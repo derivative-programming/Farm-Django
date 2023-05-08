@@ -1,0 +1,26 @@
+{
+    "ignore":[
+        "dist",
+        ".git", 
+        "build",
+        ".DS_Store",
+        "TODO.md"
+    ],
+    "templateSet":
+    {
+        "name": "Python 3.11 Django 4.2 API",
+        "internalName" : "api_py3_dj4",
+        "versionNumber" : {
+            "major": "1",
+            "minor": "0",
+            "build": "0",
+            "revision": "*"
+        }
+    },
+    "modelFile" : "gen-model.json",
+    "SupressTemplateLanguageSubstitution": [
+        "package*.json",
+        "*.svg",
+        "*.ico"
+    ]
+}
