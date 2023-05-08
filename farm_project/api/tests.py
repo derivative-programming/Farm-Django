@@ -1,200 +1,173 @@
 from django.test import TestCase
-
-
-from .models import TriStateFilter
-
-from .models import Tac
-
-from .models import Role
-
-from .models import Plant
-
-from .models import Pac
-
-from .models import OrgCustomer
-
-from .models import OrgApiKey
-
-from .models import Organization
-
-from .models import Land
-
-from .models import Flavor
-
-from .models import ErrorLog
-
-from .models import DateGreaterThanFilter
-
-from .models import CustomerRole
-
-from .models import Customer 
+from . import models 
+ 
 
 
 
 class TriStateFilterTestCase(TestCase):
     def test_triStateFilter(self):
         self.assertEquals(
-            TriStateFilter.objects.count(),
+            models.TriStateFilter.objects.count(),
             0
         )
-        TriStateFilter.objects.create() 
+        models.TriStateFilter.objects.create() 
         self.assertEquals(
-            TriStateFilter.objects.count(),
+            models.TriStateFilter.objects.count(),
             1
         ) 
 
 class TacTestCase(TestCase):
     def test_tac(self):
         self.assertEquals(
-            Tac.objects.count(),
+            models.Tac.objects.count(),
             0
         )
-        Tac.objects.create() 
+        models.Tac.objects.create() 
         self.assertEquals(
-            Tac.objects.count(),
+            models.Tac.objects.count(),
             1
         ) 
 
 class RoleTestCase(TestCase):
     def test_role(self):
         self.assertEquals(
-            Role.objects.count(),
+            models.Role.objects.count(),
             0
         )
-        Role.objects.create() 
+        models.Role.objects.create() 
         self.assertEquals(
-            Role.objects.count(),
+            models.Role.objects.count(),
             1
         ) 
 
 class PlantTestCase(TestCase):
     def test_plant(self):
         self.assertEquals(
-            Plant.objects.count(),
+            models.Plant.objects.count(),
             0
         )
-        Plant.objects.create() 
+        models.Plant.objects.create() 
         self.assertEquals(
-            Plant.objects.count(),
+            models.Plant.objects.count(),
             1
         ) 
 
 class PacTestCase(TestCase):
     def test_pac(self):
         self.assertEquals(
-            Pac.objects.count(),
+            models.Pac.objects.count(),
             0
         )
-        Pac.objects.create() 
+        models.Pac.objects.create() 
         self.assertEquals(
-            Pac.objects.count(),
+            models.Pac.objects.count(),
             1
         ) 
 
 class OrgCustomerTestCase(TestCase):
     def test_orgCustomer(self):
         self.assertEquals(
-            OrgCustomer.objects.count(),
+            models.OrgCustomer.objects.count(),
             0
         )
-        OrgCustomer.objects.create() 
+        models.OrgCustomer.objects.create() 
         self.assertEquals(
-            OrgCustomer.objects.count(),
+            models.OrgCustomer.objects.count(),
             1
         ) 
 
 class OrgApiKeyTestCase(TestCase):
     def test_orgApiKey(self):
         self.assertEquals(
-            OrgApiKey.objects.count(),
+            models.OrgApiKey.objects.count(),
             0
         )
-        OrgApiKey.objects.create() 
+        models.OrgApiKey.objects.create() 
         self.assertEquals(
-            OrgApiKey.objects.count(),
+            models.OrgApiKey.objects.count(),
             1
         ) 
 
 class OrganizationTestCase(TestCase):
     def test_organization(self):
         self.assertEquals(
-            Organization.objects.count(),
+            models.Organization.objects.count(),
             0
         )
-        Organization.objects.create() 
+        models.Organization.objects.create() 
         self.assertEquals(
-            Organization.objects.count(),
+            models.Organization.objects.count(),
             1
         ) 
 
 class LandTestCase(TestCase):
     def test_land(self):
         self.assertEquals(
-            Land.objects.count(),
+            models.Land.objects.count(),
             0
         )
-        Land.objects.create() 
+        models.Land.objects.create() 
         self.assertEquals(
-            Land.objects.count(),
+            models.Land.objects.count(),
             1
         ) 
 
 class FlavorTestCase(TestCase):
     def test_flavor(self):
         self.assertEquals(
-            Flavor.objects.count(),
+            models.Flavor.objects.count(),
             0
         )
-        Flavor.objects.create() 
+        models.Flavor.objects.create() 
         self.assertEquals(
-            Flavor.objects.count(),
+            models.Flavor.objects.count(),
             1
         ) 
 
 class ErrorLogTestCase(TestCase):
     def test_errorLog(self):
         self.assertEquals(
-            ErrorLog.objects.count(),
+            models.ErrorLog.objects.count(),
             0
         )
-        ErrorLog.objects.create() 
+        models.ErrorLog.objects.create() 
         self.assertEquals(
-            ErrorLog.objects.count(),
+            models.ErrorLog.objects.count(),
             1
         ) 
 
 class DateGreaterThanFilterTestCase(TestCase):
     def test_dateGreaterThanFilter(self):
         self.assertEquals(
-            DateGreaterThanFilter.objects.count(),
+            models.DateGreaterThanFilter.objects.count(),
             0
         )
-        DateGreaterThanFilter.objects.create() 
+        models.DateGreaterThanFilter.objects.create() 
         self.assertEquals(
-            DateGreaterThanFilter.objects.count(),
+            models.DateGreaterThanFilter.objects.count(),
             1
         ) 
 
 class CustomerRoleTestCase(TestCase):
     def test_customerRole(self):
         self.assertEquals(
-            CustomerRole.objects.count(),
+            models.CustomerRole.objects.count(),
             0
         )
-        CustomerRole.objects.create() 
+        models.CustomerRole.objects.create() 
         self.assertEquals(
-            CustomerRole.objects.count(),
+            models.CustomerRole.objects.count(),
             1
         ) 
 
 class CustomerTestCase(TestCase):
     def test_customer(self):
         self.assertEquals(
-            Customer.objects.count(),
+            models.Customer.objects.count(),
             0
         )
-        Customer.objects.create() 
+        models.Customer.objects.create() 
         self.assertEquals(
-            Customer.objects.count(),
+            models.Customer.objects.count(),
             1
         )  

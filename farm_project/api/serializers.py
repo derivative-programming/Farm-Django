@@ -1,39 +1,12 @@
 from rest_framework import serializers
 
+from . import models 
 
-
-from .models import TriStateFilter
-
-from .models import Tac
-
-from .models import Role
-
-from .models import Plant
-
-from .models import Pac
-
-from .models import OrgCustomer
-
-from .models import OrgApiKey
-
-from .models import Organization
-
-from .models import Land
-
-from .models import Flavor
-
-from .models import ErrorLog
-
-from .models import DateGreaterThanFilter
-
-from .models import CustomerRole
-
-from .models import Customer 
-
+ 
 
 class TriStateFilterSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = TriStateFilter
+        model = models.TriStateFilter
         fields = (
             'description',
             'display_order',
@@ -46,7 +19,7 @@ class TriStateFilterSerializer(serializers.HyperlinkedModelSerializer):
             )
 class TacSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = Tac
+        model = models.Tac
         fields = (
             'description',
             'display_order',
@@ -58,7 +31,7 @@ class TacSerializer(serializers.HyperlinkedModelSerializer):
             )
 class RoleSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = Role
+        model = models.Role
         fields = (
             'description',
             'display_order',
@@ -70,7 +43,7 @@ class RoleSerializer(serializers.HyperlinkedModelSerializer):
             )
 class PlantSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = Plant
+        model = models.Plant
         fields = (
             'flavor_id',
             'is_delete_allowed',
@@ -95,7 +68,7 @@ class PlantSerializer(serializers.HyperlinkedModelSerializer):
             )
 class PacSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = Pac
+        model = models.Pac
         fields = (
             'description',
             'display_order',
@@ -106,7 +79,7 @@ class PacSerializer(serializers.HyperlinkedModelSerializer):
             )
 class OrgCustomerSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = OrgCustomer
+        model = models.OrgCustomer
         fields = (
             'customer_id',
             'email',
@@ -115,7 +88,7 @@ class OrgCustomerSerializer(serializers.HyperlinkedModelSerializer):
             )
 class OrgApiKeySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = OrgApiKey
+        model = models.OrgApiKey
         fields = (
             'api_key_value',
             'created_by',
@@ -130,7 +103,7 @@ class OrgApiKeySerializer(serializers.HyperlinkedModelSerializer):
             )
 class OrganizationSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = Organization
+        model = models.Organization
         fields = (
             'name',
             'tac_id',  
@@ -138,7 +111,7 @@ class OrganizationSerializer(serializers.HyperlinkedModelSerializer):
             )
 class LandSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = Land
+        model = models.Land
         fields = (
             'description',
             'display_order',
@@ -150,7 +123,7 @@ class LandSerializer(serializers.HyperlinkedModelSerializer):
             )
 class FlavorSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = Flavor
+        model = models.Flavor
         fields = (
             'description',
             'display_order',
@@ -162,7 +135,7 @@ class FlavorSerializer(serializers.HyperlinkedModelSerializer):
             )
 class ErrorLogSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = ErrorLog
+        model = models.ErrorLog
         fields = (
             'browser_code',
             'context_code',
@@ -176,7 +149,7 @@ class ErrorLogSerializer(serializers.HyperlinkedModelSerializer):
             )
 class DateGreaterThanFilterSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = DateGreaterThanFilter
+        model = models.DateGreaterThanFilter
         fields = (
             'day_count',
             'description',
@@ -189,7 +162,7 @@ class DateGreaterThanFilterSerializer(serializers.HyperlinkedModelSerializer):
             )
 class CustomerRoleSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = CustomerRole
+        model = models.CustomerRole
         fields = (
             'customer_id',
             'is_placeholder',
@@ -199,7 +172,7 @@ class CustomerRoleSerializer(serializers.HyperlinkedModelSerializer):
             )
 class CustomerSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = Customer
+        model = models.Customer
         fields = (
             'active_organization_id',
             'email',
