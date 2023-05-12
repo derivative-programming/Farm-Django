@@ -17,6 +17,8 @@ Update pip...
 Install Django...
 >pip install django
 
+Install requirements...
+>pip install -r requirements.txt
 
 make migration after model updates...
 python manage.py makemigrations api
@@ -31,7 +33,24 @@ view sql applied by a migration...replace 0001 with migration name
 create django admin user...
 python manage.py createsuperuser
 
+clear database of all records. keep tables.
+>python manage.py flush
+
+initialize db with core objects...
+>python manage.py loaddata initialize-db.json
+
+generate seed data...
+python manage.py seed api --number=10
+
 run server....
 >cd farm_project
 >python manage.py runserver
 
+collect requirements...
+>pip freeze > requirements.txt
+
+clean py cache...
+>python manage.py clean_pyc
+
+
+django toolbar is installed

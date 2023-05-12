@@ -1,0 +1,3 @@
+from .TacLogin import TacLoginViewSetTestCase
+from .TacRegister import TacRegisterViewSetTestCase
+from .TacFarmDashboard import TacFarmDashboardViewSetTestCase

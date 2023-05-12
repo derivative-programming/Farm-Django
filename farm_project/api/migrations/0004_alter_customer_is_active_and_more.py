@@ -81,12 +81,12 @@ class Migration(migrations.Migration):
             field=models.BooleanField(null=True),
         ),
         migrations.AlterField(
-            model_name='orgapikey',
+            model_name='orgApiKey',
             name='is_active',
             field=models.BooleanField(null=True),
         ),
         migrations.AlterField(
-            model_name='orgapikey',
+            model_name='orgApiKey',
             name='is_temp_user_key',
             field=models.BooleanField(null=True),
         ),

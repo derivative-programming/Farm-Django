@@ -36,12 +36,12 @@ class Migration(migrations.Migration):
             field=models.DateTimeField(null=True),
         ),
         migrations.AlterField(
-            model_name='orgapikey',
+            model_name='orgApiKey',
             name='created_utc_date_time',
             field=models.DateTimeField(null=True),
         ),
         migrations.AlterField(
-            model_name='orgapikey',
+            model_name='orgApiKey',
             name='expiration_utc_date_time',
             field=models.DateTimeField(null=True),
         ),

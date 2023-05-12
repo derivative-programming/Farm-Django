@@ -81,12 +81,12 @@ class Migration(migrations.Migration):
             field=models.UUIDField(null=True),
         ),
         migrations.AlterField(
-            model_name='orgapikey',
+            model_name='orgApiKey',
             name='insert_user_id',
             field=models.UUIDField(null=True),
         ),
         migrations.AlterField(
-            model_name='orgapikey',
+            model_name='orgApiKey',
             name='last_update_user_id',
             field=models.UUIDField(null=True),
         ),
