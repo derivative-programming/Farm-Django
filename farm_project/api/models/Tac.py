@@ -9,7 +9,7 @@ from .Pac import Pac
  
 
 class Tac(models.Model):
-    tac_id = models.AutoField(primary_key=True)
+    tac_id = models.SlugField(unique=True, primary_key=True)
     code = models.UUIDField(default=uuid.uuid4)
     insert_utc_date_time =models.DateTimeField(default=timezone.now)
     last_udpate_utc_date_time =models.DateTimeField(default=timezone.now)

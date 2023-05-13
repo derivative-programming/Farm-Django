@@ -4,6 +4,9 @@ from api.factories import TacFactory
 
 
 class TacTestCase(TestCase):
+    def setUp(self):
+        Tac.objects.all().delete()
+
     def test_tac(self):
         self.assertEquals(
             Tac.objects.count(),
