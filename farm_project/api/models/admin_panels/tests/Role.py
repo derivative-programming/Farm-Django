@@ -1,6 +1,6 @@
 from django.contrib.admin.sites import AdminSite
 from django.test import TestCase
-
+from api.models.factories import RoleFactory
 from api.models import Role
 from api.models.admin_panels import RoleAdmin
 
@@ -40,6 +40,6 @@ class RoleAdminTest(TestCase):
         )
 
     def test_queryset(self):
-        role = Role.objects.create()
-        queryset = self.admin.get_queryset(request)
-        self.assertIn(role, queryset)
+        role = RoleFactory.create()
+        queryset = self.admin.get_queryset(request) 
+        self.assertIn(role.code, [obj.code for obj in queryset]) 

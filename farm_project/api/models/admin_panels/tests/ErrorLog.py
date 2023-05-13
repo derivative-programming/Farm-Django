@@ -43,5 +43,5 @@ class ErrorLogAdminTest(TestCase):
 
     def test_queryset(self):
         error_log = ErrorLog.objects.create()
-        queryset = self.admin.get_queryset(request)
-        self.assertIn(error_log, queryset)
+        queryset = self.admin.get_queryset(request) 
+        self.assertIn(error_log.code, [obj.code for obj in queryset]) 

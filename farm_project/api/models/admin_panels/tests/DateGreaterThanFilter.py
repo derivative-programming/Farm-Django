@@ -1,6 +1,6 @@
 from django.contrib.admin.sites import AdminSite
 from django.test import TestCase
-
+from api.models.factories import DateGreaterThanFilterFactory
 from api.models import DateGreaterThanFilter
 from api.models.admin_panels import DateGreaterThanFilterAdmin
 
@@ -40,6 +40,6 @@ class DateGreaterThanFilterAdminTest(TestCase):
         )
 
     def test_queryset(self):
-        date_greater_than_filter = DateGreaterThanFilter.objects.create()
-        queryset = self.admin.get_queryset(request)
-        self.assertIn(date_greater_than_filter, queryset)
+        date_greater_than_filter = DateGreaterThanFilterFactory.create()
+        queryset = self.admin.get_queryset(request) 
+        self.assertIn(date_greater_than_filter.code, [obj.code for obj in queryset]) 

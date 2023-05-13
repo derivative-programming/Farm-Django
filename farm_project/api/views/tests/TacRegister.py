@@ -1,20 +1,16 @@
 import json
 from django.test import TestCase
-from rest_framework.test import APIClient
-from api.models import Pac
-from api.models import Tac
+from rest_framework.test import APIClient 
 from api.views.TacRegister import TacRegisterViewSet
 from uuid import uuid4
 import logging
+from api.models.factories import TacFactory
 
 class TacRegisterViewSetTestCase(TestCase):
 
     def setUp(self):
-        self.client = APIClient()
-        self.pac = Pac.objects.create(code=uuid4(), name="Test Pac")
-        self.tac = Tac.objects.create(code=uuid4(), name="Test Tac")
-        self.tac.pac = self.pac
-        self.tac.save()
+        self.client = APIClient() 
+        self.tac = TacFactory.create()
         self.valid_request_data = {
             "email": "test@example.com",
             "password": "test_password",

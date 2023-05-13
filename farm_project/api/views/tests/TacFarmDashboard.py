@@ -1,20 +1,16 @@
 from django.test import TestCase
-from rest_framework.test import APIClient
-from api.models import Pac
-from api.models import Tac
+from rest_framework.test import APIClient 
 from api.views.TacFarmDashboard import TacFarmDashboardViewSet
 from uuid import uuid4
 import logging
 import json
+from api.models.factories import TacFactory
 
 class TacFarmDashboardViewSetTestCase(TestCase):
 
     def setUp(self):
-        self.client = APIClient()
-        self.pac = Pac.objects.create(code=uuid4(), name="Test Pac")
-        self.tac = Tac.objects.create(code=uuid4(), name="Test Tac")
-        self.tac.pac = self.pac
-        self.tac.save()
+        self.client = APIClient() 
+        self.tac = TacFactory.create()
         self.valid_request_data = {
             "pageNumber": "1",
             "itemCountPerPage": "1",

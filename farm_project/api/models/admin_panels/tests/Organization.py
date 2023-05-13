@@ -38,5 +38,5 @@ class OrganizationAdminTest(TestCase):
 
     def test_queryset(self):
         organization = Organization.objects.create()
-        queryset = self.admin.get_queryset(request)
-        self.assertIn(organization, queryset)
+        queryset = self.admin.get_queryset(request) 
+        self.assertIn(organization.code, [obj.code for obj in queryset]) 

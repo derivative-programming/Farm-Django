@@ -1,6 +1,6 @@
 from django.contrib.admin.sites import AdminSite
 from django.test import TestCase
-
+from api.models.factories import PacFactory
 from api.models import Pac
 from api.models.admin_panels import PacAdmin
 
@@ -40,6 +40,6 @@ class PacAdminTest(TestCase):
         )
 
     def test_queryset(self):
-        pac = Pac.objects.create()
-        queryset = self.admin.get_queryset(request)
-        self.assertIn(pac, queryset)
+        pac = PacFactory.create()
+        queryset = self.admin.get_queryset(request) 
+        self.assertIn(pac.code, [obj.code for obj in queryset]) 

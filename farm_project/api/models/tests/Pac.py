@@ -1,7 +1,6 @@
 from django.test import TestCase
-from api.models import Pac
-
-from api.factories import PacFactory
+from api.models import Pac 
+from api.models.factories import PacFactory
 
 
 class PacTestCase(TestCase):

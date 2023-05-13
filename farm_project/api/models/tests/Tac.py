@@ -1,6 +1,6 @@
 from django.test import TestCase
 from api.models import Tac 
-from api.factories import TacFactory
+from api.models.factories.Tac import TacFactory
 
 
 class TacTestCase(TestCase):

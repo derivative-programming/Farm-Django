@@ -1,22 +1,18 @@
 from django.test import TestCase
-from rest_framework.test import APIClient
-from api.models import Pac
-from api.models import Tac 
+from rest_framework.test import APIClient 
 from api.models import Customer 
 from api.views.TacLogin import TacLoginViewSet
 from uuid import uuid4
 import logging
 import json
+from api.models.factories import TacFactory
 
 class TacLoginViewSetTestCase(TestCase):
 
     def setUp(self):
         logging.debug("TacLoginViewSetTestCase setup")
-        self.client = APIClient()
-        self.pac = Pac.objects.create(code=uuid4(), name="Test Pac")
-        self.tac = Tac.objects.create(code=uuid4(), name="Test Tac")
-        self.tac.pac = self.pac
-        self.tac.save()
+        self.client = APIClient() 
+        self.tac = TacFactory.create()
         self.customer = Customer.objects.create(code=uuid4(), first_name="Test first name", email="test@example.com", password="test_password")
         self.customer.tac = self.tac
         self.customer.save()

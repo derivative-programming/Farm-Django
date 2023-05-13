@@ -1,6 +1,6 @@
 from django.contrib.admin.sites import AdminSite
 from django.test import TestCase
-
+from api.models.factories import FlavorFactory
 from api.models import Flavor
 from api.models.admin_panels import FlavorAdmin
 
@@ -40,6 +40,6 @@ class FlavorAdminTest(TestCase):
         )
 
     def test_queryset(self):
-        flavor = Flavor.objects.create()
-        queryset = self.admin.get_queryset(request)
-        self.assertIn(flavor, queryset)
+        flavor = FlavorFactory.create()
+        queryset = self.admin.get_queryset(request) 
+        self.assertIn(flavor.code, [obj.code for obj in queryset]) 

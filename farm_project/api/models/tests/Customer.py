@@ -1,6 +1,6 @@
 from django.test import TestCase
 from api.models import Customer 
-from api.factories import CustomerFactory 
+from api.models.factories import CustomerFactory 
 
 
 
@@ -21,6 +21,10 @@ class CustomerTestCase(TestCase):
         self.assertIsNotNone(customer.code)
         self.assertIsNotNone(customer.insert_utc_date_time)
         self.assertIsNotNone(customer.last_update_utc_date_time)
+        self.assertIsNotNone(customer.forgot_password_key_expiration_utc_date_time)
+        self.assertIsNotNone(customer.registration_utc_date_time)
+        self.assertIsNotNone(customer.email_confirmed_utc_date_time)
+        self.assertIsNotNone(customer.last_login_utc_date_time)
         self.assertIsNotNone(customer.first_name)
         self.assertIsNotNone(customer.last_name)
         self.assertIsNotNone(customer.email)
@@ -29,5 +33,6 @@ class CustomerTestCase(TestCase):
         self.assertIsNotNone(customer.province)
         self.assertIsNotNone(customer.zip)
         self.assertIsNotNone(customer.tac)
+        self.assertIsNotNone(customer.email)
         self.assertIsNotNone(customer.active_organization_id)
         self.assertIsNotNone(customer.last_change_code)

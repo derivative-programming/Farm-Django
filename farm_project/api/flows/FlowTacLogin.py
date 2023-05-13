@@ -84,7 +84,7 @@ class FlowTacLogin(BaseFlowTacLogin):
         api_key_dict["customer_code"] = str(customer.code)
         api_key_dict["role_name_csv"] = role_name_csv_list_output
         api_key_output = ApiToken.create_token(api_key_dict, 1)
-
+ 
         # customer.last_login_utc_date_time = timezone.now
         customer.last_change_code = uuid.uuid4()
         customer.save()

@@ -1,8 +1,9 @@
 from django.contrib.admin.sites import AdminSite
 from django.test import TestCase
-
+from api.models.factories import TacFactory
 from api.models import Tac
 from api.models.admin_panels import TacAdmin
+import logging
 
 class MockRequest:
     pass
@@ -40,6 +41,6 @@ class TacAdminTest(TestCase):
         )
 
     def test_queryset(self):
-        tac = Tac.objects.create()
-        queryset = self.admin.get_queryset(request)
-        self.assertIn(tac, queryset)
+        tac = TacFactory.create()
+        queryset = self.admin.get_queryset(request) 
+        self.assertIn(tac.code, [obj.code for obj in queryset]) 

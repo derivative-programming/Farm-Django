@@ -1,6 +1,6 @@
 from django.contrib.admin.sites import AdminSite
 from django.test import TestCase
-
+from api.models.factories import CustomerFactory
 from api.models import Customer
 from api.models.admin_panels import CustomerAdmin
 
@@ -57,6 +57,6 @@ class CustomerAdminTest(TestCase):
         )
 
     def test_queryset(self):
-        customer = Customer.objects.create()
-        queryset = self.admin.get_queryset(request)
-        self.assertIn(customer, queryset)
+        customer = CustomerFactory.create()
+        queryset = self.admin.get_queryset(request) 
+        self.assertIn(customer.code, [obj.code for obj in queryset]) 

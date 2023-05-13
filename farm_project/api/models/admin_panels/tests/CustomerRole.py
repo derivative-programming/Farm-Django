@@ -40,5 +40,5 @@ class CustomerRoleAdminTest(TestCase):
 
     def test_queryset(self):
         customer_role = CustomerRole.objects.create()
-        queryset = self.admin.get_queryset(request)
-        self.assertIn(customer_role, queryset)
+        queryset = self.admin.get_queryset(request) 
+        self.assertIn(customer_role.code, [obj.code for obj in queryset]) 

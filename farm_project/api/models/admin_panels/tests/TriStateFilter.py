@@ -1,6 +1,6 @@
 from django.contrib.admin.sites import AdminSite
 from django.test import TestCase
-
+from api.models.factories import TriStateFilterFactory
 from api.models import TriStateFilter
 from api.models.admin_panels import TriStateFilterAdmin
 
@@ -40,6 +40,6 @@ class TriStateFilterAdminTest(TestCase):
         )
 
     def test_queryset(self):
-        tri_state_filter = TriStateFilter.objects.create()
-        queryset = self.admin.get_queryset(request)
-        self.assertIn(tri_state_filter, queryset)
+        tri_state_filter = TriStateFilterFactory.create()
+        queryset = self.admin.get_queryset(request) 
+        self.assertIn(tri_state_filter.code, [obj.code for obj in queryset]) 

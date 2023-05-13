@@ -1,6 +1,6 @@
 from django.contrib.admin.sites import AdminSite
 from django.test import TestCase
-
+from api.models.factories import LandFactory
 from api.models import Land
 from api.models.admin_panels import LandAdmin
 
@@ -40,6 +40,6 @@ class LandAdminTest(TestCase):
         )
 
     def test_queryset(self):
-        land = Land.objects.create()
-        queryset = self.admin.get_queryset(request)
-        self.assertIn(land, queryset)
+        land = LandFactory.create()
+        queryset = self.admin.get_queryset(request) 
+        self.assertIn(land.code, [obj.code for obj in queryset]) 

@@ -54,5 +54,5 @@ class PlantAdminTest(TestCase):
 
     def test_queryset(self):
         plant = Plant.objects.create()
-        queryset = self.admin.get_queryset(request)
-        self.assertIn(plant, queryset)
+        queryset = self.admin.get_queryset(request) 
+        self.assertIn(plant.code, [obj.code for obj in queryset]) 
