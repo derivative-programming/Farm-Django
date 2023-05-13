@@ -3,12 +3,15 @@ from api.models import Tac
 from .FlowValidationError import FlowValidationError 
 from .LogSeverity import LogSeverity
 import logging
+from api.helpers import SessionContext
 
 class BaseFlow():
     __flow_name = ""
     queued_validation_errors:dict
+    _session_context:SessionContext
 
-    def __init__(self, flow_name:str): 
+    def __init__(self, flow_name:str, session_context:SessionContext): 
+        self._session_context = session_context
         self.__flow_name = flow_name
         self.queued_validation_errors = dict()
 

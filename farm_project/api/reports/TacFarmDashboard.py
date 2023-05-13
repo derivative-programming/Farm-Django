@@ -6,11 +6,13 @@ from api.reports.providers.TacFarmDashboard import ReportProviderTacFarmDashboar
 from api.reports.row_models import ReportItemTacFarmDashboard
 import logging
 from .ReportRequestValidationError import ReportRequestValidationError
+from api.helpers import SessionContext
  
 
 class ReportTacFarmDashboard():
-    def __init__(self): 
-        pass
+    _session_context:SessionContext
+    def __init__(self, session_context:SessionContext): 
+        self._session_context = session_context
      
     def generate(self, 
                  tac_code:uuid,
@@ -27,7 +29,7 @@ class ReportTacFarmDashboard():
         if page_number <= 0:
             raise ReportRequestValidationError("page_number","Minimum page number is 1")
         
-        provider = ReportProviderTacFarmDashboard()
+        provider = ReportProviderTacFarmDashboard(self._session_context)
 
         dataList = provider.generate_list(
             tac_code,

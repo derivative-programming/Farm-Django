@@ -3,10 +3,12 @@ import uuid
 from django.db import connection
 from api.reports.row_models import ReportItemTacFarmDashboard
 import logging
+from api.helpers import SessionContext
 
 class ReportProviderTacFarmDashboard(): 
-    def __init__(self): 
-        pass
+    _session_context:SessionContext
+    def __init__(self, session_context:SessionContext): 
+        self._session_context = session_context
     
     def generate_list(self, 
                     tacCode:uuid,

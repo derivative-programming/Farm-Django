@@ -6,6 +6,7 @@ import api.flows.base
 from api.flows.base.BaseFlowTacFarmDashboardInitReport import BaseFlowTacFarmDashboardInitReport 
 from api.models import Tac 
 from api.flows.base.LogSeverity import LogSeverity
+from api.helpers import SessionContext
 
 @dataclass_json
 @dataclass
@@ -16,9 +17,9 @@ class FlowTacFarmDashboardInitReportResult():
     def __init__(self): 
         pass
 
-class FlowTacFarmDashboardInitReport(BaseFlowTacFarmDashboardInitReport):
-    def __init__(self): 
-        super(FlowTacFarmDashboardInitReport, self).__init__() 
+class FlowTacFarmDashboardInitReport(BaseFlowTacFarmDashboardInitReport):  
+    def __init__(self, session_context:SessionContext):  
+        super(FlowTacFarmDashboardInitReport, self).__init__(session_context) 
 
     def process(self, 
         tac: Tac,
@@ -32,10 +33,13 @@ class FlowTacFarmDashboardInitReport(BaseFlowTacFarmDashboardInitReport):
 
         super()._throw_queued_validation_errors()
         
-        customer_code_output = uuid.UUID(int=0)
+        # customer_code_output = uuid.UUID(int=0)
+
+        customer_code_output = self._session_context.customer_code
     
         super()._log_message_and_severity(LogSeverity.information_high_detail, "Building result")
         result = FlowTacFarmDashboardInitReportResult()
+        result.context_tac_code = tac.code
         result.customer_code = customer_code_output
         result.context_tac_code = tac.code
         super()._log_message_and_severity(LogSeverity.information_high_detail, "Result:" + result.to_json())

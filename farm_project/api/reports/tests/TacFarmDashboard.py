@@ -3,16 +3,18 @@ from unittest.mock import patch, MagicMock
 from api.reports.TacFarmDashboard import ReportTacFarmDashboard, ReportRequestValidationError
 from api.reports.row_models import ReportItemTacFarmDashboard
 import uuid
+from api.helpers import SessionContext
 
 class TestReportTacFarmDashboard(TestCase):
 
     def setUp(self):
+        session_context = SessionContext(dict())
         self.tac_code = uuid.uuid4()
         self.page_number = 1
         self.item_count_per_page = 10
         self.order_by_column_name = "code" 
         self.order_by_descending = False
-        self.report = ReportTacFarmDashboard()
+        self.report = ReportTacFarmDashboard(session_context)
 
     @patch('api.reports.providers.TacFarmDashboard.ReportProviderTacFarmDashboard')
     def test_generate(self, MockProvider):

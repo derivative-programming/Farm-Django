@@ -2,10 +2,12 @@ from django.test import TestCase
 from unittest.mock import patch
 from api.flows.base import BaseFlow
 from api.flows.base import FlowValidationError
+from api.helpers import SessionContext
 
 class TestBaseFlow(TestCase):
     def setUp(self):
-        self.base_flow = BaseFlow("TestFlow")
+        session_context = SessionContext(dict())
+        self.base_flow = BaseFlow("TestFlow",session_context=session_context)
 
     def test_init(self):
         self.assertEqual(self.base_flow._BaseFlow__flow_name, "TestFlow")

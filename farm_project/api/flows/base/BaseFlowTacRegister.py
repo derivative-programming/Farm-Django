@@ -2,10 +2,14 @@ import uuid
 from api.models import Tac 
 from .BaseFlow import BaseFlow
 from api.flows.base.LogSeverity import LogSeverity
+from api.helpers import SessionContext
 
 class BaseFlowTacRegister(BaseFlow):
-    def __init__(self): 
-        super(BaseFlowTacRegister, self).__init__("TacRegister") 
+    def __init__(self, session_context:SessionContext): 
+        super(BaseFlowTacRegister, self).__init__(
+            "TacRegister", 
+            session_context,
+            ) 
      
     
     def _process_validation_rules(self, 

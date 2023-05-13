@@ -5,6 +5,7 @@ import uuid
 from api.flows.base.BaseFlowTacLoginInitObjWF import BaseFlowTacLoginInitObjWF
 from api.models import Tac 
 from api.flows.base.LogSeverity import LogSeverity
+from api.helpers import SessionContext
  
  
 
@@ -19,8 +20,8 @@ class FlowTacLoginInitObjWFResult():
         pass 
 
 class FlowTacLoginInitObjWF(BaseFlowTacLoginInitObjWF):
-    def __init__(self): 
-        super(FlowTacLoginInitObjWF, self).__init__() 
+    def __init__(self, session_context:SessionContext): 
+        super(FlowTacLoginInitObjWF, self).__init__(session_context) 
      
     def process(self, 
         tac: Tac,
@@ -37,9 +38,11 @@ class FlowTacLoginInitObjWF(BaseFlowTacLoginInitObjWF):
 
         email_output = ""
         password_output = "" 
+ 
 
         super()._log_message_and_severity(LogSeverity.information_high_detail, "Building result")
         result = FlowTacLoginInitObjWFResult()
+        result.context_tac_code = tac.code
         result.email = email_output
         result.password = password_output
         result.context_tac_code = tac.code

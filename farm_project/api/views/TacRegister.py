@@ -18,6 +18,7 @@ from dacite import from_dict
 import marshmallow_dataclass
 import logging
 import marshmallow.exceptions 
+from api.helpers import SessionContext
 
 ### response
 @dataclass_json(letter_case=LetterCase.CAMEL)
@@ -93,6 +94,9 @@ class TacRegisterViewSet(ViewSet):
         response = TacRegisterPostResponse()
          
         try:
+            logging.debug("Start session...")
+            session_context = SessionContext(dict())
+
             logging.debug("Request:" + json.dumps(request.data))
 
             logging.debug("get schema")
@@ -105,7 +109,7 @@ class TacRegisterViewSet(ViewSet):
             tac = Tac.objects.get(code=tacCode)
             
             logging.debug("process flow...")
-            flow = FlowTacRegister()
+            flow = FlowTacRegister(session_context)
             flowResponse = flow.process(
                 tac,
                 request.email,
@@ -125,7 +129,8 @@ class TacRegisterViewSet(ViewSet):
              
         except TypeError as te: 
             response.success = False
-            response.message = "Invalid Request" 
+            traceback_string = "".join(traceback.format_tb(te.__traceback__))
+            response.message = str(te) + " traceback:" + traceback_string
             
         except FlowValidationError as ve:
             response.success = False 
@@ -152,12 +157,14 @@ class TacRegisterViewSet(ViewSet):
         response = TacRegisterGetInitResponse() 
          
         try: 
+            logging.debug("Start session...")
+            session_context = SessionContext(dict())
  
             logging.debug("loading model...")
             tac = Tac.objects.get(code=tacCode)
             
             logging.debug("process flow...")
-            flow = FlowTacRegisterInitObjWF()
+            flow = FlowTacRegisterInitObjWF(session_context)
             flowResponse = flow.process(
                 tac, 
             ) 

@@ -3,10 +3,14 @@ import uuid
 from api.models import Tac 
 from api.flows.base.BaseFlow import BaseFlow
 from api.flows.base.LogSeverity import LogSeverity
+from api.helpers import SessionContext
  
 class BaseFlowTacLoginInitObjWF(BaseFlow):
-    def __init__(self): 
-        super(BaseFlowTacLoginInitObjWF, self).__init__("TacLoginInitObjWF") 
+    def __init__(self, session_context:SessionContext): 
+        super(BaseFlowTacLoginInitObjWF, self).__init__(
+            "TacLoginInitObjWF", 
+            session_context,
+            ) 
       
 
 

@@ -2,15 +2,19 @@ import jwt
 import datetime
 import os
 from django.conf import settings
+import logging 
  
 
-def create_token(payload:dict): 
+def create_token(payload:dict, expires_in_day_count:int): 
+    logging.debug("create_token Start")
 
-    payload["exp"] = datetime.datetime.utcnow() + datetime.timedelta(days=1)
+    payload["exp"] = datetime.datetime.utcnow() + datetime.timedelta(days=expires_in_day_count)
 
+    logging.debug(str(payload))
     token = jwt.encode(payload, settings.SECRET_KEY, algorithm='HS256')
-
-    return token.decode()
+    logging.debug("create_token: " + token)
+    logging.debug("create_token End")
+    return token
 
 def validate_token(token) -> dict:
     try:

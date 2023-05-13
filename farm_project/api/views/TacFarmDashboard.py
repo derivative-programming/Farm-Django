@@ -20,6 +20,7 @@ import marshmallow_dataclass
 import logging
 import marshmallow.exceptions 
 from api.reports.ReportRequestValidationError import ReportRequestValidationError 
+from api.helpers import SessionContext
   
 
 ### request. expect camel case. use marshmallow to validate.
@@ -104,6 +105,8 @@ class TacFarmDashboardViewSet(ViewSet):
         response = TacFarmDashboardListModel()
          
         try:
+            session_context = SessionContext(dict())
+
             logging.debug("Request:" + json.dumps(request.query_params))
 
             logging.debug("get schema")
@@ -118,7 +121,7 @@ class TacFarmDashboardViewSet(ViewSet):
             tac = Tac.objects.get(code=tacCode)
             
             logging.debug("generate report...")
-            generator = ReportTacFarmDashboard()
+            generator = ReportTacFarmDashboard(session_context)
             items = generator.generate(
                     tacCode,
                     request.pageNumber,
@@ -166,13 +169,13 @@ class TacFarmDashboardViewSet(ViewSet):
         response = TacFarmDashboardGetInitResponse() 
          
         try:
-             
+            session_context = SessionContext(dict())
 
             logging.debug("loading model...")
             tac = Tac.objects.get(code=tacCode)
             
             logging.debug("process flow...")
-            flow = FlowTacFarmDashboardInitReport()
+            flow = FlowTacFarmDashboardInitReport(session_context)
             flowResponse = flow.process(
                 tac, 
             ) 

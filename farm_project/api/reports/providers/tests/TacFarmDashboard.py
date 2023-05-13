@@ -1,11 +1,13 @@
 from django.test import TestCase
 from api.reports.providers import ReportProviderTacFarmDashboard
 import uuid
+from api.helpers import SessionContext
 
 class ReportProviderTacFarmDashboardTest(TestCase):
 
     def setUp(self):
-        self.report_provider = ReportProviderTacFarmDashboard()
+        session_context = SessionContext(dict())
+        self.report_provider = ReportProviderTacFarmDashboard(session_context)
         self.tacCode = uuid.uuid4()  # replace with a valid UUID from your test database
         self.page_number = 1
         self.item_count_per_page = 10
