@@ -14,7 +14,7 @@ class PacFactory(factory.django.DjangoModelFactory):
 
     code = factory.LazyFunction(uuid.uuid4)
     insert_utc_date_time = factory.LazyFunction(timezone.now)
-    last_udpate_utc_date_time = factory.LazyFunction(timezone.now)
+    last_update_utc_date_time = factory.LazyFunction(timezone.now)
     insert_user_id = factory.LazyFunction(uuid.uuid4)
     last_update_user_id = factory.LazyFunction(uuid.uuid4)
     last_change_code = factory.LazyFunction(uuid.uuid4)
@@ -36,7 +36,7 @@ class TacFactory(factory.django.DjangoModelFactory):
     tac_id = factory.Sequence(lambda n: n)
     code = uuid.uuid4()
     insert_utc_date_time = factory.LazyFunction(timezone.now)
-    last_udpate_utc_date_time = factory.LazyFunction(timezone.now)
+    last_update_utc_date_time = factory.LazyFunction(timezone.now)
     insert_user_id = uuid.uuid4()
     last_update_user_id = uuid.uuid4()
     last_change_code = uuid.uuid4()

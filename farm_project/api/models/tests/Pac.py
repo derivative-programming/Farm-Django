@@ -19,7 +19,7 @@ class PacTestCase(TestCase):
         self.assertTrue(isinstance(pac, Pac))
         self.assertIsNotNone(pac.code)
         self.assertIsNotNone(pac.insert_utc_date_time)
-        self.assertIsNotNone(pac.last_udpate_utc_date_time)
+        self.assertIsNotNone(pac.last_update_utc_date_time)
         self.assertIsNotNone(pac.insert_user_id)
         self.assertIsNotNone(pac.last_update_user_id)
         self.assertIsNotNone(pac.last_change_code)

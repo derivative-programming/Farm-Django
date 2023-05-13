@@ -20,7 +20,7 @@ class CustomerTestCase(TestCase):
         self.assertIsNotNone(customer.customer_id)
         self.assertIsNotNone(customer.code)
         self.assertIsNotNone(customer.insert_utc_date_time)
-        self.assertIsNotNone(customer.last_udpate_utc_date_time)
+        self.assertIsNotNone(customer.last_update_utc_date_time)
         self.assertIsNotNone(customer.first_name)
         self.assertIsNotNone(customer.last_name)
         self.assertIsNotNone(customer.email)
