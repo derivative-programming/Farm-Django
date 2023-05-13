@@ -22,7 +22,7 @@ class OrganizationAdminTest(TestCase):
     def test_readonly_fields(self):
         self.assertEqual(
             self.admin.readonly_fields,
-            ('organization_id', 'code', 'insert_utc_date_time', 'last_udpate_utc_date_time', 'insert_user_id', 'last_update_user_id', 'last_change_code')
+            ('organization_id', 'code', 'insert_utc_date_time', 'last_update_utc_date_time', 'insert_user_id', 'last_update_user_id', 'last_change_code')
         )
 
     def test_list_display(self):
