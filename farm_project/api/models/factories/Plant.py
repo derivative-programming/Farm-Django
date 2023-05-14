@@ -6,8 +6,8 @@ from factory.django import DjangoModelFactory
 from factory import Faker, SubFactory
 from django.utils import timezone
 from api.models import Plant, Flavor, Land
-from api.models.factories import FlavorFactory
-from api.models.factories import LandFactory
+from api.models.factories import FlavorFactory #flavor_id
+from api.models.factories import LandFactory   #land_id
   
 class PlantFactory(DjangoModelFactory):
     class Meta:

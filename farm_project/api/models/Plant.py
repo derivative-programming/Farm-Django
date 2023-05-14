@@ -2,8 +2,8 @@ from django.db import models
 from django.utils import timezone
 import datetime
 import uuid 
-from .Flavor import Flavor
-from .Land import Land
+from .flavor import Flavor #flavor_id
+from .land import Land      #land_id
  
 class Plant(models.Model):
     plant_id = models.AutoField(primary_key=True)

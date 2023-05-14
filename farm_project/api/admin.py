@@ -21,9 +21,9 @@ admin.site.register(models.OrgApiKey,admin_panels.OrgApiKeyAdmin)
 
 admin.site.register(models.Organization,admin_panels.OrganizationAdmin)
 
-admin.site.register(models.Land,admin_panels.LandAdmin)
+admin.site.register(models.land,admin_panels.LandAdmin)
 
-admin.site.register(models.Flavor,admin_panels.FlavorAdmin)
+admin.site.register(models.flavor,admin_panels.FlavorAdmin)
 
 admin.site.register(models.ErrorLog,admin_panels.ErrorLogAdmin)
 
