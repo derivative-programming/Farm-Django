@@ -57,6 +57,6 @@ class CustomerAdminTest(TestCase):
         )
 
     def test_queryset(self):
-        customer = CustomerFactory.create()
+        customer:Customer = CustomerFactory.create()  
         queryset = self.admin.get_queryset(request) 
         self.assertIn(customer.code, [obj.code for obj in queryset]) 

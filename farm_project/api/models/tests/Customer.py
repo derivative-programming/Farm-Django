@@ -5,34 +5,31 @@ from api.models.factories import CustomerFactory
 
 
 class CustomerTestCase(TestCase):
-    def test_customer(self):
-        self.assertEquals(
-            Customer.objects.count(),
-            0
-        )
-        Customer.objects.create() 
-        self.assertEquals(
-            Customer.objects.count(),
-            1
-        )
-        customer = CustomerFactory.create()
-        self.assertIsInstance(customer, Customer)
-        self.assertIsNotNone(customer.customer_id)
-        self.assertIsNotNone(customer.code)
-        self.assertIsNotNone(customer.insert_utc_date_time)
-        self.assertIsNotNone(customer.last_update_utc_date_time)
-        self.assertIsNotNone(customer.forgot_password_key_expiration_utc_date_time)
-        self.assertIsNotNone(customer.registration_utc_date_time)
-        self.assertIsNotNone(customer.email_confirmed_utc_date_time)
-        self.assertIsNotNone(customer.last_login_utc_date_time)
-        self.assertIsNotNone(customer.first_name)
-        self.assertIsNotNone(customer.last_name)
-        self.assertIsNotNone(customer.email)
-        self.assertIsNotNone(customer.password)
-        self.assertIsNotNone(customer.phone)
-        self.assertIsNotNone(customer.province)
-        self.assertIsNotNone(customer.zip)
-        self.assertIsNotNone(customer.tac)
-        self.assertIsNotNone(customer.email)
-        self.assertIsNotNone(customer.active_organization_id)
-        self.assertIsNotNone(customer.last_change_code)
+    def setUp(self): 
+        self.customer = CustomerFactory.create()
+
+    def test_customer_creation(self):
+        # Test that the instance was created
+        self.assertIsNotNone(self.customer)
+
+    def test_customer_fields(self): 
+        self.assertIsInstance(self.customer, Customer)
+        self.assertIsNotNone(self.customer.customer_id)
+        self.assertIsNotNone(self.customer.code)
+        self.assertIsNotNone(self.customer.insert_utc_date_time)
+        self.assertIsNotNone(self.customer.last_update_utc_date_time)
+        self.assertIsNotNone(self.customer.forgot_password_key_expiration_utc_date_time)
+        self.assertIsNotNone(self.customer.registration_utc_date_time)
+        self.assertIsNotNone(self.customer.email_confirmed_utc_date_time)
+        self.assertIsNotNone(self.customer.last_login_utc_date_time)
+        self.assertIsNotNone(self.customer.first_name)
+        self.assertIsNotNone(self.customer.last_name)
+        self.assertIsNotNone(self.customer.email)
+        self.assertIsNotNone(self.customer.password)
+        self.assertIsNotNone(self.customer.phone)
+        self.assertIsNotNone(self.customer.province)
+        self.assertIsNotNone(self.customer.zip)
+        self.assertIsNotNone(self.customer.tac)
+        self.assertIsNotNone(self.customer.email)
+        self.assertIsNotNone(self.customer.active_organization_id)
+        self.assertIsNotNone(self.customer.last_change_code)

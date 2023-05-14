@@ -66,9 +66,9 @@ class FlowTacRegister(BaseFlowTacRegister):
         customer.code = uuid.uuid4() 
         customer.first_name = first_name
         customer.last_name = last_name
-        # customer.registration_utc_date_time = timezone.now
+        customer.registration_utc_date_time=timezone.now() 
         customer.is_active = True
-        # customer.last_login_utc_date_time = timezone.now
+        customer.last_login_utc_date_time = timezone.now()
         customer.last_change_code = uuid.uuid4() 
         customer.save()
         

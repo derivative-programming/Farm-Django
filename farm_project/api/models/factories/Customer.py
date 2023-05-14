@@ -23,12 +23,12 @@ class CustomerFactory(factory.django.DjangoModelFactory):
     forgot_password_key_value = factory.Sequence(lambda n: f"forgot_password_key_value{n}")
     fs_user_code_value = factory.Sequence(lambda n: f"{uuid.uuid4()}")
     is_active = True
-    is_email_allowed = True
-    is_email_confirmed = True
-    is_email_marketing_allowed = True
+    is_email_allowed = factory.Faker('boolean')
+    is_email_confirmed = factory.Faker('boolean')
+    is_email_marketing_allowed = factory.Faker('boolean')
     is_locked = False
-    is_multiple_organizations_allowed = True
-    is_verbose_logging_forced = False
+    is_multiple_organizations_allowed = factory.Faker('boolean')
+    is_verbose_logging_forced = factory.Faker('boolean')
     last_login_utc_date_time = factory.Faker('past_datetime', start_date="-30d")
     last_name = factory.Sequence(lambda n: f"last_name{n}")
     password = factory.Sequence(lambda n: f"password{n}")

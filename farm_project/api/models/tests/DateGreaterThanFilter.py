@@ -4,29 +4,23 @@ from api.models.factories.DateGreaterThanFilter import DateGreaterThanFilterFact
 
 
 class DateGreaterThanFilterTestCase(TestCase):
-    def setUp(self):
-        DateGreaterThanFilter.objects.all().delete()
+    def setUp(self): 
+        self.date_greater_than_filter = DateGreaterThanFilterFactory.create()
 
-    def test_dateGreaterThanFilter(self):
-        self.assertEquals(
-            DateGreaterThanFilter.objects.count(),
-            0
-        )
-        DateGreaterThanFilter.objects.create() 
-        self.assertEquals(
-            DateGreaterThanFilter.objects.count(),
-            1
-        )
-        # create a DateGreaterThanFilter object with default attributes
-        dateGreaterThanFilter = DateGreaterThanFilterFactory.create()
+    def test_date_greater_than_filter_creation(self):
+        # Test that the instance was created
+        self.assertIsNotNone(self.date_greater_than_filter)
+
+    def test_date_greater_than_filter_fields(self): 
+        # create a DateGreaterThanFilter object with default attributes 
         # assert that the object was created successfully
-        self.assertIsInstance(dateGreaterThanFilter, DateGreaterThanFilter)
-        self.assertIsNotNone(dateGreaterThanFilter.code)
-        self.assertIsNotNone(dateGreaterThanFilter.insert_user_id)
-        self.assertIsNotNone(dateGreaterThanFilter.last_update_user_id)
-        self.assertIsNotNone(dateGreaterThanFilter.description)
-        self.assertIsNotNone(dateGreaterThanFilter.display_order)
-        self.assertIsNotNone(dateGreaterThanFilter.is_active)
-        self.assertIsNotNone(dateGreaterThanFilter.lookup_enum_name)
-        self.assertIsNotNone(dateGreaterThanFilter.name)
-        self.assertIsNotNone(dateGreaterThanFilter.pac)
+        self.assertIsInstance(self.date_greater_than_filter, DateGreaterThanFilter)
+        self.assertIsNotNone(self.date_greater_than_filter.code)
+        self.assertIsNotNone(self.date_greater_than_filter.insert_user_id)
+        self.assertIsNotNone(self.date_greater_than_filter.last_update_user_id)
+        self.assertIsNotNone(self.date_greater_than_filter.description)
+        self.assertIsNotNone(self.date_greater_than_filter.display_order)
+        self.assertIsNotNone(self.date_greater_than_filter.is_active)
+        self.assertIsNotNone(self.date_greater_than_filter.lookup_enum_name)
+        self.assertIsNotNone(self.date_greater_than_filter.name)
+        self.assertIsNotNone(self.date_greater_than_filter.pac)

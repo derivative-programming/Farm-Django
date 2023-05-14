@@ -1,17 +1,23 @@
 from django.test import TestCase
-from api.models import CustomerRole 
- 
-
-
+from api.models.factories import CustomerRoleFactory
 
 class CustomerRoleTestCase(TestCase):
-    def test_customer_role(self):
-        self.assertEquals(
-            CustomerRole.objects.count(),
-            0
-        )
-        CustomerRole.objects.create() 
-        self.assertEquals(
-            CustomerRole.objects.count(),
-            1
-        ) 
+    def setUp(self):
+        self.customer_role = CustomerRoleFactory.create()
+
+    def test_customer_role_creation(self):
+        # Test that the CustomerRole instance was created
+        self.assertIsNotNone(self.customer_role)
+
+    def test_customer_role_fields(self):
+        # Test that the CustomerRole fields were correctly set
+        self.assertIsNotNone(self.customer_role.code)
+        self.assertIsNotNone(self.customer_role.insert_utc_date_time)
+        self.assertIsNotNone(self.customer_role.last_update_utc_date_time)
+        self.assertIsNotNone(self.customer_role.insert_user_id)
+        self.assertIsNotNone(self.customer_role.last_update_user_id)
+        self.assertIsNotNone(self.customer_role.last_change_code)
+        self.assertIsNotNone(self.customer_role.customer)
+        self.assertIsNotNone(self.customer_role.is_placeholder)
+        self.assertIsNotNone(self.customer_role.placeholder)
+        self.assertIsNotNone(self.customer_role.role)

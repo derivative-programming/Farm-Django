@@ -14,7 +14,7 @@ class TacLoginViewSetTestCase(TestCase):
         self.client = APIClient() 
         self.tac = TacFactory.create()
         self.customer = Customer.objects.create(code=uuid4(), first_name="Test first name", email="test@example.com", password="test_password")
-        self.customer.tac = self.tac
+        self.customer.tac = self.tac 
         self.customer.save()
         logging.debug(str(self.customer))
         self.valid_request_data = {
