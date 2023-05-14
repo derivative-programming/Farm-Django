@@ -1,7 +1,6 @@
 {
     "templateType":"object", 
     "ForceFileNameFormat" : "LowerUnderscored",
-    "PreferredFormat": "Pascal",
     "dimension" :{
         "name":"Plant"
     },
@@ -10,7 +9,13 @@
         "prop.isFKLookup",
         "prop.isQueryByAvailable",
         "prop.calculatedIsDBColumnIndexed",
+        "prop.calculatedSqlServerDBDataType",
+        "prop.calculatedIsConditionalVisible",
+        "prop.isFKNonLookupIncludedInXMLFunction",
+        "prop.calculatedIsDefaultValueSet",
+        "prop.isFK",
         "prop.isEncrypted",
+        "prop.calculatedIsDBColumnIndexed",
         "prop.calculatedIsCodeNotLookup",
         "prop.calculatedIsCodeAndLookup"
     ]
