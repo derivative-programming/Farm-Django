@@ -2,9 +2,13 @@
     "ignore":[
         "dist",
         ".git", 
+        ".pytest_cache",
+        ".vscode",
         "build",
         ".DS_Store",
-        "TODO.md"
+        "TODO.md",
+        "__pycache__",
+        "migrations"
     ],
     "templateSet":
     {

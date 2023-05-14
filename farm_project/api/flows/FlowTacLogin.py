@@ -9,7 +9,7 @@ from api.flows.base.LogSeverity import LogSeverity
 from api.helpers import SessionContext
 from django.core.exceptions import ObjectDoesNotExist
 from api.flows.base import FlowValidationError
-from api.flows import ApiToken
+from api.helpers import ApiToken
 from django.utils import timezone
 
 @dataclass_json

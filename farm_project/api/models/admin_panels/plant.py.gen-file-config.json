@@ -1,0 +1,9 @@
+{
+    "templateType":"object", 
+    "ForceFileNameFormat" : "LowerUnderscored",
+    "dimension" :{
+        "name":"Plant"
+    },
+    "ignoreDimensionPropertyList": [
+    ]
+} 

@@ -7,7 +7,7 @@ from api.flows.base.LogSeverity import LogSeverity
 from api.helpers import SessionContext
 from api.models import Customer
 from django.utils import timezone
-from api.flows import ApiToken
+from api.helpers import ApiToken
 
 @dataclass_json
 @dataclass

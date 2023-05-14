@@ -8,7 +8,7 @@ from django.utils import timezone
 from api.models import Plant, Flavor, Land
 from api.models.factories import FlavorFactory
 from api.models.factories import LandFactory
-
+  
 class PlantFactory(DjangoModelFactory):
     class Meta:
         model = Plant
@@ -19,10 +19,10 @@ class PlantFactory(DjangoModelFactory):
     insert_user_id = factory.LazyFunction(uuid.uuid4)
     last_update_user_id = factory.LazyFunction(uuid.uuid4)
     last_change_code = factory.LazyFunction(uuid.uuid4)
-    flavor = SubFactory(FlavorFactory)
+    flavor = SubFactory(FlavorFactory) #flavor_id
     is_delete_allowed = Faker('boolean')
     is_edit_allowed = Faker('boolean')
-    land = SubFactory(LandFactory)
+    land = SubFactory(LandFactory) #land_id
     other_flavor = Faker('sentence', nb_words=4)
     some_big_int_val = Faker('random_int')
     some_bit_val = Faker('boolean')

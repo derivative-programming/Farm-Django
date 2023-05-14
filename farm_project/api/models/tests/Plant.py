@@ -11,7 +11,7 @@ class PlantTestCase(TestCase):
     def test_plant_creation(self):
         # Test that the instance was created
         self.assertIsNotNone(self.plant)
-
+  
     def test_plant_fields(self): 
 
         self.assertIsInstance(self.plant, Plant)
@@ -22,10 +22,10 @@ class PlantTestCase(TestCase):
         self.assertIsNotNone(self.plant.insert_user_id)
         self.assertIsNotNone(self.plant.last_update_user_id)
         self.assertIsNotNone(self.plant.last_change_code)
-        self.assertIsNotNone(self.plant.flavor)
+        self.assertIsNotNone(self.plant.flavor) #flavor_id
         self.assertIsNotNone(self.plant.is_delete_allowed)
         self.assertIsNotNone(self.plant.is_edit_allowed)
-        self.assertIsNotNone(self.plant.land)
+        self.assertIsNotNone(self.plant.land) #land_id
         self.assertIsNotNone(self.plant.other_flavor)
         self.assertIsNotNone(self.plant.some_big_int_val)
         self.assertIsNotNone(self.plant.some_bit_val)

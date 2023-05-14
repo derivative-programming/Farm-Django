@@ -59,7 +59,7 @@
                 "labelText": "Email Confirmed Date/Time"
               },
               {
-                "name": "first_name",
+                "name": "FirstName",
                 "codeDescription": "Customer First Name",
                 "sqlServerDBDataType": "nvarchar",
                 "sqlServerDBDataTypeSize": "200",
@@ -103,7 +103,7 @@
                 "labelText": "Forgot Password Key Value"
               },
               {
-                "name": "FSuser_code_value",
+                "name": "FSUserCodeValue",
                 "codeDescription": "Customer FS User Code Value",
                 "sqlServerDBDataType": "uniqueidentifier",
                 "isFK": "false",
@@ -229,7 +229,7 @@
                 "labelText": "Last Login Date/Time"
               },
               {
-                "name": "last_name",
+                "name": "LastName",
                 "codeDescription": "Customer Last Name",
                 "sqlServerDBDataType": "nvarchar",
                 "sqlServerDBDataTypeSize": "200",
@@ -358,13 +358,13 @@
             ],
             "query": [
               {
-                "name": "QueryByFSuser_code_value",
-                "storedProcName": "FS_Farm_Customer_QueryByFSuser_code_value",
+                "name": "QueryByFSUserCodeValue",
+                "storedProcName": "FS_Farm_Customer_QueryByFSUserCodeValue",
                 "isCustomSqlUsed": "false",
                 "queryParam": [
                   {
-                    "name": "FSuser_code_value",
-                    "storedProcParamName": "i_uidFSuser_code_value",
+                    "name": "FSUserCodeValue",
+                    "storedProcParamName": "i_uidFSUserCodeValue",
                     "sqlServerDBDataType": "uniqueidentifier"
                   }
                 ]
@@ -404,11 +404,11 @@
             "report": [],
             "objectWorkflow": [
               {
-                "name": "CustomerBuildTempapi_key",
+                "name": "CustomerBuildTempApiKey",
                 "isPage": "false",
                 "roleRequired": "",
                 "objectWorkflowParam": [],
-                "objectWorkflow_outputVar": [
+                "objectWorkflowOutputVar": [
                   {
                     "name": "TmpOrgApiKeyCode",
                     "sqlServerDBDataType": "uniqueidentifier",
@@ -427,7 +427,7 @@
                 "isPage": "false",
                 "roleRequired": "User",
                 "objectWorkflowParam": [],
-                "objectWorkflow_outputVar": [],
+                "objectWorkflowOutputVar": [],
                 "objectWorkflowButton": [
                   {
                     "buttonType": "submit",
@@ -454,7 +454,7 @@
               {
                 "name": "CustomerUserLogOutInitObjWF",
                 "objectWorkflowParam": [],
-                "objectWorkflow_outputVar": [
+                "objectWorkflowOutputVar": [
                   {
                     "name": "TacCode",
                     "sqlServerDBDataType": "uniqueidentifier",
@@ -908,7 +908,7 @@
                 "isPage": "false",
                 "roleRequired": "Config",
                 "objectWorkflowParam": [],
-                "objectWorkflow_outputVar": [],
+                "objectWorkflowOutputVar": [],
                 "objectWorkflowButton": []
               }
             ],
@@ -2100,9 +2100,9 @@
                     "isIgnored": "false"
                   }
                 ],
-                "objectWorkflow_outputVar": [
+                "objectWorkflowOutputVar": [
                   {
-                    "name": "_outputFlavorCode",
+                    "name": "OutputFlavorCode",
                     "sqlServerDBDataType": "uniqueidentifier",
                     "sqlServerDBDataTypeSize": "",
                     "labelText": "Flavor",
@@ -2112,7 +2112,7 @@
                     "sourcePropertyName": "FlavorCodePeek"
                   },
                   {
-                    "name": "_outputOtherFlavor",
+                    "name": "OutputOtherFlavor",
                     "sqlServerDBDataType": "nvarchar",
                     "sqlServerDBDataTypeSize": "100",
                     "labelText": "Other Flavor",
@@ -2120,7 +2120,7 @@
                     "sourcePropertyName": "OtherFlavor"
                   },
                   {
-                    "name": "_outputSomeIntVal",
+                    "name": "OutputSomeIntVal",
                     "sqlServerDBDataType": "int",
                     "sqlServerDBDataTypeSize": "",
                     "labelText": "Some Int Val",
@@ -2128,7 +2128,7 @@
                     "sourcePropertyName": "SomeIntVal"
                   },
                   {
-                    "name": "_outputSomeBigIntVal",
+                    "name": "OutputSomeBigIntVal",
                     "sqlServerDBDataType": "bigint",
                     "sqlServerDBDataTypeSize": "",
                     "labelText": "Some Big Int Val",
@@ -2136,7 +2136,7 @@
                     "sourcePropertyName": "SomeBigIntVal"
                   },
                   {
-                    "name": "_outputSomeBitVal",
+                    "name": "OutputSomeBitVal",
                     "sqlServerDBDataType": "bit",
                     "sqlServerDBDataTypeSize": "",
                     "labelText": "Some Bit Val",
@@ -2144,7 +2144,7 @@
                     "sourcePropertyName": "SomeBitVal"
                   },
                   {
-                    "name": "_outputIsEditAllowed",
+                    "name": "OutputIsEditAllowed",
                     "sqlServerDBDataType": "bit",
                     "sqlServerDBDataTypeSize": "",
                     "labelText": "Is Edit Allowed",
@@ -2152,7 +2152,7 @@
                     "sourcePropertyName": "IsEditAllowed"
                   },
                   {
-                    "name": "_outputIsDeleteAllowed",
+                    "name": "OutputIsDeleteAllowed",
                     "sqlServerDBDataType": "bit",
                     "sqlServerDBDataTypeSize": "",
                     "labelText": "Is Delete Allowed",
@@ -2160,7 +2160,7 @@
                     "sourcePropertyName": "IsDeleteAllowed"
                   },
                   {
-                    "name": "_outputSomeFloatVal",
+                    "name": "OutputSomeFloatVal",
                     "sqlServerDBDataType": "float",
                     "sqlServerDBDataTypeSize": "",
                     "labelText": "Some Float Val",
@@ -2168,7 +2168,7 @@
                     "sourcePropertyName": "SomeFloatVal"
                   },
                   {
-                    "name": "_outputSomeDecimalVal",
+                    "name": "OutputSomeDecimalVal",
                     "sqlServerDBDataType": "decimal",
                     "sqlServerDBDataTypeSize": "",
                     "labelText": "Some Decimal Val",
@@ -2176,7 +2176,7 @@
                     "sourcePropertyName": "SomeDecimalVal"
                   },
                   {
-                    "name": "_outputSomeUTCDateTimeVal",
+                    "name": "OutputSomeUTCDateTimeVal",
                     "sqlServerDBDataType": "datetime",
                     "sqlServerDBDataTypeSize": "",
                     "labelText": "Some UTC Date Time Val",
@@ -2184,7 +2184,7 @@
                     "sourcePropertyName": "SomeUTCDateTimeVal"
                   },
                   {
-                    "name": "_outputSomeDateVal",
+                    "name": "OutputSomeDateVal",
                     "sqlServerDBDataType": "date",
                     "sqlServerDBDataTypeSize": "",
                     "labelText": "Some Date Val",
@@ -2192,7 +2192,7 @@
                     "sourcePropertyName": "SomeDateVal"
                   },
                   {
-                    "name": "_outputSomeMoneyVal",
+                    "name": "OutputSomeMoneyVal",
                     "sqlServerDBDataType": "money",
                     "sqlServerDBDataTypeSize": "",
                     "labelText": "Some Money Val",
@@ -2200,7 +2200,7 @@
                     "sourcePropertyName": "SomeMoneyVal"
                   },
                   {
-                    "name": "_outputSomeNVarCharVal",
+                    "name": "OutputSomeNVarCharVal",
                     "sqlServerDBDataType": "nvarchar",
                     "sqlServerDBDataTypeSize": "100",
                     "labelText": "Some N Var Char Val",
@@ -2208,7 +2208,7 @@
                     "sourcePropertyName": "SomeNVarCharVal"
                   },
                   {
-                    "name": "_outputSomeVarCharVal",
+                    "name": "OutputSomeVarCharVal",
                     "sqlServerDBDataType": "varchar",
                     "sqlServerDBDataTypeSize": "",
                     "labelText": "Some Var Char Val",
@@ -2216,7 +2216,7 @@
                     "sourcePropertyName": "SomeVarCharVal"
                   },
                   {
-                    "name": "_outputSomeTextVal",
+                    "name": "OutputSomeTextVal",
                     "sqlServerDBDataType": "text",
                     "sqlServerDBDataTypeSize": "",
                     "labelText": "Some Text Val",
@@ -2224,7 +2224,7 @@
                     "sourcePropertyName": "SomeTextVal"
                   },
                   {
-                    "name": "_outputSomePhoneNumber",
+                    "name": "OutputSomePhoneNumber",
                     "sqlServerDBDataType": "varchar",
                     "sqlServerDBDataTypeSize": "50",
                     "labelText": "Some Phone Number",
@@ -2232,7 +2232,7 @@
                     "sourcePropertyName": "SomePhoneNumber"
                   },
                   {
-                    "name": "_outputSomeEmailAddress",
+                    "name": "OutputSomeEmailAddress",
                     "sqlServerDBDataType": "varchar",
                     "sqlServerDBDataTypeSize": "50",
                     "labelText": "Some Email Address",
@@ -2286,7 +2286,7 @@
               {
                 "name": "LandAddPlantInitObjWF",
                 "objectWorkflowParam": [],
-                "objectWorkflow_outputVar": [
+                "objectWorkflowOutputVar": [
                   {
                     "name": "RequestFlavorCode",
                     "sqlServerDBDataType": "uniqueidentifier",
@@ -2450,7 +2450,7 @@
               {
                 "name": "LandPlantListInitReport",
                 "objectWorkflowParam": [],
-                "objectWorkflow_outputVar": [
+                "objectWorkflowOutputVar": [
                   {
                     "name": "SomeIntVal",
                     "sqlServerDBDataType": "int",
@@ -2600,7 +2600,7 @@
                     "isIgnored": "false"
                   }
                 ],
-                "objectWorkflow_outputVar": [],
+                "objectWorkflowOutputVar": [],
                 "objectWorkflowButton": []
               },
               {
@@ -2621,7 +2621,7 @@
                     "isIgnored": "false"
                   }
                 ],
-                "objectWorkflow_outputVar": [],
+                "objectWorkflowOutputVar": [],
                 "objectWorkflowButton": []
               }
             ],
@@ -2696,7 +2696,7 @@
             "parentObjectName": "Organization",
             "prop": [
               {
-                "name": "api_keyValue",
+                "name": "ApiKeyValue",
                 "codeDescription": "Org Api Key Api Key Value",
                 "sqlServerDBDataType": "nvarchar",
                 "sqlServerDBDataTypeSize": "4000",
@@ -4023,37 +4023,37 @@
               {
                 "name": "PacUserDateGreaterThanFilterListInitReport",
                 "objectWorkflowParam": [],
-                "objectWorkflow_outputVar": [],
+                "objectWorkflowOutputVar": [],
                 "objectWorkflowButton": []
               },
               {
                 "name": "PacUserFlavorListInitReport",
                 "objectWorkflowParam": [],
-                "objectWorkflow_outputVar": [],
+                "objectWorkflowOutputVar": [],
                 "objectWorkflowButton": []
               },
               {
                 "name": "PacUserLandListInitReport",
                 "objectWorkflowParam": [],
-                "objectWorkflow_outputVar": [],
+                "objectWorkflowOutputVar": [],
                 "objectWorkflowButton": []
               },
               {
                 "name": "PacUserRoleListInitReport",
                 "objectWorkflowParam": [],
-                "objectWorkflow_outputVar": [],
+                "objectWorkflowOutputVar": [],
                 "objectWorkflowButton": []
               },
               {
                 "name": "PacUserTacListInitReport",
                 "objectWorkflowParam": [],
-                "objectWorkflow_outputVar": [],
+                "objectWorkflowOutputVar": [],
                 "objectWorkflowButton": []
               },
               {
                 "name": "PacUserTriStateFilterListInitReport",
                 "objectWorkflowParam": [],
-                "objectWorkflow_outputVar": [],
+                "objectWorkflowOutputVar": [],
                 "objectWorkflowButton": []
               }
             ],
@@ -4930,13 +4930,13 @@
                 "isPage": "false",
                 "roleRequired": "User",
                 "objectWorkflowParam": [],
-                "objectWorkflow_outputVar": [],
+                "objectWorkflowOutputVar": [],
                 "objectWorkflowButton": []
               },
               {
                 "name": "PlantUserDetailsInitReport",
                 "objectWorkflowParam": [],
-                "objectWorkflow_outputVar": [
+                "objectWorkflowOutputVar": [
                   {
                     "name": "LandCode",
                     "sqlServerDBDataType": "uniqueidentifier",
@@ -4961,7 +4961,7 @@
                 "isPage": "false",
                 "roleRequired": "User",
                 "objectWorkflowParam": [],
-                "objectWorkflow_outputVar": [],
+                "objectWorkflowOutputVar": [],
                 "objectWorkflowButton": []
               }
             ],
@@ -5375,9 +5375,9 @@
               {
                 "name": "TacFarmDashboardInitReport",
                 "objectWorkflowParam": [],
-                "objectWorkflow_outputVar": [
+                "objectWorkflowOutputVar": [
                   {
-                    "name": "customer_code",
+                    "name": "CustomerCode",
                     "sqlServerDBDataType": "uniqueidentifier",
                     "sqlServerDBDataTypeSize": "",
                     "labelText": "Customer",
@@ -5444,9 +5444,9 @@
                     "sourcePropertyName": ""
                   }
                 ],
-                "objectWorkflow_outputVar": [
+                "objectWorkflowOutputVar": [
                   {
-                    "name": "customer_code",
+                    "name": "CustomerCode",
                     "sqlServerDBDataType": "uniqueidentifier",
                     "sqlServerDBDataTypeSize": "",
                     "labelText": "Customer",
@@ -5460,7 +5460,7 @@
                     "labelText": "Email"
                   },
                   {
-                    "name": "user_code_value",
+                    "name": "UserCodeValue",
                     "sqlServerDBDataType": "uniqueidentifier",
                     "sqlServerDBDataTypeSize": "",
                     "labelText": "User Code Value"
@@ -5472,13 +5472,13 @@
                     "labelText": "UTC Offset In Minutes"
                   },
                   {
-                    "name": "role_name_csv_list",
+                    "name": "RoleNameCSVList",
                     "sqlServerDBDataType": "nvarchar",
                     "sqlServerDBDataTypeSize": "100",
                     "labelText": "Role Name CSV List"
                   },
                   {
-                    "name": "api_key",
+                    "name": "ApiKey",
                     "sqlServerDBDataType": "nvarchar",
                     "sqlServerDBDataTypeSize": "100",
                     "labelText": "Api Key"
@@ -5510,7 +5510,7 @@
               {
                 "name": "TacLoginInitObjWF",
                 "objectWorkflowParam": [],
-                "objectWorkflow_outputVar": [
+                "objectWorkflowOutputVar": [
                   {
                     "name": "Email",
                     "sqlServerDBDataType": "nvarchar",
@@ -5528,7 +5528,7 @@
                     "sourcePropertyName": ""
                   },
                   {
-                    "name": "customer_code",
+                    "name": "CustomerCode",
                     "sqlServerDBDataType": "uniqueidentifier",
                     "sqlServerDBDataTypeSize": "",
                     "labelText": "Customer",
@@ -5581,7 +5581,7 @@
                     "sourcePropertyName": "Password"
                   },
                   {
-                    "name": "confirm_password",
+                    "name": "ConfirmPassword",
                     "codeDescription": "Confirm Password",
                     "labelText": "Confirm Password",
                     "sqlServerDBDataType": "nvarchar",
@@ -5598,7 +5598,7 @@
                     "sourcePropertyName": ""
                   },
                   {
-                    "name": "first_name",
+                    "name": "FirstName",
                     "codeDescription": "First Name",
                     "labelText": "First Name",
                     "sqlServerDBDataType": "nvarchar",
@@ -5609,10 +5609,10 @@
                     "isFileUpload": "false",
                     "isIgnored": "false",
                     "sourceObjectName": "Customer",
-                    "sourcePropertyName": "first_name"
+                    "sourcePropertyName": "FirstName"
                   },
                   {
-                    "name": "last_name",
+                    "name": "LastName",
                     "codeDescription": "Last Name",
                     "labelText": "Last Name",
                     "sqlServerDBDataType": "nvarchar",
@@ -5623,12 +5623,12 @@
                     "isFileUpload": "false",
                     "isIgnored": "false",
                     "sourceObjectName": "Customer",
-                    "sourcePropertyName": "last_name"
+                    "sourcePropertyName": "LastName"
                   }
                 ],
-                "objectWorkflow_outputVar": [
+                "objectWorkflowOutputVar": [
                   {
-                    "name": "customer_code",
+                    "name": "CustomerCode",
                     "sqlServerDBDataType": "uniqueidentifier",
                     "sqlServerDBDataTypeSize": "",
                     "labelText": "Customer",
@@ -5644,7 +5644,7 @@
                     "sourcePropertyName": "Email"
                   },
                   {
-                    "name": "user_code_value",
+                    "name": "UserCodeValue",
                     "sqlServerDBDataType": "uniqueidentifier",
                     "sqlServerDBDataTypeSize": "",
                     "labelText": "User Code Value"
@@ -5658,13 +5658,13 @@
                     "sourcePropertyName": "UTCOffsetInMinutes"
                   },
                   {
-                    "name": "role_name_csv_list",
+                    "name": "RoleNameCSVList",
                     "sqlServerDBDataType": "nvarchar",
                     "sqlServerDBDataTypeSize": "100",
                     "labelText": "Role Name CSV List"
                   },
                   {
-                    "name": "api_key",
+                    "name": "ApiKey",
                     "sqlServerDBDataType": "nvarchar",
                     "sqlServerDBDataTypeSize": "100",
                     "labelText": "Api Key"
@@ -5698,7 +5698,7 @@
               {
                 "name": "TacRegisterInitObjWF",
                 "objectWorkflowParam": [],
-                "objectWorkflow_outputVar": [
+                "objectWorkflowOutputVar": [
                   {
                     "name": "Email",
                     "sqlServerDBDataType": "nvarchar",
@@ -5716,7 +5716,7 @@
                     "sourcePropertyName": ""
                   },
                   {
-                    "name": "confirm_password",
+                    "name": "ConfirmPassword",
                     "sqlServerDBDataType": "nvarchar",
                     "sqlServerDBDataTypeSize": "100",
                     "labelText": "Confirm Password",
@@ -5724,15 +5724,15 @@
                     "sourcePropertyName": ""
                   },
                   {
-                    "name": "first_name",
+                    "name": "FirstName",
                     "sqlServerDBDataType": "nvarchar",
                     "sqlServerDBDataTypeSize": "100",
                     "labelText": "First Name",
                     "sourceObjectName": "Customer",
-                    "sourcePropertyName": "first_name"
+                    "sourcePropertyName": "FirstName"
                   },
                   {
-                    "name": "last_name",
+                    "name": "LastName",
                     "sqlServerDBDataType": "nvarchar",
                     "sqlServerDBDataTypeSize": "100",
                     "labelText": "Last Name",
@@ -5749,7 +5749,7 @@
                     "sourcePropertyName": ""
                   },
                   {
-                    "name": "customer_code",
+                    "name": "CustomerCode",
                     "sqlServerDBDataType": "uniqueidentifier",
                     "sqlServerDBDataTypeSize": "",
                     "labelText": "Customer",
@@ -5962,7 +5962,7 @@
                 "isDeleteAvailable": "false",
                 "pluralName": "customerUserLogOut",
                 "description": "CustomerUserLogOut Endpoint",
-                "apiCodeParamName": "customer_code",
+                "apiCodeParamName": "CustomerCode",
                 "apiPostContextObjectName": "Customer",
                 "apiPostContextTargetName": "CustomerUserLogOut",
                 "isEndPointLoggingEnabled": "false"
@@ -6303,7 +6303,7 @@
                 "isEndPointLoggingEnabled": "false"
               },
               {
-                "name": "CustomerBuildTempapi_key",
+                "name": "CustomerBuildTempApiKey",
                 "isAPIAuthorizationRequired": "true",
                 "isGetAvailable": "false",
                 "isGetWithIdAvailable": "false",
@@ -6315,11 +6315,11 @@
                 "isLazyPost": "false",
                 "isPutAvailable": "false",
                 "isDeleteAvailable": "false",
-                "pluralName": "customerBuildTempapi_key",
-                "description": "CustomerBuildTempapi_key Endpoint",
-                "apiCodeParamName": "customer_code",
+                "pluralName": "customerBuildTempApiKey",
+                "description": "CustomerBuildTempApiKey Endpoint",
+                "apiCodeParamName": "CustomerCode",
                 "apiPostContextObjectName": "Customer",
-                "apiPostContextTargetName": "CustomerBuildTempapi_key",
+                "apiPostContextTargetName": "CustomerBuildTempApiKey",
                 "isEndPointLoggingEnabled": "false"
               },
               {
@@ -6503,7 +6503,7 @@
             "displayTextValue": "Email Confirmed Date/Time"
           },
           {
-            "name": "first_name",
+            "name": "FirstName",
             "internalTextValue": "First Name",
             "displayTextValue": "First Name"
           },
@@ -6518,7 +6518,7 @@
             "displayTextValue": "Forgot Password Key Value"
           },
           {
-            "name": "FSuser_code_value",
+            "name": "FSUserCodeValue",
             "internalTextValue": "FS User Code Value",
             "displayTextValue": "FS User Code Value"
           },
@@ -6558,7 +6558,7 @@
             "displayTextValue": "Last Login Date/Time"
           },
           {
-            "name": "last_name",
+            "name": "LastName",
             "internalTextValue": "Last Name",
             "displayTextValue": "Last Name"
           },
@@ -6638,7 +6638,7 @@
             "displayTextValue": "Organization"
           },
           {
-            "name": "api_keyValue",
+            "name": "ApiKeyValue",
             "internalTextValue": "Api Key Value",
             "displayTextValue": "Api Key Value"
           },

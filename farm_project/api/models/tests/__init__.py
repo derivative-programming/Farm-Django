@@ -10,5 +10,5 @@ from .ErrorLog import ErrorLogTestCase
 from .Flavor import FlavorTestCase
 from .Land import LandTestCase
 from .Pac import PacTestCase
-from .Plant import PlantTestCase
+from .plant import PlantTestCase
 from .Role import RoleTestCase

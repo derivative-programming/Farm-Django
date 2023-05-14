@@ -10,5 +10,5 @@ from .ErrorLog import ErrorLogAdminTest
 from .Flavor import FlavorAdminTest
 from .Land import LandAdminTest
 from .Pac import PacAdminTest
-from .Plant import PlantAdminTest
+from .plant import PlantAdminTest
 from .Role import RoleAdminTest

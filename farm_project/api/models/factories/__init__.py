@@ -7,5 +7,5 @@ from .Flavor import FlavorFactory
 from .Land import LandFactory 
 from .Role import RoleFactory 
 from .TriStateFilter import TriStateFilterFactory  
-from .Plant import PlantFactory
+from .plant import PlantFactory
 from .ErrorLog import ErrorLogFactory  

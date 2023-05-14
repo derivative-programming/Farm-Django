@@ -4,10 +4,7 @@ import datetime
 import uuid 
 from .Flavor import Flavor
 from .Land import Land
-
  
-
-
 class Plant(models.Model):
     plant_id = models.AutoField(primary_key=True)
     code = models.UUIDField(default=uuid.uuid4)
