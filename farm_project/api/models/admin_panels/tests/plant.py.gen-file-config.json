@@ -6,5 +6,7 @@
         "name":"Plant"
     },
     "ignoreDimensionPropertyList": [
+        "prop.isNotPublishedToSubscriptions",
+        "prop.isFKLookup"
     ]
 } 
