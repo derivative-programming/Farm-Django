@@ -3,6 +3,7 @@ from django.test import TestCase
 
 from api.models import Plant
 from api.models.admin_panels import PlantAdmin
+from api.models.factories import PlantFactory
 
 class MockRequest:
     pass
@@ -53,6 +54,6 @@ class PlantAdminTest(TestCase):
         )
 
     def test_queryset(self):
-        plant = Plant.objects.create()
+        plant = PlantFactory.create()
         queryset = self.admin.get_queryset(request) 
         self.assertIn(plant.code, [obj.code for obj in queryset]) 

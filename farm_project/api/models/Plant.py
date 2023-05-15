@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.core.exceptions import ValidationError
 import datetime
 import uuid 
 from .flavor import Flavor #flavor_id
@@ -92,3 +93,17 @@ class Plant(models.Model):
 
     def __str__(self):
         return str(self.code)
+    
+    def save(self, *args, **kwargs):
+       # On save, update timestamps
+        if self.plant_id is not None:  
+            # If the instance already exists in the database, make sure it hasn't already changed since last read
+            current_instance = Plant.objects.get(plant_id=self.plant_id)
+            if self.last_change_code != current_instance.last_change_code:
+                raise ValidationError('This object is invalid. It has already changed in the db.')
+        if self.plant_id is None:
+            self.insert_utc_date_time = timezone.now()
+        
+        self.last_update_utc_date_time = timezone.now()
+        self.last_change_code = uuid.uuid4()
+        return super(Plant, self).save(*args, **kwargs)
