@@ -15,7 +15,7 @@ from django.utils import timezone
 @dataclass_json
 @dataclass
 class FlowTacLoginResult():
-    context_tac_code:uuid = uuid.UUID(int=0)
+    context_object_code:uuid = uuid.UUID(int=0)
     customer_code:uuid = uuid.UUID(int=0)
     email:str = ""
     user_code_value:uuid = uuid.UUID(int=0)
@@ -90,7 +90,7 @@ class FlowTacLogin(BaseFlowTacLogin):
 
         super()._log_message_and_severity(LogSeverity.information_high_detail, "Building result")
         result = FlowTacLoginResult()
-        result.context_tac_code = tac.code
+        result.context_object_code = tac.code
         result.customer_code = customer_code_output
         result.email = email_output
         result.user_code_value = user_code_value_output

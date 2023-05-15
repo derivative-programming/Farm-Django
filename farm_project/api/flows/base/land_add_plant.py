@@ -15,7 +15,7 @@ class BaseFlowLandAddPlant(BaseFlow):
     
     def _process_validation_rules(self, 
         land: Land,
-        request_flavor_code:str = "",    
+        request_flavor_code:uuid = "",    
         request_other_flavor:str = "",    
         request_some_int_val:int = 0,    
         request_some_big_int_val:int = 0,    

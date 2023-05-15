@@ -13,10 +13,10 @@ from decimal import Decimal
 @dataclass_json
 @dataclass
 class FlowLandAddPlantResult():
-    context_land_code:uuid = uuid.UUID(int=0) 
+    context_object_code:uuid = uuid.UUID(int=0) 
     land_code:uuid = uuid.UUID(int=0) 
     plant_code:uuid = uuid.UUID(int=0)     
-    output_flavor_code:str = "" 
+    output_flavor_code:uuid = uuid.UUID(int=0)    
     output_other_flavor:str = "" 
     output_some_int_val:int = 0 
     output_some_big_int_val:int = 0 
@@ -43,7 +43,7 @@ class FlowLandAddPlant(BaseFlowLandAddPlant):
     
     def process(self,
         land: Land,
-        request_flavor_code:str = "",    
+        request_flavor_code:uuid = uuid.UUID(int=0),    
         request_other_flavor:str = "",    
         request_some_int_val:int = 0,    
         request_some_big_int_val:int = 0,    
@@ -118,7 +118,7 @@ class FlowLandAddPlant(BaseFlowLandAddPlant):
         super()._log_message_and_severity(LogSeverity.information_high_detail, "Building result")
         result = FlowLandAddPlantResult() 
         
-        result.context_land_code = land.code
+        result.context_object_code = land.code
         result.land_code = land_code_output
         result.plant_code = plant_code_output
         result.output_flavor_code = output_flavor_code_output

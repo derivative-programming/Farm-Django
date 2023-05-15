@@ -12,7 +12,7 @@ from api.helpers import SessionContext
 @dataclass_json
 @dataclass
 class FlowTacLoginInitObjWFResult():
-    context_tac_code:uuid = uuid.UUID(int=0)
+    context_object_code:uuid = uuid.UUID(int=0)
     email:str = ""
     password:str = ""
 
@@ -42,10 +42,10 @@ class FlowTacLoginInitObjWF(BaseFlowTacLoginInitObjWF):
 
         super()._log_message_and_severity(LogSeverity.information_high_detail, "Building result")
         result = FlowTacLoginInitObjWFResult()
-        result.context_tac_code = tac.code
+        result.context_object_code = tac.code
         result.email = email_output
         result.password = password_output
-        result.context_tac_code = tac.code
+        result.context_object_code = tac.code
         super()._log_message_and_severity(LogSeverity.information_high_detail, "Result:" + result.to_json())
 
         super()._log_message_and_severity(LogSeverity.information_high_detail, "End")
