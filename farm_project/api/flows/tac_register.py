@@ -1,20 +1,17 @@
-
 from dataclasses import dataclass
 from dataclasses_json import dataclass_json,LetterCase 
 import uuid
-from api.flows.base.BaseFlowTacLogin import BaseFlowTacLogin
-from api.models import Tac
-from api.models import Customer
-from api.flows.base.LogSeverity import LogSeverity
+from api.flows.base import BaseFlowTacRegister
+from api.models import Tac 
+from api.flows.base import LogSeverity
 from api.helpers import SessionContext
-from django.core.exceptions import ObjectDoesNotExist
-from api.flows.base import FlowValidationError
-from api.helpers import ApiToken
+from api.models import Customer
 from django.utils import timezone
+from api.helpers import ApiToken
 
 @dataclass_json
 @dataclass
-class FlowTacLoginResult():
+class FlowTacRegisterResult():
     context_tac_code:uuid = uuid.UUID(int=0)
     customer_code:uuid = uuid.UUID(int=0)
     email:str = ""
@@ -26,36 +23,29 @@ class FlowTacLoginResult():
     def __init__(self): 
         pass
 
-class FlowTacLogin(BaseFlowTacLogin):
+class FlowTacRegister(BaseFlowTacRegister):
     def __init__(self, session_context:SessionContext): 
-        super(FlowTacLogin, self).__init__(session_context) 
-
-    def process(self, 
+        super(FlowTacRegister, self).__init__(session_context) 
+    
+    def process(self,
         tac: Tac,
-        email: str,
-        password: str,
-        ) -> FlowTacLoginResult: 
-        
+        email:str,
+        password:str,
+        confirm_password:str,
+        first_name:str,
+        last_name:str
+        ) -> FlowTacRegisterResult:
+
         super()._log_message_and_severity(LogSeverity.information_high_detail, "Start")
         super()._log_message_and_severity(LogSeverity.information_high_detail, "Code::" + str(tac.code))
-
-        
-        customer = Customer()
-        try:
-            customer = Customer.objects.get(email=email) 
-        except ObjectDoesNotExist:
-            super()._add_field_validation_error("email","User does not exist")
-
-        if password != customer.password:
-            super()._add_field_validation_error("password","Invalid password")
-
-        if customer.is_active == False:
-            super()._add_field_validation_error("email","This user account is locked")
 
         super()._process_validation_rules(
             tac,
             email,
             password,
+            confirm_password,
+            first_name,
+            last_name,
         )
 
         super()._throw_queued_validation_errors()
@@ -67,10 +57,20 @@ class FlowTacLogin(BaseFlowTacLogin):
         role_name_csv_list_output = ""
         api_key_output = ""
 
- 
+        # TODO: add flow logic
 
-
-
+        customer = Customer.objects.create()
+        customer.tac = tac
+        customer.email = email
+        customer.password = password
+        customer.code = uuid.uuid4() 
+        customer.first_name = first_name
+        customer.last_name = last_name
+        customer.registration_utc_date_time=timezone.now() 
+        customer.is_active = True
+        customer.last_login_utc_date_time = timezone.now() 
+        customer.save()
+        
         customer_code_output = customer.code
         email_output = customer.email
         user_code_value_output = customer.code
@@ -85,11 +85,10 @@ class FlowTacLogin(BaseFlowTacLogin):
         api_key_dict["role_name_csv"] = role_name_csv_list_output
         api_key_output = ApiToken.create_token(api_key_dict, 1)
  
-        customer.last_login_utc_date_time = timezone.now() 
-        customer.save()
+
 
         super()._log_message_and_severity(LogSeverity.information_high_detail, "Building result")
-        result = FlowTacLoginResult()
+        result = FlowTacRegisterResult() 
         result.context_tac_code = tac.code
         result.customer_code = customer_code_output
         result.email = email_output
@@ -100,6 +99,7 @@ class FlowTacLogin(BaseFlowTacLogin):
         super()._log_message_and_severity(LogSeverity.information_high_detail, "Result:" + result.to_json())
 
         super()._log_message_and_severity(LogSeverity.information_high_detail, "End")
+
 
         return result
 

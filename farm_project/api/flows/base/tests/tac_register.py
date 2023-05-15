@@ -1,5 +1,5 @@
 import unittest 
-from api.flows.base.BaseFlowTacRegister import BaseFlowTacRegister
+from api.flows.base import BaseFlowTacRegister
 from api.helpers import SessionContext
 from api.models.factories import TacFactory
 

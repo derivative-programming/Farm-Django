@@ -1,29 +1,32 @@
-
 from dataclasses import dataclass
 from dataclasses_json import dataclass_json,LetterCase 
 import uuid
-import api.flows.base
-from api.flows.base.BaseFlowTacFarmDashboardInitReport import BaseFlowTacFarmDashboardInitReport 
+from api.flows.base import BaseFlowTacRegisterInitObjWF
 from api.models import Tac 
-from api.flows.base.LogSeverity import LogSeverity
+from api.flows.base import LogSeverity
 from api.helpers import SessionContext
 
 @dataclass_json
 @dataclass
-class FlowTacFarmDashboardInitReportResult():
+class FlowTacRegisterInitObjWFResult():
     context_tac_code:uuid = uuid.UUID(int=0)
-    customer_code:uuid = uuid.UUID(int=0)
+    email:str = ""
+    password:str = ""
+    confirm_password:str = ""
+    first_name:str = ""
+    last_name:str = ""
 
     def __init__(self): 
         pass
 
-class FlowTacFarmDashboardInitReport(BaseFlowTacFarmDashboardInitReport):  
-    def __init__(self, session_context:SessionContext):  
-        super(FlowTacFarmDashboardInitReport, self).__init__(session_context) 
+class FlowTacRegisterInitObjWF(BaseFlowTacRegisterInitObjWF):
+    def __init__(self, session_context:SessionContext): 
+        super(FlowTacRegisterInitObjWF, self).__init__(session_context) 
 
-    def process(self, 
+    def process(self,
         tac: Tac,
-        ) -> FlowTacFarmDashboardInitReportResult:
+        ) -> FlowTacRegisterInitObjWFResult:
+ 
         super()._log_message_and_severity(LogSeverity.information_high_detail, "Start")
         super()._log_message_and_severity(LogSeverity.information_high_detail, "Code::" + str(tac.code))
 
@@ -32,19 +35,29 @@ class FlowTacFarmDashboardInitReport(BaseFlowTacFarmDashboardInitReport):
         )
 
         super()._throw_queued_validation_errors()
-        
-        # customer_code_output = uuid.UUID(int=0)
 
-        customer_code_output = self._session_context.customer_code
-    
+        email_output = ""
+        password_output = ""
+        confirm_password_output = ""
+        first_name_output = ""
+        last_name_output = ""
+ 
+        
+
         super()._log_message_and_severity(LogSeverity.information_high_detail, "Building result")
-        result = FlowTacFarmDashboardInitReportResult()
+        result = FlowTacRegisterInitObjWFResult()
         result.context_tac_code = tac.code
-        result.customer_code = customer_code_output
+        result.email = email_output
+        result.password = password_output
+        result.confirm_password = confirm_password_output
+        result.first_name = first_name_output
+        result.last_name = last_name_output
         result.context_tac_code = tac.code
         super()._log_message_and_severity(LogSeverity.information_high_detail, "Result:" + result.to_json())
-        
+
         super()._log_message_and_severity(LogSeverity.information_high_detail, "End")
+
+
         return result
 
 

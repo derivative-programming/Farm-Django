@@ -2,9 +2,9 @@
 from dataclasses import dataclass
 from dataclasses_json import dataclass_json,LetterCase 
 import uuid
-from api.flows.base.BaseFlowTacLoginInitObjWF import BaseFlowTacLoginInitObjWF
+from api.flows.base import BaseFlowTacLoginInitObjWF
 from api.models import Tac 
-from api.flows.base.LogSeverity import LogSeverity
+from api.flows.base import LogSeverity
 from api.helpers import SessionContext
  
  

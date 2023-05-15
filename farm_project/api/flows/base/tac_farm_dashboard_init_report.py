@@ -1,18 +1,17 @@
 import uuid
 from api.models import Tac 
-from .BaseFlow import BaseFlow
-from api.flows.base.LogSeverity import LogSeverity
+from api.flows.base import BaseFlow
+from api.flows.base import LogSeverity
 from api.helpers import SessionContext
  
 
-class BaseFlowTacRegisterInitObjWF(BaseFlow):
+class BaseFlowTacFarmDashboardInitReport(BaseFlow):
     def __init__(self, session_context:SessionContext): 
-        super(BaseFlowTacRegisterInitObjWF, self).__init__(
-            "TacRegisterInitObjWF", 
+        super(BaseFlowTacFarmDashboardInitReport, self).__init__(
+            "TacFarmDashboardInitReport", 
             session_context,
             ) 
- 
-    
+
     def _process_validation_rules(self, 
         tac: Tac,
         ):
@@ -24,3 +23,6 @@ class BaseFlowTacRegisterInitObjWF(BaseFlow):
         tac: Tac,
         ):
         super()._log_message_and_severity(LogSeverity.information_high_detail, "Processing security rules...")
+
+
+    

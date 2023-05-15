@@ -1,11 +1,6 @@
-from .FlowTacFarmDashboardInitReport import FlowTacFarmDashboardInitReport
-from .FlowTacFarmDashboardInitReport import FlowTacFarmDashboardInitReportResult
-from .FlowTacLogin import FlowTacLogin 
-from .FlowTacLogin import FlowTacLoginResult  
-from .FlowTacLoginInitObjWF import FlowTacLoginInitObjWF 
-from .FlowTacLoginInitObjWF import FlowTacLoginInitObjWFResult 
-from .FlowTacRegister import FlowTacRegister 
-from .FlowTacRegister import FlowTacRegisterResult 
-from .FlowTacRegisterInitObjWF import FlowTacRegisterInitObjWF 
-from .FlowTacRegisterInitObjWF import FlowTacRegisterInitObjWFResult 
-from .base.FlowValidationError import FlowValidationError
+from .tac_farm_dashboard_init_report import FlowTacFarmDashboardInitReport, FlowTacFarmDashboardInitReportResult 
+from .tac_login import FlowTacLogin, FlowTacLoginResult 
+from .tac_login_init_obj_wf import FlowTacLoginInitObjWF, FlowTacLoginInitObjWFResult 
+from .tac_register import FlowTacRegister, FlowTacRegisterResult 
+from .tac_register_init_obj_wf import FlowTacRegisterInitObjWF, FlowTacRegisterInitObjWFResult 
+from .base.flow_validation_error import FlowValidationError

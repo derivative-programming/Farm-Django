@@ -1,6 +1,6 @@
 # your_app/tests.py
 from django.test import TestCase
-from api.flows.base.FlowValidationError import FlowValidationError
+from api.flows.base import FlowValidationError
 
 class TestFlowValidationError(TestCase):
     def test_init_with_message(self):

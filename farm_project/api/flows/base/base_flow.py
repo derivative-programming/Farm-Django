@@ -1,7 +1,7 @@
 import uuid
 from api.models import Tac 
-from .FlowValidationError import FlowValidationError 
-from .LogSeverity import LogSeverity
+from .flow_validation_error import FlowValidationError 
+from .log_severity import LogSeverity
 import logging
 from api.helpers import SessionContext
 

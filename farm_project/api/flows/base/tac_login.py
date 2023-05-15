@@ -1,7 +1,7 @@
 import uuid
 from api.models import Tac 
-from api.flows.base.BaseFlow import BaseFlow
-from api.flows.base.LogSeverity import LogSeverity
+from api.flows.base import BaseFlow
+from api.flows.base import LogSeverity
 from api.helpers import SessionContext
  
 

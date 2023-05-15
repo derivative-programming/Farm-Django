@@ -1,13 +1,13 @@
-import unittest  
-from api.flows.base.BaseFlowTacFarmDashboardInitReport import BaseFlowTacFarmDashboardInitReport
+import unittest 
+from api.flows.base import BaseFlowTacRegisterInitObjWF
 from api.helpers import SessionContext
 from api.models.factories import TacFactory
 
 
-class BaseFlowTacFarmDashboardInitReportTestCase(unittest.TestCase):
+class BaseFlowTacRegisterInitObjWFTestCase(unittest.TestCase):
     def setUp(self):
         session_context = SessionContext(dict())
-        self.flow = BaseFlowTacFarmDashboardInitReport(session_context)
+        self.flow = BaseFlowTacRegisterInitObjWF(session_context)
     
     def test_process_validation_rules(self):
         # Create a mock Tac object

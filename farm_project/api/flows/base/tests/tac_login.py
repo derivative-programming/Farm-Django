@@ -1,13 +1,13 @@
-import unittest 
-from api.flows.base.BaseFlowTacLoginInitObjWF import BaseFlowTacLoginInitObjWF
+import unittest   
+from api.flows.base import BaseFlowTacLogin
 from api.helpers import SessionContext
 from api.models.factories import TacFactory
 
 
-class BaseFlowTacLoginInitObjWFTestCase(unittest.TestCase):
+class BaseFlowTacLoginTestCase(unittest.TestCase):
     def setUp(self):
         session_context = SessionContext(dict())
-        self.flow = BaseFlowTacLoginInitObjWF(session_context)
+        self.flow = BaseFlowTacLogin(session_context)
     
     def test_process_validation_rules(self):
         # Create a mock Tac object
@@ -15,9 +15,11 @@ class BaseFlowTacLoginInitObjWFTestCase(unittest.TestCase):
         # tac = Mock(spec=Tac)
         # tac.pac.return_value = pac
         tac = TacFactory.create()
+        email = "test@example.com"
+        password = "password123"
         
         # Call the method being tested
-        self.flow._process_validation_rules(tac)
+        self.flow._process_validation_rules(tac, email, password)
         
         # Add assertions here to validate the expected behavior
     
@@ -32,4 +34,3 @@ class BaseFlowTacLoginInitObjWFTestCase(unittest.TestCase):
         self.flow._process_security_rules(tac)
         
         # Add assertions here to validate the expected behavior
- 
