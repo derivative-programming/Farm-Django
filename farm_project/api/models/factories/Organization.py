@@ -1,10 +1,19 @@
-import factory
+# api/models/factories.py
 import uuid
-from django.utils import timezone
+import factory
+from factory.django import DjangoModelFactory
 from factory import Faker, SubFactory
-from faker import Factory as FakerFactory
-from .models import Pac, Tac, Customer
-from faker import Faker
-from datetime import timedelta 
-
-# TODO
+from django.utils import timezone
+from api.models import Organization
+from api.models.factories import TacFactory #tac_id
+class OrganizationFactory(DjangoModelFactory):
+    class Meta:
+        model = Organization
+    code = factory.LazyFunction(uuid.uuid4)
+    insert_utc_date_time = factory.LazyFunction(timezone.now)
+    last_update_utc_date_time = factory.LazyFunction(timezone.now)
+    insert_user_id = factory.LazyFunction(uuid.uuid4)
+    last_update_user_id = factory.LazyFunction(uuid.uuid4)
+    last_change_code = factory.LazyFunction(uuid.uuid4)
+    name = Faker('sentence', nb_words=4)
+    tac = SubFactory(TacFactory) #tac_id

@@ -3,9 +3,6 @@ from django.utils import timezone
 import datetime
 import uuid 
 from django.contrib import admin
-
-
-
 class PlantAdmin(admin.ModelAdmin):
     readonly_fields = ('plant_id','code','insert_utc_date_time','last_update_utc_date_time','insert_user_id','last_update_user_id','last_change_code')
     list_display = ( 
@@ -28,6 +25,6 @@ class PlantAdmin(admin.ModelAdmin):
         'some_text_val',
         'some_uniqueidentifier_val',
         'some_utc_date_time_val',
-        'some_var_char_val', 
+        'some_var_char_val',
         'code', 
         )

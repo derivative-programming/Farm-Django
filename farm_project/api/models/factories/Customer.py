@@ -1,48 +1,40 @@
-import factory
+# api/models/factories.py
 import uuid
-from django.utils import timezone
+import factory
+from factory.django import DjangoModelFactory
 from factory import Faker, SubFactory
-from faker import Factory as FakerFactory
+from django.utils import timezone
 from api.models import Customer
-from faker import Faker
-from datetime import timedelta 
-from .Tac import TacFactory
- 
-
-
-
-class CustomerFactory(factory.django.DjangoModelFactory):
+from api.models.factories import TacFactory #tac_id
+class CustomerFactory(DjangoModelFactory):
     class Meta:
         model = Customer
- 
-    active_organization_id = factory.Sequence(lambda n: n)
-    email = factory.Faker('email')
-    email_confirmed_utc_date_time = factory.Faker('past_datetime', start_date="-30d")
-    first_name = factory.Sequence(lambda n: f"first_name{n}")
-    forgot_password_key_expiration_utc_date_time = factory.Faker('past_datetime', start_date="-30d")
-    forgot_password_key_value = factory.Sequence(lambda n: f"forgot_password_key_value{n}")
-    fs_user_code_value = factory.Sequence(lambda n: f"{uuid.uuid4()}")
-    is_active = True
-    is_email_allowed = factory.Faker('boolean')
-    is_email_confirmed = factory.Faker('boolean')
-    is_email_marketing_allowed = factory.Faker('boolean')
-    is_locked = False
-    is_multiple_organizations_allowed = factory.Faker('boolean')
-    is_verbose_logging_forced = factory.Faker('boolean')
-    last_login_utc_date_time = factory.Faker('past_datetime', start_date="-30d")
-    last_name = factory.Sequence(lambda n: f"last_name{n}")
-    password = factory.Sequence(lambda n: f"password{n}")
-    phone = factory.LazyAttribute(lambda n: f"{factory.Faker('phone_number')}")
-    province = factory.Sequence(lambda n: f"province{n}")
-    registration_utc_date_time = factory.Faker('past_datetime', start_date="-30d")
-    tac = factory.SubFactory(TacFactory)
-    utc_offset_in_minutes = factory.Sequence(lambda n: n)
-    zip = factory.Sequence(lambda n: f"zip{n}")
-
-    @factory.lazy_attribute
-    def insert_user_id(self):
-        return uuid.uuid4()
-
-    @factory.lazy_attribute
-    def last_update_user_id(self):
-        return uuid.uuid4()
+    code = factory.LazyFunction(uuid.uuid4)
+    insert_utc_date_time = factory.LazyFunction(timezone.now)
+    last_update_utc_date_time = factory.LazyFunction(timezone.now)
+    insert_user_id = factory.LazyFunction(uuid.uuid4)
+    last_update_user_id = factory.LazyFunction(uuid.uuid4)
+    last_change_code = factory.LazyFunction(uuid.uuid4)
+    active_organization_id = Faker('random_int')
+    email = Faker('email')
+    email_confirmed_utc_date_time = Faker('date_time', tzinfo=timezone.utc)
+    first_name = Faker('sentence', nb_words=4)
+    forgot_password_key_expiration_utc_date_time = Faker('date_time', tzinfo=timezone.utc)
+    forgot_password_key_value = Faker('sentence', nb_words=4)
+    fs_user_code_value = factory.LazyFunction(uuid.uuid4)
+    is_active = Faker('boolean')
+    is_email_allowed = Faker('boolean')
+    is_email_confirmed = Faker('boolean')
+    is_email_marketing_allowed = Faker('boolean')
+    is_locked = Faker('boolean')
+    is_multiple_organizations_allowed = Faker('boolean')
+    is_verbose_logging_forced = Faker('boolean')
+    last_login_utc_date_time = Faker('date_time', tzinfo=timezone.utc)
+    last_name = Faker('sentence', nb_words=4)
+    password = Faker('sentence', nb_words=4)
+    phone = Faker('phone_number')
+    province = Faker('sentence', nb_words=4)
+    registration_utc_date_time = Faker('date_time', tzinfo=timezone.utc)
+    tac = SubFactory(TacFactory) #tac_id
+    utc_offset_in_minutes = Faker('random_int')
+    zip = Faker('sentence', nb_words=4)

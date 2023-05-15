@@ -2,11 +2,12 @@ from django.db import models
 from django.utils import timezone
 from django.core.exceptions import ValidationError
 import datetime
-import uuid 
+import uuid
 from .flavor import Flavor #flavor_id
-from .land import Land      #land_id
+from .land import Land #land_id
 from api.models.constants import PlantConstants
- 
+import logging 
+
 class Plant(models.Model): 
     plantConstants = PlantConstants()
     plant_id = models.AutoField(primary_key=True)
@@ -17,10 +18,10 @@ class Plant(models.Model):
     last_update_user_id = models.UUIDField(null=True)
     last_change_code = models.UUIDField(default=uuid.uuid4)	
     #flavor_id = models.IntegerField(null=True)
-    flavor = models.ForeignKey(Flavor, 
-                               related_name='plant_list', 
-                               on_delete=models.SET_NULL, 
-                               blank=True, 
+    flavor = models.ForeignKey(Flavor,
+                               related_name='plant_list',
+                               on_delete=models.SET_NULL,
+                               blank=True,
                                null=True,
                                db_index=True)
     is_delete_allowed = models.BooleanField(
@@ -28,14 +29,14 @@ class Plant(models.Model):
                                 db_index=plantConstants.is_delete_allowed_calculatedIsDBColumnIndexed)
     is_edit_allowed = models.BooleanField(
                                 null=True,
-                                db_index=plantConstants.is_edit_allowed_calculatedIsDBColumnIndexed)	
+                                db_index=plantConstants.is_edit_allowed_calculatedIsDBColumnIndexed)
     #land_id = models.IntegerField(null=True)
-    land = models.ForeignKey(Land, 
-                                related_name='plant_list', 
-                                on_delete=models.SET_NULL, 
-                                blank=True, 
-                                null=True,
-                                db_index=True)	
+    land = models.ForeignKey(Land,
+                               related_name='plant_list',
+                               on_delete=models.SET_NULL,
+                               blank=True,
+                               null=True,
+                               db_index=True)
     other_flavor = models.TextField(
                                 null=True,
                                 db_index=plantConstants.other_flavor_calculatedIsDBColumnIndexed)
@@ -49,7 +50,7 @@ class Plant(models.Model):
                                 null=True,
                                 db_index=plantConstants.some_date_val_calculatedIsDBColumnIndexed)
     some_decimal_val = models.DecimalField(
-                                max_digits=18, 
+                                max_digits=18,
                                 decimal_places=6,
                                 null=True,
                                 db_index=plantConstants.some_decimal_val_calculatedIsDBColumnIndexed)
@@ -64,12 +65,11 @@ class Plant(models.Model):
                                 null=True,
                                 db_index=plantConstants.some_int_val_calculatedIsDBColumnIndexed)	
     some_money_val = models.DecimalField(
-                                max_digits=19, 
+                                max_digits=19,
                                 decimal_places=4,
                                 null=True,
                                 db_index=plantConstants.some_money_val_calculatedIsDBColumnIndexed)
     some_n_var_char_val = models.TextField(
-                                max_length=50,
                                 null=True,
                                 db_index=plantConstants.some_n_var_char_val_calculatedIsDBColumnIndexed)
     some_phone_number = models.TextField(
@@ -89,21 +89,19 @@ class Plant(models.Model):
     some_var_char_val = models.TextField(
                                 max_length=50,
                                 null=True,
-                                db_index=plantConstants.some_var_char_val_calculatedIsDBColumnIndexed)  
-
+                                db_index=plantConstants.some_var_char_val_calculatedIsDBColumnIndexed)
     def __str__(self):
         return str(self.code)
-    
     def save(self, *args, **kwargs):
        # On save, update timestamps
         if self.plant_id is not None:  
             # If the instance already exists in the database, make sure it hasn't already changed since last read
-            current_instance = Plant.objects.get(plant_id=self.plant_id)
+            current_instance:Plant = Plant.objects.get(plant_id=self.plant_id)
             if self.last_change_code != current_instance.last_change_code:
+                logging.debug("in db: " + str(current_instance.last_change_code) + " yours: " + str(self.last_change_code))
                 raise ValidationError('This object is invalid. It has already changed in the db.')
         if self.plant_id is None:
             self.insert_utc_date_time = timezone.now()
-        
         self.last_update_utc_date_time = timezone.now()
         self.last_change_code = uuid.uuid4()
         return super(Plant, self).save(*args, **kwargs)

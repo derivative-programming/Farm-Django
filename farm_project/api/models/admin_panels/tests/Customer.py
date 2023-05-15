@@ -1,34 +1,28 @@
 from django.contrib.admin.sites import AdminSite
 from django.test import TestCase
-from api.models.factories import CustomerFactory
 from api.models import Customer
 from api.models.admin_panels import CustomerAdmin
-
+from api.models.factories import CustomerFactory
 class MockRequest:
     pass
-
 class MockSuperUser:
     def has_perm(self, perm, obj=None):
         return True
-
 request = MockRequest()
 request.user = MockSuperUser()
-
 class CustomerAdminTest(TestCase):
     def setUp(self):
         self.site = AdminSite()
         self.admin = CustomerAdmin(Customer, self.site)
-
     def test_readonly_fields(self):
         self.assertEqual(
             self.admin.readonly_fields,
             ('customer_id', 'code', 'insert_utc_date_time', 'last_update_utc_date_time', 'insert_user_id', 'last_update_user_id', 'last_change_code')
         )
-
     def test_list_display(self):
         self.assertEqual(
             self.admin.list_display,
-            ('customer_id', 
+            ( 'customer_id',
             'active_organization_id',
             'email',
             'email_confirmed_utc_date_time',
@@ -55,8 +49,7 @@ class CustomerAdminTest(TestCase):
             'code', 
             )
         )
-
     def test_queryset(self):
-        customer:Customer = CustomerFactory.create()  
+        customer = CustomerFactory.create()
         queryset = self.admin.get_queryset(request) 
         self.assertIn(customer.code, [obj.code for obj in queryset]) 

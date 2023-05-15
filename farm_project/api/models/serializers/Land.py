@@ -1,7 +1,5 @@
 from rest_framework import serializers
-
 from api.models import Land 
-     
 class LandSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Land
@@ -11,6 +9,6 @@ class LandSerializer(serializers.HyperlinkedModelSerializer):
             'is_active',
             'lookup_enum_name',
             'name',
-            'pac_id',  
+            'pac_id',
             'code'
             )

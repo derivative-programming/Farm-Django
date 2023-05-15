@@ -1,18 +1,16 @@
+# api/models/tests/test_pac.py
 from django.test import TestCase
-from api.models import Pac 
+from api.models import Pac
 from api.models.factories import PacFactory
-
-
 class PacTestCase(TestCase):
     def setUp(self): 
         self.pac = PacFactory.create()
-
     def test_pac_creation(self):
         # Test that the instance was created
         self.assertIsNotNone(self.pac)
-
     def test_pac_fields(self): 
-        self.assertTrue(isinstance(self.pac, Pac))
+        self.assertIsInstance(self.pac, Pac)
+        self.assertIsNotNone(self.pac.pac_id)
         self.assertIsNotNone(self.pac.code)
         self.assertIsNotNone(self.pac.insert_utc_date_time)
         self.assertIsNotNone(self.pac.last_update_utc_date_time)

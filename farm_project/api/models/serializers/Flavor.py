@@ -1,7 +1,5 @@
 from rest_framework import serializers
-
 from api.models import Flavor 
-      
 class FlavorSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Flavor
@@ -11,6 +9,6 @@ class FlavorSerializer(serializers.HyperlinkedModelSerializer):
             'is_active',
             'lookup_enum_name',
             'name',
-            'pac_id',  
+            'pac_id',
             'code'
             )

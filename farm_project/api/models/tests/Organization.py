@@ -1,19 +1,21 @@
+# api/models/tests/test_organization.py
 from django.test import TestCase
-from api.models import Organization 
- 
-
-
-
+from api.models import Organization
+from api.models.factories import OrganizationFactory
 class OrganizationTestCase(TestCase):
-    def test_organization(self):
-        self.assertEquals(
-            Organization.objects.count(),
-            0
-        )
-        Organization.objects.create() 
-        self.assertEquals(
-            Organization.objects.count(),
-            1
-        ) 
-
-# TODO
+    def setUp(self): 
+        self.organization = OrganizationFactory.create()
+    def test_organization_creation(self):
+        # Test that the instance was created
+        self.assertIsNotNone(self.organization)
+    def test_organization_fields(self): 
+        self.assertIsInstance(self.organization, Organization)
+        self.assertIsNotNone(self.organization.organization_id)
+        self.assertIsNotNone(self.organization.code)
+        self.assertIsNotNone(self.organization.insert_utc_date_time)
+        self.assertIsNotNone(self.organization.last_update_utc_date_time)
+        self.assertIsNotNone(self.organization.insert_user_id)
+        self.assertIsNotNone(self.organization.last_update_user_id)
+        self.assertIsNotNone(self.organization.last_change_code)
+        self.assertIsNotNone(self.organization.name)
+        self.assertIsNotNone(self.organization.tac) #tac_id

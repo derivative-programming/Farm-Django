@@ -1,7 +1,5 @@
 from rest_framework import serializers
-
 from api.models import Customer 
-  
 class CustomerSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Customer
@@ -28,6 +26,6 @@ class CustomerSerializer(serializers.HyperlinkedModelSerializer):
             'registration_utc_date_time',
             'tac_id',
             'utc_offset_in_minutes',
-            'zip',  
+            'zip',
             'code'
-            ) 
+            )

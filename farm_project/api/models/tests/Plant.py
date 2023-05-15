@@ -1,19 +1,14 @@
 # api/models/tests/test_plant.py
-
 from django.test import TestCase
 from api.models import Plant
 from api.models.factories import PlantFactory
-
 class PlantTestCase(TestCase):
     def setUp(self): 
         self.plant = PlantFactory.create()
-
     def test_plant_creation(self):
         # Test that the instance was created
         self.assertIsNotNone(self.plant)
-  
     def test_plant_fields(self): 
-
         self.assertIsInstance(self.plant, Plant)
         self.assertIsNotNone(self.plant.plant_id)
         self.assertIsNotNone(self.plant.code)

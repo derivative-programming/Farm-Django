@@ -1,8 +1,5 @@
 from rest_framework import serializers
-
 from api.models import Plant 
-
-    
 class PlantSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Plant
@@ -25,6 +22,6 @@ class PlantSerializer(serializers.HyperlinkedModelSerializer):
             'some_text_val',
             'some_uniqueidentifier_val',
             'some_utc_date_time_val',
-            'some_var_char_val',  
+            'some_var_char_val',
             'code'
             )

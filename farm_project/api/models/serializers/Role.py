@@ -1,8 +1,5 @@
 from rest_framework import serializers
-
 from api.models import Role 
-
-   
 class RoleSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Role
@@ -12,6 +9,6 @@ class RoleSerializer(serializers.HyperlinkedModelSerializer):
             'is_active',
             'lookup_enum_name',
             'name',
-            'pac_id',  
+            'pac_id',
             'code'
             )

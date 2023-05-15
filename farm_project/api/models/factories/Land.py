@@ -1,28 +1,23 @@
-import factory
+# api/models/factories.py
 import uuid
-from django.utils import timezone
+import factory
+from factory.django import DjangoModelFactory
 from factory import Faker, SubFactory
-from faker import Factory as FakerFactory
+from django.utils import timezone
 from api.models import Land
-from faker import Faker
-from datetime import timedelta
-from .Pac import PacFactory
- 
- 
-class LandFactory(factory.django.DjangoModelFactory):
+from api.models.factories import PacFactory #pac_id
+class LandFactory(DjangoModelFactory):
     class Meta:
         model = Land
- 
-    # land_id = factory.Sequence(lambda n: n)
-    code = uuid.uuid4()
+    code = factory.LazyFunction(uuid.uuid4)
     insert_utc_date_time = factory.LazyFunction(timezone.now)
     last_update_utc_date_time = factory.LazyFunction(timezone.now)
-    insert_user_id = uuid.uuid4()
-    last_update_user_id = uuid.uuid4()
-    last_change_code = uuid.uuid4()
-    description = factory.Faker('text', max_nb_chars=500)
-    display_order = factory.Sequence(lambda n: n)
-    is_active = True
-    lookup_enum_name = factory.Faker('word')
-    name = factory.Faker('word')
-    pac = SubFactory(PacFactory)
+    insert_user_id = factory.LazyFunction(uuid.uuid4)
+    last_update_user_id = factory.LazyFunction(uuid.uuid4)
+    last_change_code = factory.LazyFunction(uuid.uuid4)
+    description = Faker('sentence', nb_words=4)
+    display_order = Faker('random_int')
+    is_active = Faker('boolean')
+    lookup_enum_name = Faker('sentence', nb_words=4)
+    name = Faker('sentence', nb_words=4)
+    pac = SubFactory(PacFactory) #pac_id
