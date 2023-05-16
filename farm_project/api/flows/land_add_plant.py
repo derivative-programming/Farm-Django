@@ -50,6 +50,31 @@ class FlowLandAddPlant(BaseFlowLandAddPlant):
     def __init__(self, session_context:SessionContext): 
         super(FlowLandAddPlant, self).__init__(session_context) 
     
+    def process_dict(self,
+                land: Land,
+                data_dict:dict) -> FlowLandAddPlantResult:
+        return self.process( 
+            land,
+            data_dict["request_flavor_code"],  
+            data_dict["request_other_flavor"], 
+            data_dict["request_some_int_val"],  
+            data_dict["request_some_big_int_val"],    
+            data_dict["request_some_bit_val"],    
+            data_dict["request_is_edit_allowed"],  
+            data_dict["request_is_delete_allowed"],    
+            data_dict["request_some_float_val"],  
+            data_dict["request_some_decimal_val"],   
+            data_dict["request_some_utc_date_time_val"], 
+            data_dict["request_some_date_val"], 
+            data_dict["request_some_money_val"], 
+            data_dict["request_some_n_var_char_val"],   
+            data_dict["request_some_var_char_val"], 
+            data_dict["request_some_text_val"], 
+            data_dict["request_some_phone_number"],   
+            data_dict["request_some_email_address"],   
+            data_dict["request_sample_image_upload_file"], 
+        )
+
     def process(self,
         land: Land,
         request_flavor_code:uuid = uuid.UUID(int=0),    

@@ -1,12 +1,9 @@
 from dataclasses import asdict
 import json
 from django.test import TestCase
-from rest_framework.test import APIClient 
-from api.views import LandAddPlantViewSet
-from uuid import uuid4
+from rest_framework.test import APIClient  
 import logging
-from api.models.factories import LandFactory
-from factory import Faker
+from api.models.factories import LandFactory 
 from api.views.factories import LandAddPlantRequestFactory
 
 class LandAddPlantViewSetTestCase(TestCase):

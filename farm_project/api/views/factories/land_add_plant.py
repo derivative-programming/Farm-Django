@@ -1,13 +1,10 @@
 # api/models/factories.py
 import uuid
-import factory
-from factory.django import DjangoModelFactory
-from factory import Faker, SubFactory
-from django.utils import timezone
-from api.models import Plant
-from api.models.factories import FlavorFactory #flavor_id
-from api.models.factories import LandFactory #land_id
-from api.views import LandAddPlantPostModel
+import factory 
+from factory import Faker
+from django.utils import timezone 
+from api.models.factories import FlavorFactory #requestFlavorCode 
+from api.views.models import LandAddPlantPostModel
 from datetime import date, datetime
 from decimal import Decimal
 

@@ -11,7 +11,7 @@ from .tac_register import TacRegisterViewSet
 ##GENLOOPObjectWorkflowEnd
 ##GENLearn[modelType=object,name=Tac]End 
 from .tac_login import TacLoginViewSet
-from .land_add_plant import LandAddPlantViewSet, LandAddPlantPostModel
+from .land_add_plant import LandAddPlantViewSet
 ##GENTrainingBlock[a]End
 ##GENLOOPObjectEnd
 

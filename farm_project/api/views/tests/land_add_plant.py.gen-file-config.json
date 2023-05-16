@@ -1,7 +1,8 @@
 {
     "templateType":"objWF",  
     "dimension" :{
-        "name":"LandAddPlant"
+        "name":"LandAddPlant",
+        "calculatedIsInitObjWF":"false" 
     },
     "ignoreDimensionPropertyList": [  
         "objectWorkflowParam.calculatedIsSourceObjectAvailable", 

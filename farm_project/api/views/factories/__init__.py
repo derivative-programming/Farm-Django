@@ -1,15 +1,15 @@
 
 ##GENLOOPObjectStart
 ##GENTrainingBlock[a]Start
-##GENLearn[modelType=object,name=Tac]Start 
+##GENLearn[modelType=object,name=Land]Start 
 ##GENLOOPObjectWorkflowStart
 ##GENTrainingBlock[b]Start
-##GENLearn[modelType=objectWorkflow,name=TacRegister]Start  
-##GENLearn[modelType=objectWorkflow,name=TacRegister]End
+##GENLearn[modelType=objectWorkflow,name=LandAddPlant,calculatedIsInitObjWF=false]Start  
+from .land_add_plant import LandAddPlantRequestFactory
+##GENLearn[modelType=objectWorkflow,name=LandAddPlant,calculatedIsInitObjWF=false]End
 ##GENTrainingBlock[b]End
 ##GENLOOPObjectWorkflowEnd
-##GENLearn[modelType=object,name=Tac]End  
-from .land_add_plant import LandAddPlantRequestFactory
+##GENLearn[modelType=object,name=Land]End  
 ##GENTrainingBlock[a]End
 ##GENLOOPObjectEnd
 
