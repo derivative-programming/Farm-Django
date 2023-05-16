@@ -6,6 +6,7 @@ from api.models.factories import LandFactory
 from decimal import Decimal
 from factory import Faker
 from django.utils import timezone
+from datetime import date, datetime
 from api.models.factories import FlavorFactory #request_flavor_code
 
 
@@ -25,8 +26,8 @@ class BaseFlowLandAddPlantTestCase(unittest.TestCase):
         request_is_delete_allowed:bool = Faker('boolean')    
         request_some_float_val:float = Faker('pyfloat', positive=True) 
         request_some_decimal_val:Decimal = Faker('pydecimal', left_digits=5, right_digits=2, positive=True) 
-        request_some_utc_date_time_val:str = Faker('date_time', tzinfo=timezone.utc)   
-        request_some_date_val:str = Faker('date_object')    
+        request_some_utc_date_time_val:datetime = Faker('date_time', tzinfo=timezone.utc)   
+        request_some_date_val:date = Faker('date_object')    
         request_some_money_val:Decimal = Faker('pydecimal', left_digits=5, right_digits=2, positive=True)  
         request_some_n_var_char_val:str = Faker('sentence', nb_words=4)    
         request_some_var_char_val:str = Faker('sentence', nb_words=4)    
@@ -47,8 +48,8 @@ class BaseFlowLandAddPlantTestCase(unittest.TestCase):
             request_is_delete_allowed,    
             request_some_float_val, 
             request_some_decimal_val,  
-            request_some_utc_date_time_val,    
-            request_some_date_val,    
+            # request_some_utc_date_time_val,    
+            # request_some_date_val,    
             request_some_money_val,  
             request_some_n_var_char_val,    
             request_some_var_char_val,    

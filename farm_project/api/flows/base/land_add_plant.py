@@ -4,6 +4,8 @@ from .base_flow import BaseFlow
 from api.flows.base import LogSeverity
 from api.helpers import SessionContext
 from decimal import Decimal
+from datetime import date, datetime
+from api.helpers import TypeConversion
 
 class BaseFlowLandAddPlant(BaseFlow):
     def __init__(self, session_context:SessionContext): 
@@ -24,8 +26,8 @@ class BaseFlowLandAddPlant(BaseFlow):
         request_is_delete_allowed:bool = False,    
         request_some_float_val:float = 0,    
         request_some_decimal_val:Decimal = 0,    
-        request_some_utc_date_time_val:str = "",    
-        request_some_date_val:str = "",    
+        request_some_utc_date_time_val:datetime = TypeConversion.get_default_date_time(), 
+        request_some_date_val:date = TypeConversion.get_default_date(),   
         request_some_money_val:Decimal = 0,    
         request_some_n_var_char_val:str = "",    
         request_some_var_char_val:str = "",    

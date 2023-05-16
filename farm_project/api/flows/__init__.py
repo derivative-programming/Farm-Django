@@ -15,5 +15,6 @@ from .tac_login import FlowTacLogin, FlowTacLoginResult
 from .tac_login_init_obj_wf import FlowTacLoginInitObjWF, FlowTacLoginInitObjWFResult 
 from .tac_register import FlowTacRegister, FlowTacRegisterResult 
 from .tac_register_init_obj_wf import FlowTacRegisterInitObjWF, FlowTacRegisterInitObjWFResult 
+from .land_add_plant_init_obj_wf import FlowLandAddPlantInitObjWF, FlowLandAddPlantInitObjWFResult
 ##GENTrainingBlock[a]End
 ##GENLOOPObjectEnd

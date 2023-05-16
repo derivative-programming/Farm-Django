@@ -1,5 +1,6 @@
-from dataclasses import dataclass
-from dataclasses_json import dataclass_json,LetterCase 
+from dataclasses import dataclass, field
+from dataclasses_json import dataclass_json,LetterCase, config
+from datetime import date, datetime
 import uuid
 from api.flows.base import BaseFlowLandAddPlant
 from api.models import Land 
@@ -9,6 +10,7 @@ from api.models import Customer
 from django.utils import timezone
 from api.helpers import ApiToken
 from decimal import Decimal
+from api.helpers import TypeConversion
 
 @dataclass_json
 @dataclass
@@ -25,9 +27,16 @@ class FlowLandAddPlantResult():
     output_is_delete_allowed:bool = False 
     output_some_float_val:float = 0
     output_some_decimal_val:Decimal = Decimal(0)
-    output_some_utc_date_time_val:str = "" 
-    output_some_date_val:str = "" 
-    output_some_money_val:Decimal = 0
+    output_some_utc_date_time_val:datetime = field(default_factory=TypeConversion.get_default_date_time, 
+            metadata=config(
+            encoder=datetime.isoformat, 
+            decoder=datetime.fromisoformat
+        )) 
+    output_some_date_val:date = field(default_factory=TypeConversion.get_default_date, metadata=config(
+            encoder=date.isoformat, 
+            decoder=date.fromisoformat
+        ))
+    output_some_money_val:Decimal = Decimal(0)
     output_some_n_var_char_val:str = "" 
     output_some_var_char_val:str = "" 
     output_some_text_val:str = "" 
@@ -52,8 +61,8 @@ class FlowLandAddPlant(BaseFlowLandAddPlant):
         request_is_delete_allowed:bool = False,    
         request_some_float_val:float = 0,    
         request_some_decimal_val:Decimal = 0,    
-        request_some_utc_date_time_val:str = "",    
-        request_some_date_val:str = "",    
+        request_some_utc_date_time_val:datetime = TypeConversion.get_default_date_time(),
+        request_some_date_val:date = TypeConversion.get_default_date(),
         request_some_money_val:Decimal = 0,    
         request_some_n_var_char_val:str = "",    
         request_some_var_char_val:str = "",    
