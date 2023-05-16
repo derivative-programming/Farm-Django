@@ -40,6 +40,7 @@ class FlowLandAddPlantInitObjWFResult():
     request_some_phone_number:str = ""
     request_some_email_address:str = ""
     tac_code:uuid = uuid.UUID(int=0)
+    land_name:str = ""
     def __init__(self): 
         pass
 class FlowLandAddPlantInitObjWF(BaseFlowLandAddPlantInitObjWF):
@@ -50,7 +51,7 @@ class FlowLandAddPlantInitObjWF(BaseFlowLandAddPlantInitObjWF):
 
         ) -> FlowLandAddPlantInitObjWFResult:
         super()._log_message_and_severity(LogSeverity.information_high_detail, "Start")
-        super()._log_message_and_severity(LogSeverity.information_high_detail, "Code::" + str(tac.code))
+        super()._log_message_and_severity(LogSeverity.information_high_detail, "Code::" + str(land.code))
         super()._process_validation_rules(
             land,
 
@@ -65,8 +66,8 @@ class FlowLandAddPlantInitObjWF(BaseFlowLandAddPlantInitObjWF):
         request_is_edit_allowed_output:bool = False
         request_some_float_val_output:float = 0
         request_some_decimal_val_output:Decimal = Decimal(0)
-        request_some_utc_date_time_val_output:str = ""
-        request_some_date_val_output:str = ""
+        request_some_utc_date_time_val_output:datetime = TypeConversion.get_default_date_time()
+        request_some_date_val_output:date = TypeConversion.get_default_date()
         request_some_money_val_output:Decimal = 0
         request_some_n_var_char_val_output:str = ""
         request_some_var_char_val_output:str = ""
@@ -74,6 +75,7 @@ class FlowLandAddPlantInitObjWF(BaseFlowLandAddPlantInitObjWF):
         request_some_phone_number_output:str = ""
         request_some_email_address_output:str = ""
         tac_code_output:uuid = uuid.UUID(int=0)
+        land_name_output:str = ""
         # TODO: add flow logic
         super()._log_message_and_severity(LogSeverity.information_high_detail, "Building result")
         result = FlowLandAddPlantInitObjWFResult()
@@ -95,6 +97,7 @@ class FlowLandAddPlantInitObjWF(BaseFlowLandAddPlantInitObjWF):
         result.request_some_phone_number = request_some_phone_number_output
         result.request_some_email_address = request_some_email_address_output
         result.tac_code = tac_code_output
+        result.land_name = land_name_output
         super()._log_message_and_severity(LogSeverity.information_high_detail, "Result:" + result.to_json())
         super()._log_message_and_severity(LogSeverity.information_high_detail, "End")
         return result

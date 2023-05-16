@@ -186,7 +186,8 @@ class TacFarmDashboardViewSet(ViewSet):
             
         except TypeError as te: 
             response.success = False
-            traceback_string = "Invalid Request" 
+            traceback_string = "".join(traceback.format_tb(te.__traceback__))
+            response.message = str(te) + " traceback:" + traceback_string
             
         except FlowValidationError as ve:
             response.success = False 

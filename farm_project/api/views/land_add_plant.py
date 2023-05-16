@@ -21,7 +21,7 @@ import marshmallow_dataclass
 import logging
 import marshmallow.exceptions 
 from api.helpers import SessionContext
-from api.helpers import TypeConversion
+from api.helpers import TypeConversion, UUIDField
 
 ### response
 @dataclass_json(letter_case=LetterCase.CAMEL)
@@ -90,10 +90,10 @@ class LandAddPlantPostResponse(PostResponse):
         self.output_some_email_address = data.output_some_email_address
 
 ### request. expect camel case. use marshmallow to validate.
-@dataclass_json(letter_case=LetterCase.SNAKE)
+@dataclass_json(letter_case=LetterCase.CAMEL)
 @dataclass
-class LandAddPlantPostModel:
-    requestFlavorCode:uuid = uuid.UUID(int=0)  
+class LandAddPlantPostModel: 
+    requestFlavorCode:uuid.UUID = field(default_factory=lambda: uuid.UUID('00000000-0000-0000-0000-000000000000'))
     requestOtherFlavor:str = ""
     requestSomeIntVal:int = 0 
     requestSomeBigIntVal:int = 0 
@@ -117,7 +117,7 @@ class LandAddPlantPostModel:
     requestSomeTextVal:str = ""
     requestSomePhoneNumber:str = ""
     requestSomeEmailAddress:str = ""
-    requestSampleImageUploadFile:str = ""
+    requestSampleImageUploadFile:str = "" 
 
 
 ### init response
@@ -131,12 +131,53 @@ class GetInitResponse:
 @dataclass_json(letter_case=LetterCase.CAMEL)
 @dataclass
 class LandAddPlantGetInitResponse(GetInitResponse):
-    email:str = ""
-    password:str = ""
+    landName:str=""
+    tacCode:uuid.UUID = field(default_factory=lambda: uuid.UUID('00000000-0000-0000-0000-000000000000'))
+    requestFlavorCode:uuid.UUID = field(default_factory=lambda: uuid.UUID('00000000-0000-0000-0000-000000000000'))
+    requestOtherFlavor:str = ""
+    requestSomeIntVal:int = 0 
+    requestSomeBigIntVal:int = 0 
+    requestSomeBitVal:bool = False 
+    requestIsEditAllowed:bool = False 
+    requestIsDeleteAllowed:bool = False 
+    requestSomeFloatVal:float = 0
+    requestSomeDecimalVal:Decimal = Decimal(0)
+    requestSomeUTCDateTimeVal:datetime = field(default_factory=TypeConversion.get_default_date_time, 
+            metadata=config(
+            encoder=datetime.isoformat, 
+            decoder=datetime.fromisoformat
+        )) 
+    requestSomeDateVal:date = field(default_factory=TypeConversion.get_default_date, metadata=config(
+            encoder=date.isoformat, 
+            decoder=date.fromisoformat
+        ))
+    requestSomeMoneyVal:Decimal = Decimal(0)
+    requestSomeNVarCharVal:str = ""
+    requestSomeVarCharVal:str = ""
+    requestSomeTextVal:str = ""
+    requestSomePhoneNumber:str = ""
+    requestSomeEmailAddress:str = "" 
 
-    def load_flow_response(self,data:FlowLandAddPlantInitObjWFResult):
-        self.email = data.email
-        self.password = data.password
+    def load_flow_response(self,data:FlowLandAddPlantInitObjWFResult): 
+        self.landName = data.land_name
+        self.tacCode = data.tac_code
+        self.requestFlavorCode = data.request_flavor_code
+        self.requestOtherFlavor = data.request_other_flavor
+        self.requestSomeIntVal = data.request_some_int_val
+        self.requestSomeBigIntVal = data.request_some_big_int_val
+        self.requestSomeBitVal = data.request_some_bit_val
+        self.requestIsEditAllowed = data.request_is_delete_allowed
+        self.requestIsDeleteAllowed = data.request_is_edit_allowed
+        self.requestSomeFloatVal = data.request_some_float_val
+        self.requestSomeDecimalVal = data.request_some_decimal_val
+        self.requestSomeUTCDateTimeVal = data.request_some_utc_date_time_val
+        self.requestSomeDateVal = data.request_some_date_val
+        self.requestSomeMoneyVal = data.request_some_money_val
+        self.requestSomeNVarCharVal = data.request_some_n_var_char_val
+        self.requestSomeVarCharVal = data.request_some_var_char_val
+        self.requestSomeTextVal = data.request_some_text_val
+        self.requestSomePhoneNumber = data.request_some_phone_number
+        self.requestSomeEmailAddress = data.request_some_email_address 
  
   
 
@@ -153,10 +194,11 @@ class LandAddPlantViewSet(ViewSet):
             logging.debug("Start session...")
             session_context = SessionContext(dict())
 
-            logging.debug("Request:" + json.dumps(request.data))
 
+            logging.debug("Request:" + json.dumps(request.data)) 
+ 
             logging.debug("get schema")
-            schema = marshmallow_dataclass.class_schema(LandAddPlantPostModel)()
+            schema = marshmallow_dataclass.class_schema(LandAddPlantPostModel)() 
              
             logging.debug("validating request...")
             request:LandAddPlantPostModel = schema.load(request.data)  
@@ -194,7 +236,7 @@ class LandAddPlantViewSet(ViewSet):
 
         except marshmallow.exceptions.ValidationError as se:
             response.success = False
-            response.message = "Schema validation error. Invalid Request" 
+            response.message = "Schema validation error. Invalid Request: " + str(se.messages)
              
         except TypeError as te: 
             response.success = False
@@ -244,7 +286,8 @@ class LandAddPlantViewSet(ViewSet):
             
         except TypeError as te: 
             response.success = False
-            traceback_string = "Invalid Request" 
+            traceback_string = "".join(traceback.format_tb(te.__traceback__))
+            response.message = str(te) + " traceback:" + traceback_string
             
         except FlowValidationError as ve:
             response.success = False 

@@ -73,7 +73,7 @@ class FlowLandAddPlant(BaseFlowLandAddPlant):
         ) -> FlowLandAddPlantResult:
 
         super()._log_message_and_severity(LogSeverity.information_high_detail, "Start")
-        super()._log_message_and_severity(LogSeverity.information_high_detail, "Code::" + str(tac.code))
+        super()._log_message_and_severity(LogSeverity.information_high_detail, "Code::" + str(land.code))
 
         super()._process_validation_rules(
             land,
@@ -110,8 +110,8 @@ class FlowLandAddPlant(BaseFlowLandAddPlant):
         output_is_delete_allowed_output:bool = False 
         output_some_float_val_output:float = 0
         output_some_decimal_val_output:Decimal = Decimal(0)
-        output_some_utc_date_time_val_output:str = "" 
-        output_some_date_val_output:str = "" 
+        output_some_utc_date_time_val_output:datetime = TypeConversion.get_default_date_time() 
+        output_some_date_val_output:date = TypeConversion.get_default_date()
         output_some_money_val_output:Decimal = 0
         output_some_n_var_char_val_output:str = "" 
         output_some_var_char_val_output:str = "" 
