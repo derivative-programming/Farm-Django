@@ -10,8 +10,8 @@ from rest_framework.decorators import action
 from rest_framework.viewsets import GenericViewSet,ViewSet
 from rest_framework_dataclasses.serializers import DataclassSerializer
 from rest_framework import status
-from api.reports.TacFarmDashboard import ReportTacFarmDashboard
-from api.reports.row_models.TacFarmDashboard import ReportItemTacFarmDashboard
+from api.reports import ReportTacFarmDashboard
+from api.reports.row_models import ReportItemTacFarmDashboard
 from api.flows import FlowTacFarmDashboardInitReport,FlowTacFarmDashboardInitReportResult
 from api.flows import FlowValidationError
 from api.models import Tac
@@ -19,7 +19,7 @@ from dacite import from_dict
 import marshmallow_dataclass
 import logging
 import marshmallow.exceptions 
-from api.reports.ReportRequestValidationError import ReportRequestValidationError 
+from api.reports import ReportRequestValidationError 
 from api.helpers import SessionContext
   
 

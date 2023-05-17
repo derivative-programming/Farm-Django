@@ -5,9 +5,8 @@ import datetime
 import uuid
 from .customer import Customer #customer_id
 from .organization import Organization #organization_id
-from api.models.constants import OrgCustomerConstants
-class OrgCustomer(models.Model): 
-    org_customerConstants = OrgCustomerConstants()
+import api.models.constants.org_customer as OrgCustomerConstants
+class OrgCustomer(models.Model):  
     org_customer_id = models.AutoField(primary_key=True)
     code = models.UUIDField(default=uuid.uuid4,db_index=True)
     insert_utc_date_time =models.DateTimeField(default=timezone.now)
@@ -25,7 +24,7 @@ class OrgCustomer(models.Model):
     email = models.TextField(
                                 max_length=50,
                                 null=True,
-                                db_index=org_customerConstants.email_calculatedIsDBColumnIndexed)
+                                db_index=OrgCustomerConstants.email_calculatedIsDBColumnIndexed)
     #organization_id = models.IntegerField(null=True)
     organization = models.ForeignKey(Organization,
                                related_name='org_customer_list',

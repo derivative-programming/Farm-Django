@@ -4,9 +4,8 @@ from django.core.exceptions import ValidationError
 import datetime
 import uuid
 from .tac import Tac #tac_id
-from api.models.constants import CustomerConstants
-class Customer(models.Model): 
-    customerConstants = CustomerConstants()
+import api.models.constants.customer as CustomerConstants
+class Customer(models.Model):  
     customer_id = models.AutoField(primary_key=True)
     code = models.UUIDField(default=uuid.uuid4,db_index=True)
     insert_utc_date_time =models.DateTimeField(default=timezone.now)
@@ -16,66 +15,66 @@ class Customer(models.Model):
     last_change_code = models.UUIDField(default=uuid.uuid4)	
     active_organization_id = models.IntegerField(
                                 null=True,
-                                db_index=customerConstants.active_organization_id_calculatedIsDBColumnIndexed)	
+                                db_index=CustomerConstants.active_organization_id_calculatedIsDBColumnIndexed)	
     email = models.TextField(
                                 max_length=50,
                                 null=True,
-                                db_index=customerConstants.email_calculatedIsDBColumnIndexed)
+                                db_index=CustomerConstants.email_calculatedIsDBColumnIndexed)
     email_confirmed_utc_date_time = models.DateTimeField(
                                 null=True,
-                                db_index=customerConstants.email_confirmed_utc_date_time_calculatedIsDBColumnIndexed)
+                                db_index=CustomerConstants.email_confirmed_utc_date_time_calculatedIsDBColumnIndexed)
     first_name = models.TextField(
                                 null=True,
-                                db_index=customerConstants.first_name_calculatedIsDBColumnIndexed)
+                                db_index=CustomerConstants.first_name_calculatedIsDBColumnIndexed)
     forgot_password_key_expiration_utc_date_time = models.DateTimeField(
                                 null=True,
-                                db_index=customerConstants.forgot_password_key_expiration_utc_date_time_calculatedIsDBColumnIndexed)
+                                db_index=CustomerConstants.forgot_password_key_expiration_utc_date_time_calculatedIsDBColumnIndexed)
     forgot_password_key_value = models.TextField(
                                 null=True,
-                                db_index=customerConstants.forgot_password_key_value_calculatedIsDBColumnIndexed)
+                                db_index=CustomerConstants.forgot_password_key_value_calculatedIsDBColumnIndexed)
     fs_user_code_value = models.UUIDField(
                                 null=True,
-                                db_index=customerConstants.fs_user_code_value_calculatedIsDBColumnIndexed)
+                                db_index=CustomerConstants.fs_user_code_value_calculatedIsDBColumnIndexed)
     is_active = models.BooleanField(
                                 null=True,
-                                db_index=customerConstants.is_active_calculatedIsDBColumnIndexed)
+                                db_index=CustomerConstants.is_active_calculatedIsDBColumnIndexed)
     is_email_allowed = models.BooleanField(
                                 null=True,
-                                db_index=customerConstants.is_email_allowed_calculatedIsDBColumnIndexed)
+                                db_index=CustomerConstants.is_email_allowed_calculatedIsDBColumnIndexed)
     is_email_confirmed = models.BooleanField(
                                 null=True,
-                                db_index=customerConstants.is_email_confirmed_calculatedIsDBColumnIndexed)
+                                db_index=CustomerConstants.is_email_confirmed_calculatedIsDBColumnIndexed)
     is_email_marketing_allowed = models.BooleanField(
                                 null=True,
-                                db_index=customerConstants.is_email_marketing_allowed_calculatedIsDBColumnIndexed)
+                                db_index=CustomerConstants.is_email_marketing_allowed_calculatedIsDBColumnIndexed)
     is_locked = models.BooleanField(
                                 null=True,
-                                db_index=customerConstants.is_locked_calculatedIsDBColumnIndexed)
+                                db_index=CustomerConstants.is_locked_calculatedIsDBColumnIndexed)
     is_multiple_organizations_allowed = models.BooleanField(
                                 null=True,
-                                db_index=customerConstants.is_multiple_organizations_allowed_calculatedIsDBColumnIndexed)
+                                db_index=CustomerConstants.is_multiple_organizations_allowed_calculatedIsDBColumnIndexed)
     is_verbose_logging_forced = models.BooleanField(
                                 null=True,
-                                db_index=customerConstants.is_verbose_logging_forced_calculatedIsDBColumnIndexed)
+                                db_index=CustomerConstants.is_verbose_logging_forced_calculatedIsDBColumnIndexed)
     last_login_utc_date_time = models.DateTimeField(
                                 null=True,
-                                db_index=customerConstants.last_login_utc_date_time_calculatedIsDBColumnIndexed)
+                                db_index=CustomerConstants.last_login_utc_date_time_calculatedIsDBColumnIndexed)
     last_name = models.TextField(
                                 null=True,
-                                db_index=customerConstants.last_name_calculatedIsDBColumnIndexed)
+                                db_index=CustomerConstants.last_name_calculatedIsDBColumnIndexed)
     password = models.TextField(
                                 null=True,
-                                db_index=customerConstants.password_calculatedIsDBColumnIndexed)
+                                db_index=CustomerConstants.password_calculatedIsDBColumnIndexed)
     phone = models.TextField(
                                 max_length=50,
                                 null=True,
-                                db_index=customerConstants.phone_calculatedIsDBColumnIndexed)
+                                db_index=CustomerConstants.phone_calculatedIsDBColumnIndexed)
     province = models.TextField(
                                 null=True,
-                                db_index=customerConstants.province_calculatedIsDBColumnIndexed)
+                                db_index=CustomerConstants.province_calculatedIsDBColumnIndexed)
     registration_utc_date_time = models.DateTimeField(
                                 null=True,
-                                db_index=customerConstants.registration_utc_date_time_calculatedIsDBColumnIndexed)
+                                db_index=CustomerConstants.registration_utc_date_time_calculatedIsDBColumnIndexed)
     #tac_id = models.IntegerField(null=True)
     tac = models.ForeignKey(Tac,
                                related_name='customer_list',
@@ -85,10 +84,10 @@ class Customer(models.Model):
                                db_index=True)
     utc_offset_in_minutes = models.IntegerField(
                                 null=True,
-                                db_index=customerConstants.utc_offset_in_minutes_calculatedIsDBColumnIndexed)	
+                                db_index=CustomerConstants.utc_offset_in_minutes_calculatedIsDBColumnIndexed)	
     zip = models.TextField(
                                 null=True,
-                                db_index=customerConstants.zip_calculatedIsDBColumnIndexed)
+                                db_index=CustomerConstants.zip_calculatedIsDBColumnIndexed)
     def __str__(self):
         return str(self.code)
     def save(self, *args, **kwargs):

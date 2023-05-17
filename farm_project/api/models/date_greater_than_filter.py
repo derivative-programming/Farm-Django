@@ -4,9 +4,8 @@ from django.core.exceptions import ValidationError
 import datetime
 import uuid
 from .pac import Pac #pac_id
-from api.models.constants import DateGreaterThanFilterConstants
-class DateGreaterThanFilter(models.Model): 
-    date_greater_than_filterConstants = DateGreaterThanFilterConstants()
+import api.models.constants.date_greater_than_filter as DateGreaterThanFilterConstants
+class DateGreaterThanFilter(models.Model):  
     date_greater_than_filter_id = models.AutoField(primary_key=True)
     code = models.UUIDField(default=uuid.uuid4,db_index=True)
     insert_utc_date_time =models.DateTimeField(default=timezone.now)
@@ -16,22 +15,22 @@ class DateGreaterThanFilter(models.Model):
     last_change_code = models.UUIDField(default=uuid.uuid4)	
     day_count = models.IntegerField(
                                 null=True,
-                                db_index=date_greater_than_filterConstants.day_count_calculatedIsDBColumnIndexed)	
+                                db_index=DateGreaterThanFilterConstants.day_count_calculatedIsDBColumnIndexed)	
     description = models.TextField(
                                 null=True,
-                                db_index=date_greater_than_filterConstants.description_calculatedIsDBColumnIndexed)
+                                db_index=DateGreaterThanFilterConstants.description_calculatedIsDBColumnIndexed)
     display_order = models.IntegerField(
                                 null=True,
-                                db_index=date_greater_than_filterConstants.display_order_calculatedIsDBColumnIndexed)	
+                                db_index=DateGreaterThanFilterConstants.display_order_calculatedIsDBColumnIndexed)	
     is_active = models.BooleanField(
                                 null=True,
-                                db_index=date_greater_than_filterConstants.is_active_calculatedIsDBColumnIndexed)
+                                db_index=DateGreaterThanFilterConstants.is_active_calculatedIsDBColumnIndexed)
     lookup_enum_name = models.TextField(
                                 null=True,
-                                db_index=date_greater_than_filterConstants.lookup_enum_name_calculatedIsDBColumnIndexed)
+                                db_index=DateGreaterThanFilterConstants.lookup_enum_name_calculatedIsDBColumnIndexed)
     name = models.TextField(
                                 null=True,
-                                db_index=date_greater_than_filterConstants.name_calculatedIsDBColumnIndexed)
+                                db_index=DateGreaterThanFilterConstants.name_calculatedIsDBColumnIndexed)
     #pac_id = models.IntegerField(null=True)
     pac = models.ForeignKey(Pac,
                                related_name='date_greater_than_filter_list',

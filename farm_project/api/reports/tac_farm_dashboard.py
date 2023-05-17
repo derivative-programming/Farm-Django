@@ -2,10 +2,10 @@ from dataclasses import dataclass
 import json
 import uuid
 from typing import List
-from api.reports.providers.TacFarmDashboard import ReportProviderTacFarmDashboard
+from api.reports.providers import ReportProviderTacFarmDashboard
 from api.reports.row_models import ReportItemTacFarmDashboard
 import logging
-from .ReportRequestValidationError import ReportRequestValidationError
+from .report_request_validation_error import ReportRequestValidationError
 from api.helpers import SessionContext
  
 

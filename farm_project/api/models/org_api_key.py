@@ -5,9 +5,8 @@ import datetime
 import uuid
 from .organization import Organization #organization_id
 from .org_customer import OrgCustomer #org_customer_id
-from api.models.constants import OrgApiKeyConstants
-class OrgApiKey(models.Model): 
-    org_api_keyConstants = OrgApiKeyConstants()
+import api.models.constants.org_api_key as OrgApiKeyConstants
+class OrgApiKey(models.Model):  
     org_api_key_id = models.AutoField(primary_key=True)
     code = models.UUIDField(default=uuid.uuid4,db_index=True)
     insert_utc_date_time =models.DateTimeField(default=timezone.now)
@@ -17,25 +16,25 @@ class OrgApiKey(models.Model):
     last_change_code = models.UUIDField(default=uuid.uuid4)	
     api_key_value = models.TextField(
                                 null=True,
-                                db_index=org_api_keyConstants.api_key_value_calculatedIsDBColumnIndexed)
+                                db_index=OrgApiKeyConstants.api_key_value_calculatedIsDBColumnIndexed)
     created_by = models.TextField(
                                 null=True,
-                                db_index=org_api_keyConstants.created_by_calculatedIsDBColumnIndexed)
+                                db_index=OrgApiKeyConstants.created_by_calculatedIsDBColumnIndexed)
     created_utc_date_time = models.DateTimeField(
                                 null=True,
-                                db_index=org_api_keyConstants.created_utc_date_time_calculatedIsDBColumnIndexed)
+                                db_index=OrgApiKeyConstants.created_utc_date_time_calculatedIsDBColumnIndexed)
     expiration_utc_date_time = models.DateTimeField(
                                 null=True,
-                                db_index=org_api_keyConstants.expiration_utc_date_time_calculatedIsDBColumnIndexed)
+                                db_index=OrgApiKeyConstants.expiration_utc_date_time_calculatedIsDBColumnIndexed)
     is_active = models.BooleanField(
                                 null=True,
-                                db_index=org_api_keyConstants.is_active_calculatedIsDBColumnIndexed)
+                                db_index=OrgApiKeyConstants.is_active_calculatedIsDBColumnIndexed)
     is_temp_user_key = models.BooleanField(
                                 null=True,
-                                db_index=org_api_keyConstants.is_temp_user_key_calculatedIsDBColumnIndexed)
+                                db_index=OrgApiKeyConstants.is_temp_user_key_calculatedIsDBColumnIndexed)
     name = models.TextField(
                                 null=True,
-                                db_index=org_api_keyConstants.name_calculatedIsDBColumnIndexed)
+                                db_index=OrgApiKeyConstants.name_calculatedIsDBColumnIndexed)
     #organization_id = models.IntegerField(null=True)
     organization = models.ForeignKey(Organization,
                                related_name='org_api_key_list',

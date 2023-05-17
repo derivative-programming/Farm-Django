@@ -5,9 +5,8 @@ import datetime
 import uuid
 from .customer import Customer #customer_id
 from .role import Role #role_id
-from api.models.constants import CustomerRoleConstants
-class CustomerRole(models.Model): 
-    customer_roleConstants = CustomerRoleConstants()
+import api.models.constants.customer_role as CustomerRoleConstants
+class CustomerRole(models.Model):  
     customer_role_id = models.AutoField(primary_key=True)
     code = models.UUIDField(default=uuid.uuid4,db_index=True)
     insert_utc_date_time =models.DateTimeField(default=timezone.now)
@@ -24,10 +23,10 @@ class CustomerRole(models.Model):
                                db_index=True)
     is_placeholder = models.BooleanField(
                                 null=True,
-                                db_index=customer_roleConstants.is_placeholder_calculatedIsDBColumnIndexed)
+                                db_index=CustomerRoleConstants.is_placeholder_calculatedIsDBColumnIndexed)
     placeholder = models.BooleanField(
                                 null=True,
-                                db_index=customer_roleConstants.placeholder_calculatedIsDBColumnIndexed)
+                                db_index=CustomerRoleConstants.placeholder_calculatedIsDBColumnIndexed)
     #role_id = models.IntegerField(null=True)
     role = models.ForeignKey(Role,
                                related_name='customer_role_list',

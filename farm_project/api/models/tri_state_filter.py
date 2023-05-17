@@ -4,9 +4,8 @@ from django.core.exceptions import ValidationError
 import datetime
 import uuid
 from .pac import Pac #pac_id
-from api.models.constants import TriStateFilterConstants
-class TriStateFilter(models.Model): 
-    tri_state_filterConstants = TriStateFilterConstants()
+import api.models.constants.tri_state_filter as TriStateFilterConstants
+class TriStateFilter(models.Model):  
     tri_state_filter_id = models.AutoField(primary_key=True)
     code = models.UUIDField(default=uuid.uuid4,db_index=True)
     insert_utc_date_time =models.DateTimeField(default=timezone.now)
@@ -16,19 +15,19 @@ class TriStateFilter(models.Model):
     last_change_code = models.UUIDField(default=uuid.uuid4)	
     description = models.TextField(
                                 null=True,
-                                db_index=tri_state_filterConstants.description_calculatedIsDBColumnIndexed)
+                                db_index=TriStateFilterConstants.description_calculatedIsDBColumnIndexed)
     display_order = models.IntegerField(
                                 null=True,
-                                db_index=tri_state_filterConstants.display_order_calculatedIsDBColumnIndexed)	
+                                db_index=TriStateFilterConstants.display_order_calculatedIsDBColumnIndexed)	
     is_active = models.BooleanField(
                                 null=True,
-                                db_index=tri_state_filterConstants.is_active_calculatedIsDBColumnIndexed)
+                                db_index=TriStateFilterConstants.is_active_calculatedIsDBColumnIndexed)
     lookup_enum_name = models.TextField(
                                 null=True,
-                                db_index=tri_state_filterConstants.lookup_enum_name_calculatedIsDBColumnIndexed)
+                                db_index=TriStateFilterConstants.lookup_enum_name_calculatedIsDBColumnIndexed)
     name = models.TextField(
                                 null=True,
-                                db_index=tri_state_filterConstants.name_calculatedIsDBColumnIndexed)
+                                db_index=TriStateFilterConstants.name_calculatedIsDBColumnIndexed)
     #pac_id = models.IntegerField(null=True)
     pac = models.ForeignKey(Pac,
                                related_name='tri_state_filter_list',
@@ -38,7 +37,7 @@ class TriStateFilter(models.Model):
                                db_index=True)
     state_int_value = models.IntegerField(
                                 null=True,
-                                db_index=tri_state_filterConstants.state_int_value_calculatedIsDBColumnIndexed)	
+                                db_index=TriStateFilterConstants.state_int_value_calculatedIsDBColumnIndexed)	
     def __str__(self):
         return str(self.code)
     def save(self, *args, **kwargs):

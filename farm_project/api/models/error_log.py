@@ -4,9 +4,8 @@ from django.core.exceptions import ValidationError
 import datetime
 import uuid
 from .pac import Pac #pac_id
-from api.models.constants import ErrorLogConstants
-class ErrorLog(models.Model): 
-    error_logConstants = ErrorLogConstants()
+import api.models.constants.error_log as ErrorLogConstants
+class ErrorLog(models.Model):  
     error_log_id = models.AutoField(primary_key=True)
     code = models.UUIDField(default=uuid.uuid4,db_index=True)
     insert_utc_date_time =models.DateTimeField(default=timezone.now)
@@ -16,22 +15,22 @@ class ErrorLog(models.Model):
     last_change_code = models.UUIDField(default=uuid.uuid4)	
     browser_code = models.UUIDField(
                                 null=True,
-                                db_index=error_logConstants.browser_code_calculatedIsDBColumnIndexed)
+                                db_index=ErrorLogConstants.browser_code_calculatedIsDBColumnIndexed)
     context_code = models.UUIDField(
                                 null=True,
-                                db_index=error_logConstants.context_code_calculatedIsDBColumnIndexed)
+                                db_index=ErrorLogConstants.context_code_calculatedIsDBColumnIndexed)
     created_utc_date_time = models.DateTimeField(
                                 null=True,
-                                db_index=error_logConstants.created_utc_date_time_calculatedIsDBColumnIndexed)
+                                db_index=ErrorLogConstants.created_utc_date_time_calculatedIsDBColumnIndexed)
     description = models.TextField(
                                 null=True,
-                                db_index=error_logConstants.description_calculatedIsDBColumnIndexed)
+                                db_index=ErrorLogConstants.description_calculatedIsDBColumnIndexed)
     is_client_side_error = models.BooleanField(
                                 null=True,
-                                db_index=error_logConstants.is_client_side_error_calculatedIsDBColumnIndexed)
+                                db_index=ErrorLogConstants.is_client_side_error_calculatedIsDBColumnIndexed)
     is_resolved = models.BooleanField(
                                 null=True,
-                                db_index=error_logConstants.is_resolved_calculatedIsDBColumnIndexed)
+                                db_index=ErrorLogConstants.is_resolved_calculatedIsDBColumnIndexed)
     #pac_id = models.IntegerField(null=True)
     pac = models.ForeignKey(Pac,
                                related_name='error_log_list',
@@ -41,7 +40,7 @@ class ErrorLog(models.Model):
                                db_index=True)
     url = models.TextField(
                                 null=True,
-                                db_index=error_logConstants.url_calculatedIsDBColumnIndexed)
+                                db_index=ErrorLogConstants.url_calculatedIsDBColumnIndexed)
     def __str__(self):
         return str(self.code)
     def save(self, *args, **kwargs):

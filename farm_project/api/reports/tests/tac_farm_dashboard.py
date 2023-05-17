@@ -1,6 +1,6 @@
 from unittest import TestCase
 from unittest.mock import patch, MagicMock
-from api.reports.TacFarmDashboard import ReportTacFarmDashboard, ReportRequestValidationError
+from api.reports import ReportTacFarmDashboard, ReportRequestValidationError
 from api.reports.row_models import ReportItemTacFarmDashboard
 import uuid
 from api.helpers import SessionContext
@@ -16,7 +16,7 @@ class TestReportTacFarmDashboard(TestCase):
         self.order_by_descending = False
         self.report = ReportTacFarmDashboard(session_context)
 
-    @patch('api.reports.providers.TacFarmDashboard.ReportProviderTacFarmDashboard')
+    @patch('api.reports.providers.tac_farm_dashboard.ReportProviderTacFarmDashboard')
     def test_generate(self, MockProvider):
         mock_provider = MockProvider.return_value
         mock_provider.generate_list.return_value = [

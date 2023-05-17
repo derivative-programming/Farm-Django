@@ -4,9 +4,8 @@ from django.core.exceptions import ValidationError
 import datetime
 import uuid 
 
-from api.models.constants import PacConstants
-class Pac(models.Model): 
-    pacConstants = PacConstants()
+import api.models.constants.pac as PacConstants
+class Pac(models.Model):  
     pac_id = models.AutoField(primary_key=True)
     code = models.UUIDField(default=uuid.uuid4,db_index=True)
     insert_utc_date_time =models.DateTimeField(default=timezone.now)
@@ -16,19 +15,19 @@ class Pac(models.Model):
     last_change_code = models.UUIDField(default=uuid.uuid4)	
     description = models.TextField(
                                 null=True,
-                                db_index=pacConstants.description_calculatedIsDBColumnIndexed)
+                                db_index=PacConstants.description_calculatedIsDBColumnIndexed)
     display_order = models.IntegerField(
                                 null=True,
-                                db_index=pacConstants.display_order_calculatedIsDBColumnIndexed)	
+                                db_index=PacConstants.display_order_calculatedIsDBColumnIndexed)	
     is_active = models.BooleanField(
                                 null=True,
-                                db_index=pacConstants.is_active_calculatedIsDBColumnIndexed)
+                                db_index=PacConstants.is_active_calculatedIsDBColumnIndexed)
     lookup_enum_name = models.TextField(
                                 null=True,
-                                db_index=pacConstants.lookup_enum_name_calculatedIsDBColumnIndexed)
+                                db_index=PacConstants.lookup_enum_name_calculatedIsDBColumnIndexed)
     name = models.TextField(
                                 null=True,
-                                db_index=pacConstants.name_calculatedIsDBColumnIndexed)
+                                db_index=PacConstants.name_calculatedIsDBColumnIndexed)
     def __str__(self):
         return str(self.code)
     def save(self, *args, **kwargs):

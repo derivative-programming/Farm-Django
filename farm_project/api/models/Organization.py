@@ -4,9 +4,8 @@ from django.core.exceptions import ValidationError
 import datetime
 import uuid
 from .tac import Tac #tac_id
-from api.models.constants import OrganizationConstants
-class Organization(models.Model): 
-    organizationConstants = OrganizationConstants()
+import api.models.constants.organization as OrganizationConstants
+class Organization(models.Model):  
     organization_id = models.AutoField(primary_key=True)
     code = models.UUIDField(default=uuid.uuid4,db_index=True)
     insert_utc_date_time =models.DateTimeField(default=timezone.now)
@@ -16,7 +15,7 @@ class Organization(models.Model):
     last_change_code = models.UUIDField(default=uuid.uuid4)	
     name = models.TextField(
                                 null=True,
-                                db_index=organizationConstants.name_calculatedIsDBColumnIndexed)
+                                db_index=OrganizationConstants.name_calculatedIsDBColumnIndexed)
     #tac_id = models.IntegerField(null=True)
     tac = models.ForeignKey(Tac,
                                related_name='organization_list',

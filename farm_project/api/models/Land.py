@@ -4,9 +4,8 @@ from django.core.exceptions import ValidationError
 import datetime
 import uuid
 from .pac import Pac #pac_id
-from api.models.constants import LandConstants
-class Land(models.Model): 
-    landConstants = LandConstants()
+import api.models.constants.land as LandConstants
+class Land(models.Model):  
     land_id = models.AutoField(primary_key=True)
     code = models.UUIDField(default=uuid.uuid4,db_index=True)
     insert_utc_date_time =models.DateTimeField(default=timezone.now)
@@ -16,19 +15,19 @@ class Land(models.Model):
     last_change_code = models.UUIDField(default=uuid.uuid4)	
     description = models.TextField(
                                 null=True,
-                                db_index=landConstants.description_calculatedIsDBColumnIndexed)
+                                db_index=LandConstants.description_calculatedIsDBColumnIndexed)
     display_order = models.IntegerField(
                                 null=True,
-                                db_index=landConstants.display_order_calculatedIsDBColumnIndexed)	
+                                db_index=LandConstants.display_order_calculatedIsDBColumnIndexed)	
     is_active = models.BooleanField(
                                 null=True,
-                                db_index=landConstants.is_active_calculatedIsDBColumnIndexed)
+                                db_index=LandConstants.is_active_calculatedIsDBColumnIndexed)
     lookup_enum_name = models.TextField(
                                 null=True,
-                                db_index=landConstants.lookup_enum_name_calculatedIsDBColumnIndexed)
+                                db_index=LandConstants.lookup_enum_name_calculatedIsDBColumnIndexed)
     name = models.TextField(
                                 null=True,
-                                db_index=landConstants.name_calculatedIsDBColumnIndexed)
+                                db_index=LandConstants.name_calculatedIsDBColumnIndexed)
     #pac_id = models.IntegerField(null=True)
     pac = models.ForeignKey(Pac,
                                related_name='land_list',

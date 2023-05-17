@@ -4,9 +4,8 @@ from django.core.exceptions import ValidationError
 import datetime
 import uuid
 from .pac import Pac #pac_id
-from api.models.constants import TacConstants
-class Tac(models.Model): 
-    tacConstants = TacConstants()
+import api.models.constants.tac as TacConstants
+class Tac(models.Model):  
     tac_id = models.AutoField(primary_key=True)
     code = models.UUIDField(default=uuid.uuid4,db_index=True)
     insert_utc_date_time =models.DateTimeField(default=timezone.now)
@@ -16,19 +15,19 @@ class Tac(models.Model):
     last_change_code = models.UUIDField(default=uuid.uuid4)	
     description = models.TextField(
                                 null=True,
-                                db_index=tacConstants.description_calculatedIsDBColumnIndexed)
+                                db_index=TacConstants.description_calculatedIsDBColumnIndexed)
     display_order = models.IntegerField(
                                 null=True,
-                                db_index=tacConstants.display_order_calculatedIsDBColumnIndexed)	
+                                db_index=TacConstants.display_order_calculatedIsDBColumnIndexed)	
     is_active = models.BooleanField(
                                 null=True,
-                                db_index=tacConstants.is_active_calculatedIsDBColumnIndexed)
+                                db_index=TacConstants.is_active_calculatedIsDBColumnIndexed)
     lookup_enum_name = models.TextField(
                                 null=True,
-                                db_index=tacConstants.lookup_enum_name_calculatedIsDBColumnIndexed)
+                                db_index=TacConstants.lookup_enum_name_calculatedIsDBColumnIndexed)
     name = models.TextField(
                                 null=True,
-                                db_index=tacConstants.name_calculatedIsDBColumnIndexed)
+                                db_index=TacConstants.name_calculatedIsDBColumnIndexed)
     #pac_id = models.IntegerField(null=True)
     pac = models.ForeignKey(Pac,
                                related_name='tac_list',
