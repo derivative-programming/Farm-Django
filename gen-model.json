@@ -1768,6 +1768,8 @@
                     "name": "UpdateLinkPlantCode",
                     "codeDescription": "Land Plant List Report Update Link Plant Code Column",
                     "headerText": "",
+                    "sourceObjectName": "Plant",
+                    "sourcePropertyName": "Code",
                     "sqlServerDBDataType": "uniqueidentifier",
                     "sqlServerDBDataTypeSize": "",
                     "isVisible": "false",
