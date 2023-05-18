@@ -13,7 +13,9 @@ from api.flows import FlowValidationError
 import api.views.models as view_models
 
 @dataclass_json(letter_case=LetterCase.CAMEL)
-@dataclass
+@dataclass       
+
+
 class LandAddPlantPostResponse(PostResponse): 
     land_code:uuid = uuid.UUID(int=0) 
     plant_code:uuid = uuid.UUID(int=0)     
@@ -41,7 +43,7 @@ class LandAddPlantPostResponse(PostResponse):
     output_some_text_val:str = "" 
     output_some_phone_number:str = "" 
     output_some_email_address:str = ""  
-
+#endset
     def load_flow_response(self,data:FlowLandAddPlantResult): 
         self.land_code = data.land_code
         self.plant_code = data.land_code
@@ -63,6 +65,7 @@ class LandAddPlantPostResponse(PostResponse):
         self.output_some_phone_number = data.output_some_phone_number
         self.output_some_email_address = data.output_some_email_address
     
+#endset
 
 ### request. expect camel case. use marshmallow to validate.
 @dataclass_json(letter_case=LetterCase.CAMEL)
@@ -93,6 +96,7 @@ class LandAddPlantPostModel:
     requestSomePhoneNumber:str = ""
     requestSomeEmailAddress:str = ""
     requestSampleImageUploadFile:str = "" 
+#endset
     
     def process_request(self,
                         session_context:SessionContext,
@@ -123,6 +127,7 @@ class LandAddPlantPostModel:
                 self.requestSomePhoneNumber,    
                 self.requestSomeEmailAddress,    
                 self.requestSampleImageUploadFile,
+#endset
             ) 
 
             response.load_flow_response(flowResponse); 
@@ -134,3 +139,4 @@ class LandAddPlantPostModel:
                 response.validation_errors.append(view_models.ValidationError(key,ve.error_dict[key]))
  
         return response
+    

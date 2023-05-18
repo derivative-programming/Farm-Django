@@ -2,16 +2,18 @@ from django.test import TestCase
 from api.reports.providers import ReportProviderTacFarmDashboard
 import uuid
 from api.helpers import SessionContext
+from api.models.factories import TacFactory
 
 class ReportProviderTacFarmDashboardTest(TestCase):
 
     def setUp(self):
         session_context = SessionContext(dict())
         self.report_provider = ReportProviderTacFarmDashboard(session_context)
-        self.tacCode = uuid.uuid4()  # replace with a valid UUID from your test database
+        self.tac = TacFactory.create()
+        self.tacCode = self.tac.code 
         self.page_number = 1
         self.item_count_per_page = 10
-        self.order_by_column_name = "code"  # replace with a valid column name
+        self.order_by_column_name = ""  
         self.order_by_descending = False
 
     def test_generate_list(self):

@@ -8,3 +8,6 @@ class ReportItemTacFarmDashboard():
     def __init__(self): 
         pass
  
+
+    def load_data_provider_dict(self,data:dict):
+            self.field_one_land_plant_list_link_plant_code = uuid.UUID(data["field_one_land_plant_list_link_plant_code"])

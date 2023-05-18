@@ -9,7 +9,7 @@ from .report_request_validation_error import ReportRequestValidationError
 from api.helpers import SessionContext
  
 
-class ReportTacFarmDashboard():
+class ReportManagerTacFarmDashboard():
     _session_context:SessionContext
     def __init__(self, session_context:SessionContext): 
         self._session_context = session_context
@@ -21,7 +21,7 @@ class ReportTacFarmDashboard():
                  order_by_column_name:str,
                  order_by_descending:bool,
                  ) -> List[ReportItemTacFarmDashboard]:
-        logging.debug('ReportTacFarmDashboard.generate Start')
+        logging.debug('ReportManagerTacFarmDashboard.generate Start')
 
         if item_count_per_page <= 0:
             raise ReportRequestValidationError("item_count_per_page","Minimum count per page is 1")
@@ -43,12 +43,12 @@ class ReportTacFarmDashboard():
 
         for dataItem in dataList:
             reportItem = ReportItemTacFarmDashboard()
-            reportItem.field_one_land_plant_list_link_plant_code = uuid.UUID(dataItem["field_one_land_plant_list_link_plant_code"])
+            reportItem.load_data_provider_dict(dataItem)
             result.append(reportItem) 
             
-        logging.debug("ReportTacFarmDashboard.generate Results: " + json.dumps(dataList))
+        logging.debug("ReportManagerTacFarmDashboard.generate Results: " + json.dumps(dataList))
 
-        logging.debug('ReportTacFarmDashboard.generate End')
+        logging.debug('ReportManagerTacFarmDashboard.generate End')
         return result
      
 

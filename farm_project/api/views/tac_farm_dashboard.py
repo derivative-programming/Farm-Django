@@ -10,7 +10,7 @@ from rest_framework.decorators import action
 from rest_framework.viewsets import GenericViewSet,ViewSet
 from rest_framework_dataclasses.serializers import DataclassSerializer
 from rest_framework import status
-from api.reports import ReportTacFarmDashboard
+from api.reports import ReportManagerTacFarmDashboard
 from api.reports.row_models import ReportItemTacFarmDashboard
 from api.flows import FlowTacFarmDashboardInitReport,FlowTacFarmDashboardInitReportResult
 from api.flows import FlowValidationError
@@ -21,40 +21,16 @@ import logging
 import marshmallow.exceptions 
 from api.reports import ReportRequestValidationError 
 from api.helpers import SessionContext
-  
-
-### request. expect camel case. use marshmallow to validate.
-@dataclass_json(letter_case=LetterCase.SNAKE)
-@dataclass
-class ListRequest:
-    pageNumber:int = 0
-    itemCountPerPage:int = 0
-    orderByColumnName:str = ""
-    orderByDescending:bool = False
-    forceErrorMessage:str = ""
+from api.views.models import ListRequest, ListModel, ValidationError
+from api.views.models.init import GetInitResponse
+   
 
 
 ### request. expect camel case. use marshmallow to validate.
 @dataclass_json(letter_case=LetterCase.SNAKE)
 @dataclass
 class TacFarmDashboardListRequest(ListRequest):
-    pass
-
-### response
-@dataclass_json(letter_case=LetterCase.CAMEL)
-@dataclass
-class ListModel:
-    page_number:int = 0
-    item_count_per_page:int = 0
-    order_by_column_name:str = ""
-    order_by_descending:bool = False
-    success:bool = False
-    records_total:int = 0
-    records_filtered:int = 0
-    message:str = ""
-    app_version:str = ""
-
-    
+    pass 
 
 @dataclass_json(letter_case=LetterCase.CAMEL)
 @dataclass
@@ -70,22 +46,6 @@ class TacFarmDashboardListModelItem():
 class TacFarmDashboardListModel(ListModel):
     request:TacFarmDashboardListRequest = None
     items:List[TacFarmDashboardListModelItem] = field(default_factory=list)
-
-
-### init response
-@dataclass_json(letter_case=LetterCase.CAMEL)
-@dataclass
-class ValidationError:
-    property:str = ""
-    message:str  = ""
-
-@dataclass_json(letter_case=LetterCase.CAMEL)
-@dataclass
-class GetInitResponse:
-    success:bool = False
-    message:str = ""
-    validation_errors:List[ValidationError] = field(default_factory=list)
-
 
 @dataclass_json(letter_case=LetterCase.CAMEL)
 @dataclass
@@ -121,7 +81,7 @@ class TacFarmDashboardViewSet(ViewSet):
             tac = Tac.objects.get(code=tacCode)
             
             logging.debug("generate report...")
-            generator = ReportTacFarmDashboard(session_context)
+            generator = ReportManagerTacFarmDashboard(session_context)
             items = generator.generate(
                     tacCode,
                     request.pageNumber,

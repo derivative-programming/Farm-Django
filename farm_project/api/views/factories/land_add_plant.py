@@ -7,7 +7,7 @@ from api.models.factories import FlavorFactory #requestFlavorCode
 from api.views.models import LandAddPlantPostModel
 from datetime import date, datetime
 from decimal import Decimal
-
+ 
 class LandAddPlantRequestFactory(factory.base.Factory):
     class Meta:
         model = LandAddPlantPostModel 
