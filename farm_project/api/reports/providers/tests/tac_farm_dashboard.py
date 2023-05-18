@@ -27,5 +27,5 @@ class ReportProviderTacFarmDashboardTest(TestCase):
         self.assertIsInstance(results, list)
         for result in results:
             self.assertIsInstance(result, dict)
-            self.assertIn("field_one_land_plant_list_link_plant_code", result)
-            self.assertEqual(result["field_one_land_plant_list_link_plant_code"], str(self.tacCode).replace('-', ''))
+            self.assertIn("field_one_plant_list_link_land_code", result)
+            self.assertEqual(result["field_one_plant_list_link_land_code"], str(self.tacCode).replace('-', ''))

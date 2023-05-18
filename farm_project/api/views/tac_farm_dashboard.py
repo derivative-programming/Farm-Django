@@ -35,10 +35,10 @@ class TacFarmDashboardListRequest(ListRequest):
 @dataclass_json(letter_case=LetterCase.CAMEL)
 @dataclass
 class TacFarmDashboardListModelItem():
-    field_one_land_plant_list_link_plant_code:uuid = uuid.UUID(int=0)
+    field_one_plant_list_link_land_code:uuid = uuid.UUID(int=0)
 
     def load_report_item(self,data:ReportItemTacFarmDashboard):
-        self.field_one_land_plant_list_link_plant_code = data.field_one_land_plant_list_link_plant_code 
+        self.field_one_plant_list_link_land_code = data.field_one_plant_list_link_land_code 
 
 
 @dataclass_json(letter_case=LetterCase.CAMEL)

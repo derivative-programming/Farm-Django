@@ -86,4 +86,4 @@ class ReportProviderLandPlantListTest(TestCase):
             self.assertIn("update_link_plant_code", result)
             self.assertIn("delete_async_button_link_plant_code", result)
             self.assertIn("details_link_plant_code", result) 
-            # self.assertEqual(result["field_one_land_plant_list_link_plant_code"], str(self.landCode).replace('-', ''))
+            # self.assertEqual(result["field_one_plant_list_link_land_code"], str(self.landCode).replace('-', ''))

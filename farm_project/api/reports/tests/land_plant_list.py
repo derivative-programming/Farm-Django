@@ -80,7 +80,7 @@ class ReportTestLandPlantList(TestCase):
     #     self.assertIsInstance(result, list)
     #     for item in result:
     #         self.assertIsInstance(item, ReportItemLandPlantList)
-    #         self.assertEqual(item.field_one_land_plant_list_link_plant_code, self.land_code)
+    #         self.assertEqual(item.field_one_plant_list_link_land_code, self.land_code)
 
     def test_generate_invalid_item_count_per_page(self):
         with self.assertRaises(ReportRequestValidationError):
