@@ -26,5 +26,6 @@ from .tac_farm_dashboard import TacFarmDashboardViewSetTestCase
 ##GENTrainingBlock[b2]End
 ##GENLOOPReportEnd
 ##GENLearn[modelType=object,name=Tac]End  
+from .land_plant_list import LandPlantListViewSetTestCase
 ##GENTrainingBlock[a2]End
 ##GENLOOPObjectEnd

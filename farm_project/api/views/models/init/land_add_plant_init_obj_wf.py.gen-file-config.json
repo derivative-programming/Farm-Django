@@ -2,7 +2,7 @@
     "templateType":"objWF",  
     "dimension" :{
         "name":"LandAddPlantInitObjWF",
-        "calculatedIsInitObjWFForObjWF":"true" 
+        "calculatedIsInitObjWF":"true" 
     },
     "ignoreDimensionPropertyList": [  
         "objectWorkflowParam.calculatedIsSourceObjectAvailable", 

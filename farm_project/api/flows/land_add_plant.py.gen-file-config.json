@@ -18,6 +18,10 @@
         "objectWorkflowParam.isTimeZoneDetermined", 
         "objectWorkflowOutputVar.calculatedIsSourceObjectAvailable", 
         "objectWorkflowOutputVar.calculatedIsConditionalVisible", 
-        "objectWorkflowOutputVar.isAutoRedirectURL" 
+        "objectWorkflowOutputVar.isAutoRedirectURL" , 
+        "objectWorkflowOutputVar.calculatedIsObjectID",    
+        "objectWorkflowOutputVar.isLabelVisible",   
+        "objectWorkflowOutputVar.isHeaderText",   
+        "objectWorkflowOutputVar.isVisible" 
     ]
 } 

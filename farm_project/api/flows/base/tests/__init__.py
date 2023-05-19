@@ -15,6 +15,7 @@ from .tac_login_init_obj_wf import BaseFlowTacLoginInitObjWFTestCase
 from .tac_register import BaseFlowTacRegisterTestCase
 from .tac_register_init_obj_wf import BaseFlowTacRegisterInitObjWFTestCase
 from .land_add_plant_init_obj_wf import BaseFlowLandAddPlantInitObjWFTestCase
+from .land_plant_list_init_report import BaseFlowLandPlantListInitReportTestCase
 ##GENTrainingBlock[a]End
 ##GENLOOPObjectEnd
 from .base_flow import TestBaseFlow

@@ -1,4 +1,4 @@
-
+#configuration constants
 
 param_request_flavor_code_isRequired = True
 param_request_other_flavor_isRequired = False

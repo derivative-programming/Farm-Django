@@ -18,5 +18,6 @@ from .tac_farm_dashboard_init_report import BaseFlowTacFarmDashboardInitReport
 from .tac_register import BaseFlowTacRegister
 from .tac_login import BaseFlowTacLogin
 from .land_add_plant_init_obj_wf import BaseFlowLandAddPlantInitObjWF
+from .land_plant_list_init_report import BaseFlowLandPlantListInitReport
 ##GENTrainingBlock[a]End
 ##GENLOOPObjectEnd

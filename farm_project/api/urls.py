@@ -15,6 +15,7 @@ router.register(r'tac-login',views.TacLoginViewSet,basename="tac-login")
 router.register(r'tac-register',views.TacRegisterViewSet,basename="tac-register")
 router.register(r'land-add-plant',views.LandAddPlantViewSet,basename="land-add-plant")
 router.register(r'tac-farm-dashboard',views.TacFarmDashboardViewSet,basename="tac-farm-dashboard")
+router.register(r'land-plant-list',views.LandPlantListViewSet,basename="land-plant-list")
 
 urlpatterns = [ 
     path('', include(router.urls)),

@@ -36,6 +36,7 @@ class LandAddPlantGetInitResponse(GetInitResponse):
     requestSomeTextVal:str = ""
     requestSomePhoneNumber:str = ""
     requestSomeEmailAddress:str = "" 
+#endset
 
     def load_flow_response(self,data:FlowLandAddPlantInitObjWFResult): 
         self.landName = data.land_name
