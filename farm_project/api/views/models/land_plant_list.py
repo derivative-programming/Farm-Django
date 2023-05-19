@@ -49,6 +49,7 @@ class LandPlantListListModelItem():
     update_link_plant_code:uuid = uuid.UUID(int=0)
     delete_async_button_link_plant_code:uuid = uuid.UUID(int=0)
     details_link_plant_code:uuid = uuid.UUID(int=0)
+#endset
 
     def load_report_item(self,data:ReportItemLandPlantList): 
         self.plant_code = data.plant_code
@@ -74,6 +75,7 @@ class LandPlantListListModelItem():
         self.update_link_plant_code = data.update_link_plant_code
         self.delete_async_button_link_plant_code = data.delete_async_button_link_plant_code
         self.details_link_plant_code = data.details_link_plant_code
+#endset
 
 
 @dataclass_json(letter_case=LetterCase.CAMEL)
