@@ -5,13 +5,13 @@
 ##GENLOOPObjectWorkflowStart
 ##GENTrainingBlock[b]Start
 ##GENLearn[modelType=objectWorkflow,name=TacRegister]Start 
-from .tac_register import TacRegisterViewSetTestCase
+from .land_add_plant import LandAddPlantViewSetTestCase
 ##GENLearn[modelType=objectWorkflow,name=TacRegister]End
 ##GENTrainingBlock[b]End
 ##GENLOOPObjectWorkflowEnd
 ##GENLearn[modelType=object,name=Tac]End 
 from .tac_login import TacLoginViewSetTestCase
-from .land_add_plant import LandAddPlantViewSetTestCase
+from .tac_register import TacRegisterViewSetTestCase
 ##GENTrainingBlock[a]End
 ##GENLOOPObjectEnd
 
@@ -21,11 +21,11 @@ from .land_add_plant import LandAddPlantViewSetTestCase
 ##GENLOOPReportStart
 ##GENTrainingBlock[b2]Start
 ##GENLearn[modelType=report,name=TacFarmDashboard]Start 
-from .tac_farm_dashboard import TacFarmDashboardViewSetTestCase
+from .land_plant_list import LandPlantListViewSetTestCase
 ##GENLearn[modelType=report,name=TacFarmDashboard]End
 ##GENTrainingBlock[b2]End
 ##GENLOOPReportEnd
 ##GENLearn[modelType=object,name=Tac]End  
-from .land_plant_list import LandPlantListViewSetTestCase
+from .tac_farm_dashboard import TacFarmDashboardViewSetTestCase
 ##GENTrainingBlock[a2]End
 ##GENLOOPObjectEnd

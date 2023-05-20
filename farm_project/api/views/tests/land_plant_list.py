@@ -1,44 +1,34 @@
 from django.test import TestCase
+from dataclasses import asdict
 from rest_framework.test import APIClient 
-from api.views import LandPlantListViewSet
+from api.views.fs_farm_api.v1_0 import LandPlantListViewSet
 from uuid import uuid4
 import logging
 import json
-from api.models.factories import TacFactory
+from api.models.factories import LandFactory
+from api.views.factories import LandPlantListRequestFactory
 
 class LandPlantListViewSetTestCase(TestCase):
 
     def setUp(self):
         self.client = APIClient() 
-        self.tac = TacFactory.create()
-        self.valid_request_data = {
-            "pageNumber": "1",
-            "itemCountPerPage": "1",
-            "orderByColumnName": "",
-            "orderByDescending": "false" 
-        }
+        self.land = LandFactory.create()
+        request = LandPlantListRequestFactory.create()
+        self.valid_request_data =  asdict(request)
         self.invalid_request_data = {
-            "xxxxxx": "invalid@example.com",
-            "yyyyyy": "wrong_password"
+            "xxxxxx": "yyyyy" 
         }
 
-        self.invalid_request_data2 = {
-            "pageNumber": "1",
-            "itemCountPerPage": "0",
-            "orderByColumnName": "",
-            "orderByDescending": "false" 
-        }
+        self.invalid_request_data2 =  asdict(request) 
+        self.invalid_request_data2["itemCountPerPage"] = "0"
 
-        self.invalid_request_data3 = {
-            "pageNumber": "0",
-            "itemCountPerPage": "2",
-            "orderByColumnName": "",
-            "orderByDescending": "false" 
-        }
+        self.invalid_request_data3 = asdict(request)
+        self.invalid_request_data3["pageNumber"] = "0"
+
     def test_submit_success(self):
         logging.debug('LandPlantListViewSetTestCase test_submit_success')
         # Assuming you have a FlowLandPlantList.process method that handles valid data 
-        response = self.client.get(f'/api/land-plant-list/{self.tac.code}/', data=self.valid_request_data, format='json')
+        response = self.client.get(f'/api/land-plant-list/{self.land.code}/', data=self.valid_request_data, format='json')
         self.assertEqual(response.status_code, 200)
         json_string = response.content.decode() 
         responseDict = json.loads(json_string) 
@@ -46,7 +36,7 @@ class LandPlantListViewSetTestCase(TestCase):
 
     def test_submit_failure(self):
         logging.debug('LandPlantListViewSetTestCase test_submit_failure')
-        response = self.client.get(f'/api/land-plant-list/{self.tac.code}/', data=self.invalid_request_data, format='json')
+        response = self.client.get(f'/api/land-plant-list/{self.land.code}/', data=self.invalid_request_data, format='json')
         self.assertEqual(response.status_code, 200)
         json_string = response.content.decode() 
         responseDict = json.loads(json_string) 
@@ -63,7 +53,7 @@ class LandPlantListViewSetTestCase(TestCase):
         
 
     def test_submit_failure4(self):
-        response = self.client.get(f'/api/land-plant-list/{self.tac.code}/', data=self.invalid_request_data2, format='json')
+        response = self.client.get(f'/api/land-plant-list/{self.land.code}/', data=self.invalid_request_data2, format='json')
         self.assertEqual(response.status_code, 200)
         json_string = response.content.decode() 
         responseDict = json.loads(json_string) 
@@ -71,14 +61,14 @@ class LandPlantListViewSetTestCase(TestCase):
         
 
     def test_submit_failure5(self):
-        response = self.client.get(f'/api/land-plant-list/{self.tac.code}/', data=self.invalid_request_data3, format='json')
+        response = self.client.get(f'/api/land-plant-list/{self.land.code}/', data=self.invalid_request_data3, format='json')
         self.assertEqual(response.status_code, 200)
         json_string = response.content.decode() 
         responseDict = json.loads(json_string) 
         self.assertFalse(response.data['success'])
 
     def test_init_success(self):
-        response = self.client.get(f'/api/land-plant-list/{self.tac.code}/init/')
+        response = self.client.get(f'/api/land-plant-list/{self.land.code}/init/')
         self.assertEqual(response.status_code, 200)
         json_string = response.content.decode() 
         responseDict = json.loads(json_string) 

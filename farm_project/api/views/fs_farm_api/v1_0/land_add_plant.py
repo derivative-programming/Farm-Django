@@ -3,9 +3,7 @@ import traceback
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework.viewsets import ViewSet 
-from rest_framework import status
-from api.flows import FlowLandAddPlant
-from api.flows import FlowLandAddPlantInitObjWF 
+from rest_framework import status 
 from api.flows import FlowValidationError
 from api.models import Land 
 import marshmallow_dataclass
@@ -22,7 +20,9 @@ class LandAddPlantViewSet(ViewSet):
     def submit(self, request, landCode=None, *args, **kwargs): 
         logging.debug('LandAddPlantViewSet.submit post start. landCode:' + landCode)
 
-        response = view_models.LandAddPlantPostResponse()
+        ##//GENTrainingBlock[casePostWithID]Start 
+        ##//GENLearn[isPostWithIdAvailable=true]Start 
+        response = view_models.LandAddPlantPostModelResponse()
          
         try:
             logging.debug("Start session...")
@@ -32,10 +32,10 @@ class LandAddPlantViewSet(ViewSet):
             logging.debug("Request:" + json.dumps(request.data)) 
  
             logging.debug("get schema")
-            schema = marshmallow_dataclass.class_schema(view_models.LandAddPlantPostModel)() 
+            schema = marshmallow_dataclass.class_schema(view_models.LandAddPlantPostModelRequest)() 
              
             logging.debug("validating request...")
-            request:view_models.LandAddPlantPostModel = schema.load(request.data)  
+            request:view_models.LandAddPlantPostModelRequest = schema.load(request.data)  
 
             logging.debug("loading model...")
             land = Land.objects.get(code=landCode)
@@ -45,10 +45,7 @@ class LandAddPlantViewSet(ViewSet):
                 session_context,
                 land,
                 response
-            )
-            
-            response.success = True
-            response.message = "Success."
+            ) 
 
         except marshmallow.exceptions.ValidationError as se:
             response.success = False
@@ -69,13 +66,15 @@ class LandAddPlantViewSet(ViewSet):
         responseDict = json.loads(response.to_json())
         
         return Response(responseDict,status=status.HTTP_200_OK) 
+        ##//GENLearn[isPostWithIdAvailable=true]End 
+        ##//GENTrainingBlock[casePostWithID]End 
     
     
     @action(detail=False, methods=['get'],url_path=r'(?P<landCode>[0-9a-f-]{36})/init')
     def init(self, request, landCode=None, *args, **kwargs):
         logging.debug('LandAddPlantViewSet.init get start. landCode:' + landCode)
         
-        response = view_init_models.LandAddPlantGetInitResponse() 
+        response = view_init_models.LandAddPlantInitObjWFGetInitModelResponse() 
          
         try: 
             logging.debug("Start session...")
@@ -84,15 +83,13 @@ class LandAddPlantViewSet(ViewSet):
             logging.debug("loading model...")
             land = Land.objects.get(code=landCode)
             
-            logging.debug("process flow...")
-            flow = FlowLandAddPlantInitObjWF(session_context)
-            flowResponse = flow.process(
-                land
-            ) 
- 
-            response.load_flow_response(flowResponse);
-            response.success = True
-            response.message = "Success."
+            init_request = view_init_models.LandAddPlantInitObjWFGetInitModelRequest()
+            logging.debug("process request...") 
+            response = init_request.process_request(
+                session_context,
+                land,
+                response
+            )  
             
         except TypeError as te: 
             response.success = False

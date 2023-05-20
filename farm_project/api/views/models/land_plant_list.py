@@ -7,18 +7,48 @@ from decimal import Decimal
 from api.helpers import TypeConversion
 from api.reports.row_models import ReportItemLandPlantList 
 from api.views.models import ListRequest, ListModel 
+from api.helpers import SessionContext 
+from api.models import Land 
+from api.reports import ReportManagerLandPlantList
+from api.reports import ReportRequestValidationError 
+import api.views.models as view_models
    
 
 
 ### request. expect camel case. use marshmallow to validate.
 @dataclass_json(letter_case=LetterCase.SNAKE)
 @dataclass
-class LandPlantListListRequest(ListRequest):
-    pass 
+class LandPlantListGetModelRequest(ListRequest):
+    flavorCode:uuid.UUID = field(default_factory=lambda: uuid.UUID('00000000-0000-0000-0000-000000000000'))
+    someIntVal:int = 0
+    someBigIntVal:int = 0
+    someBitVal:bool = False
+    isEditAllowed:bool = False
+    isDeleteAllowed:bool = False
+    someFloatVal:float = 0
+    someDecimalVal:Decimal = Decimal(0)
+    someMinUTCDateTimeVal:datetime = field(default_factory=TypeConversion.get_default_date_time,
+            metadata=config(
+            encoder=datetime.isoformat,
+            decoder=datetime.fromisoformat
+        ))
+    someMinDateVal:date = field(default_factory=TypeConversion.get_default_date, metadata=config(
+            encoder=date.isoformat, 
+            decoder=date.fromisoformat
+        ))
+    someMoneyVal:Decimal = Decimal(0)
+    someNVarCharVal:str = ""
+    someVarCharVal:str = ""
+    someTextVal:str = ""
+    somePhoneNumber:str = ""
+    someEmailAddress:str = "" 
+#endset 
+
+    
 
 @dataclass_json(letter_case=LetterCase.CAMEL)
 @dataclass
-class LandPlantListListModelItem():
+class LandPlantListGetModelResponseItem():
     plant_code:uuid = uuid.UUID(int=0)
     some_int_val:int = 0 
     some_big_int_val:int = 0 
@@ -80,7 +110,58 @@ class LandPlantListListModelItem():
 
 @dataclass_json(letter_case=LetterCase.CAMEL)
 @dataclass
-class LandPlantListListModel(ListModel):
-    request:LandPlantListListRequest = None
-    items:List[LandPlantListListModelItem] = field(default_factory=list)
+class LandPlantListGetModelResponse(ListModel):
+    request:LandPlantListGetModelRequest = None
+    items:List[LandPlantListGetModelResponseItem] = field(default_factory=list)
    
+    def process_request(self,
+                        session_context:SessionContext,
+                        land:Land,
+                        request:LandPlantListGetModelRequest):
+        
+        try:
+            
+            generator = ReportManagerLandPlantList(session_context)
+            items = generator.generate(
+                    land.code,
+                    request.someIntVal, 
+                    request.someBigIntVal,
+                    request.someBitVal,
+                    request.isEditAllowed,
+                    request.isDeleteAllowed,
+                    request.someFloatVal,
+                    request.someDecimalVal, 
+                    request.someMinUTCDateTimeVal,
+                    request.someMinDateVal,
+                    request.someMoneyVal, 
+                    request.someNVarCharVal,
+                    request.someVarCharVal,
+                    request.someTextVal,
+                    request.somePhoneNumber,
+                    request.someEmailAddress,
+                    request.flavorCode,
+#endset
+                    request.pageNumber,
+                    request.itemCountPerPage,
+                    request.orderByColumnName,
+                    request.orderByDescending)
+
+            self.items = list()
+
+            for item in items:
+                report_item = LandPlantListGetModelResponseItem()
+                report_item.load_report_item(item)
+                self.items.append(report_item) 
+
+            self.success = True
+            self.message = "Success."
+
+        except ReportRequestValidationError as ve:
+            self.success = False 
+            self.message = "Validation Error..."
+            self.validation_errors = list()
+            for key in ve.error_dict:
+                self.message = self.message + ve.error_dict[key] + ','
+                # self.validation_errors.append(view_models.ValidationError(key,ve.error_dict[key]))
+            
+         

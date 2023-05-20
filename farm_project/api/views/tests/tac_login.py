@@ -1,7 +1,7 @@
 from django.test import TestCase
 from rest_framework.test import APIClient 
 from api.models import Customer 
-from api.views import TacLoginViewSet
+from api.views.fs_farm_api.v1_0 import TacLoginViewSet
 from uuid import uuid4
 import logging
 import json

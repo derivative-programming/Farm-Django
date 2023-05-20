@@ -6,9 +6,14 @@ from dataclasses_json import dataclass_json, LetterCase, config
 from .get_init_response import GetInitResponse
 from api.helpers import TypeConversion 
 from api.flows import FlowLandPlantListInitReportResult 
+from api.helpers import SessionContext 
+from api.models import Land 
+from api.flows import FlowLandPlantListInitReport
+from api.flows import FlowValidationError
+import api.views.models as view_models
 @dataclass_json(letter_case=LetterCase.CAMEL)
 @dataclass
-class LandPlantListGetInitResponse(GetInitResponse):
+class LandPlantListInitReportGetInitModelResponse(GetInitResponse):
     someIntVal:int = 0
     someBigIntVal:int = 0
     someBitVal:bool = False
@@ -31,6 +36,7 @@ class LandPlantListGetInitResponse(GetInitResponse):
     someTextVal:str = ""
     somePhoneNumber:str = ""
     someEmailAddress:str = ""
+    flavorCode:uuid = field(default_factory=lambda: uuid.UUID('00000000-0000-0000-0000-000000000000'))
     landCode:uuid.UUID = field(default_factory=lambda: uuid.UUID('00000000-0000-0000-0000-000000000000'))
     tacCode:uuid.UUID = field(default_factory=lambda: uuid.UUID('00000000-0000-0000-0000-000000000000'))
     landName:str=""
@@ -51,7 +57,41 @@ class LandPlantListGetInitResponse(GetInitResponse):
         self.someTextVal = data.some_text_val
         self.somePhoneNumber = data.some_phone_number
         self.someEmailAddress = data.some_email_address
+        self.flavorCode = data.flavor_code
         self.landCode = data.land_code
         self.tacCode = data.tac_code
         self.landName = data.land_name
 
+
+@dataclass_json(letter_case=LetterCase.CAMEL)
+@dataclass
+class LandPlantListInitReportGetInitModelRequest():
+    
+    def process_request(self,
+                        session_context:SessionContext,
+                        land:Land,
+                        response:LandPlantListInitReportGetInitModelResponse) -> LandPlantListInitReportGetInitModelResponse:
+        
+        try:
+            
+            flow = FlowLandPlantListInitReport(session_context)
+            flowResponse = flow.process(
+                land
+            ) 
+
+            flowResponse = flow.process(
+                land, 
+            ) 
+
+            response.load_flow_response(flowResponse); 
+        
+            response.success = True
+            response.message = "Success."
+        
+        except FlowValidationError as ve:
+            response.success = False 
+            response.validation_errors = list()
+            for key in ve.error_dict:
+                response.validation_errors.append(view_models.ValidationError(key,ve.error_dict[key]))
+ 
+        return response

@@ -7,7 +7,7 @@ from .list_model import ListModel
 ##GENLOOPObjectWorkflowStart
 ##GENTrainingBlock[b]Start
 ##GENLearn[modelType=objectWorkflow,name=LandAddPlant,calculatedIsInitObjWF=false]Start 
-from .land_add_plant import LandAddPlantPostModel, LandAddPlantPostResponse
+from .land_add_plant import LandAddPlantPostModelRequest,LandAddPlantPostModelResponse
 ##GENLearn[modelType=objectWorkflow,name=LandAddPlant,calculatedIsInitObjWF=false]End
 ##GENTrainingBlock[b]End
 ##GENLOOPObjectWorkflowEnd
@@ -15,7 +15,7 @@ from .land_add_plant import LandAddPlantPostModel, LandAddPlantPostResponse
 ##GENLOOPReportStart
 ##GENTrainingBlock[b]Start
 ##GENLearn[modelType=report,name=LandAddPlant,calculatedIsInitObjWF=false]Start 
-from .land_plant_list import LandPlantListListRequest, LandPlantListListModel, LandPlantListListModelItem
+from .land_plant_list import LandPlantListGetModelRequest,LandPlantListGetModelResponse,LandPlantListGetModelResponseItem
 ##GENLearn[modelType=report,name=LandAddPlant,calculatedIsInitObjWF=false]End
 ##GENTrainingBlock[b]End
 ##GENLOOPReportEnd

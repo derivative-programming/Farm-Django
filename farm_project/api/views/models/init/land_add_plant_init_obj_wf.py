@@ -6,10 +6,15 @@ from dataclasses_json import dataclass_json, LetterCase, config
 from .get_init_response import GetInitResponse
 from api.helpers import TypeConversion 
 from api.flows import FlowLandAddPlantInitObjWFResult 
+from api.helpers import SessionContext 
+from api.models import Land 
+from api.flows import FlowLandAddPlantInitObjWF 
+from api.flows import FlowValidationError
+import api.views.models as view_models
 
 @dataclass_json(letter_case=LetterCase.CAMEL)
 @dataclass
-class LandAddPlantGetInitResponse(GetInitResponse):
+class LandAddPlantInitObjWFGetInitModelResponse(GetInitResponse):
     landName:str=""
     tacCode:uuid.UUID = field(default_factory=lambda: uuid.UUID('00000000-0000-0000-0000-000000000000'))
     requestFlavorCode:uuid.UUID = field(default_factory=lambda: uuid.UUID('00000000-0000-0000-0000-000000000000'))
@@ -60,3 +65,35 @@ class LandAddPlantGetInitResponse(GetInitResponse):
         self.requestSomeEmailAddress = data.request_some_email_address 
  
   
+@dataclass_json(letter_case=LetterCase.CAMEL)
+@dataclass
+class LandAddPlantInitObjWFGetInitModelRequest():
+    
+    def process_request(self,
+                        session_context:SessionContext,
+                        land:Land,
+                        response:LandAddPlantInitObjWFGetInitModelResponse) -> LandAddPlantInitObjWFGetInitModelResponse:
+        
+        try:
+            
+            flow = FlowLandAddPlantInitObjWF(session_context)
+            flowResponse = flow.process(
+                land
+            ) 
+
+            flowResponse = flow.process(
+                land,  
+            ) 
+
+            response.load_flow_response(flowResponse); 
+        
+            response.success = True
+            response.message = "Success."
+        
+        except FlowValidationError as ve:
+            response.success = False 
+            response.validation_errors = list()
+            for key in ve.error_dict:
+                response.validation_errors.append(view_models.ValidationError(key,ve.error_dict[key]))
+ 
+        return response

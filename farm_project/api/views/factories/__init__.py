@@ -19,6 +19,7 @@ from .land_add_plant import LandAddPlantRequestFactory
 ##GENLOOPReportStart
 ##GENTrainingBlock[b2]Start
 ##GENLearn[modelType=report,name=TacFarmDashboard]Start  
+from .land_plant_list import LandPlantListRequestFactory
 ##GENLearn[modelType=report,name=TacFarmDashboard]End
 ##GENTrainingBlock[b2]End
 ##GENLOOPReportEnd

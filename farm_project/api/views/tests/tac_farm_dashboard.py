@@ -1,6 +1,6 @@
 from django.test import TestCase
 from rest_framework.test import APIClient 
-from api.views import TacFarmDashboardViewSet
+from api.views.fs_farm_api.v1_0 import TacFarmDashboardViewSet
 from uuid import uuid4
 import logging
 import json

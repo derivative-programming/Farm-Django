@@ -37,6 +37,7 @@ class FlowLandPlantListInitReportResult():
     some_text_val:str = ""
     some_phone_number:str = ""
     some_email_address:str = ""
+    flavor_code:uuid = uuid.UUID(int=0)
     land_code:uuid = uuid.UUID(int=0)
     tac_code:uuid = uuid.UUID(int=0)
     land_name:str = ""
@@ -69,6 +70,7 @@ class FlowLandPlantListInitReport(BaseFlowLandPlantListInitReport):
         some_text_val_output:str = ""
         some_phone_number_output:str = ""
         some_email_address_output:str = ""
+        flavor_code_output:uuid = uuid.UUID(int=0)
         land_code_output:uuid = uuid.UUID(int=0)
         tac_code_output:uuid = uuid.UUID(int=0)
         land_name_output:str = ""
@@ -91,6 +93,7 @@ class FlowLandPlantListInitReport(BaseFlowLandPlantListInitReport):
         result.some_text_val = some_text_val_output
         result.some_phone_number = some_phone_number_output
         result.some_email_address = some_email_address_output
+        result.flavor_code = flavor_code_output
         result.land_code = land_code_output
         result.tac_code = tac_code_output
         result.land_name = land_name_output

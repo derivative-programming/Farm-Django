@@ -1,0 +1,9 @@
+{
+    "templateType":"ApiEndPoint",  
+    "dimension" :{
+        "name":"LandPlantList",
+        "isPostWithIdAvailable":"false"
+    },
+    "ignoreDimensionPropertyList": [ 
+    ]
+} 

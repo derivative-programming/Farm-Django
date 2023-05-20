@@ -4,13 +4,13 @@ import factory
 from factory import Faker
 from django.utils import timezone 
 from api.models.factories import FlavorFactory #requestFlavorCode 
-from api.views.models import LandAddPlantPostModel
+from api.views.models import LandAddPlantPostModelRequest
 from datetime import date, datetime
 from decimal import Decimal
  
 class LandAddPlantRequestFactory(factory.base.Factory):
     class Meta:
-        model = LandAddPlantPostModel 
+        model = LandAddPlantPostModelRequest 
     requestFlavorCode:uuid = FlavorFactory.create().code  
     requestOtherFlavor:str = ""    
     requestSomeIntVal:int = Faker('random_int')    
