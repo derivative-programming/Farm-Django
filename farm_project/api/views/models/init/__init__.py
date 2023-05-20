@@ -1,5 +1,3 @@
-
-from .get_init_response import GetInitResponse 
 ##GENLOOPObjectStart
 ##GENTrainingBlock[a]Start
 ##GENLearn[modelType=object,name=Land]Start 

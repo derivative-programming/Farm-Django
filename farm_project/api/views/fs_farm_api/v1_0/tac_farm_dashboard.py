@@ -1,14 +1,14 @@
-from dataclasses import dataclass, asdict, field
+from dataclasses import dataclass, field
 import json
 from dataclasses_json import dataclass_json,LetterCase
 import traceback
 from typing import List
-import uuid
-from django.http import JsonResponse
+import uuid 
+from api.views.models import ValidationError
+from typing import List
 from rest_framework.response import Response
 from rest_framework.decorators import action
-from rest_framework.viewsets import GenericViewSet,ViewSet
-from rest_framework_dataclasses.serializers import DataclassSerializer
+from rest_framework.viewsets import ViewSet 
 from rest_framework import status
 from api.reports import ReportManagerTacFarmDashboard
 from api.reports.row_models import ReportItemTacFarmDashboard
@@ -21,16 +21,19 @@ import logging
 import marshmallow.exceptions 
 from api.reports import ReportRequestValidationError 
 from api.helpers import SessionContext
-from api.views.models import ListRequest, ListModel, ValidationError
-from api.views.models.init import GetInitResponse
+from api.views.models import ListModel, ValidationError 
    
 
 
 ### request. expect camel case. use marshmallow to validate.
 @dataclass_json(letter_case=LetterCase.SNAKE)
 @dataclass
-class TacFarmDashboardListRequest(ListRequest):
-    pass 
+class TacFarmDashboardListRequest():
+    pageNumber:int = 0
+    itemCountPerPage:int = 0
+    orderByColumnName:str = ""
+    orderByDescending:bool = False
+    forceErrorMessage:str = ""
 
 @dataclass_json(letter_case=LetterCase.CAMEL)
 @dataclass
@@ -49,7 +52,10 @@ class TacFarmDashboardListModel(ListModel):
 
 @dataclass_json(letter_case=LetterCase.CAMEL)
 @dataclass
-class TacFarmDashboardGetInitResponse(GetInitResponse):
+class TacFarmDashboardGetInitResponse():
+    success:bool = False
+    message:str = ""
+    validation_errors:List[ValidationError] = field(default_factory=list)
     customer_code:uuid = uuid.UUID(int=0)
 
     def load_flow_response(self,data:FlowTacFarmDashboardInitReportResult):

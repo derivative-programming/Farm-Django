@@ -11,6 +11,8 @@ from api.helpers import SessionContext
 from api.models import Land 
 from api.flows import FlowValidationError
 import api.views.models as view_models
+import logging
+from api.models import Land 
 
 @dataclass_json(letter_case=LetterCase.CAMEL)
 @dataclass        
@@ -43,6 +45,7 @@ class LandAddPlantPostModelResponse(PostResponse):
     output_some_email_address:str = ""  
 #endset
     def load_flow_response(self,data:FlowLandAddPlantResult): 
+        placeholder = "" #to avoid pass line
         self.land_code = data.land_code
         self.plant_code = data.land_code
         self.output_flavor_code = data.land_code  
@@ -98,13 +101,17 @@ class LandAddPlantPostModelRequest:
     
     def process_request(self,
                         session_context:SessionContext,
-                        land:Land,
+                        land_code:uuid,
                         response:LandAddPlantPostModelResponse) -> LandAddPlantPostModelResponse:
         
         try:
             
+            logging.debug("loading model...")
+            land = Land.objects.get(code=land_code)
+            
             flow = FlowLandAddPlant(session_context)
 
+            logging.debug("process flow...")
             flowResponse = flow.process(
                 land,
                 self.requestFlavorCode,

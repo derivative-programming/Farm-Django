@@ -1,9 +1,10 @@
 from dataclasses import dataclass, field
 from datetime import date, datetime
 from decimal import Decimal
+from api.views.models import ValidationError
+from typing import List
 import uuid
-from dataclasses_json import dataclass_json, LetterCase, config   
-from .get_init_response import GetInitResponse
+from dataclasses_json import dataclass_json, LetterCase, config    
 from api.helpers import TypeConversion 
 from api.flows import FlowLandAddPlantInitObjWFResult 
 from api.helpers import SessionContext 
@@ -11,10 +12,15 @@ from api.models import Land
 from api.flows import FlowLandAddPlantInitObjWF 
 from api.flows import FlowValidationError
 import api.views.models as view_models
+import logging
+from api.models import Land 
 
 @dataclass_json(letter_case=LetterCase.CAMEL)
 @dataclass
-class LandAddPlantInitObjWFGetInitModelResponse(GetInitResponse):
+class LandAddPlantInitObjWFGetInitModelResponse():
+    success:bool = False
+    message:str = ""
+    validation_errors:List[ValidationError] = field(default_factory=list)
     landName:str=""
     tacCode:uuid.UUID = field(default_factory=lambda: uuid.UUID('00000000-0000-0000-0000-000000000000'))
     requestFlavorCode:uuid.UUID = field(default_factory=lambda: uuid.UUID('00000000-0000-0000-0000-000000000000'))
@@ -44,6 +50,9 @@ class LandAddPlantInitObjWFGetInitModelResponse(GetInitResponse):
 #endset
 
     def load_flow_response(self,data:FlowLandAddPlantInitObjWFResult): 
+        self.validation_errors = list()
+        self.success = False
+        self.message = ""
         self.landName = data.land_name
         self.tacCode = data.tac_code
         self.requestFlavorCode = data.request_flavor_code
@@ -71,19 +80,19 @@ class LandAddPlantInitObjWFGetInitModelRequest():
     
     def process_request(self,
                         session_context:SessionContext,
-                        land:Land,
+                        land_code:uuid,
                         response:LandAddPlantInitObjWFGetInitModelResponse) -> LandAddPlantInitObjWFGetInitModelResponse:
         
         try:
             
+            logging.debug("loading model...")
+            land = Land.objects.get(code=land_code)
+
+            logging.debug("process request...") 
             flow = FlowLandAddPlantInitObjWF(session_context)
             flowResponse = flow.process(
                 land
-            ) 
-
-            flowResponse = flow.process(
-                land,  
-            ) 
+            )  
 
             response.load_flow_response(flowResponse); 
         

@@ -1,5 +1,4 @@
-from .validation_error import ValidationError
-from .list_request import ListRequest
+from .validation_error import ValidationError 
 from .list_model import ListModel
 ##GENLOOPObjectStart
 ##GENTrainingBlock[a]Start

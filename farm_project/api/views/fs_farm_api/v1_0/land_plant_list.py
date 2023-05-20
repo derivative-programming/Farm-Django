@@ -2,18 +2,14 @@ import json
 import traceback 
 from rest_framework.response import Response
 from rest_framework.decorators import action
-from rest_framework.viewsets import ViewSet
-from rest_framework_dataclasses.serializers import DataclassSerializer 
-from rest_framework import status
-from api.reports import ReportManagerLandPlantList 
+from rest_framework.viewsets import ViewSet 
+from rest_framework import status 
 import marshmallow_dataclass
 import logging
-import marshmallow.exceptions 
-from api.reports import ReportRequestValidationError 
+import marshmallow.exceptions  
 from api.helpers import SessionContext 
 import api.views.models as view_models
-import api.views.models.init as view_init_models
-from api.models import Land 
+import api.views.models.init as view_init_models 
    
  
 class LandPlantListViewSet(ViewSet): 
@@ -47,20 +43,18 @@ class LandPlantListViewSet(ViewSet):
         if self.isGetInitAvailable == False:
             return Response(status=status.HTTP_501_NOT_IMPLEMENTED) 
         
+##//GENTrainingBlock[caseisGetInitAvailable]Start 
+##//GENLearn[isGetInitAvailable=true]Start 
         response = view_init_models.LandPlantListInitReportGetInitModelResponse() 
          
         try: 
             logging.debug("Start session...")
             session_context = SessionContext(dict())
- 
-            logging.debug("loading model...")
-            land = Land.objects.get(code=landCode)
-            
-            init_request = view_init_models.LandPlantListInitReportGetInitModelRequest()
-            logging.debug("process request...") 
+  
+            init_request = view_init_models.LandPlantListInitReportGetInitModelRequest() 
             response = init_request.process_request(
                 session_context,
-                land,
+                landCode,
                 response
             )  
             
@@ -79,12 +73,18 @@ class LandPlantListViewSet(ViewSet):
         responseDict = json.loads(response.to_json())
         
         return Response(responseDict,status=status.HTTP_200_OK) 
+##//GENLearn[isGetInitAvailable=true]End 
+##//GENTrainingBlock[caseisGetInitAvailable]End 
          
     @action(detail=False, methods=['get'])
     def request_get(self, request, landCode=None, *args, **kwargs):
         logging.debug('LandPlantListViewSet.request_get start.')
         if self.isGetAvailable == False:
             return Response(status=status.HTTP_501_NOT_IMPLEMENTED) 
+##//GENTrainingBlock[caseisGetAvailable]Start 
+##//GENLearn[isGetAvailable=true]Start 
+##//GENLearn[isGetAvailable=true]End 
+##//GENTrainingBlock[caseisGetAvailable]End 
 
     @action(detail=False, methods=['get'],url_path=r'(?P<landCode>[0-9a-f-]{36})')
     def request_get_with_id(self, request, landCode=None, *args, **kwargs): 
@@ -92,6 +92,8 @@ class LandPlantListViewSet(ViewSet):
         if self.isGetWithIdAvailable == False:
             return Response(status=status.HTTP_501_NOT_IMPLEMENTED) 
 
+##//GENTrainingBlock[caseisGetWithIdAvailable]Start 
+##//GENLearn[isGetWithIdAvailable=true]Start 
         response = view_models.LandPlantListGetModelResponse()
          
         try:
@@ -107,13 +109,10 @@ class LandPlantListViewSet(ViewSet):
 
             response.request = request
 
-            logging.debug("loading model...")
-            land = Land.objects.get(code=landCode)
-            
             logging.debug("process request...") 
             response.process_request(
                 session_context,
-                land,
+                landCode,
                 request
             )  
 
@@ -132,6 +131,8 @@ class LandPlantListViewSet(ViewSet):
         responseDict = json.loads(response.to_json())
         
         return Response(responseDict,status=status.HTTP_200_OK) 
+##//GENLearn[isGetWithIdAvailable=true]End 
+##//GENTrainingBlock[caseisGetWithIdAvailable]End 
   
     @action(detail=False, methods=['get'],url_path=r'(?P<landCode>[0-9a-f-]{36})/to-csv')
     def request_get_with_id_to_csv(self, request, landCode=None, *args, **kwargs):
@@ -139,6 +140,8 @@ class LandPlantListViewSet(ViewSet):
         if self.isGetToCsvAvailable == False:
             return Response(status=status.HTTP_501_NOT_IMPLEMENTED) 
 
+##//GENTrainingBlock[caseisGetToCsvAvailable]Start 
+##//GENLearn[isGetToCsvAvailable=true]Start 
         response = view_models.LandPlantListGetModelResponse()
          
         try:
@@ -154,39 +157,17 @@ class LandPlantListViewSet(ViewSet):
 
             response.request = request
 
-            logging.debug("loading model...")
-            land = Land.objects.get(code=landCode)
-            
-            logging.debug("generate report...")
-            generator = ReportManagerLandPlantList(session_context)
-            items = generator.generate(
-                    landCode,
-                    request.pageNumber,
-                    request.itemCountPerPage,
-                    request.orderByColumnName,
-                    request.orderByDescending)
-
-            response.items = list()
-
-            for item in items:
-                report_item = view_models.LandPlantListListModelItem()
-                report_item.load_report_item(item)
-                response.items.append(report_item) 
-
-            response.success = True
-            response.message = "Success."
+            logging.debug("process request...") 
+            response.process_request(
+                session_context,
+                landCode,
+                request
+            )  
 
         except marshmallow.exceptions.ValidationError as se:
             response.success = False
             response.message = "Schema validation error. Invalid Request"  
-            
-        except ReportRequestValidationError as ve:
-            response.success = False 
-            response.validation_errors = list()
-            for key in ve.error_dict:
-                response.validation_errors.append(view_models.ValidationError(key,ve.error_dict[key]))
-        
-
+              
         except Exception as e:
             response.success = False
             traceback_string = "".join(traceback.format_tb(e.__traceback__))
@@ -197,12 +178,18 @@ class LandPlantListViewSet(ViewSet):
         responseDict = json.loads(response.to_json())
         
         return Response(responseDict,status=status.HTTP_200_OK) 
+##//GENLearn[isGetToCsvAvailable=true]End 
+##//GENTrainingBlock[caseisGetToCsvAvailable]End 
   
     @action(detail=False, methods=['post'])
     def request_post(self, request, landCode=None, *args, **kwargs):
         logging.debug('LandPlantListViewSet.request_post start.')
         if self.isPostAvailable == False:
             return Response(status=status.HTTP_501_NOT_IMPLEMENTED) 
+        ##//GENTrainingBlock[caseisPostAvailable]Start 
+        ##//GENLearn[isPostAvailable=true]Start 
+        ##//GENLearn[isPostAvailable=true]End 
+        ##//GENTrainingBlock[caseisPostAvailable]End 
 
     @action(detail=False, methods=['post'],url_path=r'(?P<landCode>[0-9a-f-]{36})')
     def request_post_with_id(self, request, landCode=None, *args, **kwargs): 
@@ -219,11 +206,19 @@ class LandPlantListViewSet(ViewSet):
         logging.debug('LandPlantListViewSet.request_put start.')
         if self.isPutAvailable == False:
             return Response(status=status.HTTP_501_NOT_IMPLEMENTED) 
+        ##//GENTrainingBlock[caseisPutAvailable]Start 
+        ##//GENLearn[isPutAvailable=true]Start 
+        ##//GENLearn[isPutAvailable=true]End 
+        ##//GENTrainingBlock[caseisPutAvailable]End 
 
     @action(detail=False, methods=['delete'])
     def request_delete(self, request, landCode=None, *args, **kwargs): 
         logging.debug('LandPlantListViewSet.request_delete start.')
         if self.isDeleteAvailable == False:
             return Response(status=status.HTTP_501_NOT_IMPLEMENTED) 
+        ##//GENTrainingBlock[caseisDeleteAvailable]Start 
+        ##//GENLearn[isDeleteAvailable=true]Start 
+        ##//GENLearn[isDeleteAvailable=true]End 
+        ##//GENTrainingBlock[caseisDeleteAvailable]End 
     
          

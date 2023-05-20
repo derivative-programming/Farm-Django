@@ -4,6 +4,8 @@ import traceback
 from dataclasses_json import dataclass_json,LetterCase
 from typing import List
 import uuid
+from api.views.models import ValidationError
+from typing import List
 from django.http import JsonResponse
 from rest_framework.response import Response
 from rest_framework.decorators import action
@@ -63,18 +65,14 @@ class TacRegisterPostModel:
     firstName:str = ""
     lastName:str = ""
 
+ 
 
-### init response
 @dataclass_json(letter_case=LetterCase.CAMEL)
 @dataclass
-class GetInitResponse:
+class TacRegisterGetInitResponse():
     success:bool = False
     message:str = ""
     validation_errors:List[ValidationError] = field(default_factory=list)
-
-@dataclass_json(letter_case=LetterCase.CAMEL)
-@dataclass
-class TacRegisterGetInitResponse(GetInitResponse):
     email:str = ""
     password:str = ""
 

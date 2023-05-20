@@ -5,13 +5,12 @@ from rest_framework.decorators import action
 from rest_framework.viewsets import ViewSet 
 from rest_framework import status 
 from api.flows import FlowValidationError
-from api.models import Land 
 import marshmallow_dataclass
 import logging
 import marshmallow.exceptions 
 from api.helpers import SessionContext 
 import api.views.models as view_models
-import api.views.models.init as view_init_models
+import api.views.models.init as view_init_models 
  
 
 class LandAddPlantViewSet(ViewSet): 
@@ -36,14 +35,10 @@ class LandAddPlantViewSet(ViewSet):
              
             logging.debug("validating request...")
             request:view_models.LandAddPlantPostModelRequest = schema.load(request.data)  
-
-            logging.debug("loading model...")
-            land = Land.objects.get(code=landCode)
-            
-            logging.debug("process flow...")
+ 
             flowResponse = request.process_request(
                 session_context,
-                land,
+                landCode,
                 response
             ) 
 
@@ -79,15 +74,12 @@ class LandAddPlantViewSet(ViewSet):
         try: 
             logging.debug("Start session...")
             session_context = SessionContext(dict())
- 
-            logging.debug("loading model...")
-            land = Land.objects.get(code=landCode)
+   
+            init_request = view_init_models.LandAddPlantInitObjWFGetInitModelRequest() 
             
-            init_request = view_init_models.LandAddPlantInitObjWFGetInitModelRequest()
-            logging.debug("process request...") 
             response = init_request.process_request(
                 session_context,
-                land,
+                landCode,
                 response
             )  
             

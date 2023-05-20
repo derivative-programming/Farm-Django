@@ -6,19 +6,26 @@ import uuid
 from decimal import Decimal
 from api.helpers import TypeConversion
 from api.reports.row_models import ReportItemLandPlantList 
-from api.views.models import ListRequest, ListModel 
+from api.views.models import ListModel 
 from api.helpers import SessionContext 
 from api.models import Land 
 from api.reports import ReportManagerLandPlantList
 from api.reports import ReportRequestValidationError 
 import api.views.models as view_models
+from api.models import Land 
+import logging
    
 
 
 ### request. expect camel case. use marshmallow to validate.
 @dataclass_json(letter_case=LetterCase.SNAKE)
 @dataclass
-class LandPlantListGetModelRequest(ListRequest):
+class LandPlantListGetModelRequest():
+    pageNumber:int = 0
+    itemCountPerPage:int = 0
+    orderByColumnName:str = ""
+    orderByDescending:bool = False
+    forceErrorMessage:str = ""
     flavorCode:uuid.UUID = field(default_factory=lambda: uuid.UUID('00000000-0000-0000-0000-000000000000'))
     someIntVal:int = 0
     someBigIntVal:int = 0
@@ -116,10 +123,13 @@ class LandPlantListGetModelResponse(ListModel):
    
     def process_request(self,
                         session_context:SessionContext,
-                        land:Land,
+                        land_code:uuid,
                         request:LandPlantListGetModelRequest):
         
         try:
+            
+            logging.debug("loading model...")
+            land = Land.objects.get(code=land_code)
             
             generator = ReportManagerLandPlantList(session_context)
             items = generator.generate(

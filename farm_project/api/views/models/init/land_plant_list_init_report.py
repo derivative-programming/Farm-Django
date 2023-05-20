@@ -1,9 +1,10 @@
 from dataclasses import dataclass, field
 from datetime import date, datetime
 from decimal import Decimal
+from api.views.models import ValidationError
+from typing import List
 import uuid
-from dataclasses_json import dataclass_json, LetterCase, config   
-from .get_init_response import GetInitResponse
+from dataclasses_json import dataclass_json, LetterCase, config    
 from api.helpers import TypeConversion 
 from api.flows import FlowLandPlantListInitReportResult 
 from api.helpers import SessionContext 
@@ -11,9 +12,14 @@ from api.models import Land
 from api.flows import FlowLandPlantListInitReport
 from api.flows import FlowValidationError
 import api.views.models as view_models
+from api.models import Land 
+import logging
 @dataclass_json(letter_case=LetterCase.CAMEL)
 @dataclass
-class LandPlantListInitReportGetInitModelResponse(GetInitResponse):
+class LandPlantListInitReportGetInitModelResponse():
+    success:bool = False
+    message:str = ""
+    validation_errors:List[ValidationError] = field(default_factory=list)
     someIntVal:int = 0
     someBigIntVal:int = 0
     someBitVal:bool = False
@@ -69,19 +75,20 @@ class LandPlantListInitReportGetInitModelRequest():
     
     def process_request(self,
                         session_context:SessionContext,
-                        land:Land,
+                        land_code:uuid,
                         response:LandPlantListInitReportGetInitModelResponse) -> LandPlantListInitReportGetInitModelResponse:
         
         try:
             
+            logging.debug("loading model...")
+            land = Land.objects.get(code=land_code)
+            
             flow = FlowLandPlantListInitReport(session_context)
+
+            logging.debug("process request...") 
             flowResponse = flow.process(
                 land
-            ) 
-
-            flowResponse = flow.process(
-                land, 
-            ) 
+            )  
 
             response.load_flow_response(flowResponse); 
         

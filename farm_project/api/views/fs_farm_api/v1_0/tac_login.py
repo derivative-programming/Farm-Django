@@ -5,6 +5,8 @@ from dataclasses_json import dataclass_json,LetterCase
 from typing import List
 import uuid 
 from django.http import JsonResponse
+from api.views.models import ValidationError
+from typing import List
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework.viewsets import GenericViewSet,ViewSet 
@@ -58,19 +60,14 @@ class TacLoginPostResponse(PostResponse):
 @dataclass
 class TacLoginPostModel:
     email:str = ""
-    password:str = ""
-
+    password:str = "" 
 
 @dataclass_json(letter_case=LetterCase.CAMEL)
 @dataclass
-class GetInitResponse:
+class TacLoginGetInitResponse():
     success:bool = False
     message:str = ""
     validation_errors:List[ValidationError] = field(default_factory=list)
-
-@dataclass_json(letter_case=LetterCase.CAMEL)
-@dataclass
-class TacLoginGetInitResponse(GetInitResponse):
     email:str = ""
     password:str = ""
 
