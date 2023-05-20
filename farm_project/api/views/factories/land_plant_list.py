@@ -8,7 +8,7 @@ from api.views.models import LandPlantListGetModelRequest
 from datetime import date, datetime
 from decimal import Decimal
  
-class LandPlantListRequestFactory(factory.base.Factory):
+class LandPlantListGetModelRequestFactory(factory.base.Factory):
     class Meta:
         model = LandPlantListGetModelRequest 
     flavorCode:uuid = FlavorFactory.create().code   

@@ -13,11 +13,11 @@ from .land_add_plant import LandAddPlantPostModelRequest,LandAddPlantPostModelRe
 ##GENLOOPObjectWorkflowEnd
 
 ##GENLOOPReportStart
-##GENTrainingBlock[b]Start
+##GENTrainingBlock[b2]Start
 ##GENLearn[modelType=report,name=LandAddPlant,calculatedIsInitObjWF=false]Start 
 from .land_plant_list import LandPlantListGetModelRequest,LandPlantListGetModelResponse,LandPlantListGetModelResponseItem
 ##GENLearn[modelType=report,name=LandAddPlant,calculatedIsInitObjWF=false]End
-##GENTrainingBlock[b]End
+##GENTrainingBlock[b2]End
 ##GENLOOPReportEnd
 
 ##GENLearn[modelType=object,name=Land]End 

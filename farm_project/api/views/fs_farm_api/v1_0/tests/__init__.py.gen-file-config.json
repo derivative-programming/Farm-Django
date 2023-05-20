@@ -1,7 +1,7 @@
 {
-    "templateType":"ApiEndPoint",  
+    "templateType":"apiSite",  
     "dimension" :{
-        "name":"LandPlantList"
+        "name":"FSFarmAPI"
     },
     "ignoreDimensionPropertyList": [ 
     ]

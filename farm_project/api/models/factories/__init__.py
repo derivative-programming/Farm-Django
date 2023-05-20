@@ -9,8 +9,6 @@ from .role import RoleFactory
 from .tri_state_filter import TriStateFilterFactory  
 from .plant import PlantFactory
 from .error_log import ErrorLogFactory  
-from .org_customer import OrgCustomerFactory
-from .error_log import ErrorLogFactory
+from .org_customer import OrgCustomerFactory 
 from .org_api_key import OrgApiKeyFactory
-from .organization import OrganizationFactory
-from .tri_state_filter import TriStateFilterFactory
+from .organization import OrganizationFactory 

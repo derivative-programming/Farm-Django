@@ -6,14 +6,14 @@ from uuid import uuid4
 import logging
 import json
 from api.models.factories import LandFactory
-from api.views.factories import LandPlantListRequestFactory
+from api.views.factories import LandPlantListGetModelRequestFactory
 
 class LandPlantListViewSetTestCase(TestCase):
 
     def setUp(self):
         self.client = APIClient() 
         self.land = LandFactory.create()
-        request = LandPlantListRequestFactory.create()
+        request = LandPlantListGetModelRequestFactory.create()
         self.valid_request_data =  asdict(request)
         self.invalid_request_data = {
             "xxxxxx": "yyyyy" 

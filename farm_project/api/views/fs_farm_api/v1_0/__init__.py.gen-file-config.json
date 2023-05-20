@@ -1,7 +1,7 @@
 {
-    "templateType":"namespace",  
+    "templateType":"apiSite",  
     "dimension" :{
-        "name":"Farm"
+        "name":"FSFarmAPI"
     },
     "ignoreDimensionPropertyList": [ 
     ]

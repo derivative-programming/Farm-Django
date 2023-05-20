@@ -4,14 +4,14 @@ from django.test import TestCase
 from rest_framework.test import APIClient  
 import logging
 from api.models.factories import LandFactory 
-from api.views.factories import LandAddPlantRequestFactory
+from api.views.factories import LandAddPlantPostModelRequestFactory
 
 class LandAddPlantViewSetTestCase(TestCase):
 
     def setUp(self):
         self.client = APIClient() 
         self.land = LandFactory.create()
-        request = LandAddPlantRequestFactory.create()
+        request = LandAddPlantPostModelRequestFactory.create()
         self.valid_request_data =  asdict(request)
         self.invalid_request_data = {
             "xxxxxx": "yyyyy" 
