@@ -5,7 +5,7 @@ from factory.django import DjangoModelFactory
 from factory import Faker, SubFactory
 from django.utils import timezone
 from api.models import Organization
-from api.models.factories import TacFactory #tac_id
+from .tac import TacFactory #tac_id
 class OrganizationFactory(DjangoModelFactory):
     class Meta:
         model = Organization

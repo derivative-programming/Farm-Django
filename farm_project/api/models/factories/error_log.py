@@ -5,7 +5,7 @@ from factory.django import DjangoModelFactory
 from factory import Faker, SubFactory
 from django.utils import timezone
 from api.models import ErrorLog
-from api.models.factories import PacFactory #pac_id
+from .pac import PacFactory #pac_id
 class ErrorLogFactory(DjangoModelFactory):
     class Meta:
         model = ErrorLog

@@ -1,4 +1,4 @@
-from .tac import TacFactory
+
 from .customer import CustomerFactory 
 from .customer_role import CustomerRoleFactory 
 from .pac import PacFactory 
@@ -12,3 +12,4 @@ from .error_log import ErrorLogFactory
 from .org_customer import OrgCustomerFactory 
 from .org_api_key import OrgApiKeyFactory
 from .organization import OrganizationFactory 
+from .tac import TacFactory

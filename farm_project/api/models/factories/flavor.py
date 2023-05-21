@@ -5,7 +5,7 @@ from factory.django import DjangoModelFactory
 from factory import Faker, SubFactory
 from django.utils import timezone
 from api.models import Flavor
-from api.models.factories import PacFactory #pac_id
+from .pac import PacFactory #pac_id
 class FlavorFactory(DjangoModelFactory):
     class Meta:
         model = Flavor
