@@ -5353,6 +5353,8 @@
                     "name": "FieldOnePlantListLinkLandCode",
                     "codeDescription": "Tac Farm Dashboard Report Field One Plant List Link Land Code Column",
                     "headerText": "",
+                    "sourceObjectName": "Land",
+                    "sourcePropertyName": "Code",
                     "sqlServerDBDataType": "uniqueidentifier",
                     "sqlServerDBDataTypeSize": "",
                     "isVisible": "true",
