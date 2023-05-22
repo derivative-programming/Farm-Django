@@ -34,6 +34,8 @@ class CustomerRole(models.Model):
                                blank=True,
                                null=True,
                                db_index=True)
+    class Meta:
+        db_table = 'farm_customer_role'
     def __str__(self):
         return str(self.code)
     def save(self, *args, **kwargs):

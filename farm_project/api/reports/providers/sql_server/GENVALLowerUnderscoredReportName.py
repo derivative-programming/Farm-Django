@@ -60,27 +60,6 @@ class ReportProviderLandPlantList():
         query_dict["some_phone_number"] = some_phone_number 
         query_dict["some_email_address"] = some_email_address 
         query_dict["flavor_code"] = str(flavor_code)
-#endset
-		
-        query_dict["like_some_int_val"] = some_int_val 
-        query_dict["like_some_big_int_val"] = some_big_int_val 
-        query_dict["like_some_bit_val"] = some_bit_val 
-        query_dict["like_is_edit_allowed"] = is_edit_allowed 
-        query_dict["like_is_delete_allowed"] = is_delete_allowed 
-        query_dict["like_some_float_val"] = some_float_val 
-        query_dict["like_some_decimal_val"] = some_decimal_val 
-        query_dict["like_some_min_utc_date_time_val"] = some_min_utc_date_time_val 
-        query_dict["like_some_min_date_val"] = some_min_date_val 
-        query_dict["like_some_money_val"] = some_money_val 
-        query_dict["like_some_n_var_char_val"] = '%' + some_n_var_char_val + '%' 
-        query_dict["like_some_var_char_val"] = '%' + some_var_char_val  + '%' 
-        query_dict["like_some_text_val"] = '%' + some_text_val  + '%' 
-        query_dict["like_some_phone_number"] = '%' + some_phone_number  + '%' 
-        query_dict["like_some_email_address"] = '%' + some_email_address  + '%' 
-        query_dict["like_flavor_code"] = str(flavor_code)
-#endset
-        
-
         query_dict["page_number"] = page_number 
         query_dict["item_count_per_page"] = item_count_per_page 
         query_dict["order_by_column_name"] = order_by_column_name 
@@ -112,7 +91,7 @@ class ReportProviderLandPlantList():
    
 	SELECT * FROM 
 	(
-		SELECT    
+		SELECT  Top  (%(page_number)s * %(item_count_per_page)s)  
         --GENLOOPReportColumnStart
 		--GENIF[calculatedIsSourceObjectAvailable=true]Start
 			GENVALLowerUnderscoredcalculatedSourceLookupObjImplementationObjNameGENVALLowerUnderscoredcalculatedSourceObjectName.GENVALLowerUnderscoredcalculatedSourcePropertyName as GENVALLowerUnderscoredReportColumnName,
@@ -309,7 +288,7 @@ class ReportProviderLandPlantList():
 		--GENIF[calculatedIsTargetObjectAvailable=true]Start
 			 	--GENCASE[calculatedCSharpDataType]Start
 				--GENWHEN[String]Start 
-			and (%(GENVALLowerUnderscoredReportParamName)s is null or %(GENVALLowerUnderscoredReportParamName)s = GENVALcalculatedSqlServerSingleQuoteDefaultValue or  GENVALLowerUnderscoredcalculatedTargetLookupObjImplementationObjNameGENVALLowerUnderscoredcalculatedTargetObjectName.GENVALLowerUnderscoredcalculatedTargetPropertyName like %(like_GENVALLowerUnderscoredReportParamName)s)
+			and (%(GENVALLowerUnderscoredReportParamName)s is null or %(GENVALLowerUnderscoredReportParamName)s = GENVALcalculatedSqlServerSingleQuoteDefaultValue or  GENVALLowerUnderscoredcalculatedTargetLookupObjImplementationObjNameGENVALLowerUnderscoredcalculatedTargetObjectName.GENVALLowerUnderscoredcalculatedTargetPropertyName like '%' + %(GENVALLowerUnderscoredReportParamName)s + '%')
 				--GENWHEN[String]End
 				--GENElseStart  
 				
@@ -334,7 +313,7 @@ class ReportProviderLandPlantList():
 		--GENIF[calculatedIsTargetObjectAvailable=false]Start
 			 	--GENCASE[calculatedCSharpDataType]Start
 				--GENWHEN[String]Start 
-			and (%(GENVALLowerUnderscoredReportParamName)s is null or %(GENVALLowerUnderscoredReportParamName)s = GENVALcalculatedSqlServerSingleQuoteDefaultValue or  GENVALLowerUnderscoredObjectName.GENVALLowerUnderscoredReportParamName like %(like_GENVALLowerUnderscoredReportParamName)s)
+			and (%(GENVALLowerUnderscoredReportParamName)s is null or %(GENVALLowerUnderscoredReportParamName)s = GENVALcalculatedSqlServerSingleQuoteDefaultValue or  GENVALLowerUnderscoredObjectName.GENVALLowerUnderscoredReportParamName like '%' + %(GENVALLowerUnderscoredReportParamName)s + '%')
 				--GENWHEN[String]End
 				--GENElseStart  
 			and (%(GENVALLowerUnderscoredReportParamName)s is null or %(GENVALLowerUnderscoredReportParamName)s = GENVALcalculatedSqlServerSingleQuoteDefaultValue or %(GENVALLowerUnderscoredReportParamName)s = GENVALLowerUnderscoredObjectName.GENVALLowerUnderscoredReportParamName)

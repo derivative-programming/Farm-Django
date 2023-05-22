@@ -28,6 +28,8 @@ class Pac(models.Model):
     name = models.TextField(
                                 null=True,
                                 db_index=PacConstants.name_calculatedIsDBColumnIndexed)
+    class Meta:
+        db_table = 'farm_pac'
     def __str__(self):
         return str(self.code)
     def save(self, *args, **kwargs):

@@ -38,6 +38,8 @@ class TriStateFilter(models.Model):
     state_int_value = models.IntegerField(
                                 null=True,
                                 db_index=TriStateFilterConstants.state_int_value_calculatedIsDBColumnIndexed)	
+    class Meta:
+        db_table = 'farm_tri_state_filter'
     def __str__(self):
         return str(self.code)
     def save(self, *args, **kwargs):

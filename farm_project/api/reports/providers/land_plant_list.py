@@ -71,9 +71,9 @@ class ReportProviderLandPlantList():
                     plant.code as delete_async_button_link_plant_code,
                     plant.code as details_link_plant_code
                 from 
-                    api_plant plant
-                join api_flavor flavor on plant.flavor_id = flavor.flavor_id
-                join api_land land on land.land_id = plant.land_id
+                    farm_plant plant
+                join farm_flavor flavor on plant.flavor_id = flavor.flavor_id
+                join farm_land land on land.land_id = plant.land_id
                 WHERE land.code = %s
                 """, (
                     str(land_code).replace('-', ''),  

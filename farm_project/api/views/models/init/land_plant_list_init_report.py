@@ -9,11 +9,11 @@ from api.helpers import TypeConversion
 from api.flows import FlowLandPlantListInitReportResult 
 from api.helpers import SessionContext 
 from api.models import Land 
-from api.flows import FlowLandPlantListInitReport
+from api.flows import FlowLandPlantListInitReport 
 from api.flows import FlowValidationError
 import api.views.models as view_models
-from api.models import Land 
 import logging
+from api.models import Land 
 @dataclass_json(letter_case=LetterCase.CAMEL)
 @dataclass
 class LandPlantListInitReportGetInitModelResponse():
@@ -42,12 +42,14 @@ class LandPlantListInitReportGetInitModelResponse():
     someTextVal:str = ""
     somePhoneNumber:str = ""
     someEmailAddress:str = ""
-    flavorCode:uuid = field(default_factory=lambda: uuid.UUID('00000000-0000-0000-0000-000000000000'))
     landCode:uuid.UUID = field(default_factory=lambda: uuid.UUID('00000000-0000-0000-0000-000000000000'))
     tacCode:uuid.UUID = field(default_factory=lambda: uuid.UUID('00000000-0000-0000-0000-000000000000'))
     landName:str=""
 #endset
-    def load_flow_response(self,data:FlowLandPlantListInitReportResult):
+    def load_flow_response(self,data:FlowLandPlantListInitReportResult): 
+        self.validation_errors = list()
+        self.success = False
+        self.message = ""
         self.someIntVal = data.some_int_val
         self.someBigIntVal = data.some_big_int_val
         self.someBitVal = data.some_bit_val
@@ -63,42 +65,31 @@ class LandPlantListInitReportGetInitModelResponse():
         self.someTextVal = data.some_text_val
         self.somePhoneNumber = data.some_phone_number
         self.someEmailAddress = data.some_email_address
-        self.flavorCode = data.flavor_code
         self.landCode = data.land_code
         self.tacCode = data.tac_code
         self.landName = data.land_name
-
-
 @dataclass_json(letter_case=LetterCase.CAMEL)
 @dataclass
 class LandPlantListInitReportGetInitModelRequest():
-    
     def process_request(self,
                         session_context:SessionContext,
                         land_code:uuid,
                         response:LandPlantListInitReportGetInitModelResponse) -> LandPlantListInitReportGetInitModelResponse:
-        
         try:
-            
             logging.debug("loading model...")
             land = Land.objects.get(code=land_code)
-            
-            flow = FlowLandPlantListInitReport(session_context)
-
             logging.debug("process request...") 
+            flow = FlowLandPlantListInitReport(session_context)
             flowResponse = flow.process(
                 land
             )  
-
             response.load_flow_response(flowResponse); 
-        
             response.success = True
             response.message = "Success."
-        
         except FlowValidationError as ve:
             response.success = False 
             response.validation_errors = list()
             for key in ve.error_dict:
                 response.validation_errors.append(view_models.ValidationError(key,ve.error_dict[key]))
- 
         return response
+

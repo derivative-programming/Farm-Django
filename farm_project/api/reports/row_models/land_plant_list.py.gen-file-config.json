@@ -3,7 +3,7 @@
     "dimension" :{
         "name":"LandPlantList",
         "calculatedIsPage":"true"
-    },
+    }, 
     "ignoreDimensionPropertyList": [
         "reportParam.calculatedIsTargetColumnNameAvailable",
         "reportParam.calculatedIsTargetObjectAvailable",
@@ -16,6 +16,10 @@
         "reportColumn.calculatedIsSummarySumAllowed",
         "reportColumn.calculatedIsSummaryDisplayed",
         "reportColumn.calculatedIsAddedIntoExport",
+        "reportColumn.calculatedDestinationIsReport",
+        "reportColumn.calculatedDestinationIsReportDetailView",
+        "reportColumn.calculatedDestinationIsObjectWorkflow",
+        "reportColumn.calculatedDestinationIsJump", 
         "reportColumn.isColumnSumMetricAvailable",
         "reportColumn.isButtonClickedOnRowClick",
         "reportColumn.isConditionallyDisplayed",

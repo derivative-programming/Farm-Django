@@ -29,14 +29,21 @@ class TacLoginViewSetTestCase(TestCase):
     def test_submit_success(self):
         # Assuming you have a FlowTacLogin.process method that handles valid data
         logging.debug(f'/api/tac-login/{self.tac.code}/')
-        response = self.client.post(f'/api/tac-login/{self.tac.code}/', data=self.valid_request_data, format='json')
+        response = self.client.post(f'/api/tac-login/{self.tac.code}/submit/', data=self.valid_request_data, format='json')
         self.assertEqual(response.status_code, 200)
         json_string = response.content.decode() 
         responseDict = json.loads(json_string) 
         self.assertTrue(responseDict["success"]) 
 
+        
+    def test_post_failure(self):
+        # Assuming you have a FlowTacLogin.process method that handles valid data
+        logging.debug('/api/tac-login/')
+        response = self.client.post('/api/tac-login/', data=self.valid_request_data, format='json')
+        self.assertEqual(response.status_code, 501)
+
     def test_submit_failure(self):
-        response = self.client.post(f'/api/tac-login/{self.tac.code}/', data=self.invalid_request_data, format='json')
+        response = self.client.post(f'/api/tac-login/{self.tac.code}/submit/', data=self.invalid_request_data, format='json')
         self.assertEqual(response.status_code, 200)
         json_string = response.content.decode() 
         responseDict = json.loads(json_string) 
@@ -48,7 +55,7 @@ class TacLoginViewSetTestCase(TestCase):
         
     def test_submit_failure3(self):
         response = self.client.get('/api/tac-login/')
-        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.status_code, 501)
 
     def test_init_success(self):
         response = self.client.get(f'/api/tac-login/{self.tac.code}/init/')

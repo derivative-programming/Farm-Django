@@ -2,7 +2,7 @@
     "templateType":"ApiEndPoint",  
     "dimension" :{
         "name":"LandPlantList"
-    },
-    "ignoreDimensionPropertyList": [ 
+    }, 
+    "ignoreDimensionPropertyList": [  
     ]
 } 

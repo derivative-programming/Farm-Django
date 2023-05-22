@@ -14,9 +14,6 @@ from api.reports import ReportRequestValidationError
 import api.views.models as view_models
 from api.models import Land 
 import logging
-   
-
-
 ### request. expect camel case. use marshmallow to validate.
 @dataclass_json(letter_case=LetterCase.SNAKE)
 @dataclass
@@ -29,10 +26,10 @@ class LandPlantListGetModelRequest():
     flavorCode:uuid.UUID = field(default_factory=lambda: uuid.UUID('00000000-0000-0000-0000-000000000000'))
     someIntVal:int = 0
     someBigIntVal:int = 0
+    someFloatVal:float = 0
     someBitVal:bool = False
     isEditAllowed:bool = False
     isDeleteAllowed:bool = False
-    someFloatVal:float = 0
     someDecimalVal:Decimal = Decimal(0)
     someMinUTCDateTimeVal:datetime = field(default_factory=TypeConversion.get_default_date_time,
             metadata=config(
@@ -40,7 +37,7 @@ class LandPlantListGetModelRequest():
             decoder=datetime.fromisoformat
         ))
     someMinDateVal:date = field(default_factory=TypeConversion.get_default_date, metadata=config(
-            encoder=date.isoformat, 
+            encoder=date.isoformat,
             decoder=date.fromisoformat
         ))
     someMoneyVal:Decimal = Decimal(0)
@@ -48,47 +45,43 @@ class LandPlantListGetModelRequest():
     someVarCharVal:str = ""
     someTextVal:str = ""
     somePhoneNumber:str = ""
-    someEmailAddress:str = "" 
+    someEmailAddress:str = ""
 #endset 
-
-    
-
 @dataclass_json(letter_case=LetterCase.CAMEL)
 @dataclass
 class LandPlantListGetModelResponseItem():
     plant_code:uuid = uuid.UUID(int=0)
-    some_int_val:int = 0 
-    some_big_int_val:int = 0 
-    some_bit_val:bool = False 
-    is_edit_allowed:bool = False 
-    is_delete_allowed:bool = False 
+    some_int_val:int = 0
+    some_big_int_val:int = 0
+    some_bit_val:bool = False
+    is_edit_allowed:bool = False
+    is_delete_allowed:bool = False
     some_float_val:float = 0
     some_decimal_val:Decimal = Decimal(0)
-    some_utc_date_time_val:datetime = field(default_factory=TypeConversion.get_default_date_time, 
+    some_utc_date_time_val:datetime = field(default_factory=TypeConversion.get_default_date_time,
             metadata=config(
-            encoder=datetime.isoformat, 
+            encoder=datetime.isoformat,
             decoder=datetime.fromisoformat
-        )) 
+        ))
     some_date_val:date = field(default_factory=TypeConversion.get_default_date, metadata=config(
-            encoder=date.isoformat, 
+            encoder=date.isoformat,
             decoder=date.fromisoformat
         ))
     some_money_val:Decimal = Decimal(0)
-    some_n_var_char_val:str = "" 
-    some_var_char_val:str = "" 
-    some_text_val:str = "" 
-    some_phone_number:str = "" 
-    some_email_address:str = "" 
-    flavor_name:str = "" 
+    some_n_var_char_val:str = ""
+    some_var_char_val:str = ""
+    some_text_val:str = ""
+    some_phone_number:str = ""
+    some_email_address:str = ""
+    flavor_name:str = ""
     flavor_code:uuid = uuid.UUID(int=0)
-    some_int_conditional_on_deletable:int = 0 
-    n_var_char_as_url:str = "" 
+    some_int_conditional_on_deletable:int = 0
+    n_var_char_as_url:str = ""
     update_link_plant_code:uuid = uuid.UUID(int=0)
     delete_async_button_link_plant_code:uuid = uuid.UUID(int=0)
     details_link_plant_code:uuid = uuid.UUID(int=0)
 #endset
-
-    def load_report_item(self,data:ReportItemLandPlantList): 
+    def load_report_item(self,data:ReportItemLandPlantList):
         self.plant_code = data.plant_code
         self.some_int_val = data.some_int_val
         self.some_big_int_val = data.some_big_int_val
@@ -113,59 +106,49 @@ class LandPlantListGetModelResponseItem():
         self.delete_async_button_link_plant_code = data.delete_async_button_link_plant_code
         self.details_link_plant_code = data.details_link_plant_code
 #endset
-
-
 @dataclass_json(letter_case=LetterCase.CAMEL)
 @dataclass
 class LandPlantListGetModelResponse(ListModel):
     request:LandPlantListGetModelRequest = None
     items:List[LandPlantListGetModelResponseItem] = field(default_factory=list)
-   
     def process_request(self,
                         session_context:SessionContext,
                         land_code:uuid,
                         request:LandPlantListGetModelRequest):
-        
         try:
-            
             logging.debug("loading model...")
             land = Land.objects.get(code=land_code)
-            
             generator = ReportManagerLandPlantList(session_context)
             items = generator.generate(
                     land.code,
-                    request.someIntVal, 
+                    request.flavorCode,
+                    request.someIntVal,
                     request.someBigIntVal,
+                    request.someFloatVal,
                     request.someBitVal,
                     request.isEditAllowed,
                     request.isDeleteAllowed,
-                    request.someFloatVal,
-                    request.someDecimalVal, 
+                    request.someDecimalVal,
                     request.someMinUTCDateTimeVal,
                     request.someMinDateVal,
-                    request.someMoneyVal, 
+                    request.someMoneyVal,
                     request.someNVarCharVal,
                     request.someVarCharVal,
                     request.someTextVal,
                     request.somePhoneNumber,
                     request.someEmailAddress,
-                    request.flavorCode,
 #endset
                     request.pageNumber,
                     request.itemCountPerPage,
                     request.orderByColumnName,
                     request.orderByDescending)
-
             self.items = list()
-
             for item in items:
                 report_item = LandPlantListGetModelResponseItem()
                 report_item.load_report_item(item)
                 self.items.append(report_item) 
-
             self.success = True
             self.message = "Success."
-
         except ReportRequestValidationError as ve:
             self.success = False 
             self.message = "Validation Error..."
@@ -173,5 +156,3 @@ class LandPlantListGetModelResponse(ListModel):
             for key in ve.error_dict:
                 self.message = self.message + ve.error_dict[key] + ','
                 # self.validation_errors.append(view_models.ValidationError(key,ve.error_dict[key]))
-            
-         

@@ -88,6 +88,8 @@ class Customer(models.Model):
     zip = models.TextField(
                                 null=True,
                                 db_index=CustomerConstants.zip_calculatedIsDBColumnIndexed)
+    class Meta:
+        db_table = 'farm_customer'
     def __str__(self):
         return str(self.code)
     def save(self, *args, **kwargs):

@@ -49,6 +49,8 @@ class OrgApiKey(models.Model):
                                blank=True,
                                null=True,
                                db_index=True)
+    class Meta:
+        db_table = 'farm_org_api_key'
     def __str__(self):
         return str(self.code)
     def save(self, *args, **kwargs):

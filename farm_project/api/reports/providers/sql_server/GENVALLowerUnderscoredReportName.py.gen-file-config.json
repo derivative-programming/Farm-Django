@@ -1,13 +1,11 @@
 {
-    "templateType":"report",  
+    "templateType":"report", 
     "dimension" :{
-        "name":"LandPlantList"
+        "name":"LandPlantList",
+        "calculatedIsPage":"true"
     },
-    "ignoreDimensionPropertyList": [   
-        "reportParam.calculatedIsTargetColumnNameAvailable",
-        "reportParam.calculatedIsTargetObjectAvailable",
-        "reportColumn.calculatedIsConditionalSqlLogicAvailable",
-        "reportColumn.calculatedIsSourceObjectAvailable",
+    "ignoreDimensionPropertyList": [ 
+        "reportColumn.calculatedIsConditionalSqlLogicAvailable", 
         "reportColumn.isAsyncObjWFResultFileStreamedOut",
         "reportColumn.calculatedIsConditionalVisible",
         "reportColumn.calculatedIsMaxWidthAvailable",
@@ -15,10 +13,6 @@
         "reportColumn.calculatedIsSummarySumAllowed",
         "reportColumn.calculatedIsSummaryDisplayed",
         "reportColumn.calculatedIsAddedIntoExport",
-        "reportColumn.calculatedDestinationIsReport",
-        "reportColumn.calculatedDestinationIsReportDetailView",
-        "reportColumn.calculatedDestinationIsObjectWorkflow",
-        "reportColumn.calculatedDestinationIsJump", 
         "reportColumn.isColumnSumMetricAvailable",
         "reportColumn.isButtonClickedOnRowClick",
         "reportColumn.isConditionallyDisplayed",
@@ -29,4 +23,4 @@
         "reportColumn.isForcedIntoExport",
         "reportColumn.isVisible"
     ]
-} 
+}

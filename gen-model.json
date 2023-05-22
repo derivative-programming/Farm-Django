@@ -1274,6 +1274,7 @@
                     "sqlServerDBDataTypeSize": "",
                     "isVisible": "true",
                     "isFKList": "true",
+                    "targetColumnName": "FlavorCode",
                     "isFK": "true",
                     "isFKLookup": "true",
                     "isFKListSearchable": "true"
@@ -1285,7 +1286,8 @@
                     "sqlServerDBDataType": "int",
                     "sqlServerDBDataTypeSize": "",
                     "isVisible": "true",
-                    "isFKList": "false"
+                    "isFKList": "false",
+                    "targetColumnName": "SomeIntVal"
                   },
                   {
                     "name": "SomeBigIntVal",
@@ -1294,7 +1296,8 @@
                     "sqlServerDBDataType": "bigint",
                     "sqlServerDBDataTypeSize": "",
                     "isVisible": "true",
-                    "isFKList": "false"
+                    "isFKList": "false",
+                    "targetColumnName": "SomeBigIntVal"
                   },
                   {
                     "name": "SomeFloatVal",
@@ -1303,7 +1306,8 @@
                     "sqlServerDBDataType": "float",
                     "sqlServerDBDataTypeSize": "",
                     "isVisible": "true",
-                    "isFKList": "false"
+                    "isFKList": "false",
+                    "targetColumnName": "SomeFloatVal"
                   },
                   {
                     "name": "SomeBitVal",
@@ -1312,7 +1316,8 @@
                     "sqlServerDBDataType": "bit",
                     "sqlServerDBDataTypeSize": "",
                     "isVisible": "true",
-                    "isFKList": "false"
+                    "isFKList": "false",
+                    "targetColumnName": "SomeBitVal"
                   },
                   {
                     "name": "IsEditAllowed",
@@ -1322,6 +1327,7 @@
                     "sqlServerDBDataTypeSize": "",
                     "isVisible": "true",
                     "isFKList": "false",
+                    "targetColumnName": "IsEditAllowed",
                     "defaultValue": "true"
                   },
                   {
@@ -1332,6 +1338,7 @@
                     "sqlServerDBDataTypeSize": "",
                     "isVisible": "true",
                     "isFKList": "false",
+                    "targetColumnName": "IsEditAllowed",
                     "defaultValue": "true"
                   },
                   {
@@ -1341,7 +1348,8 @@
                     "sqlServerDBDataType": "decimal",
                     "sqlServerDBDataTypeSize": "",
                     "isVisible": "true",
-                    "isFKList": "false"
+                    "isFKList": "false",
+                    "targetColumnName": "SomeDecimalVal"
                   },
                   {
                     "name": "SomeMinUTCDateTimeVal",
@@ -1350,7 +1358,8 @@
                     "sqlServerDBDataType": "datetime",
                     "sqlServerDBDataTypeSize": "",
                     "isVisible": "true",
-                    "isFKList": "false"
+                    "isFKList": "false",
+                    "targetColumnName": "SomeUTCDateTimeVal"
                   },
                   {
                     "name": "SomeMinDateVal",
@@ -1359,7 +1368,8 @@
                     "sqlServerDBDataType": "date",
                     "sqlServerDBDataTypeSize": "",
                     "isVisible": "true",
-                    "isFKList": "false"
+                    "isFKList": "false",
+                    "targetColumnName": "SomeDateVal"
                   },
                   {
                     "name": "SomeMoneyVal",
@@ -1368,7 +1378,8 @@
                     "sqlServerDBDataType": "money",
                     "sqlServerDBDataTypeSize": "",
                     "isVisible": "true",
-                    "isFKList": "false"
+                    "isFKList": "false",
+                    "targetColumnName": "SomeMoneyVal"
                   },
                   {
                     "name": "SomeNVarCharVal",
@@ -1377,7 +1388,8 @@
                     "sqlServerDBDataType": "nvarchar",
                     "sqlServerDBDataTypeSize": "50",
                     "isVisible": "true",
-                    "isFKList": "false"
+                    "isFKList": "false",
+                    "targetColumnName": "SomeNVarCharVal"
                   },
                   {
                     "name": "SomeVarCharVal",
@@ -1386,7 +1398,8 @@
                     "sqlServerDBDataType": "varchar",
                     "sqlServerDBDataTypeSize": "50",
                     "isVisible": "true",
-                    "isFKList": "false"
+                    "isFKList": "false",
+                    "targetColumnName": "SomeVarCharVal"
                   },
                   {
                     "name": "SomeTextVal",
@@ -1395,7 +1408,8 @@
                     "sqlServerDBDataType": "text",
                     "sqlServerDBDataTypeSize": "",
                     "isVisible": "true",
-                    "isFKList": "false"
+                    "isFKList": "false",
+                    "targetColumnName": "SomeTextVal"
                   },
                   {
                     "name": "SomePhoneNumber",
@@ -1403,7 +1417,8 @@
                     "labelText": "Some Phone Number",
                     "sqlServerDBDataType": "varchar",
                     "sqlServerDBDataTypeSize": "50",
-                    "isVisible": "true"
+                    "isVisible": "true",
+                    "targetColumnName": "SomePhoneNumber"
                   },
                   {
                     "name": "SomeEmailAddress",
@@ -1411,7 +1426,8 @@
                     "labelText": "Some Email Address",
                     "sqlServerDBDataType": "varchar",
                     "sqlServerDBDataTypeSize": "50",
-                    "isVisible": "true"
+                    "isVisible": "true",
+                    "targetColumnName": "SomeEmailAddress"
                   }
                 ],
                 "reportColumn": [
@@ -1419,6 +1435,8 @@
                     "name": "PlantCode",
                     "codeDescription": "Land Plant List Report Plant Code Column",
                     "headerText": "",
+                    "sourceObjectName": "Plant",
+                    "sourcePropertyName": "Code",
                     "sqlServerDBDataType": "uniqueidentifier",
                     "sqlServerDBDataTypeSize": "",
                     "isVisible": "true",
@@ -1436,6 +1454,8 @@
                     "name": "SomeIntVal",
                     "codeDescription": "Land Plant List Report Some Int Val Column",
                     "headerText": "Int Val",
+                    "sourceObjectName": "Plant",
+                    "sourcePropertyName": "SomeIntVal",
                     "sqlServerDBDataType": "int",
                     "sqlServerDBDataTypeSize": "",
                     "isVisible": "true",
@@ -1453,6 +1473,8 @@
                     "name": "SomeBigIntVal",
                     "codeDescription": "Land Plant List Report Some Big Int Val Column",
                     "headerText": "Big Int Val",
+                    "sourceObjectName": "Plant",
+                    "sourcePropertyName": "SomeBigIntVal",
                     "sqlServerDBDataType": "bigint",
                     "sqlServerDBDataTypeSize": "",
                     "isVisible": "true",
@@ -1470,6 +1492,8 @@
                     "name": "SomeBitVal",
                     "codeDescription": "Land Plant List Report Some Bit Val Column",
                     "headerText": "Bit Val",
+                    "sourceObjectName": "Plant",
+                    "sourcePropertyName": "SomeBitVal",
                     "sqlServerDBDataType": "bit",
                     "sqlServerDBDataTypeSize": "",
                     "isVisible": "true",
@@ -1487,6 +1511,7 @@
                     "name": "IsEditAllowed",
                     "codeDescription": "Land Plant List Report Is Edit Allowed Column",
                     "headerText": "Edit Allowed",
+                    "sourceObjectName": "",
                     "sqlServerDBDataType": "bit",
                     "sqlServerDBDataTypeSize": "",
                     "isVisible": "true",
@@ -1521,6 +1546,8 @@
                     "name": "SomeFloatVal",
                     "codeDescription": "Land Plant List Report Some Float Val Column",
                     "headerText": "Float Val",
+                    "sourceObjectName": "Plant",
+                    "sourcePropertyName": "SomeFloatVal",
                     "sqlServerDBDataType": "float",
                     "sqlServerDBDataTypeSize": "",
                     "isVisible": "true",
@@ -1538,6 +1565,8 @@
                     "name": "SomeDecimalVal",
                     "codeDescription": "Land Plant List Report Some Decimal Val Column",
                     "headerText": "Decimal Val",
+                    "sourceObjectName": "Plant",
+                    "sourcePropertyName": "SomeDecimalVal",
                     "sqlServerDBDataType": "decimal",
                     "sqlServerDBDataTypeSize": "",
                     "isVisible": "true",
@@ -1555,6 +1584,8 @@
                     "name": "SomeUTCDateTimeVal",
                     "codeDescription": "Land Plant List Report Some UTC Date Time Val Column",
                     "headerText": "Date Time Val",
+                    "sourceObjectName": "Plant",
+                    "sourcePropertyName": "SomeUTCDateTimeVal",
                     "sqlServerDBDataType": "datetime",
                     "sqlServerDBDataTypeSize": "",
                     "isVisible": "true",
@@ -1572,6 +1603,8 @@
                     "name": "SomeDateVal",
                     "codeDescription": "Land Plant List Report Some Date Val Column",
                     "headerText": "Date Val",
+                    "sourceObjectName": "Plant",
+                    "sourcePropertyName": "SomeDateVal",
                     "sqlServerDBDataType": "date",
                     "sqlServerDBDataTypeSize": "",
                     "isVisible": "true",
@@ -1589,6 +1622,8 @@
                     "name": "SomeMoneyVal",
                     "codeDescription": "Land Plant List Report Some Money Val Column",
                     "headerText": "Money Val",
+                    "sourceObjectName": "Plant",
+                    "sourcePropertyName": "SomeMoneyVal",
                     "sqlServerDBDataType": "money",
                     "sqlServerDBDataTypeSize": "",
                     "isVisible": "true",
@@ -1606,6 +1641,8 @@
                     "name": "SomeNVarCharVal",
                     "codeDescription": "Land Plant List Report Some N Var Char Val Column",
                     "headerText": "N Var Char Val",
+                    "sourceObjectName": "Plant",
+                    "sourcePropertyName": "SomeNVarCharVal",
                     "sqlServerDBDataType": "nvarchar",
                     "sqlServerDBDataTypeSize": "100",
                     "isVisible": "true",
@@ -1623,6 +1660,8 @@
                     "name": "SomeVarCharVal",
                     "codeDescription": "Land Plant List Report Some Var Char Val Column",
                     "headerText": "Var Char Val",
+                    "sourceObjectName": "Plant",
+                    "sourcePropertyName": "SomeVarCharVal",
                     "sqlServerDBDataType": "varchar",
                     "sqlServerDBDataTypeSize": "",
                     "isVisible": "true",
@@ -1640,6 +1679,8 @@
                     "name": "SomeTextVal",
                     "codeDescription": "Land Plant List Report Some Text Val Column",
                     "headerText": "Text Val",
+                    "sourceObjectName": "Plant",
+                    "sourcePropertyName": "SomeTextVal",
                     "sqlServerDBDataType": "text",
                     "sqlServerDBDataTypeSize": "",
                     "isVisible": "true",
@@ -1657,6 +1698,8 @@
                     "name": "SomePhoneNumber",
                     "codeDescription": "Land Plant List Report Some Phone Number Column",
                     "headerText": "Phone Number",
+                    "sourceObjectName": "Plant",
+                    "sourcePropertyName": "SomePhoneNumber",
                     "sqlServerDBDataType": "varchar",
                     "sqlServerDBDataTypeSize": "50",
                     "isVisible": "true",
@@ -1674,6 +1717,8 @@
                     "name": "SomeEmailAddress",
                     "codeDescription": "Land Plant List Report Some Email Address Column",
                     "headerText": "Email Address",
+                    "sourceObjectName": "Plant",
+                    "sourcePropertyName": "SomeEmailAddress",
                     "sqlServerDBDataType": "varchar",
                     "sqlServerDBDataTypeSize": "50",
                     "isVisible": "true",
@@ -1691,6 +1736,9 @@
                     "name": "FlavorName",
                     "codeDescription": "Land Plant List Report Flavor Name Column",
                     "headerText": "Flavor Name",
+                    "sourceLookupObjImplementationObjName": "Plant",
+                    "sourceObjectName": "Flavor",
+                    "sourcePropertyName": "Name",
                     "sqlServerDBDataType": "nvarchar",
                     "sqlServerDBDataTypeSize": "100",
                     "isVisible": "true",
@@ -1708,6 +1756,9 @@
                     "name": "FlavorCode",
                     "codeDescription": "Land Plant List Report Flavor Code Column",
                     "headerText": "",
+                    "sourceLookupObjImplementationObjName": "Plant",
+                    "sourceObjectName": "Flavor",
+                    "sourcePropertyName": "Code",
                     "sqlServerDBDataType": "uniqueidentifier",
                     "sqlServerDBDataTypeSize": "",
                     "isVisible": "false",

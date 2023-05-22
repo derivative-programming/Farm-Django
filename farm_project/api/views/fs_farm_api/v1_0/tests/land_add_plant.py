@@ -11,23 +11,30 @@ class LandAddPlantViewSetTestCase(TestCase):
     def setUp(self):
         self.client = APIClient() 
         self.land = LandFactory.create()
-        request = LandAddPlantPostModelRequestFactory.create()
-        self.valid_request_data =  asdict(request)
+        self.request = LandAddPlantPostModelRequestFactory.create()
+        self.valid_request_data =  asdict(self.request)
         self.invalid_request_data = {
             "xxxxxx": "yyyyy" 
         }
 
+        
+    def test_post_not_implemented(self):
+        # Assuming you have a FlowLandAddPlant.process method that handles valid data
+        logging.debug('/api/land-add-plant/')
+        response = self.client.post('/api/land-add-plant/', self.valid_request_data, content_type='application/json')
+        self.assertEqual(response.status_code, 501) 
+
     def test_submit_success(self):
         # Assuming you have a FlowLandAddPlant.process method that handles valid data
         logging.debug(f'/api/land-add-plant/{self.land.code}/')
-        response = self.client.post(f'/api/land-add-plant/{self.land.code}/', data=self.valid_request_data, format='json')
+        response = self.client.post(f'/api/land-add-plant/{self.land.code}/submit/', data=self.request.to_json(), content_type='application/json')
         self.assertEqual(response.status_code, 200)
         json_string = response.content.decode() 
         responseDict = json.loads(json_string) 
         self.assertTrue(response.data['success'])
 
     def test_submit_failure(self):
-        response = self.client.post(f'/api/land-add-plant/{self.land.code}/', data=self.invalid_request_data, format='json')
+        response = self.client.post(f'/api/land-add-plant/{self.land.code}/submit/', data=self.invalid_request_data, content_type='application/json')
         self.assertEqual(response.status_code, 200)
         json_string = response.content.decode() 
         responseDict = json.loads(json_string) 
@@ -39,7 +46,7 @@ class LandAddPlantViewSetTestCase(TestCase):
         
     def test_submit_failure3(self):
         response = self.client.get('/api/land-add-plant/')
-        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.status_code, 501)
 
     def test_init_success(self):
         response = self.client.get(f'/api/land-add-plant/{self.land.code}/init/')

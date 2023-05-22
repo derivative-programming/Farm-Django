@@ -1,184 +1,133 @@
-from dataclasses import dataclass, asdict, field
-import json
-import traceback
-from dataclasses_json import dataclass_json,LetterCase
-from typing import List
-import uuid 
-from django.http import JsonResponse
-from api.views.models import ValidationError
-from typing import List
+import json 
+import traceback 
 from rest_framework.response import Response
 from rest_framework.decorators import action
-from rest_framework.viewsets import GenericViewSet,ViewSet 
-from rest_framework_dataclasses.serializers import DataclassSerializer
-from rest_framework import status
-from api.flows import FlowTacLogin, FlowTacLoginResult 
-from api.flows import FlowTacLoginInitObjWF,FlowTacLoginInitObjWFResult 
-from api.flows import FlowValidationError
-from api.models import Tac
-from dacite import from_dict
+from rest_framework.viewsets import ViewSet 
+from rest_framework import status 
 import marshmallow_dataclass
 import logging
-import marshmallow.exceptions 
-from api.helpers import SessionContext
-
-@dataclass_json(letter_case=LetterCase.CAMEL)
-@dataclass
-class ValidationError:
-    property:str = ""
-    message:str = "" 
-
-@dataclass_json(letter_case=LetterCase.CAMEL)
-@dataclass
-class PostResponse:
-    success:bool = False
-    message:str = ""
-    validation_errors:List[ValidationError] = field(default_factory=list)
-
-
-@dataclass_json(letter_case=LetterCase.CAMEL)
-@dataclass
-class TacLoginPostResponse(PostResponse):
-    customer_code:uuid = uuid.UUID(int=0)
-    email:str = ""
-    user_code_value:uuid = uuid.UUID(int=0)
-    utc_offset_in_minutes:int = 0
-    role_name_csv_list:str = ""
-    api_key:str = ""
-
-    def load_flow_response(self,data:FlowTacLoginResult):
-        self.customer_code = data.customer_code
-        self.email = data.email
-        self.user_code_value = data.user_code_value
-        self.utc_offset_in_minutes = data.utc_offset_in_minutes
-        self.role_name_csv_list = data.role_name_csv_list
-        self.api_key = data.api_key
-
-
-### request. expect camel case. use marshmallow to validate.
-@dataclass_json(letter_case=LetterCase.SNAKE)
-@dataclass
-class TacLoginPostModel:
-    email:str = ""
-    password:str = "" 
-
-@dataclass_json(letter_case=LetterCase.CAMEL)
-@dataclass
-class TacLoginGetInitResponse():
-    success:bool = False
-    message:str = ""
-    validation_errors:List[ValidationError] = field(default_factory=list)
-    email:str = ""
-    password:str = ""
-
-    def load_flow_response(self,data:FlowTacLoginInitObjWFResult):
-        self.email = data.email
-        self.password = data.password 
-
-
+import marshmallow.exceptions  
+from api.helpers import SessionContext 
+import api.views.models as view_models
+import api.views.models.init as view_init_models 
 class TacLoginViewSet(ViewSet): 
-
-    @action(detail=False, methods=['post'],url_path=r'(?P<tacCode>[0-9a-f-]{36})')
-    def submit(self, request, tacCode=None, *args, **kwargs): 
-        logging.debug('TacLoginViewSet.submit post start. tacCode:' + tacCode)
-        
-        response = TacLoginPostResponse() 
-        
-        try:
-            session_context = SessionContext(dict())
-
-            logging.debug("Request:" + json.dumps(request.data))
-
-            logging.debug("get schema")
-            schema = marshmallow_dataclass.class_schema(TacLoginPostModel)()
-             
-            logging.debug("validating request...")
-            request = schema.load(request.data)  
-
-            logging.debug("loading model...")
-            tac = Tac.objects.get(code=tacCode)
-            
-            logging.debug("process flow...")
-            flow = FlowTacLogin(session_context)
-            flowResponse = flow.process(
-                tac,
-                request.email,
-                request.password,
-            ) 
-
-            response.load_flow_response(flowResponse);
-            response.success = True
-            response.message = "Success."
-
-        except marshmallow.exceptions.ValidationError as se:
-            response.success = False
-            response.message = "Schema validation error. Invalid Request" 
-            
-        except TypeError as te: 
-            response.success = False
-            traceback_string = "".join(traceback.format_tb(te.__traceback__))
-            response.message = str(te) + " traceback:" + traceback_string
-            
-        except FlowValidationError as ve:
-            response.success = False 
-            response.validation_errors = list()
-            for key in ve.error_dict:
-                response.validation_errors.append(ValidationError(key,ve.error_dict[key]))
-
-        except Exception as e: 
-            response.success = False
-            traceback_string = "".join(traceback.format_tb(e.__traceback__))
-            response.message = "Error Type:" + str(type(e))  + " message: " +  str(e) + " traceback:" + traceback_string
- 
-        logging.debug('TacLoginViewSet.submit get result:' + response.to_json())
-
-        responseDict = json.loads(response.to_json())
-
-        return Response(responseDict,status=status.HTTP_200_OK) 
-    
-    
+    isAPIAuthorizationRequired:bool = True
+    isGetAvailable:bool = False
+    isGetWithIdAvailable:bool = False
+    isGetInitAvailable:bool = True
+    isGetToCsvAvailable:bool = False
+    isPostAvailable:bool = False
+    isPostWithIdAvailable:bool = True
+    isPutAvailable:bool = False 
+    isDeleteAvailable:bool = False 
+    # "apiGetInitContextTargetName": "CustomerUserLogOutInitObjWF",
+    # "apiGetInitContextObjectName": "Customer",
+    # "isGetToCsvAvailable": "false", 
+    # "isPublic": "true",
+    # "isLazyPost": "false", 
+    # "pluralName": "customerUserLogOut",
+    # "description": "CustomerUserLogOut Endpoint",
+    # "apiCodeParamName": "CustomerCode",
+    # "apiPostContextObjectName": "Customer",
+    # "apiPostContextTargetName": "CustomerUserLogOut",
+    # "isEndPointLoggingEnabled": "false",
+    # "apiContextTargetName": "",
+    # "apiContextObjectName": "",
+    # "isGetContextCodeAParam": "false",
     @action(detail=False, methods=['get'],url_path=r'(?P<tacCode>[0-9a-f-]{36})/init')
-    def init(self, request, tacCode=None, *args, **kwargs):
-        logging.debug('TacLoginViewSet.init get start. tacCode:' + tacCode)
-        
-        response = TacLoginGetInitResponse()
-        
-        # tacCode = kwargs.get('tacCode')
-        
-        try:  
+    def request_get_init(self, request, tacCode=None, *args, **kwargs):
+        logging.debug('TacLoginViewSet.request_get_init start. tacCode:' + tacCode)
+        if self.isGetInitAvailable == False:
+            return Response(status=status.HTTP_501_NOT_IMPLEMENTED) 
+## 
+        response = view_init_models.TacLoginInitObjWFGetInitModelResponse() 
+        try: 
+            logging.debug("Start session...")
             session_context = SessionContext(dict())
-
-            logging.debug("loading model...")
-            tac = Tac.objects.get(code=tacCode)
-            
-            logging.debug("process flow...")
-            flow = FlowTacLoginInitObjWF(session_context)
-            flowResponse = flow.process(
-                tac, 
-            ) 
- 
-            response.load_flow_response(flowResponse);
-            response.success = True
-            response.message = "Success."
-            
+            init_request = view_init_models.TacLoginInitObjWFGetInitModelRequest() 
+            response = init_request.process_request(
+                session_context,
+                tacCode,
+                response
+            )  
         except TypeError as te: 
             response.success = False
             traceback_string = "".join(traceback.format_tb(te.__traceback__))
-            response.message = str(te) + " traceback:" + traceback_string
-            
-        except FlowValidationError as ve:
-            response.success = False 
-            response.validation_errors = list()
-            for key in ve.error_dict:
-                response.validation_errors.append(ValidationError(key,ve.error_dict[key]))
-
+            response.message = str(te) + " traceback:" + traceback_string 
         except Exception as e:
             response.success = False
             traceback_string = "".join(traceback.format_tb(e.__traceback__))
             response.message = str(e) + " traceback:" + traceback_string
- 
         logging.debug('TacLoginViewSet.init get result:' + response.to_json())
-
         responseDict = json.loads(response.to_json())
-        
         return Response(responseDict,status=status.HTTP_200_OK) 
+##  
+    def list(self, request):
+        logging.debug('TacLoginViewSet.request_get start.')
+        if self.isGetAvailable == False:
+            return Response(status=status.HTTP_501_NOT_IMPLEMENTED) 
+## 
+    @action(detail=False, methods=['get'],url_path=r'(?P<tacCode>[0-9a-f-]{36})')
+    def request_get_with_id(self, request, tacCode=None, *args, **kwargs): 
+        logging.debug('TacLoginViewSet.request_get_with_id start. tacCode:' + tacCode)
+        if self.isGetWithIdAvailable == False:
+            return Response(status=status.HTTP_501_NOT_IMPLEMENTED) 
+## 
+    @action(detail=False, methods=['get'],url_path=r'(?P<tacCode>[0-9a-f-]{36})/to-csv')
+    def request_get_with_id_to_csv(self, request, tacCode=None, *args, **kwargs):
+        logging.debug('TacLoginViewSet.request_get_with_id_to_csv start. tacCode:' + tacCode)
+        if self.isGetToCsvAvailable == False:
+            return Response(status=status.HTTP_501_NOT_IMPLEMENTED) 
+##  
+    def create(self, request):
+        logging.debug('TacLoginViewSet.request_post start.')
+        if self.isPostAvailable == False:
+            return Response(status=status.HTTP_501_NOT_IMPLEMENTED) 
+        ## 
+    @action(detail=False, methods=['post'],url_path=r'(?P<tacCode>[0-9a-f-]{36})/submit')
+    def request_post_with_id(self, request, tacCode=None): 
+        logging.debug('TacLoginViewSet.request_post_with_id start. tacCode:' + tacCode)
+        if self.isPostWithIdAvailable == False:
+            return Response(status=status.HTTP_501_NOT_IMPLEMENTED) 
+        ## 
+        response = view_models.TacLoginPostModelResponse()
+        try:
+            logging.debug("Start session...")
+            session_context = SessionContext(dict())
+            logging.debug("Request:" + json.dumps(request.data)) 
+            logging.debug("get schema")
+            schema = marshmallow_dataclass.class_schema(view_models.TacLoginPostModelRequest)() 
+            logging.debug("validating request...")
+            request:view_models.TacLoginPostModelRequest = schema.load(request.data)  
+            flowResponse = request.process_request(
+                session_context,
+                tacCode,
+                response
+            ) 
+        except marshmallow.exceptions.ValidationError as se:
+            response.success = False
+            response.message = "Schema validation error. Invalid Request: " + str(se.messages)
+        except TypeError as te: 
+            response.success = False
+            traceback_string = "".join(traceback.format_tb(te.__traceback__))
+            response.message = str(te) + " traceback:" + traceback_string
+        except Exception as e:
+            response.success = False
+            traceback_string = "".join(traceback.format_tb(e.__traceback__))
+            response.message = str(e) + " traceback:" + traceback_string
+        logging.debug('TacLoginViewSet.submit get result:' + response.to_json())
+        responseDict = json.loads(response.to_json())
+        return Response(responseDict,status=status.HTTP_200_OK) 
+        ## 
+    @action(detail=False, methods=['put'])
+    def request_put(self, request, tacCode=None, *args, **kwargs): 
+        logging.debug('TacLoginViewSet.request_put start.')
+        if self.isPutAvailable == False:
+            return Response(status=status.HTTP_501_NOT_IMPLEMENTED) 
+        ## 
+    @action(detail=False, methods=['delete'])
+    def request_delete(self, request, tacCode=None, *args, **kwargs): 
+        logging.debug('TacLoginViewSet.request_delete start.')
+        if self.isDeleteAvailable == False:
+            return Response(status=status.HTTP_501_NOT_IMPLEMENTED) 
+        ## 

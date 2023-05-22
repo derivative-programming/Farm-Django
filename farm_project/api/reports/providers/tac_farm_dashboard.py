@@ -30,7 +30,7 @@ class ReportProviderTacFarmDashboard():
             cursor.execute(""" 
                 SELECT 
                     tac.code as field_one_plant_list_link_land_code
-                from api_tac tac
+                from farm_tac tac
                 WHERE tac.code = %s
                 """, (
                     str(tacCode).replace('-', ''),  

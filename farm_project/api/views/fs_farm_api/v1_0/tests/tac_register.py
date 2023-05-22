@@ -26,14 +26,14 @@ class TacRegisterViewSetTestCase(TestCase):
     def test_submit_success(self):
         # Assuming you have a FlowTacRegister.process method that handles valid data
         logging.debug(f'/api/tac-register/{self.tac.code}/')
-        response = self.client.post(f'/api/tac-register/{self.tac.code}/', data=self.valid_request_data, format='json')
+        response = self.client.post(f'/api/tac-register/{self.tac.code}/submit/', data=self.valid_request_data, format='json')
         self.assertEqual(response.status_code, 200)
         json_string = response.content.decode() 
         responseDict = json.loads(json_string) 
         self.assertTrue(response.data['success'])
 
     def test_submit_failure(self):
-        response = self.client.post(f'/api/tac-register/{self.tac.code}/', data=self.invalid_request_data, format='json')
+        response = self.client.post(f'/api/tac-register/{self.tac.code}/submit/', data=self.invalid_request_data, format='json')
         self.assertEqual(response.status_code, 200)
         json_string = response.content.decode() 
         responseDict = json.loads(json_string) 
@@ -45,7 +45,7 @@ class TacRegisterViewSetTestCase(TestCase):
         
     def test_submit_failure3(self):
         response = self.client.get('/api/tac-register/')
-        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.status_code, 501)
 
     def test_init_success(self):
         response = self.client.get(f'/api/tac-register/{self.tac.code}/init/')

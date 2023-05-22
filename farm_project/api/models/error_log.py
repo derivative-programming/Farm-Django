@@ -41,6 +41,8 @@ class ErrorLog(models.Model):
     url = models.TextField(
                                 null=True,
                                 db_index=ErrorLogConstants.url_calculatedIsDBColumnIndexed)
+    class Meta:
+        db_table = 'farm_error_log'
     def __str__(self):
         return str(self.code)
     def save(self, *args, **kwargs):
