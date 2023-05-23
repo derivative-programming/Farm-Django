@@ -1,4 +1,4 @@
-# api/models/tests/test_role.py
+# farm/models/tests/test_role.py
 from django.test import TestCase
 from farm.models import Role
 from farm.models.factories import RoleFactory

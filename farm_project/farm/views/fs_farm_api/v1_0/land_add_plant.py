@@ -8,9 +8,9 @@ from rest_framework import status
 import marshmallow_dataclass
 import logging
 import marshmallow.exceptions  
-from farm.helpers import SessionContext 
+from farm.helpers import SessionContext, ApiToken
 import farm.views.models as view_models
-import farm.views.models.init as view_init_models 
+import farm.views.models.init as view_init_models  
 
 class LandAddPlantViewSet(ViewSet): 
     isAPIAuthorizationRequired:bool = True
@@ -22,17 +22,32 @@ class LandAddPlantViewSet(ViewSet):
     isPostWithIdAvailable:bool = True
     isPutAvailable:bool = False 
     isDeleteAvailable:bool = False  
+    isPublic: bool = False
+
+    def get_token(self, request):
+        token = request.META.get('HTTP_API_KEY')
+        return token
+    
     @action(detail=False, methods=['get'],url_path=r'(?P<landCode>[0-9a-f-]{36})/init')
     def request_get_init(self, request, landCode=None, *args, **kwargs):
         logging.debug('LandAddPlantViewSet.request_get_init start. landCode:' + landCode)
         if self.isGetInitAvailable == False:
             return Response(status=status.HTTP_501_NOT_IMPLEMENTED) 
-## 
+        
         response = view_init_models.LandAddPlantInitObjWFGetInitModelResponse() 
+
+        auth_dict = dict()
+        if self.isPublic == False:
+            token = self.get_token(request)
+            auth_dict = ApiToken.validate_token(token)
+            if auth_dict == None or len(auth_dict) == 0:
+                return Response(json.loads(response.to_json()),status=status.HTTP_401_UNAUTHORIZED)   
+## 
         sid = transaction.savepoint()
         try: 
             logging.debug("Start session...")
-            session_context = SessionContext(dict())
+            session_context = SessionContext(auth_dict)
+            land_code = session_context.check_context_code("LandCode", landCode)
             init_request = view_init_models.LandAddPlantInitObjWFGetInitModelRequest() 
             response = init_request.process_request(
                 session_context,
@@ -85,10 +100,19 @@ class LandAddPlantViewSet(ViewSet):
             return Response(status=status.HTTP_501_NOT_IMPLEMENTED) 
         ## 
         response = view_models.LandAddPlantPostModelResponse()
+
+        auth_dict = dict()
+        if self.isPublic == False:
+            token = self.get_token(request)
+            auth_dict = ApiToken.validate_token(token)
+            if auth_dict == None or len(auth_dict) == 0:
+                return Response(json.loads(response.to_json()),status=status.HTTP_401_UNAUTHORIZED)   
+            
         sid = transaction.savepoint()
         try:
             logging.debug("Start session...")
-            session_context = SessionContext(dict())
+            session_context = SessionContext(auth_dict)
+            land_code = session_context.check_context_code("LandCode", landCode)
             logging.debug("Request:" + json.dumps(request.data)) 
             logging.debug("get schema")
             schema = marshmallow_dataclass.class_schema(view_models.LandAddPlantPostModelRequest)() 

@@ -5,6 +5,7 @@ from rest_framework.test import APIClient
 import logging
 from farm.models.factories import LandFactory 
 from farm.views.factories import LandAddPlantPostModelRequestFactory
+from farm.helpers import ApiToken 
 
 class LandAddPlantViewSetTestCase(TestCase):
 
@@ -16,7 +17,14 @@ class LandAddPlantViewSetTestCase(TestCase):
         self.invalid_request_data = {
             "xxxxxx": "yyyyy" 
         }
+        api_dict = {'LandCode': str(self.land.code)}
+        self.test_api_key = ApiToken.create_token(api_dict,1)
+        self.valid_header = {'HTTP_API_KEY' : self.test_api_key}
 
+    ## TODO add test - zeroed context code replaced by true code in api token
+    ## TODO add test - invalid api key 
+    ## TODO add test - no api key on public endpoint
+    ## TODO add test - no api key on private endpoint
         
     def test_post_not_implemented(self):
         # Assuming you have a FlowLandAddPlant.process method that handles valid data
@@ -27,40 +35,40 @@ class LandAddPlantViewSetTestCase(TestCase):
     def test_submit_success(self):
         # Assuming you have a FlowLandAddPlant.process method that handles valid data
         logging.debug(f'/api/v1_0/land-add-plant/{self.land.code}/')
-        response = self.client.post(f'/api/v1_0/land-add-plant/{self.land.code}/submit/', data=self.request.to_json(), content_type='application/json')
+        response = self.client.post(f'/api/v1_0/land-add-plant/{self.land.code}/submit/', data=self.request.to_json(), **self.valid_header, content_type='application/json')
         self.assertEqual(response.status_code, 200)
         json_string = response.content.decode() 
         responseDict = json.loads(json_string) 
         self.assertTrue(response.data['success'])
 
     def test_submit_failure(self):
-        response = self.client.post(f'/api/v1_0/land-add-plant/{self.land.code}/submit/', data=self.invalid_request_data, content_type='application/json')
+        response = self.client.post(f'/api/v1_0/land-add-plant/{self.land.code}/submit/', data=self.invalid_request_data, **self.valid_header, content_type='application/json')
         self.assertEqual(response.status_code, 200)
         json_string = response.content.decode() 
         responseDict = json.loads(json_string) 
         self.assertFalse(response.data['success'])
         
     def test_submit_failure2(self):
-        response = self.client.get('/api/v1_0/land-add-plant/xxx/')
+        response = self.client.get('/api/v1_0/land-add-plant/xxx/', **self.valid_header)
         self.assertEqual(response.status_code, 404)
         
     def test_submit_failure3(self):
-        response = self.client.get('/api/v1_0/land-add-plant/')
+        response = self.client.get('/api/v1_0/land-add-plant/', **self.valid_header)
         self.assertEqual(response.status_code, 501)
 
     def test_init_success(self):
-        response = self.client.get(f'/api/v1_0/land-add-plant/{self.land.code}/init/')
+        response = self.client.get(f'/api/v1_0/land-add-plant/{self.land.code}/init/', **self.valid_header)
         self.assertEqual(response.status_code, 200)
         json_string = response.content.decode() 
         responseDict = json.loads(json_string) 
         self.assertTrue(response.data['success'])
 
     def test_init_failure(self):
-        response = self.client.get('/api/v1_0/land-add-plant/xxx/init/')
+        response = self.client.get('/api/v1_0/land-add-plant/xxx/init/', **self.valid_header)
         self.assertEqual(response.status_code, 404)
         
     def test_init_failure2(self):
-        response = self.client.get('/api/v1_0/land-add-plant/init/')
+        response = self.client.get('/api/v1_0/land-add-plant/init/', **self.valid_header)
         self.assertEqual(response.status_code, 404)
 
     # Add any additional test cases for different scenarios and edge cases

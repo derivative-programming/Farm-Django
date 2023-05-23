@@ -1,4 +1,4 @@
-# api/models/tests/test_pac.py
+# farm/models/tests/test_pac.py
 from django.test import TestCase
 from farm.models import Pac
 from farm.models.factories import PacFactory

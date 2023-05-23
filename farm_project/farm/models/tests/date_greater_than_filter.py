@@ -1,4 +1,4 @@
-# api/models/tests/test_date_greater_than_filter.py
+# farm/models/tests/test_date_greater_than_filter.py
 from django.test import TestCase
 from farm.models import DateGreaterThanFilter
 from farm.models.factories import DateGreaterThanFilterFactory

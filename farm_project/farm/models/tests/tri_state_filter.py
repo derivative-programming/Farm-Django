@@ -1,4 +1,4 @@
-# api/models/tests/test_tri_state_filter.py
+# farm/models/tests/test_tri_state_filter.py
 from django.test import TestCase
 from farm.models import TriStateFilter
 from farm.models.factories import TriStateFilterFactory

@@ -1,4 +1,4 @@
-# api/models/tests/test_flavor.py
+# farm/models/tests/test_flavor.py
 from django.test import TestCase
 from farm.models import Flavor
 from farm.models.factories import FlavorFactory

@@ -1,4 +1,4 @@
-# api/models/tests/test_error_log.py
+# farm/models/tests/test_error_log.py
 from django.test import TestCase
 from farm.models import ErrorLog
 from farm.models.factories import ErrorLogFactory

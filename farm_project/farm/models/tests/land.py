@@ -1,4 +1,4 @@
-# api/models/tests/test_land.py
+# farm/models/tests/test_land.py
 from django.test import TestCase
 from farm.models import Land
 from farm.models.factories import LandFactory

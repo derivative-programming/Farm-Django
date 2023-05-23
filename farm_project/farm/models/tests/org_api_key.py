@@ -1,4 +1,4 @@
-# api/models/tests/test_org_api_key.py
+# farm/models/tests/test_org_api_key.py
 from django.test import TestCase
 from farm.models import OrgApiKey
 from farm.models.factories import OrgApiKeyFactory

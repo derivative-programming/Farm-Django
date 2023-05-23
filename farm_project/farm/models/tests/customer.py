@@ -1,4 +1,4 @@
-# api/models/tests/test_customer.py
+# farm/models/tests/test_customer.py
 from django.test import TestCase
 from farm.models import Customer
 from farm.models.factories import CustomerFactory

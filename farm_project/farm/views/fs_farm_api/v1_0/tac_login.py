@@ -8,7 +8,7 @@ from rest_framework import status
 import marshmallow_dataclass
 import logging
 import marshmallow.exceptions  
-from farm.helpers import SessionContext 
+from farm.helpers import SessionContext, ApiToken 
 import farm.views.models as view_models
 import farm.views.models.init as view_init_models 
 class TacLoginViewSet(ViewSet): 
@@ -21,20 +21,12 @@ class TacLoginViewSet(ViewSet):
     isPostWithIdAvailable:bool = True
     isPutAvailable:bool = False 
     isDeleteAvailable:bool = False 
-    # "apiGetInitContextTargetName": "CustomerUserLogOutInitObjWF",
-    # "apiGetInitContextObjectName": "Customer",
-    # "isGetToCsvAvailable": "false", 
-    # "isPublic": "true",
-    # "isLazyPost": "false", 
-    # "pluralName": "customerUserLogOut",
-    # "description": "CustomerUserLogOut Endpoint",
-    # "apiCodeParamName": "CustomerCode",
-    # "apiPostContextObjectName": "Customer",
-    # "apiPostContextTargetName": "CustomerUserLogOut",
-    # "isEndPointLoggingEnabled": "false",
-    # "apiContextTargetName": "",
-    # "apiContextObjectName": "",
-    # "isGetContextCodeAParam": "false",
+    isPublic: bool = True 
+
+    def get_token(self, request):
+        token = request.META.get('HTTP_API_KEY')
+        return token
+    
     @action(detail=False, methods=['get'],url_path=r'(?P<tacCode>[0-9a-f-]{36})/init')
     def request_get_init(self, request, tacCode=None, *args, **kwargs):
         logging.debug('TacLoginViewSet.request_get_init start. tacCode:' + tacCode)
@@ -42,10 +34,19 @@ class TacLoginViewSet(ViewSet):
             return Response(status=status.HTTP_501_NOT_IMPLEMENTED) 
 ## 
         response = view_init_models.TacLoginInitObjWFGetInitModelResponse() 
+
+        auth_dict = dict()
+        if self.isPublic == False:
+            token = self.get_token(request)
+            auth_dict = ApiToken.validate_token(token)
+            if auth_dict == None or len(auth_dict) == 0:
+                return Response(json.loads(response.to_json()),status=status.HTTP_401_UNAUTHORIZED)   
+            
         sid = transaction.savepoint()
         try: 
             logging.debug("Start session...")
-            session_context = SessionContext(dict())
+            session_context = SessionContext(auth_dict)
+            tacCode = session_context.check_context_code("TacCode", tacCode)
             init_request = view_init_models.TacLoginInitObjWFGetInitModelRequest() 
             response = init_request.process_request(
                 session_context,
@@ -98,10 +99,19 @@ class TacLoginViewSet(ViewSet):
             return Response(status=status.HTTP_501_NOT_IMPLEMENTED) 
         ## 
         response = view_models.TacLoginPostModelResponse()
+
+        auth_dict = dict()
+        if self.isPublic == False:
+            token = self.get_token(request)
+            auth_dict = ApiToken.validate_token(token)
+            if auth_dict == None or len(auth_dict) == 0:
+                return Response(json.loads(response.to_json()),status=status.HTTP_401_UNAUTHORIZED)   
+            
         sid = transaction.savepoint()
         try:
             logging.debug("Start session...")
-            session_context = SessionContext(dict())
+            session_context = SessionContext(auth_dict)
+            tacCode = session_context.check_context_code("TacCode", tacCode)
             logging.debug("Request:" + json.dumps(request.data)) 
             logging.debug("get schema")
             schema = marshmallow_dataclass.class_schema(view_models.TacLoginPostModelRequest)() 
