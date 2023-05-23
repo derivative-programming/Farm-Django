@@ -17,15 +17,15 @@ router = DefaultRouter()
 ##GENLOOPApiEndPointStart
 ##GENTrainingBlock[b]Start
 ##GENLearn[modelType=apiEndPoint,name=LandAddPlant]Start 
-router.register(r'land-add-plant',api_views.LandAddPlantViewSet,basename="land-add-plant")
+router.register(r'v1_0/land-add-plant',api_views.LandAddPlantViewSet,basename="v1_0/land-add-plant")
 ##GENLearn[modelType=apiEndPoint,name=LandAddPlant]End
 ##GENTrainingBlock[b]End
 ##GENLOOPApiEndPointEnd
 ##GENLearn[modelType=apiSite,name=FSFarmAPI]End 
-router.register(r'land-plant-list',api_views.LandPlantListViewSet,basename="land-plant-list")
-router.register(r'tac-farm-dashboard',api_views.TacFarmDashboardViewSet,basename="tac-farm-dashboard")
-router.register(r'tac-login',api_views.TacLoginViewSet,basename="tac-login")
-router.register(r'tac-register',api_views.TacRegisterViewSet,basename="tac-register")
+router.register(r'v1_0/land-plant-list',api_views.LandPlantListViewSet,basename="v1_0/land-plant-list")
+router.register(r'v1_0/tac-farm-dashboard',api_views.TacFarmDashboardViewSet,basename="v1_0/tac-farm-dashboard")
+router.register(r'v1_0/tac-login',api_views.TacLoginViewSet,basename="v1_0/tac-login")
+router.register(r'v1_0/tac-register',api_views.TacRegisterViewSet,basename="v1_0/tac-register")
 ##GENTrainingBlock[a]End
 ##GENLOOPApiSiteEnd
 
