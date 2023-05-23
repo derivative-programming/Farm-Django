@@ -1,0 +1,37 @@
+[
+    {
+        "model": "farm.pac",
+        "pk": 1,
+        "fields": {
+            "name": "Unknown",
+            "description": "",
+            "display_order": 1,
+            "is_active": true,
+            "lookup_enum_name": "Unknown"
+        }
+    },
+    {
+        "model": "farm.tac",
+        "pk": 1,
+        "fields": {
+            "name": "Unknown",
+            "description": "",
+            "display_order": 1,
+            "is_active": true,
+            "lookup_enum_name": "Unknown",
+            "pac_id": 1
+        }
+    } ,
+    {
+        "model": "farm.tac",
+        "pk": 2,
+        "fields": {
+            "name": "Primary",
+            "description": "",
+            "display_order": 1,
+            "is_active": true,
+            "lookup_enum_name": "Primary",
+            "pac_id": 1
+        }
+    }
+]
