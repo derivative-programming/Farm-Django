@@ -1,5 +1,6 @@
 import json 
 import traceback 
+from django.db import transaction
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework.viewsets import ViewSet 
@@ -41,6 +42,7 @@ class TacLoginViewSet(ViewSet):
             return Response(status=status.HTTP_501_NOT_IMPLEMENTED) 
 ## 
         response = view_init_models.TacLoginInitObjWFGetInitModelResponse() 
+        sid = transaction.savepoint()
         try: 
             logging.debug("Start session...")
             session_context = SessionContext(dict())
@@ -58,6 +60,11 @@ class TacLoginViewSet(ViewSet):
             response.success = False
             traceback_string = "".join(traceback.format_tb(e.__traceback__))
             response.message = str(e) + " traceback:" + traceback_string
+        finally:
+            if response.success == True:
+                transaction.savepoint_commit(sid)
+            else:
+                transaction.savepoint_rollback(sid)
         logging.debug('TacLoginViewSet.init get result:' + response.to_json())
         responseDict = json.loads(response.to_json())
         return Response(responseDict,status=status.HTTP_200_OK) 
@@ -91,6 +98,7 @@ class TacLoginViewSet(ViewSet):
             return Response(status=status.HTTP_501_NOT_IMPLEMENTED) 
         ## 
         response = view_models.TacLoginPostModelResponse()
+        sid = transaction.savepoint()
         try:
             logging.debug("Start session...")
             session_context = SessionContext(dict())
@@ -115,6 +123,11 @@ class TacLoginViewSet(ViewSet):
             response.success = False
             traceback_string = "".join(traceback.format_tb(e.__traceback__))
             response.message = str(e) + " traceback:" + traceback_string
+        finally:
+            if response.success == True:
+                transaction.savepoint_commit(sid)
+            else:
+                transaction.savepoint_rollback(sid)
         logging.debug('TacLoginViewSet.submit get result:' + response.to_json())
         responseDict = json.loads(response.to_json())
         return Response(responseDict,status=status.HTTP_200_OK) 

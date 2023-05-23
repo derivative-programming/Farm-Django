@@ -7,7 +7,7 @@ from .pac import Pac #pac_id
 import api.models.constants.tri_state_filter as TriStateFilterConstants
 class TriStateFilter(models.Model):  
     tri_state_filter_id = models.AutoField(primary_key=True)
-    code = models.UUIDField(default=uuid.uuid4,db_index=True)
+    code = models.UUIDField(default=uuid.uuid4,db_index=True, unique=True)
     insert_utc_date_time =models.DateTimeField(default=timezone.now)
     last_update_utc_date_time =models.DateTimeField(default=timezone.now)
     insert_user_id = models.UUIDField(null=True)

@@ -10,7 +10,7 @@ import logging
 
 class Plant(models.Model):  
     plant_id = models.AutoField(primary_key=True,db_column='plant_id')
-    code = models.UUIDField(default=uuid.uuid4,db_index=True,db_column='code')
+    code = models.UUIDField(default=uuid.uuid4,db_index=True,db_column='code', unique=True)
     insert_utc_date_time =models.DateTimeField(default=timezone.now,db_column='insert_utc_date_time')
     last_update_utc_date_time =models.DateTimeField(default=timezone.now,db_column='last_update_utc_date_time')
     insert_user_id = models.UUIDField(null=True,db_column='insert_user_id')

@@ -7,7 +7,7 @@ from .tac import Tac #tac_id
 import api.models.constants.organization as OrganizationConstants
 class Organization(models.Model):  
     organization_id = models.AutoField(primary_key=True)
-    code = models.UUIDField(default=uuid.uuid4,db_index=True)
+    code = models.UUIDField(default=uuid.uuid4,db_index=True, unique=True)
     insert_utc_date_time =models.DateTimeField(default=timezone.now)
     last_update_utc_date_time =models.DateTimeField(default=timezone.now)
     insert_user_id = models.UUIDField(null=True)

@@ -1,5 +1,6 @@
 import json 
 import traceback 
+from django.db import transaction
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework.viewsets import ViewSet 
@@ -19,21 +20,7 @@ class LandPlantListViewSet(ViewSet):
     isPostAvailable:bool = False
     isPostWithIdAvailable:bool = False
     isPutAvailable:bool = False 
-    isDeleteAvailable:bool = False 
-    # "apiGetInitContextTargetName": "CustomerUserLogOutInitObjWF",
-    # "apiGetInitContextObjectName": "Customer",
-    # "isGetToCsvAvailable": "false", 
-    # "isPublic": "false",
-    # "isLazyPost": "false", 
-    # "pluralName": "customerUserLogOut",
-    # "description": "CustomerUserLogOut Endpoint",
-    # "apiCodeParamName": "CustomerCode",
-    # "apiPostContextObjectName": "Customer",
-    # "apiPostContextTargetName": "CustomerUserLogOut",
-    # "isEndPointLoggingEnabled": "false",
-    # "apiContextTargetName": "",
-    # "apiContextObjectName": "",
-    # "isGetContextCodeAParam": "false",
+    isDeleteAvailable:bool = False  
     @action(detail=False, methods=['get'],url_path=r'(?P<landCode>[0-9a-f-]{36})/init')
     def request_get_init(self, request, landCode=None, *args, **kwargs):
         logging.debug('LandPlantListViewSet.request_get_init start. landCode:' + landCode)
@@ -41,6 +28,7 @@ class LandPlantListViewSet(ViewSet):
             return Response(status=status.HTTP_501_NOT_IMPLEMENTED) 
 ## 
         response = view_init_models.LandPlantListInitReportGetInitModelResponse() 
+        sid = transaction.savepoint()
         try: 
             logging.debug("Start session...")
             session_context = SessionContext(dict())
@@ -58,6 +46,11 @@ class LandPlantListViewSet(ViewSet):
             response.success = False
             traceback_string = "".join(traceback.format_tb(e.__traceback__))
             response.message = str(e) + " traceback:" + traceback_string
+        finally:
+            if response.success == True:
+                transaction.savepoint_commit(sid)
+            else:
+                transaction.savepoint_rollback(sid)
         logging.debug('LandPlantListViewSet.init get result:' + response.to_json())
         responseDict = json.loads(response.to_json())
         return Response(responseDict,status=status.HTTP_200_OK) 
@@ -75,6 +68,7 @@ class LandPlantListViewSet(ViewSet):
             return Response(status=status.HTTP_501_NOT_IMPLEMENTED) 
 ## 
         response = view_models.LandPlantListGetModelResponse()
+        sid = transaction.savepoint()
         try:
             session_context = SessionContext(dict())
             logging.debug("Request:" + json.dumps(request.query_params))
@@ -96,6 +90,11 @@ class LandPlantListViewSet(ViewSet):
             response.success = False
             traceback_string = "".join(traceback.format_tb(e.__traceback__))
             response.message = str(e) + " traceback:" + traceback_string
+        finally:
+            if response.success == True:
+                transaction.savepoint_commit(sid)
+            else:
+                transaction.savepoint_rollback(sid)
         logging.debug('LandPlantListViewSet.submit get result:' + response.to_json())
         responseDict = json.loads(response.to_json())
         return Response(responseDict,status=status.HTTP_200_OK) 
@@ -107,6 +106,7 @@ class LandPlantListViewSet(ViewSet):
             return Response(status=status.HTTP_501_NOT_IMPLEMENTED) 
 ## 
         response = view_models.LandPlantListGetModelResponse()
+        sid = transaction.savepoint()
         try:
             session_context = SessionContext(dict())
             logging.debug("Request:" + json.dumps(request.query_params))
@@ -128,6 +128,11 @@ class LandPlantListViewSet(ViewSet):
             response.success = False
             traceback_string = "".join(traceback.format_tb(e.__traceback__))
             response.message = str(e) + " traceback:" + traceback_string
+        finally:
+            if response.success == True:
+                transaction.savepoint_commit(sid)
+            else:
+                transaction.savepoint_rollback(sid)
         logging.debug('LandPlantListViewSet.submit get result:' + response.to_json())
         responseDict = json.loads(response.to_json())
         return Response(responseDict,status=status.HTTP_200_OK) 

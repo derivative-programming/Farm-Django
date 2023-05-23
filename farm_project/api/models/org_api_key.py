@@ -8,7 +8,7 @@ from .org_customer import OrgCustomer #org_customer_id
 import api.models.constants.org_api_key as OrgApiKeyConstants
 class OrgApiKey(models.Model):  
     org_api_key_id = models.AutoField(primary_key=True)
-    code = models.UUIDField(default=uuid.uuid4,db_index=True)
+    code = models.UUIDField(default=uuid.uuid4,db_index=True, unique=True)
     insert_utc_date_time =models.DateTimeField(default=timezone.now)
     last_update_utc_date_time =models.DateTimeField(default=timezone.now)
     insert_user_id = models.UUIDField(null=True)

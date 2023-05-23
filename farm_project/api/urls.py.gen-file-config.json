@@ -1,0 +1,10 @@
+{
+    "templateType":"namespace",   
+    "dimension" :{
+        "name":"Farm"
+    },
+    "ignoreDimensionPropertyList": [   
+        "ApiSite.isSiteLoggingEnabled", 
+        "ApiSite.isPublic"
+    ]
+} 

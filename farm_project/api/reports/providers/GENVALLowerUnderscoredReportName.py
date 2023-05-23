@@ -89,8 +89,7 @@ class ReportProviderLandPlantList():
 
         results = list()
 
-        with connection.cursor() as cursor: 
-            ##TODO report sql templates
+        with connection.cursor() as cursor:  
             cursor.execute(""" 
 
                

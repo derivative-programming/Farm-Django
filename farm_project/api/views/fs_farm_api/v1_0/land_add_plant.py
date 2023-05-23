@@ -1,4 +1,5 @@
 import json 
+from django.db import transaction
 import traceback 
 from rest_framework.response import Response
 from rest_framework.decorators import action
@@ -10,6 +11,7 @@ import marshmallow.exceptions
 from api.helpers import SessionContext 
 import api.views.models as view_models
 import api.views.models.init as view_init_models 
+
 class LandAddPlantViewSet(ViewSet): 
     isAPIAuthorizationRequired:bool = True
     isGetAvailable:bool = False
@@ -19,21 +21,7 @@ class LandAddPlantViewSet(ViewSet):
     isPostAvailable:bool = False
     isPostWithIdAvailable:bool = True
     isPutAvailable:bool = False 
-    isDeleteAvailable:bool = False 
-    # "apiGetInitContextTargetName": "CustomerUserLogOutInitObjWF",
-    # "apiGetInitContextObjectName": "Customer",
-    # "isGetToCsvAvailable": "false", 
-    # "isPublic": "false",
-    # "isLazyPost": "false", 
-    # "pluralName": "customerUserLogOut",
-    # "description": "CustomerUserLogOut Endpoint",
-    # "apiCodeParamName": "CustomerCode",
-    # "apiPostContextObjectName": "Customer",
-    # "apiPostContextTargetName": "CustomerUserLogOut",
-    # "isEndPointLoggingEnabled": "false",
-    # "apiContextTargetName": "",
-    # "apiContextObjectName": "",
-    # "isGetContextCodeAParam": "false",
+    isDeleteAvailable:bool = False  
     @action(detail=False, methods=['get'],url_path=r'(?P<landCode>[0-9a-f-]{36})/init')
     def request_get_init(self, request, landCode=None, *args, **kwargs):
         logging.debug('LandAddPlantViewSet.request_get_init start. landCode:' + landCode)
@@ -41,6 +29,7 @@ class LandAddPlantViewSet(ViewSet):
             return Response(status=status.HTTP_501_NOT_IMPLEMENTED) 
 ## 
         response = view_init_models.LandAddPlantInitObjWFGetInitModelResponse() 
+        sid = transaction.savepoint()
         try: 
             logging.debug("Start session...")
             session_context = SessionContext(dict())
@@ -58,6 +47,11 @@ class LandAddPlantViewSet(ViewSet):
             response.success = False
             traceback_string = "".join(traceback.format_tb(e.__traceback__))
             response.message = str(e) + " traceback:" + traceback_string
+        finally:
+            if response.success == True:
+                transaction.savepoint_commit(sid)
+            else:
+                transaction.savepoint_rollback(sid)
         logging.debug('LandAddPlantViewSet.init get result:' + response.to_json())
         responseDict = json.loads(response.to_json())
         return Response(responseDict,status=status.HTTP_200_OK) 
@@ -91,6 +85,7 @@ class LandAddPlantViewSet(ViewSet):
             return Response(status=status.HTTP_501_NOT_IMPLEMENTED) 
         ## 
         response = view_models.LandAddPlantPostModelResponse()
+        sid = transaction.savepoint()
         try:
             logging.debug("Start session...")
             session_context = SessionContext(dict())
@@ -115,6 +110,11 @@ class LandAddPlantViewSet(ViewSet):
             response.success = False
             traceback_string = "".join(traceback.format_tb(e.__traceback__))
             response.message = str(e) + " traceback:" + traceback_string
+        finally:
+            if response.success == True:
+                transaction.savepoint_commit(sid)
+            else:
+                transaction.savepoint_rollback(sid)
         logging.debug('LandAddPlantViewSet.submit get result:' + response.to_json())
         responseDict = json.loads(response.to_json())
         return Response(responseDict,status=status.HTTP_200_OK) 
