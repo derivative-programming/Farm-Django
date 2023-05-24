@@ -5,6 +5,8 @@ import datetime
 import uuid
 from .pac import Pac #pac_id
 import farm.models.constants.role as RoleConstants
+from farm.models.managers import RoleManager
+
 class Role(models.Model):  
     role_id = models.AutoField(primary_key=True)
     code = models.UUIDField(default=uuid.uuid4,db_index=True, unique=True)
@@ -35,6 +37,9 @@ class Role(models.Model):
                                blank=True,
                                null=True,
                                db_index=True)
+        
+    objects = RoleManager()
+
     class Meta:
         db_table = 'farm_role'
     def __str__(self):

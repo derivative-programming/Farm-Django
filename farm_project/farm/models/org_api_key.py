@@ -6,6 +6,8 @@ import uuid
 from .organization import Organization #organization_id
 from .org_customer import OrgCustomer #org_customer_id
 import farm.models.constants.org_api_key as OrgApiKeyConstants
+from farm.models.managers import OrgApiKeyManager
+
 class OrgApiKey(models.Model):  
     org_api_key_id = models.AutoField(primary_key=True)
     code = models.UUIDField(default=uuid.uuid4,db_index=True, unique=True)
@@ -49,6 +51,9 @@ class OrgApiKey(models.Model):
                                blank=True,
                                null=True,
                                db_index=True)
+        
+    objects = OrgApiKeyManager()
+
     class Meta:
         db_table = 'farm_org_api_key'
     def __str__(self):

@@ -5,6 +5,8 @@ import datetime
 import uuid
 from .pac import Pac #pac_id
 import farm.models.constants.date_greater_than_filter as DateGreaterThanFilterConstants
+from farm.models.managers import DateGreaterThanFilterManager
+
 class DateGreaterThanFilter(models.Model):  
     date_greater_than_filter_id = models.AutoField(primary_key=True)
     code = models.UUIDField(default=uuid.uuid4,db_index=True, unique=True)
@@ -38,6 +40,9 @@ class DateGreaterThanFilter(models.Model):
                                blank=True,
                                null=True,
                                db_index=True)
+        
+    objects = DateGreaterThanFilterManager()
+    
     class Meta:
         db_table = 'farm_date_greater_than_filter'
     def __str__(self):

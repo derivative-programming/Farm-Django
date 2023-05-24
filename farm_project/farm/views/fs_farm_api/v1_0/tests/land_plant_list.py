@@ -53,7 +53,7 @@ class LandPlantListViewSetTestCase(TestCase):
 
     def test_submit_failure3(self):
         response = self.client.get('/api/v1_0/land-plant-list/', **self.valid_header)
-        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.status_code, 501)
         
 
     def test_submit_failure4(self):

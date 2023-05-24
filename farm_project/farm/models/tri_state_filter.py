@@ -5,6 +5,8 @@ import datetime
 import uuid
 from .pac import Pac #pac_id
 import farm.models.constants.tri_state_filter as TriStateFilterConstants
+from farm.models.managers import TriStateFilterManager
+
 class TriStateFilter(models.Model):  
     tri_state_filter_id = models.AutoField(primary_key=True)
     code = models.UUIDField(default=uuid.uuid4,db_index=True, unique=True)
@@ -38,6 +40,9 @@ class TriStateFilter(models.Model):
     state_int_value = models.IntegerField(
                                 null=True,
                                 db_index=TriStateFilterConstants.state_int_value_calculatedIsDBColumnIndexed)	
+        
+    objects = TriStateFilterManager()
+
     class Meta:
         db_table = 'farm_tri_state_filter'
     def __str__(self):

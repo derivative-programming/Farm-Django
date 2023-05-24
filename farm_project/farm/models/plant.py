@@ -7,6 +7,8 @@ from .flavor import Flavor #flavor_id
 from .land import Land #land_id
 import farm.models.constants.plant as PlantConstants
 import logging 
+from farm.models.managers import PlantManager
+
 
 class Plant(models.Model):  
     plant_id = models.AutoField(primary_key=True,db_column='plant_id')
@@ -108,6 +110,9 @@ class Plant(models.Model):
                                 null=True,
                                 db_column='some_var_char_val',
                                 db_index=PlantConstants.some_var_char_val_calculatedIsDBColumnIndexed)
+        
+    objects = PlantManager()
+
     class Meta:
         db_table = 'farm_plant'
     def __str__(self):

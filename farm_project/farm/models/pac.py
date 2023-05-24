@@ -2,9 +2,10 @@ from django.db import models
 from django.utils import timezone
 from django.core.exceptions import ValidationError
 import datetime
-import uuid 
-
+import uuid  
 import farm.models.constants.pac as PacConstants
+from farm.models.managers import PacManager
+
 class Pac(models.Model):  
     pac_id = models.AutoField(primary_key=True)
     code = models.UUIDField(default=uuid.uuid4,db_index=True, unique=True)
@@ -28,6 +29,9 @@ class Pac(models.Model):
     name = models.TextField(
                                 null=True,
                                 db_index=PacConstants.name_calculatedIsDBColumnIndexed)
+        
+    objects = PacManager()
+
     class Meta:
         db_table = 'farm_pac'
     def __str__(self):

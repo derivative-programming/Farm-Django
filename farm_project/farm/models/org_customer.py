@@ -6,6 +6,8 @@ import uuid
 from .customer import Customer #customer_id
 from .organization import Organization #organization_id
 import farm.models.constants.org_customer as OrgCustomerConstants
+from farm.models.managers import OrgCustomerManager
+
 class OrgCustomer(models.Model):  
     org_customer_id = models.AutoField(primary_key=True)
     code = models.UUIDField(default=uuid.uuid4,db_index=True, unique=True)
@@ -32,6 +34,9 @@ class OrgCustomer(models.Model):
                                blank=True,
                                null=True,
                                db_index=True)
+        
+    objects = OrgCustomerManager()
+
     class Meta:
         db_table = 'farm_org_customer'
     def __str__(self):

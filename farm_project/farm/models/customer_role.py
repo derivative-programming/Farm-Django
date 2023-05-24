@@ -6,6 +6,8 @@ import uuid
 from .customer import Customer #customer_id
 from .role import Role #role_id
 import farm.models.constants.customer_role as CustomerRoleConstants
+from farm.models.managers import CustomerRoleManager
+
 class CustomerRole(models.Model):  
     customer_role_id = models.AutoField(primary_key=True)
     code = models.UUIDField(default=uuid.uuid4,db_index=True, unique=True)
@@ -34,6 +36,9 @@ class CustomerRole(models.Model):
                                blank=True,
                                null=True,
                                db_index=True)
+        
+    objects = CustomerRoleManager()
+    
     class Meta:
         db_table = 'farm_customer_role'
     def __str__(self):

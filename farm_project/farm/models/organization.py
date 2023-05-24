@@ -5,6 +5,8 @@ import datetime
 import uuid
 from .tac import Tac #tac_id
 import farm.models.constants.organization as OrganizationConstants
+from farm.models.managers import OrganizationManager
+
 class Organization(models.Model):  
     organization_id = models.AutoField(primary_key=True)
     code = models.UUIDField(default=uuid.uuid4,db_index=True, unique=True)
@@ -23,6 +25,9 @@ class Organization(models.Model):
                                blank=True,
                                null=True,
                                db_index=True)
+        
+    objects = OrganizationManager()
+
     class Meta:
         db_table = 'farm_organization'
     def __str__(self):

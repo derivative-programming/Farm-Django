@@ -5,6 +5,8 @@ import datetime
 import uuid
 from .pac import Pac #pac_id
 import farm.models.constants.tac as TacConstants
+from farm.models.managers import TacManager
+
 class Tac(models.Model):  
     tac_id = models.AutoField(primary_key=True)
     code = models.UUIDField(default=uuid.uuid4,db_index=True, unique=True)
@@ -35,6 +37,9 @@ class Tac(models.Model):
                                blank=True,
                                null=True,
                                db_index=True)
+        
+    objects = TacManager()
+
     class Meta:
         db_table = 'farm_tac'
     def __str__(self):

@@ -5,6 +5,8 @@ import datetime
 import uuid
 from .pac import Pac #pac_id
 import farm.models.constants.error_log as ErrorLogConstants
+from farm.models.managers import ErrorLogManager
+
 class ErrorLog(models.Model):  
     error_log_id = models.AutoField(primary_key=True)
     code = models.UUIDField(default=uuid.uuid4,db_index=True, unique=True)
@@ -41,6 +43,9 @@ class ErrorLog(models.Model):
     url = models.TextField(
                                 null=True,
                                 db_index=ErrorLogConstants.url_calculatedIsDBColumnIndexed)
+        
+    objects = ErrorLogManager()
+    
     class Meta:
         db_table = 'farm_error_log'
     def __str__(self):

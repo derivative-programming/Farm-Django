@@ -5,6 +5,8 @@ import datetime
 import uuid
 from .tac import Tac #tac_id
 import farm.models.constants.customer as CustomerConstants
+from farm.models.managers import CustomerManager
+
 class Customer(models.Model):  
     customer_id = models.AutoField(primary_key=True)
     code = models.UUIDField(default=uuid.uuid4,db_index=True, unique=True)
@@ -88,8 +90,12 @@ class Customer(models.Model):
     zip = models.TextField(
                                 null=True,
                                 db_index=CustomerConstants.zip_calculatedIsDBColumnIndexed)
+        
+    objects = CustomerManager()
+
     class Meta:
         db_table = 'farm_customer'
+    
     def __str__(self):
         return str(self.code)
     def save(self, *args, **kwargs):

@@ -11,8 +11,7 @@ import marshmallow.exceptions
 from farm.helpers import SessionContext, ApiToken
 import farm.views.models as view_models
 import farm.views.models.init as view_init_models 
-class LandPlantListViewSet(ViewSet): 
-    isAPIAuthorizationRequired:bool = True
+class LandPlantListViewSet(ViewSet):  
     isGetAvailable:bool = False
     isGetWithIdAvailable:bool = True
     isGetInitAvailable:bool = True
@@ -32,7 +31,8 @@ class LandPlantListViewSet(ViewSet):
         logging.debug('LandPlantListViewSet.request_get_init start. landCode:' + landCode)
         if self.isGetInitAvailable == False:
             return Response(status=status.HTTP_501_NOT_IMPLEMENTED) 
-## 
+##GENTrainingBlock[caseisGetInitAvailable]Start
+##GENLearn[isGetInitAvailable=true]Start
         response = view_init_models.LandPlantListInitReportGetInitModelResponse() 
 
         auth_dict = dict()
@@ -69,19 +69,23 @@ class LandPlantListViewSet(ViewSet):
         logging.debug('LandPlantListViewSet.init get result:' + response.to_json())
         responseDict = json.loads(response.to_json())
         return Response(responseDict,status=status.HTTP_200_OK) 
-## 
-    @action(detail=False, methods=['get'])
-    def request_get(self, request, landCode=None, *args, **kwargs):
+##GENLearn[isGetInitAvailable=true]End
+##GENTrainingBlock[caseisGetInitAvailable]End 
+    def list(self, request, *args, **kwargs):
         logging.debug('LandPlantListViewSet.request_get start.')
         if self.isGetAvailable == False:
             return Response(status=status.HTTP_501_NOT_IMPLEMENTED) 
-## 
+##GENTrainingBlock[caseisGetAvailable]Start
+##GENLearn[isGetAvailable=false]Start
+##GENLearn[isGetAvailable=false]End
+##GENTrainingBlock[caseisGetAvailable]End
     @action(detail=False, methods=['get'],url_path=r'(?P<landCode>[0-9a-f-]{36})')
     def request_get_with_id(self, request, landCode=None, *args, **kwargs): 
         logging.debug('LandPlantListViewSet.request_get_with_id start. landCode:' + landCode)
         if self.isGetWithIdAvailable == False:
-            return Response(status=status.HTTP_501_NOT_IMPLEMENTED) 
-## 
+            return Response(status=status.HTTP_501_NOT_IMPLEMENTED)  
+##GENTrainingBlock[caseisGetWithIdAvailable]Start
+##GENLearn[isGetWithIdAvailable=true]Start
         response = view_models.LandPlantListGetModelResponse()
 
         auth_dict = dict()
@@ -122,13 +126,15 @@ class LandPlantListViewSet(ViewSet):
         logging.debug('LandPlantListViewSet.submit get result:' + response.to_json())
         responseDict = json.loads(response.to_json())
         return Response(responseDict,status=status.HTTP_200_OK) 
-## 
+##GENLearn[isGetWithIdAvailable=true]End
+##GENTrainingBlock[caseisGetWithIdAvailable]End
     @action(detail=False, methods=['get'],url_path=r'(?P<landCode>[0-9a-f-]{36})/to-csv')
     def request_get_with_id_to_csv(self, request, landCode=None, *args, **kwargs):
         logging.debug('LandPlantListViewSet.request_get_with_id_to_csv start. landCode:' + landCode)
         if self.isGetToCsvAvailable == False:
             return Response(status=status.HTTP_501_NOT_IMPLEMENTED) 
-## 
+##GENTrainingBlock[caseisGetToCsvAvailable]Start
+##GENLearn[isGetToCsvAvailable=true]Start
         response = view_models.LandPlantListGetModelResponse()
 
         auth_dict = dict()
@@ -169,28 +175,40 @@ class LandPlantListViewSet(ViewSet):
         logging.debug('LandPlantListViewSet.submit get result:' + response.to_json())
         responseDict = json.loads(response.to_json())
         return Response(responseDict,status=status.HTTP_200_OK) 
-## 
-    @action(detail=False, methods=['post'])
-    def request_post(self, request, landCode=None, *args, **kwargs):
+##GENLearn[isGetToCsvAvailable=true]End
+##GENTrainingBlock[caseisGetToCsvAvailable]End 
+    def create(self, request, *args, **kwargs):
         logging.debug('LandPlantListViewSet.request_post start.')
         if self.isPostAvailable == False:
             return Response(status=status.HTTP_501_NOT_IMPLEMENTED) 
-        ## 
+##GENTrainingBlock[caseisPostAvailable]Start
+##GENLearn[isPostAvailable=false]Start
+##GENLearn[isPostAvailable=false]End
+##GENTrainingBlock[caseisPostAvailable]End
     @action(detail=False, methods=['post'],url_path=r'(?P<landCode>[0-9a-f-]{36})')
     def request_post_with_id(self, request, landCode=None, *args, **kwargs): 
         logging.debug('LandPlantListViewSet.request_post_with_id start. landCode:' + landCode)
         if self.isPostWithIdAvailable == False:
             return Response(status=status.HTTP_501_NOT_IMPLEMENTED) 
-        ## 
+##GENTrainingBlock[caseisPostWithIdAvailable]Start
+##GENLearn[isPostWithIdAvailable=false]Start
+##GENLearn[isPostWithIdAvailable=false]End
+##GENTrainingBlock[caseisPostWithIdAvailable]End
     @action(detail=False, methods=['put'])
     def request_put(self, request, landCode=None, *args, **kwargs): 
         logging.debug('LandPlantListViewSet.request_put start.')
         if self.isPutAvailable == False:
             return Response(status=status.HTTP_501_NOT_IMPLEMENTED) 
-        ## 
+##GENTrainingBlock[caseisPutAvailable]Start
+##GENLearn[isPutAvailable=false]Start
+##GENLearn[isPutAvailable=false]End
+##GENTrainingBlock[caseisPutAvailable]End
     @action(detail=False, methods=['delete'])
     def request_delete(self, request, landCode=None, *args, **kwargs): 
         logging.debug('LandPlantListViewSet.request_delete start.')
         if self.isDeleteAvailable == False:
             return Response(status=status.HTTP_501_NOT_IMPLEMENTED) 
-        ## 
+##GENTrainingBlock[caseisDeleteAvailable]Start
+##GENLearn[isDeleteAvailable=false]Start
+##GENLearn[isDeleteAvailable=false]End
+##GENTrainingBlock[isDeleteAvailable]End

@@ -1,0 +1,17 @@
+{
+    "templateType":"object", 
+    "ForceFileNameFormat" : "LowerUnderscored",
+    "dimension" :{
+        "name":"Plant",
+        "isLookup":"false"
+    },
+    "ignoreDimensionPropertyList": [
+        "prop.isNotPublishedToSubscriptions",
+        "prop.isFKLookup",
+        "prop.isQueryByAvailable",
+        "prop.calculatedIsDBColumnIndexed",
+        "prop.isEncrypted",
+        "prop.calculatedIsCodeNotLookup",
+        "prop.calculatedIsCodeAndLookup"
+    ]
+} 

@@ -7,26 +7,55 @@ You will be submitting a PR to this repository.
 
 todo...
 
+priority...
+>>>>>>create managers for all models.  create enums for all lookups. create on manager get_by_code, get_by_enum
+
+initialize lookup tables
+security
+v1_0 and Farm in template paths
+
+convert ui apps to use new /submit endpoint
+
+signalr
+
+model managers...
+- /models/managers folder
+- one for each model
+- initialize function: create any recs, like lookups
+- build function: initializes all props and sets all lookups to unknown
+
+currentRuntime class
+- static fn Get[modelName]ByEnum(enum) for each lookup
+- static fn Get[Modelname]ByCode(code) 
+
+
+
 implement django-seed to generate seed data.  add to readme doc on how to use.
 - getting error on seeding. only 3 are being populated.
+   
 
-change name of app from 'Api' to 'Core'
+site templates have farm in file path
 
-running:job...implement factory_boy and faker in pac, tac, and customer unit tests
+version number folder name replacement not working...
+calculatedCodeSafeVersionNumber > calculatedCodeSafeVersionNumberText
+add a view sub folder?
 
-move model out of farm repos. put in harvest repo. 
- 
-models...
-- blank=true
-- add indexes
-- set table name explicitly. no plurals
-- set col name explicitly
-- override update to verify that lastchangecode matches
+add roles to token. check roles in flow?
+
+implement security checks in base flows
+
+Change land parent to customer? Tac?
+
+If report is custom, create txt file
+
+Init lookups
+
+need view post (no id), get (no id), delete, and put examples 
+
+Signalr 
 
 tests...
-- check all object props
-- api call tests !!!gpt
-- expand factory_boy and faker logic from job to test all objects
+- check all object props  
 
 multiple project settings files. one for each env
 
@@ -35,108 +64,58 @@ populate flavor table with lookup values...
 - use a fixture?  what happens if it runs twice?
 - generate a migration to create lookup recs?
 
-job to create register endpoint....
--  should also encrypt a string 
- 
-
-
-flows...      
-- make async     
-- https://github.com/phalt/django-api-domains/blob/master/example_domain/services.py
-
-reports...
-- separate classes to generate reports
-- dir structure
-    - [app root]
-        - models
-        - flows
-        - reports
-            - [modelName]
-                - [reportname] file
-                    - Generate function 
-                        call provider class
-                        optionally just return json instead of report item array?
-                    - report item class
-                - reader folder
-                - writer folder
-                - provider folder
-                    report provider class
-                        - this contains the custom sql. it may be generated but overridden later
-                        - return json? have a reader loat it?
-- use custom sql
-- use dataclasses to define request and response objects
-- select_related?
-    no. not using models
-- use functional views?
-- paginator 
-    - offset? cursor\keyset?
-
-api...
-- create instance of flow or report and execute
-- folder struct
-    - [approot]
-        - models
-        - reports
-        - flows
-        - api
-            - /V##/
-                - views
-                    - [endpointname] file
-                        - contains all functions. creates flows or generates reports
-                - data-models
-- use dataclasses to define request and response of api endpoints
-- views.  class or function? what do dataclass examples use?
-- https://copyprogramming.com/howto/django-reporting-options
-    - custom sql example
-- https://stackoverflow.com/questions/26015851/django-rest-framework-passing-raw-query
-    - endpoint with custom sql to json example
-        queryset = MyModel.objects.raw('... your SQL here...')
-        serializer = MyModelSerializer(queryset, many=True)
-        return Response(serializer.data)
-- https://www.scaler.com/topics/django/django-running-raw-queries/
-    - custom sql
-- https://djangostars.com/blog/rest-apis-django-development/
-    - api test
-    - browsable api
-    - openapi web -  drf-yasg
-- https://stackoverflow.com/questions/59361772/using-custom-query-to-return-json-in-django-rest-framework
-    - custom sql
-        - execute to dict
-- https://medium.com/roivant-technology/faster-api-development-with-django-dataclasses-5d33c366f23c
-    - django_dataclasses<<< best???
-        - request and response defined
-            - https://pypi.org/project/django-dataclasses/
-- https://www.errietta.me/blog/django-dataclass-serializer-openapi-swagger/  
-    - djangorestframework-dataclasses
-    - swagger
-- https://opensource.com/article/21/9/unit-test-python
-    - dataclass and testing
-- https://aws.amazon.com/blogs/compute/generating-rest-apis-from-data-classes-in-python/
-    - dataclass and dataclass_json
-- https://fabiorosado.dev/blog/python-dataclasses/
-                    - 
+ apis and flows should be async
 
 async workflow processing....
 - celery? 
     - requires redis?
 - dj background tasks?
 - tasks subfolder containing all dynaflow tasks?
+ 
+add to admin models...
+search_fields = ['name', 'email', 'related_model__related_field']. what the admin search textbox will search.  do all varchar and nvarchar fields.
 
+list_filter = ('is_active', 'created_at', 'related_model__related_field'). filter controls show on sidebar.
+all boolean, all dates? all datetimes?
+ 
+---------------------------------------------
 
-api auth...
-- rest framework... DEFAULT_AUTHENTICATION_CLASSES 
-- allauth?
-  
-admin...
-- can create Admin versions of models with props
-    - list_display
-    - list_filter
-    - search_fields
-    - raw_id_fields
+flavor manager...............
+ In this scenario, you can create a custom manager for the Flavor model, define a method in that manager to get an instance based on the LookupEnumName, and define an Enum to represent the possible LookupEnumName values.
 
+First, you would need to import the necessary modules and define the Enum:
 
+python
+Copy code
+from enum import Enum
+from django.db import models
 
+class FlavorEnum(Enum):
+    SWEET = 'Sweet'
+    SOUR = 'Sour'
+    UNKNOWN = 'Unknown'
+Next, you would define the custom manager. In the manager, you would define a method that takes a FlavorEnum value and returns the corresponding Flavor instance:
 
-choices?
-- create a json dict of all possible values a column can have?
-- dont use. stick to lookup tables
+python
+Copy code
+class FlavorManager(models.Manager):
+    def from_enum(self, flavor_enum):
+        return self.get(LookupEnumName=flavor_enum.value)
+Finally, you would define the Flavor model, using the custom manager and LookupEnumName field:
+
+python
+Copy code
+class Flavor(models.Model):
+    LookupEnumName = models.CharField(max_length=50)
+
+    objects = FlavorManager()
+Now, you can get a Flavor instance using a FlavorEnum value like this:
+
+python
+Copy code
+sweet_flavor = Flavor.objects.from_enum(FlavorEnum.SWEET)
+This will return the Flavor instance with LookupEnumName equal to 'Sweet'. If no such instance exists, it will raise a Flavor.DoesNotExist exception.
+
+You should handle this exception in your application code and decide what to do if the Flavor instance doesn't exist.
+
+Also, please ensure that the Flavor instances for all FlavorEnum values are created in the database.

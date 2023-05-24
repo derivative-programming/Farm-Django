@@ -77,6 +77,8 @@ class FlowLandAddPlantInitObjWF(BaseFlowLandAddPlantInitObjWF):
         tac_code_output:uuid = uuid.UUID(int=0)
         land_name_output:str = ""
         # TODO: add flow logic
+
+        
         super()._log_message_and_severity(LogSeverity.information_high_detail, "Building result")
         result = FlowLandAddPlantInitObjWFResult()
         result.request_flavor_code = request_flavor_code_output

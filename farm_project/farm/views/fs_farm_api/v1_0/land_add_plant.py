@@ -12,8 +12,7 @@ from farm.helpers import SessionContext, ApiToken
 import farm.views.models as view_models
 import farm.views.models.init as view_init_models  
 
-class LandAddPlantViewSet(ViewSet): 
-    isAPIAuthorizationRequired:bool = True
+class LandAddPlantViewSet(ViewSet):  
     isGetAvailable:bool = False
     isGetWithIdAvailable:bool = False
     isGetInitAvailable:bool = True
@@ -23,6 +22,7 @@ class LandAddPlantViewSet(ViewSet):
     isPutAvailable:bool = False 
     isDeleteAvailable:bool = False  
     isPublic: bool = False
+      
 
     def get_token(self, request):
         token = request.META.get('HTTP_API_KEY')
@@ -97,8 +97,9 @@ class LandAddPlantViewSet(ViewSet):
     def request_post_with_id(self, request, landCode=None, *args, **kwargs): 
         logging.debug('LandAddPlantViewSet.request_post_with_id start. landCode:' + landCode)
         if self.isPostWithIdAvailable == False:
-            return Response(status=status.HTTP_501_NOT_IMPLEMENTED) 
-        ## 
+            return Response(status=status.HTTP_501_NOT_IMPLEMENTED)  
+##GENTrainingBlock[caseisPostWithIdAvailable]Start
+##GENLearn[isPostWithIdAvailable=true]Start
         response = view_models.LandAddPlantPostModelResponse()
 
         auth_dict = dict()
@@ -142,7 +143,8 @@ class LandAddPlantViewSet(ViewSet):
         logging.debug('LandAddPlantViewSet.submit get result:' + response.to_json())
         responseDict = json.loads(response.to_json())
         return Response(responseDict,status=status.HTTP_200_OK) 
-        ## 
+##GENLearn[isPostWithIdAvailable=true]End
+##GENTrainingBlock[caseisPostWithIdAvailable]End 
     @action(detail=False, methods=['put'])
     def request_put(self, request, landCode=None, *args, **kwargs): 
         logging.debug('LandAddPlantViewSet.request_put start.')

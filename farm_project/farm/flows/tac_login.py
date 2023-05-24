@@ -79,9 +79,10 @@ class FlowTacLogin(BaseFlowTacLogin):
         role_name_csv_list_output = "" 
 
         api_key_dict = dict()
-        api_key_dict["pac_code"] = str(customer.tac.pac.code)
-        api_key_dict["tac_code"] = str(customer.tac.code)
-        api_key_dict["customer_code"] = str(customer.code)
+        api_key_dict["PacCode"] = str(customer.tac.pac.code)
+        api_key_dict["TacCode"] = str(customer.tac.code)
+        api_key_dict["CustomerCode"] = str(customer.code)
+        api_key_dict["UserName"] = customer.email
         api_key_dict["role_name_csv"] = role_name_csv_list_output
         api_key_output = ApiToken.create_token(api_key_dict, 1)
  

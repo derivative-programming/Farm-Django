@@ -1,10 +1,14 @@
 from django.db import models
+from enum import Enum
 from django.utils import timezone
 from django.core.exceptions import ValidationError
 import datetime
 import uuid
 from .pac import Pac #pac_id
-import farm.models.constants.flavor as FlavorConstants
+import farm.models.constants.flavor as FlavorConstants 
+from farm.models.managers import FlavorManager
+ 
+
 class Flavor(models.Model):  
     flavor_id = models.AutoField(primary_key=True)
     code = models.UUIDField(default=uuid.uuid4,db_index=True, unique=True)
@@ -35,6 +39,9 @@ class Flavor(models.Model):
                                blank=True,
                                null=True,
                                db_index=True)
+        
+    objects = FlavorManager()
+
     class Meta:
         db_table = 'farm_flavor'
     def __str__(self):

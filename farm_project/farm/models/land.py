@@ -5,6 +5,8 @@ import datetime
 import uuid
 from .pac import Pac #pac_id
 import farm.models.constants.land as LandConstants
+from farm.models.managers import LandManager
+
 class Land(models.Model):  
     land_id = models.AutoField(primary_key=True)
     code = models.UUIDField(default=uuid.uuid4,db_index=True, unique=True)
@@ -35,6 +37,9 @@ class Land(models.Model):
                                blank=True,
                                null=True,
                                db_index=True)
+        
+    objects = LandManager()
+
     class Meta:
         db_table = 'farm_land'
     def __str__(self):
