@@ -1,8 +1,9 @@
 {
     "templateType":"object",  
+    "ForceFileNameFormat" : "LowerUnderscored",
     "IsEdgeCase": true,
     "dimension" :{
-        "name":"Flavor",
+        "name":"DateGreaterThanFilter",
         "isLookup":"true"
     },
     "ignoreDimensionPropertyList": [
@@ -12,6 +13,8 @@
         "prop.calculatedIsDBColumnIndexed",
         "prop.isEncrypted",
         "prop.calculatedIsCodeNotLookup",
-        "prop.calculatedIsCodeAndLookup"
+        "prop.calculatedIsCodeAndLookup",
+        "lookupItem.calculatedIsCustomIntProp1ValueAvailable",
+        "lookupItem.isActive"
     ]
 } 

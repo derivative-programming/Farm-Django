@@ -211,4 +211,4 @@ class LandPlantListViewSet(ViewSet):
 ##GENTrainingBlock[caseisDeleteAvailable]Start
 ##GENLearn[isDeleteAvailable=false]Start
 ##GENLearn[isDeleteAvailable=false]End
-##GENTrainingBlock[isDeleteAvailable]End
+##GENTrainingBlock[caseisDeleteAvailable]End

@@ -2,8 +2,7 @@
     "templateType":"object", 
     "ForceFileNameFormat" : "LowerUnderscored",
     "dimension" :{
-        "name":"Plant",
-        "isLookup":"false"
+        "name":"Plant"
     },
     "ignoreDimensionPropertyList": [
         "prop.isNotPublishedToSubscriptions",

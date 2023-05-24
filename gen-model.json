@@ -1042,6 +1042,26 @@
                 "isSubscribed": "true"
               }
             ],
+            "lookupItem": [
+              {
+                "name": "Unknown",
+                "displayName": "Unknown",
+                "description": "Unknown",
+                "isActive": "true"
+              },
+              {
+                "name": "Sweet",
+                "displayName": "Sweet",
+                "description": "Sweet",
+                "isActive": "true"
+              },
+              {
+                "name": "Sour",
+                "displayName": "Sour",
+                "description": "Sour",
+                "isActive": "true"
+              }
+            ],
             "report": [],
             "objectWorkflow": [],
             "isSoftDeleteUsed": "false",
@@ -4420,6 +4440,7 @@
                 "isSubscribed": "true"
               }
             ],
+            "lookupItem": [],
             "report": [
               {
                 "name": "PlantUserDetails",
