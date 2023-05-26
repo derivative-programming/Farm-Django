@@ -3,7 +3,9 @@ from enum import Enum
 import uuid  
     
 ##GENTrainingBlock[caselookupenum]Start
-##GENLearn[isLookup=false]Start
+##GENLearn[isLookup=false]Start 
+class PlantEnum(Enum):
+    pass
 ##GENLearn[isLookup=false]End
 ##GENTrainingBlock[caselookupenum]End
 
@@ -13,6 +15,6 @@ class PlantManager(models.Manager):
         return self.get(code=code)
     
 ##GENTrainingBlock[caselookup]Start
-##GENLearn[isLookup=false]Start
+##GENLearn[isLookup=false]Start 
 ##GENLearn[isLookup=false]End
 ##GENTrainingBlock[caselookup]End

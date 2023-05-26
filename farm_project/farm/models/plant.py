@@ -7,7 +7,7 @@ from .flavor import Flavor #flavor_id
 from .land import Land #land_id
 import farm.models.constants.plant as PlantConstants
 import logging 
-from farm.models.managers import PlantManager
+from farm.models.managers import PlantManager,PlantEnum
 
 
 class Plant(models.Model):  
@@ -130,3 +130,11 @@ class Plant(models.Model):
         self.last_update_utc_date_time = timezone.now()
         self.last_change_code = uuid.uuid4()
         return super(Plant, self).save(*args, **kwargs)
+
+##GENTrainingBlock[caselookup]Start
+##GENLearn[isLookup=false,calculatedIsParentObjectAvailable=true]Start   
+    @staticmethod
+    def initialize():
+        pass
+##GENLearn[isLookup=false,calculatedIsParentObjectAvailable=true]End
+##GENTrainingBlock[caselookup]End

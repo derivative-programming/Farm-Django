@@ -4,7 +4,7 @@ from django.core.exceptions import ValidationError
 import datetime
 import uuid  
 import farm.models.constants.pac as PacConstants
-from farm.models.managers import PacManager
+from farm.models.managers import PacManager,PacEnum
 
 class Pac(models.Model):  
     pac_id = models.AutoField(primary_key=True)
@@ -48,3 +48,20 @@ class Pac(models.Model):
         self.last_update_utc_date_time = timezone.now()
         self.last_change_code = uuid.uuid4()
         return super(Pac, self).save(*args, **kwargs)
+
+
+##GENTrainingBlock[caselookup]Start
+##GENLearn[isLookup=true,calculatedIsParentObjectAvailable=false]Start  
+    @staticmethod
+    def initialize(): 
+        if Pac.objects.filter(lookup_enum_name=PacEnum.Unknown.value).exists() == False:
+            item = Pac()  
+            item.code = uuid.uuid4()
+            item.name = "Unknown"
+            item.lookup_enum_name = "Unknown"
+            item.description = "Unknown"
+            item.display_order = 1
+            item.is_active = True 
+            item.save()
+##GENLearn[isLookup=true,calculatedIsParentObjectAvailable=false]End
+##GENTrainingBlock[caselookup]End

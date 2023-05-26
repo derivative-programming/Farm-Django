@@ -12,5 +12,4 @@ class PacManager(models.Manager):
 
     def from_enum(self, enum_val:PacEnum):
         return self.get(LookupEnumName=enum_val.value)
-
-
+ 

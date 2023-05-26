@@ -15,4 +15,4 @@ class FlavorManager(models.Manager):
     def from_enum(self, enum_val:FlavorEnum):
         return self.get(LookupEnumName=enum_val.value)
 
-
+ 

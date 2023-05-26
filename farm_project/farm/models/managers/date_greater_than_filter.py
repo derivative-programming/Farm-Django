@@ -1,6 +1,6 @@
 from django.db import models
 from enum import Enum 
-import uuid
+import uuid 
 
 ##GENTrainingBlock[caselookupenum]Start
 ##GENLearn[isLookup=true]Start 
@@ -17,11 +17,11 @@ class DateGreaterThanFilterEnum(Enum):
 class DateGreaterThanFilterManager(models.Manager):
 
     def from_code(self, code:uuid):
-        return self.get(code=code)
+        return self.get(code=code) 
     
 ##GENTrainingBlock[caselookup]Start
 ##GENLearn[isLookup=true]Start
     def from_enum(self, enum_val:DateGreaterThanFilterEnum):
-        return self.get(LookupEnumName=enum_val.value)
+        return self.get(lookup_enum_name=enum_val.value)
 ##GENLearn[isLookup=true]End
 ##GENTrainingBlock[caselookup]End

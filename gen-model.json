@@ -1194,7 +1194,20 @@
                 "isSubscribed": "true"
               }
             ],
-            "lookupItem": [],
+            "lookupItem": [
+              {
+                "name": "Unknown",
+                "displayName": "Unknown",
+                "description": "Unknown",
+                "isActive": "true"
+              },
+              {
+                "name": "Field_One",
+                "displayName": "Field One",
+                "description": "Field One",
+                "isActive": "true"
+              }
+            ],
             "report": [
               {
                 "name": "LandPlantList",

@@ -3,9 +3,7 @@ from enum import Enum
 import uuid
 
 class LandEnum(Enum):
-    SWEET = 'Sweet'
-    SOUR = 'Sour'
-    UNKNOWN = 'Unknown'
+    pass
     
 class LandManager(models.Manager):
 
@@ -14,3 +12,4 @@ class LandManager(models.Manager):
     
     def from_enum(self, enum_val:LandEnum):
         return self.get(LookupEnumName=enum_val.value)
+     

@@ -14,5 +14,4 @@ class TriStateFilterManager(models.Manager):
 
     def from_enum(self, enum_val:TriStateFilterEnum):
         return self.get(LookupEnumName=enum_val.value)
-
-
+ 

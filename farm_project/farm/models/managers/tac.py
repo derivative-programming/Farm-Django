@@ -13,5 +13,5 @@ class TacManager(models.Manager):
 
     def from_enum(self, enum_val:TacEnum):
         return self.get(LookupEnumName=enum_val.value)
-
+ 
 

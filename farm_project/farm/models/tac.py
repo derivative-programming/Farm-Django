@@ -5,7 +5,7 @@ import datetime
 import uuid
 from .pac import Pac #pac_id
 import farm.models.constants.tac as TacConstants
-from farm.models.managers import TacManager
+from farm.models.managers import TacManager,TacEnum
 
 class Tac(models.Model):  
     tac_id = models.AutoField(primary_key=True)
@@ -56,3 +56,29 @@ class Tac(models.Model):
         self.last_update_utc_date_time = timezone.now()
         self.last_change_code = uuid.uuid4()
         return super(Tac, self).save(*args, **kwargs)
+
+
+    @staticmethod
+    def initialize():
+        
+        pac = Pac.objects.all().first()
+        if Tac.objects.filter(lookup_enum_name=TacEnum.Unknown.value).exists() == False:
+            item = Tac() 
+            item.pac = pac
+            item.code = uuid.uuid4()
+            item.name = "Unknown"
+            item.lookup_enum_name = "Unknown"
+            item.description = "Unknown"
+            item.display_order = Tac.objects.count()
+            item.is_active = True 
+            item.save()
+        if Tac.objects.filter(lookup_enum_name=TacEnum.Primary.value).exists() == False:
+            item = Tac() 
+            item.pac = pac
+            item.code = uuid.uuid4()
+            item.name = "Primary"
+            item.lookup_enum_name = "Primary"
+            item.description = "Primary"
+            item.display_order = Tac.objects.count()
+            item.is_active = True 
+            item.save()

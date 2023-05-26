@@ -5,7 +5,7 @@ import datetime
 import uuid
 from .pac import Pac #pac_id
 import farm.models.constants.role as RoleConstants
-from farm.models.managers import RoleManager
+from farm.models.managers import RoleManager,RoleEnum
 
 class Role(models.Model):  
     role_id = models.AutoField(primary_key=True)
@@ -56,3 +56,48 @@ class Role(models.Model):
         self.last_update_utc_date_time = timezone.now()
         self.last_change_code = uuid.uuid4()
         return super(Role, self).save(*args, **kwargs)
+
+
+    @staticmethod
+    def initialize(): 
+        pac = Pac.objects.all().first()
+        if Role.objects.filter(lookup_enum_name=RoleEnum.Unknown.value).exists() == False:
+            item = Role() 
+            item.pac = pac
+            item.code = uuid.uuid4()
+            item.name = "Unknown"
+            item.lookup_enum_name = "Unknown"
+            item.description = "Unknown"
+            item.display_order = Role.objects.count()
+            item.is_active = True 
+            item.save()
+        if Role.objects.filter(lookup_enum_name=RoleEnum.Admin.value).exists() == False:
+            item = Role() 
+            item.pac = pac
+            item.code = uuid.uuid4()
+            item.name = "Admin"
+            item.lookup_enum_name = "Admin"
+            item.description = "Admin"
+            item.display_order = Role.objects.count()
+            item.is_active = True 
+            item.save()
+        if Role.objects.filter(lookup_enum_name=RoleEnum.Config.value).exists() == False:
+            item = Role() 
+            item.pac = pac
+            item.code = uuid.uuid4()
+            item.name = "Config"
+            item.lookup_enum_name = "Config"
+            item.description = "Config"
+            item.display_order = Role.objects.count()
+            item.is_active = True 
+            item.save()
+        if Role.objects.filter(lookup_enum_name=RoleEnum.User.value).exists() == False:
+            item = Role() 
+            item.pac = pac
+            item.code = uuid.uuid4()
+            item.name = "User"
+            item.lookup_enum_name = "User"
+            item.description = "User"
+            item.display_order = Role.objects.count()
+            item.is_active = True 
+            item.save()

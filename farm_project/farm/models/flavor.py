@@ -6,7 +6,7 @@ import datetime
 import uuid
 from .pac import Pac #pac_id
 import farm.models.constants.flavor as FlavorConstants 
-from farm.models.managers import FlavorManager
+from farm.models.managers import FlavorManager,FlavorEnum
  
 
 class Flavor(models.Model):  
@@ -58,3 +58,38 @@ class Flavor(models.Model):
         self.last_update_utc_date_time = timezone.now()
         self.last_change_code = uuid.uuid4()
         return super(Flavor, self).save(*args, **kwargs)
+
+
+    @staticmethod
+    def initialize():
+        pac = Pac.objects.all().first()
+        if Flavor.objects.filter(lookup_enum_name=FlavorEnum.Sour.value).exists() == False:
+            item = Flavor() 
+            item.pac = pac
+            item.code = uuid.uuid4()
+            item.name = "Sour"
+            item.lookup_enum_name = "Sour"
+            item.description = "Sour"
+            item.display_order = Flavor.objects.count()
+            item.is_active = True 
+            item.save()
+        if Flavor.objects.filter(lookup_enum_name=FlavorEnum.Sweet.value).exists() == False:
+            item = Flavor() 
+            item.pac = pac
+            item.code = uuid.uuid4()
+            item.name = "Sweet"
+            item.lookup_enum_name = "Sweet"
+            item.description = "Sweet"
+            item.display_order = Flavor.objects.count()
+            item.is_active = True 
+            item.save()
+        if Flavor.objects.filter(lookup_enum_name=FlavorEnum.Unknown.value).exists() == False:
+            item = Flavor() 
+            item.pac = pac
+            item.code = uuid.uuid4()
+            item.name = "Unknown"
+            item.lookup_enum_name = "Unknown"
+            item.description = "Unknown"
+            item.display_order = Flavor.objects.count()
+            item.is_active = True 
+            item.save()

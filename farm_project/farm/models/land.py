@@ -56,3 +56,8 @@ class Land(models.Model):
         self.last_update_utc_date_time = timezone.now()
         self.last_change_code = uuid.uuid4()
         return super(Land, self).save(*args, **kwargs)
+
+
+    @staticmethod
+    def initialize():
+        pass

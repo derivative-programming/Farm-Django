@@ -5,7 +5,7 @@ import datetime
 import uuid
 from .pac import Pac #pac_id
 import farm.models.constants.date_greater_than_filter as DateGreaterThanFilterConstants
-from farm.models.managers import DateGreaterThanFilterManager
+from farm.models.managers import DateGreaterThanFilterManager,DateGreaterThanFilterEnum 
 
 class DateGreaterThanFilter(models.Model):  
     date_greater_than_filter_id = models.AutoField(primary_key=True)
@@ -59,3 +59,79 @@ class DateGreaterThanFilter(models.Model):
         self.last_update_utc_date_time = timezone.now()
         self.last_change_code = uuid.uuid4()
         return super(DateGreaterThanFilter, self).save(*args, **kwargs)
+
+
+
+##GENTrainingBlock[caselookup]Start
+##GENLearn[isLookup=true,calculatedIsParentObjectAvailable=true]Start  #vrdebug
+    @staticmethod
+    def initialize():
+        pac = Pac.objects.all().first()
+        if DateGreaterThanFilter.objects.filter(lookup_enum_name=DateGreaterThanFilterEnum.Unknown.value).exists() == False:
+            item = DateGreaterThanFilter() 
+            item.pac = pac
+            item.code = uuid.uuid4()
+            item.name = "Unknown"
+            item.lookup_enum_name = "Unknown"
+            item.description = "Unknown"
+            item.display_order = DateGreaterThanFilter.objects.count()
+            item.is_active = True
+            # item.day_count = 1
+            item.save()
+        if DateGreaterThanFilter.objects.filter(lookup_enum_name=DateGreaterThanFilterEnum.Last_24_Hours.value).exists() == False:
+            item = DateGreaterThanFilter() 
+            item.pac = pac
+            item.code = uuid.uuid4()
+            item.name = "Last 24 Hours"
+            item.lookup_enum_name = "Last_24_Hours"
+            item.description = "Last 24 Hours"
+            item.display_order = DateGreaterThanFilter.objects.count()
+            item.is_active = True
+            # item.day_count = 1
+            item.save()
+        if DateGreaterThanFilter.objects.filter(lookup_enum_name=DateGreaterThanFilterEnum.Last_7_Days.value).exists() == False:
+            item = DateGreaterThanFilter() 
+            item.pac = pac
+            item.code = uuid.uuid4()
+            item.name = "Last 7 Days"
+            item.lookup_enum_name = "Last_7_Days"
+            item.description = "Last 7 Days"
+            item.display_order = DateGreaterThanFilter.objects.count()
+            item.is_active = True
+            # item.day_count = 7
+            item.save()
+        if DateGreaterThanFilter.objects.filter(lookup_enum_name=DateGreaterThanFilterEnum.Last_30_Days.value).exists() == False:
+            item = DateGreaterThanFilter() 
+            item.pac = pac
+            item.code = uuid.uuid4()
+            item.name = "Last 30 Days"
+            item.lookup_enum_name = "Last_30_Days"
+            item.description = "Last 30 Days"
+            item.display_order = DateGreaterThanFilter.objects.count()
+            item.is_active = True
+            # item.day_count = 30
+            item.save()
+        if DateGreaterThanFilter.objects.filter(lookup_enum_name=DateGreaterThanFilterEnum.Last_90_Days.value).exists() == False:
+            item = DateGreaterThanFilter() 
+            item.pac = pac
+            item.code = uuid.uuid4()
+            item.name = "Last 90 Days"
+            item.lookup_enum_name = "Last_90_Days"
+            item.description = "Last 90 Days"
+            item.display_order = DateGreaterThanFilter.objects.count()
+            item.is_active = True
+            # item.day_count = 90
+            item.save()
+        if DateGreaterThanFilter.objects.filter(lookup_enum_name=DateGreaterThanFilterEnum.Last_365_Days.value).exists() == False:
+            item = DateGreaterThanFilter() 
+            item.pac = pac
+            item.code = uuid.uuid4()
+            item.name = "Last 365 Days"
+            item.lookup_enum_name = "Last_365_Days"
+            item.description = "Last 365 Days"
+            item.display_order = DateGreaterThanFilter.objects.count()
+            item.is_active = True
+            # item.day_count = 365
+            item.save() 
+##GENLearn[isLookup=true,calculatedIsParentObjectAvailable=true]End
+##GENTrainingBlock[caselookup]End

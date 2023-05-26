@@ -5,7 +5,7 @@ import datetime
 import uuid
 from .pac import Pac #pac_id
 import farm.models.constants.tri_state_filter as TriStateFilterConstants
-from farm.models.managers import TriStateFilterManager
+from farm.models.managers import TriStateFilterManager, TriStateFilterEnum
 
 class TriStateFilter(models.Model):  
     tri_state_filter_id = models.AutoField(primary_key=True)
@@ -59,3 +59,38 @@ class TriStateFilter(models.Model):
         self.last_update_utc_date_time = timezone.now()
         self.last_change_code = uuid.uuid4()
         return super(TriStateFilter, self).save(*args, **kwargs)
+
+
+    @staticmethod
+    def initialize(): 
+        pac = Pac.objects.all().first()
+        if TriStateFilter.objects.filter(lookup_enum_name=TriStateFilterEnum.Unknown.value).exists() == False:
+            item = TriStateFilter() 
+            item.pac = pac
+            item.code = uuid.uuid4()
+            item.name = "Unknown"
+            item.lookup_enum_name = "Unknown"
+            item.description = "Unknown"
+            item.display_order = TriStateFilter.objects.count()
+            item.is_active = True 
+            item.save()
+        if TriStateFilter.objects.filter(lookup_enum_name=TriStateFilterEnum.No.value).exists() == False:
+            item = TriStateFilter() 
+            item.pac = pac
+            item.code = uuid.uuid4()
+            item.name = "No"
+            item.lookup_enum_name = "No"
+            item.description = "No"
+            item.display_order = TriStateFilter.objects.count()
+            item.is_active = True 
+            item.save()
+        if TriStateFilter.objects.filter(lookup_enum_name=TriStateFilterEnum.Yes.value).exists() == False:
+            item = TriStateFilter() 
+            item.pac = pac
+            item.code = uuid.uuid4()
+            item.name = "Yes"
+            item.lookup_enum_name = "Yes"
+            item.description = "Yes"
+            item.display_order = TriStateFilter.objects.count()
+            item.is_active = True 
+            item.save()  

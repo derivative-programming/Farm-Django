@@ -2,7 +2,7 @@ from django import urls
 from django.urls import path, include
 
 from . import views
-import farm.views.fs_farm_api.v1_0 as api_views   #vrdebug
+import farm.views.fs_farm_api.v1_0 as api_views
 from rest_framework.schemas import get_schema_view
 from rest_framework.routers import DefaultRouter
 from farm import views  

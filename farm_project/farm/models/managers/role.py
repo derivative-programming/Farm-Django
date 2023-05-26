@@ -15,5 +15,4 @@ class RoleManager(models.Manager):
 
     def from_enum(self, enum_val:RoleEnum):
         return self.get(LookupEnumName=enum_val.value)
-
-
+ 
