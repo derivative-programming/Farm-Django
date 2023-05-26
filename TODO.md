@@ -7,24 +7,26 @@ You will be submitting a PR to this repository.
 
 todo...
 
-priority... 
-lookup enums
-initialize lookup tables
+
+priority...   
 security
 v1_0 and Farm in template paths
+
+move enum to model file? easier to work with instead of also importing manager?
+
 
 convert ui apps to use new /submit endpoint
 
 signalr
 
-model managers...  
-- initialize function: create any recs, like lookups
-- build function: initializes all props and sets all lookups to unknown
-
-currentRuntime class
-- static fn Get[modelName]ByEnum(enum) for each lookup
-- static fn Get[Modelname]ByCode(code) 
-
+test:build function: initializes all props and sets all lookups to unknown...
+- expose on parent object model.  def build_[child_object]
+- create object explicitly, not through manager?
+- still need build function in a child object file. need to know all properties.
+ 
+on parent object...build_[child object name]...
+- need a sub array on object... childObjects
+- childObject array exist, but not being populated?
 
 
 implement django-seed to generate seed data.  add to readme doc on how to use.
@@ -43,9 +45,7 @@ implement security checks in base flows
 
 Change land parent to customer? Tac?
 
-If report is custom, create txt file
-
-Init lookups
+If report is custom, create txt file 
 
 need view post (no id), get (no id), delete, and put examples 
 
@@ -55,11 +55,6 @@ tests...
 - check all object props  
 
 multiple project settings files. one for each env
-
-populate flavor table with lookup values...
-- dont create a migration
-- use a fixture?  what happens if it runs twice?
-- generate a migration to create lookup recs?
 
  apis and flows should be async
 

@@ -64,13 +64,33 @@ class DateGreaterThanFilter(models.Model):
 
 ##GENTrainingBlock[caselookup]Start
 ##GENLearn[isLookup=true,calculatedIsParentObjectAvailable=true]Start  #vrdebug
+
+    @staticmethod
+    def build(pac:Pac
+        ):
+        item = DateGreaterThanFilter()
+        item.day_count = 0
+        item.code = uuid.uuid4()
+        item.insert_utc_date_time = timezone.now
+        item.last_update_utc_date_time = timezone.now
+        item.insert_user_id = uuid.UUID(int=0)
+        item.last_update_user_id = uuid.UUID(int=0)
+        item.last_change_code = uuid.uuid4()
+        item.description = ""
+        item.display_order = 0
+        item.is_active = False
+        item.lookup_enum_name = ""
+        item.name = ""
+        #pac_id = models.IntegerField(null=True)
+        item.pac = pac
+        return item
+
+
     @staticmethod
     def initialize():
         pac = Pac.objects.all().first()
         if DateGreaterThanFilter.objects.filter(lookup_enum_name=DateGreaterThanFilterEnum.Unknown.value).exists() == False:
-            item = DateGreaterThanFilter() 
-            item.pac = pac
-            item.code = uuid.uuid4()
+            item = DateGreaterThanFilter.build(pac) 
             item.name = "Unknown"
             item.lookup_enum_name = "Unknown"
             item.description = "Unknown"
@@ -79,9 +99,7 @@ class DateGreaterThanFilter(models.Model):
             # item.day_count = 1
             item.save()
         if DateGreaterThanFilter.objects.filter(lookup_enum_name=DateGreaterThanFilterEnum.Last_24_Hours.value).exists() == False:
-            item = DateGreaterThanFilter() 
-            item.pac = pac
-            item.code = uuid.uuid4()
+            item = DateGreaterThanFilter.build(pac)  
             item.name = "Last 24 Hours"
             item.lookup_enum_name = "Last_24_Hours"
             item.description = "Last 24 Hours"
@@ -90,9 +108,7 @@ class DateGreaterThanFilter(models.Model):
             # item.day_count = 1
             item.save()
         if DateGreaterThanFilter.objects.filter(lookup_enum_name=DateGreaterThanFilterEnum.Last_7_Days.value).exists() == False:
-            item = DateGreaterThanFilter() 
-            item.pac = pac
-            item.code = uuid.uuid4()
+            item = DateGreaterThanFilter.build(pac) 
             item.name = "Last 7 Days"
             item.lookup_enum_name = "Last_7_Days"
             item.description = "Last 7 Days"
@@ -101,9 +117,7 @@ class DateGreaterThanFilter(models.Model):
             # item.day_count = 7
             item.save()
         if DateGreaterThanFilter.objects.filter(lookup_enum_name=DateGreaterThanFilterEnum.Last_30_Days.value).exists() == False:
-            item = DateGreaterThanFilter() 
-            item.pac = pac
-            item.code = uuid.uuid4()
+            item = DateGreaterThanFilter.build(pac) 
             item.name = "Last 30 Days"
             item.lookup_enum_name = "Last_30_Days"
             item.description = "Last 30 Days"
@@ -112,9 +126,7 @@ class DateGreaterThanFilter(models.Model):
             # item.day_count = 30
             item.save()
         if DateGreaterThanFilter.objects.filter(lookup_enum_name=DateGreaterThanFilterEnum.Last_90_Days.value).exists() == False:
-            item = DateGreaterThanFilter() 
-            item.pac = pac
-            item.code = uuid.uuid4()
+            item = DateGreaterThanFilter.build(pac)  
             item.name = "Last 90 Days"
             item.lookup_enum_name = "Last_90_Days"
             item.description = "Last 90 Days"
@@ -123,9 +135,7 @@ class DateGreaterThanFilter(models.Model):
             # item.day_count = 90
             item.save()
         if DateGreaterThanFilter.objects.filter(lookup_enum_name=DateGreaterThanFilterEnum.Last_365_Days.value).exists() == False:
-            item = DateGreaterThanFilter() 
-            item.pac = pac
-            item.code = uuid.uuid4()
+            item = DateGreaterThanFilter.build(pac) 
             item.name = "Last 365 Days"
             item.lookup_enum_name = "Last_365_Days"
             item.description = "Last 365 Days"

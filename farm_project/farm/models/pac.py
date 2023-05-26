@@ -4,7 +4,7 @@ from django.core.exceptions import ValidationError
 import datetime
 import uuid  
 import farm.models.constants.pac as PacConstants
-from farm.models.managers import PacManager,PacEnum
+from farm.models.managers import PacManager,PacEnum 
 
 class Pac(models.Model):  
     pac_id = models.AutoField(primary_key=True)

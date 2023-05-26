@@ -7,7 +7,11 @@ from .flavor import Flavor #flavor_id
 from .land import Land #land_id
 import farm.models.constants.plant as PlantConstants
 import logging 
+from farm.models.managers import FlavorManager,FlavorEnum #flavor_id
+from farm.models.managers import LandManager,LandEnum #land_id
 from farm.models.managers import PlantManager,PlantEnum
+from decimal import Decimal
+from farm.helpers import TypeConversion
 
 
 class Plant(models.Model):  
@@ -133,6 +137,37 @@ class Plant(models.Model):
 
 ##GENTrainingBlock[caselookup]Start
 ##GENLearn[isLookup=false,calculatedIsParentObjectAvailable=true]Start   
+    @staticmethod
+    def build(land:Land
+        ):
+        item = Plant()
+        item.code = uuid.uuid4()
+        item.insert_utc_date_time = timezone.now
+        item.last_update_utc_date_time = timezone.now
+        item.insert_user_id = uuid.UUID(int=0)
+        item.last_update_user_id = uuid.UUID(int=0)
+        item.last_change_code = uuid.uuid4()
+        item.some_int_val = 0
+        item.some_big_int_val = 0
+        item.some_bit_val = False
+        item.is_edit_allowed = False
+        item.is_delete_allowed = False
+        item.some_float_val = 0
+        item.some_decimal_val = Decimal(0)
+        item.some_utc_date_time_val = TypeConversion.get_default_date_time()
+        item.some_date_val = TypeConversion.get_default_date()
+        item.some_money_val = 0
+        item.some_n_var_char_val = ""
+        item.some_var_char_val = ""
+        item.some_text_val = ""
+        item.some_phone_number = ""
+        item.some_email_address = ""
+        item.some_uniqueidentifier_val = uuid.UUID(int=0)
+        item.flavor = Flavor.objects.from_enum(enum_val=FlavorEnum.Unknown)
+        item.land = land
+        item.other_flavor = ""
+        return item
+
     @staticmethod
     def initialize():
         pass

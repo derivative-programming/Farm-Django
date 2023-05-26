@@ -1,0 +1,21 @@
+{
+    "templateType":"object",  
+    "ForceFileNameFormat" : "LowerUnderscored",
+    "IsEdgeCase": true,
+    "dimension" :{
+        "name":"DateGreaterThanFilter",
+        "isLookup":"true",
+        "calculatedIsParentObjectAvailable":"true"
+    },
+    "ignoreDimensionPropertyList": [
+        "prop.isNotPublishedToSubscriptions",
+        "prop.isFKLookup",
+        "prop.isQueryByAvailable",
+        "prop.calculatedIsDBColumnIndexed",
+        "prop.isEncrypted",
+        "prop.calculatedIsCodeNotLookup",
+        "prop.calculatedIsCodeAndLookup",
+        "lookupItem.calculatedIsCustomIntProp1ValueAvailable",
+        "lookupItem.isActive"
+    ]
+} 
