@@ -163,8 +163,8 @@ class Plant(models.Model):
         item.some_phone_number = ""
         item.some_email_address = ""
         item.some_uniqueidentifier_val = uuid.UUID(int=0)
-        item.flavor = Flavor.objects.from_enum(enum_val=FlavorEnum.Unknown)
-        item.land = land
+        item.flavor = Flavor.objects.from_enum(enum_val=FlavorEnum.Unknown) #flavor_id
+        item.land = land #land_id
         item.other_flavor = ""
         return item
 

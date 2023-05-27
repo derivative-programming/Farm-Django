@@ -10,10 +10,7 @@ todo...
 
 priority...   
 security
-v1_0 and Farm in template paths
-
-move enum to model file? easier to work with instead of also importing manager?
-
+v1_0 and Farm in template paths 
 
 convert ui apps to use new /submit endpoint
 
