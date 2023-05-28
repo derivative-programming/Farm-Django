@@ -6,7 +6,7 @@ from farm.helpers import SessionContext
 from decimal import Decimal
 from datetime import date, datetime
 from farm.helpers import TypeConversion
-import farm.flows.constants.land_plant_list_init_report as LandPlantListInitReportConstants
+import farm.flows.constants.land_plant_list_init_report as FlowConstants
 class BaseFlowLandPlantListInitReport(BaseFlow):
     def __init__(self, session_context:SessionContext): 
         super(BaseFlowLandPlantListInitReport, self).__init__(

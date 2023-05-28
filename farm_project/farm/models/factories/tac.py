@@ -6,6 +6,7 @@ from factory.django import DjangoModelFactory
 from factory import Faker, SubFactory
 from django.utils import timezone
 from farm.models import Tac
+from farm.models.managers import TacEnum
 from .pac import PacFactory #pac_id
 class TacFactory(DjangoModelFactory):
     class Meta:
@@ -23,6 +24,7 @@ class TacFactory(DjangoModelFactory):
     name = Faker('sentence', nb_words=4)
     pac = SubFactory(PacFactory) #pac_id
 
+  
     @classmethod
     def _create(cls, model_class, *args, **kwargs): 
         items = Tac.objects.all()
@@ -31,3 +33,5 @@ class TacFactory(DjangoModelFactory):
                 if item.lookup_enum_name == 'Uknown':
                     items.remove(item)
         return random.choice(items)
+
+

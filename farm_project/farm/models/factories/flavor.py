@@ -6,8 +6,8 @@ from factory.django import DjangoModelFactory
 from factory import Faker, SubFactory
 from django.utils import timezone
 from farm.models import Flavor
+from farm.models.managers import FlavorEnum
 from .pac import PacFactory #pac_id
-import logging
 class FlavorFactory(DjangoModelFactory):
     class Meta:
         model = Flavor
@@ -24,12 +24,14 @@ class FlavorFactory(DjangoModelFactory):
     name = Faker('sentence', nb_words=4)
     pac = SubFactory(PacFactory) #pac_id
 
+  
     @classmethod
-    def create(cls, **kwargs): 
+    def _create(cls, model_class, *args, **kwargs): 
         items = Flavor.objects.all()
-        logging.debug(items)
         if len(items)>0:
             for item in items:
                 if item.lookup_enum_name == 'Uknown':
                     items.remove(item)
         return random.choice(items)
+
+

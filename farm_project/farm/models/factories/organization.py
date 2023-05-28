@@ -1,10 +1,12 @@
 # farm/models/factories.py
 import uuid
 import factory
+import random
 from factory.django import DjangoModelFactory
 from factory import Faker, SubFactory
 from django.utils import timezone
 from farm.models import Organization
+from farm.models.managers import OrganizationEnum
 from .tac import TacFactory #tac_id
 class OrganizationFactory(DjangoModelFactory):
     class Meta:
@@ -17,3 +19,7 @@ class OrganizationFactory(DjangoModelFactory):
     last_change_code = factory.LazyFunction(uuid.uuid4)
     name = Faker('sentence', nb_words=4)
     tac = SubFactory(TacFactory) #tac_id
+
+
+ 
+

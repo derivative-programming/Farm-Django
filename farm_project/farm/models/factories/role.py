@@ -1,11 +1,12 @@
 # farm/models/factories.py
 import uuid
-import random
 import factory
+import random
 from factory.django import DjangoModelFactory
 from factory import Faker, SubFactory
 from django.utils import timezone
 from farm.models import Role
+from farm.models.managers import RoleEnum
 from .pac import PacFactory #pac_id
 class RoleFactory(DjangoModelFactory):
     class Meta:
@@ -23,6 +24,7 @@ class RoleFactory(DjangoModelFactory):
     name = Faker('sentence', nb_words=4)
     pac = SubFactory(PacFactory) #pac_id
 
+  
     @classmethod
     def _create(cls, model_class, *args, **kwargs): 
         items = Role.objects.all()
@@ -31,3 +33,5 @@ class RoleFactory(DjangoModelFactory):
                 if item.lookup_enum_name == 'Uknown':
                     items.remove(item)
         return random.choice(items)
+
+

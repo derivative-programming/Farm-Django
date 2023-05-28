@@ -1,34 +1,29 @@
 import uuid
 from farm.models import Tac 
-from farm.flows.base import BaseFlow
+from .base_flow import BaseFlow
 from farm.flows.base import LogSeverity
 from farm.helpers import SessionContext
- 
-
+from decimal import Decimal
+from datetime import date, datetime
+from farm.helpers import TypeConversion
+import farm.flows.constants.tac_login as FlowConstants
 class BaseFlowTacLogin(BaseFlow):
     def __init__(self, session_context:SessionContext): 
         super(BaseFlowTacLogin, self).__init__(
             "TacLogin", 
             session_context,
             ) 
-
-      
     def _process_validation_rules(self, 
-        tac: Tac,
-        email: str,
-        password: str,
+            tac: Tac,
+            email:str = "",
+            password:str = "",
         ):
         super()._log_message_and_severity(LogSeverity.information_high_detail, "Validating...")
-
-        if email == "":
-            self._add_field_validation_error(email,"Email is required")
-            
-        if password == "":
-            self._add_field_validation_error(email,"Password is required")
-
+        if email == "" and FlowConstants.param_email_isRequired == True:
+            self._add_field_validation_error("email","Please enter a Email")
+        if password == "" and FlowConstants.param_password_isRequired == True:
+            self._add_field_validation_error("password","Please enter a ")
         self._process_security_rules(tac)
-
-    
     def _process_security_rules(self, 
         tac: Tac,
         ):

@@ -1,10 +1,12 @@
 # farm/models/factories.py
 import uuid
 import factory
+import random
 from factory.django import DjangoModelFactory
 from factory import Faker, SubFactory
 from django.utils import timezone
 from farm.models import Customer
+from farm.models.managers import CustomerEnum
 from .tac import TacFactory #tac_id
 class CustomerFactory(DjangoModelFactory):
     class Meta:
@@ -38,3 +40,7 @@ class CustomerFactory(DjangoModelFactory):
     tac = SubFactory(TacFactory) #tac_id
     utc_offset_in_minutes = Faker('random_int')
     zip = Faker('sentence', nb_words=4)
+
+
+ 
+

@@ -4,44 +4,41 @@ from datetime import date, datetime
 import uuid
 from decimal import Decimal
 from farm.helpers import TypeConversion
-
 @dataclass
-class ReportItemLandPlantList():    
+class ReportItemLandPlantList():
     plant_code:uuid = uuid.UUID(int=0)
-    some_int_val:int = 0 
-    some_big_int_val:int = 0 
-    some_bit_val:bool = False 
-    is_edit_allowed:bool = False 
-    is_delete_allowed:bool = False 
+    some_int_val:int = 0
+    some_big_int_val:int = 0
+    some_bit_val:bool = False
+    is_edit_allowed:bool = False
+    is_delete_allowed:bool = False
     some_float_val:float = 0
     some_decimal_val:Decimal = Decimal(0)
-    some_utc_date_time_val:datetime = field(default_factory=TypeConversion.get_default_date_time, 
+    some_utc_date_time_val:datetime = field(default_factory=TypeConversion.get_default_date_time,
             metadata=config(
-            encoder=datetime.isoformat, 
+            encoder=datetime.isoformat,
             decoder=datetime.fromisoformat
-        )) 
+        ))
     some_date_val:date = field(default_factory=TypeConversion.get_default_date, metadata=config(
-            encoder=date.isoformat, 
+            encoder=date.isoformat,
             decoder=date.fromisoformat
         ))
     some_money_val:Decimal = Decimal(0)
-    some_n_var_char_val:str = "" 
-    some_var_char_val:str = "" 
-    some_text_val:str = "" 
-    some_phone_number:str = "" 
-    some_email_address:str = "" 
-    flavor_name:str = "" 
+    some_n_var_char_val:str = ""
+    some_var_char_val:str = ""
+    some_text_val:str = ""
+    some_phone_number:str = ""
+    some_email_address:str = ""
+    flavor_name:str = ""
     flavor_code:uuid = uuid.UUID(int=0)
-    some_int_conditional_on_deletable:int = 0 
-    n_var_char_as_url:str = "" 
+    some_int_conditional_on_deletable:int = 0
+    n_var_char_as_url:str = ""
     update_link_plant_code:uuid = uuid.UUID(int=0)
     delete_async_button_link_plant_code:uuid = uuid.UUID(int=0)
     details_link_plant_code:uuid = uuid.UUID(int=0)
 #endset
     def __init__(self): 
         pass
- 
-
     def load_data_provider_dict(self,data:dict):
             self.plant_code = uuid.UUID(data["plant_code"])
             self.some_int_val = int(data["some_int_val"])
@@ -66,3 +63,4 @@ class ReportItemLandPlantList():
             self.update_link_plant_code = uuid.UUID(data["update_link_plant_code"])
             self.delete_async_button_link_plant_code = uuid.UUID(data["delete_async_button_link_plant_code"])
             self.details_link_plant_code = uuid.UUID(data["details_link_plant_code"])
+

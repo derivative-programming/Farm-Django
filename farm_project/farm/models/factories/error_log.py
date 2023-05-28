@@ -1,10 +1,12 @@
 # farm/models/factories.py
 import uuid
 import factory
+import random
 from factory.django import DjangoModelFactory
 from factory import Faker, SubFactory
 from django.utils import timezone
 from farm.models import ErrorLog
+from farm.models.managers import ErrorLogEnum
 from .pac import PacFactory #pac_id
 class ErrorLogFactory(DjangoModelFactory):
     class Meta:
@@ -23,3 +25,7 @@ class ErrorLogFactory(DjangoModelFactory):
     is_resolved = Faker('boolean')
     pac = SubFactory(PacFactory) #pac_id
     url = Faker('sentence', nb_words=4)
+
+
+ 
+

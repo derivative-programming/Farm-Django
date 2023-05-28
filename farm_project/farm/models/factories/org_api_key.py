@@ -1,10 +1,12 @@
 # farm/models/factories.py
 import uuid
 import factory
+import random
 from factory.django import DjangoModelFactory
 from factory import Faker, SubFactory
 from django.utils import timezone
 from farm.models import OrgApiKey
+from farm.models.managers import OrgApiKeyEnum
 from .organization import OrganizationFactory #organization_id
 from .org_customer import OrgCustomerFactory #org_customer_id
 class OrgApiKeyFactory(DjangoModelFactory):
@@ -25,3 +27,7 @@ class OrgApiKeyFactory(DjangoModelFactory):
     name = Faker('sentence', nb_words=4)
     organization = SubFactory(OrganizationFactory) #organization_id
     org_customer = SubFactory(OrgCustomerFactory) #org_customer_id
+
+
+ 
+

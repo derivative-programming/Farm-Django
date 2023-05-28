@@ -1,10 +1,12 @@
 # farm/models/factories.py
 import uuid
 import factory
+import random
 from factory.django import DjangoModelFactory
 from factory import Faker, SubFactory
 from django.utils import timezone
 from farm.models import CustomerRole
+from farm.models.managers import CustomerRoleEnum
 from .customer import CustomerFactory #customer_id
 from .role import RoleFactory #role_id
 class CustomerRoleFactory(DjangoModelFactory):
@@ -20,3 +22,7 @@ class CustomerRoleFactory(DjangoModelFactory):
     is_placeholder = Faker('boolean')
     placeholder = Faker('boolean')
     role = SubFactory(RoleFactory) #role_id
+
+
+ 
+
