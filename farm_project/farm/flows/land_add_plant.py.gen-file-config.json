@@ -1,5 +1,6 @@
 {
     "templateType":"objWF",  
+    "ForceFileNameFormat" : "LowerUnderscored",
     "dimension" :{
         "name":"LandAddPlant"
     },

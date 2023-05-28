@@ -78,7 +78,7 @@ class Land(models.Model):
         item.last_update_user_id = uuid.UUID(int=0)
         item.last_change_code = uuid.uuid4()
         item.is_active = False
-        item.lookupEnumName = ""
+        item.lookup_enum_name = ""
         item.name = ""
         #pac_id = models.IntegerField(null=True)
         item.pac = pac

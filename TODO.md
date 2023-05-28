@@ -10,21 +10,13 @@ todo...
 
 priority...   
 security
-v1_0 and Farm in template paths 
-
-model test factories...
-pac factory should just return existing one
-lookup factory should select random of existing ones
+v1_0 and Farm in template paths  
 
 convert ui apps to use new /submit endpoint
 
 signalr
-
-test:build function: initializes all props and sets all lookups to unknown...
-- expose on parent object model.  def build_[child_object]
-- create object explicitly, not through manager?
-- still need build function in a child object file. need to know all properties.
  
+- expose build on parent object model.  def build_[child_object]   
 
 implement django-seed to generate seed data.  add to readme doc on how to use.
 - getting error on seeding. only 3 are being populated.
@@ -44,8 +36,7 @@ If report is custom, create txt file
 
 Signalr 
 
-multiple project settings files. one for each env
-
+multiple project settings files. one for each env 
 
 async workflow processing....
 - celery? 

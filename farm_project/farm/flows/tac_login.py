@@ -70,16 +70,8 @@ class FlowTacLogin(BaseFlowTacLogin):
         api_key_output = ""
 
  
-
-
-
-        customer_code_output = customer.code
-        email_output = customer.email
-        user_code_value_output = customer.code
-        utc_offset_in_minutes_output = customer.utc_offset_in_minutes
  
-        role_name_csv_list_output = "" 
-
+   
         api_key_dict = dict()
         api_key_dict["PacCode"] = str(customer.tac.pac.code)
         api_key_dict["TacCode"] = str(customer.tac.code)
@@ -90,7 +82,13 @@ class FlowTacLogin(BaseFlowTacLogin):
  
         customer.last_login_utc_date_time = timezone.now() 
         customer.save()
-
+        
+        customer_code_output = customer.code
+        email_output = customer.email
+        user_code_value_output = customer.code
+        utc_offset_in_minutes_output = customer.utc_offset_in_minutes 
+        role_name_csv_list_output = "" 
+ 
         super()._log_message_and_severity(LogSeverity.information_high_detail, "Building result")
         result = FlowTacLoginResult()
         result.context_object_code = tac.code

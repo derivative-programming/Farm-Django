@@ -122,6 +122,9 @@ class FlowLandAddPlant(BaseFlowLandAddPlant):
         output_some_email_address_output:str = ""  
 
         # TODO: add flow logic 
+##GENTrainingBlock[caseFlowLogic]Start
+##GENLearn[calculatedIsTrueParentChild=true,calculatedIsTargetChildObjectAvailable=true,calculatedIsInitObjWF=false,isLoginPage=false]Start   
+ 
         plant:farm_models.Plant = farm_models.Plant.build(land)
         plant.land = land
         plant.flavor = farm_models.Flavor.objects.from_code(request_flavor_code)
@@ -144,7 +147,7 @@ class FlowLandAddPlant(BaseFlowLandAddPlant):
         # plant.some_int_val = request_sample_image_upload_file
         plant.save()
 
-        land_code_output:uuid = plant.land.code
+        land_code_output:uuid = land.code
         plant_code_output:uuid = plant.code    
         output_flavor_code_output = plant.flavor.code 
         output_other_flavor_output = plant.other_flavor
@@ -164,6 +167,9 @@ class FlowLandAddPlant(BaseFlowLandAddPlant):
         output_some_phone_number_output = plant.some_phone_number
         output_some_email_address_output = plant.some_email_address 
 
+##GENLearn[calculatedIsTrueParentChild=true,calculatedIsTargetChildObjectAvailable=true,calculatedIsInitObjWF=false,isLoginPage=false]End
+##GENTrainingBlock[caseFlowLogic]End
+    
         super()._log_message_and_severity(LogSeverity.information_high_detail, "Building result")
         result = FlowLandAddPlantResult() 
         
