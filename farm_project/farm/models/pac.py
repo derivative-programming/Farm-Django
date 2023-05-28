@@ -72,7 +72,7 @@ class Pac(models.Model):
         if Pac.objects.filter(lookup_enum_name=PacEnum.Unknown.value).exists() == False:
             item = Pac.build()  
             item.code = uuid.uuid4()
-            item.name = "Unknown"
+            item.name = "Unknown" #vrdebug
             item.lookup_enum_name = "Unknown"
             item.description = "Unknown"
             item.display_order = 1

@@ -63,7 +63,7 @@ class DateGreaterThanFilter(models.Model):
 
 
 ##GENTrainingBlock[caselookup]Start
-##GENLearn[isLookup=true,calculatedIsParentObjectAvailable=true]Start  #vrdebug
+##GENLearn[isLookup=true,calculatedIsParentObjectAvailable=true]Start   
 
     @staticmethod
     def build(pac:Pac

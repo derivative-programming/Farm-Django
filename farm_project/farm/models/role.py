@@ -64,7 +64,7 @@ class Role(models.Model):
         self.last_update_utc_date_time = timezone.now()
         self.last_change_code = uuid.uuid4()
         return super(Role, self).save(*args, **kwargs)
-  #vrdebug
+    
     @staticmethod
     def build(pac:Pac
         ):

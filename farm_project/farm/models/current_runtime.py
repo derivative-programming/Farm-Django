@@ -4,10 +4,20 @@ import logging
 class CurrentRuntime:
 
     @staticmethod
+    def initialize_root_model():
+        models.Pac.initialize()
+#endset
+
+    @staticmethod
     def initialize():
         logging.debug('Models.CurrentRuntime.initialize() Start')
-        models.Pac.initialize()
-##endset
+        CurrentRuntime.initialize_root_model()
+        CurrentRuntime.initialize_models()
+        logging.debug('Models.CurrentRuntime.initialize() End')
+
+    @staticmethod
+    def initialize_models():
+        logging.debug('Models.CurrentRuntime.initialize Models')
         
         models.Customer.initialize()
         models.CustomerRole.initialize()
@@ -23,4 +33,4 @@ class CurrentRuntime:
         models.Role.initialize()
         models.Tac.initialize()
         models.TriStateFilter.initialize() 
-        logging.debug('Models.CurrentRuntime.initialize() End')
+#endset
