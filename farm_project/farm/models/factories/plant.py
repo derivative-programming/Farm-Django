@@ -1,10 +1,12 @@
 # farm/models/factories.py
 import uuid
 import factory
+import random
 from factory.django import DjangoModelFactory
 from factory import Faker, SubFactory
 from django.utils import timezone
 from farm.models import Plant
+from farm.models.managers import PlantEnum
 from .flavor import FlavorFactory #flavor_id
 from .land import LandFactory #land_id
 class PlantFactory(DjangoModelFactory):
@@ -35,3 +37,8 @@ class PlantFactory(DjangoModelFactory):
     some_uniqueidentifier_val = factory.LazyFunction(uuid.uuid4)
     some_utc_date_time_val = Faker('date_time', tzinfo=timezone.utc)
     some_var_char_val = Faker('sentence', nb_words=4)
+
+##GENTrainingBlock[caselookup]Start
+##GENLearn[isLookup=false,calculatedIsParentObjectAvailable=true]Start 
+##GENLearn[isLookup=false,calculatedIsParentObjectAvailable=true]End
+##GENTrainingBlock[caselookup]End

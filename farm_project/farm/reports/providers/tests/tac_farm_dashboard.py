@@ -3,10 +3,12 @@ from farm.reports.providers import ReportProviderTacFarmDashboard
 import uuid
 from farm.helpers import SessionContext
 from farm.models.factories import TacFactory
+from farm.models import CurrentRuntime
 
 class ReportProviderTacFarmDashboardTest(TestCase):
 
     def setUp(self):
+        CurrentRuntime.initialize()
         session_context = SessionContext(dict())
         self.report_provider = ReportProviderTacFarmDashboard(session_context)
         self.tac = TacFactory.create()

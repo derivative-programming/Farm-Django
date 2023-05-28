@@ -2,8 +2,10 @@
 from django.test import TestCase
 from farm.models import Tac
 from farm.models.factories import TacFactory
+from farm.models import CurrentRuntime
 class TacTestCase(TestCase):
     def setUp(self): 
+        CurrentRuntime.initialize()
         self.tac = TacFactory.create()
     def test_tac_creation(self):
         # Test that the instance was created

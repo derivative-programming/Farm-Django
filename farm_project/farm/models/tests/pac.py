@@ -2,8 +2,10 @@
 from django.test import TestCase
 from farm.models import Pac
 from farm.models.factories import PacFactory
+from farm.models import CurrentRuntime
 class PacTestCase(TestCase):
     def setUp(self): 
+        CurrentRuntime.initialize()
         self.pac = PacFactory.create()
     def test_pac_creation(self):
         # Test that the instance was created

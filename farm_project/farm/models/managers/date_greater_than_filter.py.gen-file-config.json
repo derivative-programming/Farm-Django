@@ -15,6 +15,7 @@
         "prop.calculatedIsCodeNotLookup",
         "prop.calculatedIsCodeAndLookup",
         "lookupItem.calculatedIsCustomIntProp1ValueAvailable",
-        "lookupItem.isActive"
+        "lookupItem.isActive",
+        "prop.calculatedisLexiconEligible"
     ]
 } 

@@ -5,10 +5,12 @@ import uuid
 from decimal import Decimal
 from farm.helpers import SessionContext,TypeConversion
 from farm.models.factories import LandFactory
+from farm.models import CurrentRuntime
 
 class ReportProviderLandPlantListTest(TestCase):
 
     def setUp(self):
+        CurrentRuntime.initialize()
         session_context = SessionContext(dict())
         self.report_provider = ReportProviderLandPlantList(session_context)
         self.land = LandFactory.create()

@@ -2,8 +2,10 @@
 from django.test import TestCase
 from farm.models import Land
 from farm.models.factories import LandFactory
+from farm.models import CurrentRuntime
 class LandTestCase(TestCase):
     def setUp(self): 
+        CurrentRuntime.initialize()
         self.land = LandFactory.create()
     def test_land_creation(self):
         # Test that the instance was created

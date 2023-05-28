@@ -3,6 +3,7 @@ from django.test import TestCase
 from farm.models import Flavor
 from farm.models.admin_panels import FlavorAdmin
 from farm.models.factories import FlavorFactory
+from farm.models import CurrentRuntime
 class MockRequest:
     pass
 class MockSuperUser:
@@ -12,6 +13,7 @@ request = MockRequest()
 request.user = MockSuperUser()
 class FlavorAdminTest(TestCase):
     def setUp(self):
+        CurrentRuntime.initialize()
         self.site = AdminSite()
         self.admin = FlavorAdmin(Flavor, self.site)
     def test_readonly_fields(self):

@@ -8,10 +8,12 @@ import json
 from farm.models.factories import LandFactory
 from farm.views.factories import LandPlantListGetModelRequestFactory
 from farm.helpers import ApiToken 
+from farm.models import CurrentRuntime
 
 class LandPlantListViewSetTestCase(TestCase):
 
     def setUp(self):
+        CurrentRuntime.initialize()
         self.client = APIClient() 
         self.land = LandFactory.create()
         request = LandPlantListGetModelRequestFactory.create()

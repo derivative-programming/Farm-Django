@@ -3,6 +3,7 @@ from django.test import TestCase
 from farm.models import Land
 from farm.models.admin_panels import LandAdmin
 from farm.models.factories import LandFactory
+from farm.models import CurrentRuntime
 class MockRequest:
     pass
 class MockSuperUser:
@@ -12,6 +13,7 @@ request = MockRequest()
 request.user = MockSuperUser()
 class LandAdminTest(TestCase):
     def setUp(self):
+        CurrentRuntime.initialize()
         self.site = AdminSite()
         self.admin = LandAdmin(Land, self.site)
     def test_readonly_fields(self):

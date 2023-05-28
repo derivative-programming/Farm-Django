@@ -3,6 +3,7 @@ from django.test import TestCase
 from farm.models import Tac
 from farm.models.admin_panels import TacAdmin
 from farm.models.factories import TacFactory
+from farm.models import CurrentRuntime
 class MockRequest:
     pass
 class MockSuperUser:
@@ -12,6 +13,7 @@ request = MockRequest()
 request.user = MockSuperUser()
 class TacAdminTest(TestCase):
     def setUp(self):
+        CurrentRuntime.initialize()
         self.site = AdminSite()
         self.admin = TacAdmin(Tac, self.site)
     def test_readonly_fields(self):

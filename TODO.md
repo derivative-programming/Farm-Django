@@ -12,6 +12,10 @@ priority...
 security
 v1_0 and Farm in template paths 
 
+model test factories...
+pac factory should just return existing one
+lookup factory should select random of existing ones
+
 convert ui apps to use new /submit endpoint
 
 signalr
@@ -21,10 +25,6 @@ test:build function: initializes all props and sets all lookups to unknown...
 - create object explicitly, not through manager?
 - still need build function in a child object file. need to know all properties.
  
-on parent object...build_[child object name]...
-- need a sub array on object... childObjects
-- childObject array exist, but not being populated?
-
 
 implement django-seed to generate seed data.  add to readme doc on how to use.
 - getting error on seeding. only 3 are being populated.
@@ -40,26 +40,35 @@ add roles to token. check roles in flow?
 
 implement security checks in base flows
 
-Change land parent to customer? Tac?
-
 If report is custom, create txt file 
-
-need view post (no id), get (no id), delete, and put examples 
 
 Signalr 
 
-tests...
-- check all object props  
-
 multiple project settings files. one for each env
 
- apis and flows should be async
 
 async workflow processing....
 - celery? 
     - requires redis?
 - dj background tasks?
 - tasks subfolder containing all dynaflow tasks?
+
+
+low priority....
+
+on parent object...build_[child object name]...
+- need a sub array on object... childObjects
+- childObject array exist, but not being populated?
+
+
+Change farm land parent to customer? Tac?
+
+need view post (no id), get (no id), delete, and put examples 
+
+tests...
+- check all object props  
+
+ apis and flows should be async
  
 add to admin models...
 search_fields = ['name', 'email', 'related_model__related_field']. what the admin search textbox will search.  do all varchar and nvarchar fields.

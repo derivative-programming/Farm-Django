@@ -11,6 +11,8 @@ from django.utils import timezone
 from farm.helpers import ApiToken
 from decimal import Decimal
 from farm.helpers import TypeConversion
+import farm.models as farm_models 
+import farm.models.managers as farm_managers
 @dataclass_json
 @dataclass
 class FlowLandPlantListInitReportResult():
@@ -75,6 +77,12 @@ class FlowLandPlantListInitReport(BaseFlowLandPlantListInitReport):
         tac_code_output:uuid = uuid.UUID(int=0)
         land_name_output:str = ""
         # TODO: add flow logic
+
+        flavor_code_output = farm_models.Flavor.objects.from_enum(farm_managers.FlavorEnum.Unknown).code
+        land_code_output = farm_models.Land.objects.from_enum(farm_managers.LandEnum.Unknown).code
+        tac_code_output = farm_models.Tac.objects.from_enum(farm_managers.TacEnum.Unknown).code
+        land_name_output = land.name
+
         super()._log_message_and_severity(LogSeverity.information_high_detail, "Building result")
         result = FlowLandPlantListInitReportResult() 
         result.context_object_code = land.code

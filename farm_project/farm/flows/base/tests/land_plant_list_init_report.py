@@ -7,9 +7,11 @@ from decimal import Decimal
 from factory import Faker
 from django.utils import timezone
 from datetime import date, datetime
+from farm.models import CurrentRuntime
 
 class BaseFlowLandPlantListInitReportTestCase(unittest.TestCase):
     def setUp(self):
+        CurrentRuntime.initialize()
         session_context = SessionContext(dict())
         self.flow = BaseFlowLandPlantListInitReport(session_context)
     def test_process_validation_rules(self): 

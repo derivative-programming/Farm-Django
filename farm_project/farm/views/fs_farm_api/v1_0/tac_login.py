@@ -44,7 +44,7 @@ class TacLoginViewSet(ViewSet):
             
         sid = transaction.savepoint()
         try: 
-            logging.debug("Start session...")
+            logging.debug("Start session...") 
             session_context = SessionContext(auth_dict)
             tacCode = session_context.check_context_code("TacCode", tacCode)
             init_request = view_init_models.TacLoginInitObjWFGetInitModelRequest() 
@@ -109,7 +109,7 @@ class TacLoginViewSet(ViewSet):
             
         sid = transaction.savepoint()
         try:
-            logging.debug("Start session...")
+            logging.debug("Start session...") 
             session_context = SessionContext(auth_dict)
             tacCode = session_context.check_context_code("TacCode", tacCode)
             logging.debug("Request:" + json.dumps(request.data)) 

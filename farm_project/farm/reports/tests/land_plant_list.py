@@ -7,10 +7,12 @@ import uuid
 from decimal import Decimal 
 from farm.helpers import SessionContext,TypeConversion
 from farm.models.factories import LandFactory
+from farm.models import CurrentRuntime
 
 class ReportTestLandPlantList(TestCase):
 
     def setUp(self):
+        CurrentRuntime.initialize()
         session_context = SessionContext(dict())
         self.land = LandFactory.create()
         self.land_code = self.land.code

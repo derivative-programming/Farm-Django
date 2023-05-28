@@ -2,10 +2,12 @@ import unittest
 from farm.flows.base import BaseFlowTacLogin
 from farm.helpers import SessionContext
 from farm.models.factories import TacFactory
+from farm.models import CurrentRuntime
 
 
 class BaseFlowTacLoginTestCase(unittest.TestCase):
     def setUp(self):
+        CurrentRuntime.initialize()
         session_context = SessionContext(dict())
         self.flow = BaseFlowTacLogin(session_context)
     

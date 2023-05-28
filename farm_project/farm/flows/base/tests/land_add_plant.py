@@ -8,10 +8,12 @@ from factory import Faker
 from django.utils import timezone
 from datetime import date, datetime
 from farm.models.factories import FlavorFactory #request_flavor_code
+from farm.models import CurrentRuntime
 
 
 class BaseFlowLandAddPlantTestCase(unittest.TestCase):
     def setUp(self):
+        CurrentRuntime.initialize()
         session_context = SessionContext(dict())
         self.flow = BaseFlowLandAddPlant(session_context)
     

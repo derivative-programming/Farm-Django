@@ -3,6 +3,7 @@ from django.test import TestCase
 from farm.models import CustomerRole
 from farm.models.admin_panels import CustomerRoleAdmin
 from farm.models.factories import CustomerRoleFactory
+from farm.models import CurrentRuntime
 class MockRequest:
     pass
 class MockSuperUser:
@@ -12,6 +13,7 @@ request = MockRequest()
 request.user = MockSuperUser()
 class CustomerRoleAdminTest(TestCase):
     def setUp(self):
+        CurrentRuntime.initialize()
         self.site = AdminSite()
         self.admin = CustomerRoleAdmin(CustomerRole, self.site)
     def test_readonly_fields(self):

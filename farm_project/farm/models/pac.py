@@ -53,9 +53,24 @@ class Pac(models.Model):
 ##GENTrainingBlock[caselookup]Start
 ##GENLearn[isLookup=true,calculatedIsParentObjectAvailable=false]Start  
     @staticmethod
+    def build():
+        item = Pac()
+        item.description = ""
+        item.display_order = 0
+        item.code = uuid.uuid4()
+        item.insert_utc_date_time = timezone.now
+        item.last_update_utc_date_time = timezone.now
+        item.insert_user_id = uuid.UUID(int=0)
+        item.last_update_user_id = uuid.UUID(int=0)
+        item.last_change_code = uuid.uuid4()
+        item.is_active = False
+        item.lookupEnumName = ""
+        item.name = "" 
+        return item
+    @staticmethod
     def initialize(): 
         if Pac.objects.filter(lookup_enum_name=PacEnum.Unknown.value).exists() == False:
-            item = Pac()  
+            item = Pac.build()  
             item.code = uuid.uuid4()
             item.name = "Unknown"
             item.lookup_enum_name = "Unknown"

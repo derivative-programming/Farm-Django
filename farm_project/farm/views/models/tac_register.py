@@ -25,9 +25,9 @@ class TacRegisterPostModelResponse(PostResponse):
 #endset
     def load_flow_response(self,data:FlowTacRegisterResult): 
         placeholder = "" #to avoid pass line
-        self.customer_code = data.tac_code
+        self.customer_code = data.customer_code
         self.email = data.email
-        self.user_code_value = data.tac_
+        self.user_code_value = data.user_code_value
         self.utc_offset_in_minutes = data.utc_offset_in_minutes
         self.role_name_csv_list = data.role_name_csv_list
         self.api_key = data.api_key

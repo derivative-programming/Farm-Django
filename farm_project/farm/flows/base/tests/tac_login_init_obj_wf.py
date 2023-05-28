@@ -2,10 +2,12 @@ import unittest
 from farm.flows.base import BaseFlowTacLoginInitObjWF
 from farm.helpers import SessionContext
 from farm.models.factories import TacFactory
+from farm.models import CurrentRuntime
 
 
 class BaseFlowTacLoginInitObjWFTestCase(unittest.TestCase):
     def setUp(self):
+        CurrentRuntime.initialize()
         session_context = SessionContext(dict())
         self.flow = BaseFlowTacLoginInitObjWF(session_context)
     

@@ -1,12 +1,14 @@
 from django.db import models
 from enum import Enum 
-import uuid   
+import uuid  
 
+ 
 class CustomerRoleEnum(Enum):
     pass
-    
-class CustomerRoleManager(models.Manager):
 
+class CustomerRoleManager(models.Manager):
     def from_code(self, code:uuid):
-        return self.get(code=code)  
-  
+        return self.get(code=code)
+
+ 
+

@@ -1,10 +1,12 @@
 # farm/models/factories.py
 import uuid
 import factory
+import random
 from factory.django import DjangoModelFactory
 from factory import Faker, SubFactory
 from django.utils import timezone
 from farm.models import Pac
+from farm.models.managers import PacEnum
 
 class PacFactory(DjangoModelFactory):
     class Meta:
@@ -20,3 +22,12 @@ class PacFactory(DjangoModelFactory):
     is_active = Faker('boolean')
     lookup_enum_name = Faker('sentence', nb_words=4)
     name = Faker('sentence', nb_words=4)
+
+##GENTrainingBlock[caselookup]Start
+##GENLearn[isLookup=true,calculatedIsParentObjectAvailable=false]Start  
+    @classmethod
+    def create(cls, **kwargs):
+        pac = Pac.objects.from_enum(enum_val=PacEnum.Unknown)
+        return pac
+##GENLearn[isLookup=true,calculatedIsParentObjectAvailable=false]End
+##GENTrainingBlock[caselookup]End

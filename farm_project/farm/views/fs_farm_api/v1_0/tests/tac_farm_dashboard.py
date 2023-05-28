@@ -6,10 +6,12 @@ import logging
 import json
 from farm.models.factories import TacFactory
 from farm.helpers import ApiToken 
+from farm.models import CurrentRuntime
 
 class TacFarmDashboardViewSetTestCase(TestCase):
 
     def setUp(self):
+        CurrentRuntime.initialize()
         self.client = APIClient() 
         self.tac = TacFactory.create()
         self.valid_request_data = {

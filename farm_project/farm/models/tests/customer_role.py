@@ -2,8 +2,10 @@
 from django.test import TestCase
 from farm.models import CustomerRole
 from farm.models.factories import CustomerRoleFactory
+from farm.models import CurrentRuntime
 class CustomerRoleTestCase(TestCase):
     def setUp(self): 
+        CurrentRuntime.initialize()
         self.customer_role = CustomerRoleFactory.create()
     def test_customer_role_creation(self):
         # Test that the instance was created

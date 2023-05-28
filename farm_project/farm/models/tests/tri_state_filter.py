@@ -2,8 +2,10 @@
 from django.test import TestCase
 from farm.models import TriStateFilter
 from farm.models.factories import TriStateFilterFactory
+from farm.models import CurrentRuntime
 class TriStateFilterTestCase(TestCase):
     def setUp(self): 
+        CurrentRuntime.initialize()
         self.tri_state_filter = TriStateFilterFactory.create()
     def test_tri_state_filter_creation(self):
         # Test that the instance was created

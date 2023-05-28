@@ -11,6 +11,8 @@ from django.core.exceptions import ObjectDoesNotExist
 from farm.flows.base import FlowValidationError
 from farm.helpers import ApiToken
 from django.utils import timezone
+import farm.models as farm_models 
+import farm.models.managers as farm_managers
 
 @dataclass_json
 @dataclass

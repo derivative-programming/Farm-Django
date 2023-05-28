@@ -2,8 +2,10 @@
 from django.test import TestCase
 from farm.models import Role
 from farm.models.factories import RoleFactory
+from farm.models import CurrentRuntime
 class RoleTestCase(TestCase):
     def setUp(self): 
+        CurrentRuntime.initialize()
         self.role = RoleFactory.create()
     def test_role_creation(self):
         # Test that the instance was created

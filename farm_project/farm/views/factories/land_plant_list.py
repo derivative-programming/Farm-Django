@@ -10,7 +10,7 @@ from decimal import Decimal
 class LandPlantListGetModelRequestFactory(factory.base.Factory):
     class Meta:
         model = LandPlantListGetModelRequest
-    flavorCode:uuid = FlavorFactory.create().code
+    flavorCode:uuid = factory.LazyFunction(lambda: (FlavorFactory.create()).code)
     someIntVal:int = Faker('random_int')
     someBigIntVal:int = Faker('random_int')
     someFloatVal:float = Faker('pyfloat', positive=True)

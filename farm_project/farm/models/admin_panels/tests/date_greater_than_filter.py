@@ -3,6 +3,7 @@ from django.test import TestCase
 from farm.models import DateGreaterThanFilter
 from farm.models.admin_panels import DateGreaterThanFilterAdmin
 from farm.models.factories import DateGreaterThanFilterFactory
+from farm.models import CurrentRuntime
 class MockRequest:
     pass
 class MockSuperUser:
@@ -12,6 +13,7 @@ request = MockRequest()
 request.user = MockSuperUser()
 class DateGreaterThanFilterAdminTest(TestCase):
     def setUp(self):
+        CurrentRuntime.initialize()
         self.site = AdminSite()
         self.admin = DateGreaterThanFilterAdmin(DateGreaterThanFilter, self.site)
     def test_readonly_fields(self):

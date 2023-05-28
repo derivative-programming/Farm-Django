@@ -111,9 +111,9 @@ class LandAddPlantViewSet(ViewSet):
             
         sid = transaction.savepoint()
         try:
-            logging.debug("Start session...")
+            logging.debug("Start session...") 
             session_context = SessionContext(auth_dict)
-            land_code = session_context.check_context_code("LandCode", landCode)
+            land_code = session_context.check_context_code("LandCode", landCode) 
             logging.debug("Request:" + json.dumps(request.data)) 
             logging.debug("get schema")
             schema = marshmallow_dataclass.class_schema(view_models.LandAddPlantPostModelRequest)() 

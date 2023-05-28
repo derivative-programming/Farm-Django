@@ -8,6 +8,8 @@ from farm.helpers import SessionContext
 from farm.models import Customer
 from django.utils import timezone
 from farm.helpers import ApiToken
+import farm.models as farm_models 
+import farm.models.managers as farm_managers
 
 @dataclass_json
 @dataclass
@@ -59,7 +61,7 @@ class FlowTacRegister(BaseFlowTacRegister):
 
         # TODO: add flow logic
 
-        customer = Customer.objects.create()
+        customer = Customer.build(tac)
         customer.tac = tac
         customer.email = email
         customer.password = password
@@ -70,6 +72,25 @@ class FlowTacRegister(BaseFlowTacRegister):
         customer.is_active = True
         customer.last_login_utc_date_time = timezone.now() 
         customer.save()
+
+        
+
+        customer_role:farm_models.CustomerRole = farm_models.CustomerRole.build(customer)
+        customer_role.customer = customer
+        customer_role.role = farm_models.Role.objects.from_enum(farm_managers.RoleEnum.User)
+        customer_role.save
+
+        if email.lower() == "vince.roche@gmail.com".lower(): 
+            customer_role:farm_models.CustomerRole = farm_models.CustomerRole.build(customer)
+            customer_role.customer = customer
+            customer_role.role = farm_models.Role.objects.from_enum(farm_managers.RoleEnum.Admin)
+            customer_role.save()
+
+            customer_role:farm_models.CustomerRole = farm_models.CustomerRole.build(customer)
+            customer_role.customer = customer
+            customer_role.role = farm_models.Role.objects.from_enum(farm_managers.RoleEnum.Config)
+            customer_role.save()
+
         
         customer_code_output = customer.code
         email_output = customer.email

@@ -2,8 +2,10 @@
 from django.test import TestCase
 from farm.models import DateGreaterThanFilter
 from farm.models.factories import DateGreaterThanFilterFactory
+from farm.models import CurrentRuntime
 class DateGreaterThanFilterTestCase(TestCase):
     def setUp(self): 
+        CurrentRuntime.initialize()
         self.date_greater_than_filter = DateGreaterThanFilterFactory.create()
     def test_date_greater_than_filter_creation(self):
         # Test that the instance was created

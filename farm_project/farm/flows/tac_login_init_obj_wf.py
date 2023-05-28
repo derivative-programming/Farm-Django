@@ -6,6 +6,8 @@ from farm.flows.base import BaseFlowTacLoginInitObjWF
 from farm.models import Tac 
 from farm.flows.base import LogSeverity
 from farm.helpers import SessionContext
+import farm.models as farm_models 
+import farm.models.managers as farm_managers
  
  
 

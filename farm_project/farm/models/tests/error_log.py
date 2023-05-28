@@ -2,8 +2,10 @@
 from django.test import TestCase
 from farm.models import ErrorLog
 from farm.models.factories import ErrorLogFactory
+from farm.models import CurrentRuntime
 class ErrorLogTestCase(TestCase):
     def setUp(self): 
+        CurrentRuntime.initialize()
         self.error_log = ErrorLogFactory.create()
     def test_error_log_creation(self):
         # Test that the instance was created

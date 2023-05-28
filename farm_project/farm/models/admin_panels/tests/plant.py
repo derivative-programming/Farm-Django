@@ -3,6 +3,8 @@ from django.test import TestCase
 from farm.models import Plant
 from farm.models.admin_panels import PlantAdmin
 from farm.models.factories import PlantFactory
+from farm.models import CurrentRuntime
+import logging
 class MockRequest:
     pass
 class MockSuperUser:
@@ -12,6 +14,7 @@ request = MockRequest()
 request.user = MockSuperUser()
 class PlantAdminTest(TestCase):
     def setUp(self):
+        CurrentRuntime.initialize()
         self.site = AdminSite()
         self.admin = PlantAdmin(Plant, self.site)
     def test_readonly_fields(self):
@@ -45,7 +48,7 @@ class PlantAdminTest(TestCase):
             'code', 
             )
         )
-    def test_queryset(self):
+    def test_queryset(self): 
         plant = PlantFactory.create()
         queryset = self.admin.get_queryset(request) 
         self.assertIn(plant.code, [obj.code for obj in queryset]) 

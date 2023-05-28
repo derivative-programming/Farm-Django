@@ -2,8 +2,10 @@
 from django.test import TestCase
 from farm.models import Flavor
 from farm.models.factories import FlavorFactory
+from farm.models import CurrentRuntime
 class FlavorTestCase(TestCase):
     def setUp(self): 
+        CurrentRuntime.initialize()
         self.flavor = FlavorFactory.create()
     def test_flavor_creation(self):
         # Test that the instance was created

@@ -1,10 +1,14 @@
 # farm/models/tests/test_plant.py
 from django.test import TestCase
 from farm.models import Plant
+from farm.models import Flavor
 from farm.models.factories import PlantFactory
+from farm.models import CurrentRuntime
+import logging
 class PlantTestCase(TestCase):
     def setUp(self): 
-        self.plant = PlantFactory.create()
+        CurrentRuntime.initialize() 
+        self.plant = PlantFactory.create() 
     def test_plant_creation(self):
         # Test that the instance was created
         self.assertIsNotNone(self.plant)

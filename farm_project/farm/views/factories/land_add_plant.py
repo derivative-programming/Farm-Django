@@ -1,4 +1,4 @@
-# farm/models/factories.py
+# api/models/factories.py
 import uuid
 import factory 
 from factory import Faker
@@ -10,7 +10,7 @@ from decimal import Decimal
 class LandAddPlantPostModelRequestFactory(factory.base.Factory):
     class Meta:
         model = LandAddPlantPostModelRequest
-    requestFlavorCode:uuid = FlavorFactory.create().code
+    requestFlavorCode:uuid = factory.LazyFunction(lambda: (FlavorFactory.create()).code)
     requestOtherFlavor:str = ""
     requestSomeIntVal:int = Faker('random_int')
     requestSomeBigIntVal:int = Faker('random_int')
@@ -32,4 +32,5 @@ class LandAddPlantPostModelRequestFactory(factory.base.Factory):
     def _create(cls, model_class, *args, **kwargs):
         """Override the default _create to use the dataclass's constructor."""
         return model_class(*args, **kwargs)
+
 

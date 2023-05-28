@@ -3,6 +3,7 @@ from django.test import TestCase
 from farm.models import ErrorLog
 from farm.models.admin_panels import ErrorLogAdmin
 from farm.models.factories import ErrorLogFactory
+from farm.models import CurrentRuntime
 class MockRequest:
     pass
 class MockSuperUser:
@@ -12,6 +13,7 @@ request = MockRequest()
 request.user = MockSuperUser()
 class ErrorLogAdminTest(TestCase):
     def setUp(self):
+        CurrentRuntime.initialize()
         self.site = AdminSite()
         self.admin = ErrorLogAdmin(ErrorLog, self.site)
     def test_readonly_fields(self):

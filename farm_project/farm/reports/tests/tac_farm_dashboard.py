@@ -4,10 +4,12 @@ from farm.reports import ReportManagerTacFarmDashboard, ReportRequestValidationE
 from farm.reports.row_models import ReportItemTacFarmDashboard
 import uuid
 from farm.helpers import SessionContext
+from farm.models import CurrentRuntime
 
 class ReportTestTacFarmDashboard(TestCase):
 
     def setUp(self):
+        CurrentRuntime.initialize()
         session_context = SessionContext(dict())
         self.tac_code = uuid.uuid4()
         self.page_number = 1

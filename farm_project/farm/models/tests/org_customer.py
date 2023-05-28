@@ -2,8 +2,10 @@
 from django.test import TestCase
 from farm.models import OrgCustomer
 from farm.models.factories import OrgCustomerFactory
+from farm.models import CurrentRuntime
 class OrgCustomerTestCase(TestCase):
     def setUp(self): 
+        CurrentRuntime.initialize()
         self.org_customer = OrgCustomerFactory.create()
     def test_org_customer_creation(self):
         # Test that the instance was created

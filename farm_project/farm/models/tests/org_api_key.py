@@ -2,8 +2,10 @@
 from django.test import TestCase
 from farm.models import OrgApiKey
 from farm.models.factories import OrgApiKeyFactory
+from farm.models import CurrentRuntime
 class OrgApiKeyTestCase(TestCase):
     def setUp(self): 
+        CurrentRuntime.initialize()
         self.org_api_key = OrgApiKeyFactory.create()
     def test_org_api_key_creation(self):
         # Test that the instance was created

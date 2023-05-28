@@ -3,6 +3,7 @@ from django.test import TestCase
 from farm.models import Pac
 from farm.models.admin_panels import PacAdmin
 from farm.models.factories import PacFactory
+from farm.models import CurrentRuntime
 class MockRequest:
     pass
 class MockSuperUser:
@@ -12,6 +13,7 @@ request = MockRequest()
 request.user = MockSuperUser()
 class PacAdminTest(TestCase):
     def setUp(self):
+        CurrentRuntime.initialize()
         self.site = AdminSite()
         self.admin = PacAdmin(Pac, self.site)
     def test_readonly_fields(self):

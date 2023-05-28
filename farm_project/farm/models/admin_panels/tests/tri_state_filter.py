@@ -3,6 +3,7 @@ from django.test import TestCase
 from farm.models import TriStateFilter
 from farm.models.admin_panels import TriStateFilterAdmin
 from farm.models.factories import TriStateFilterFactory
+from farm.models import CurrentRuntime
 class MockRequest:
     pass
 class MockSuperUser:
@@ -12,6 +13,7 @@ request = MockRequest()
 request.user = MockSuperUser()
 class TriStateFilterAdminTest(TestCase):
     def setUp(self):
+        CurrentRuntime.initialize()
         self.site = AdminSite()
         self.admin = TriStateFilterAdmin(TriStateFilter, self.site)
     def test_readonly_fields(self):

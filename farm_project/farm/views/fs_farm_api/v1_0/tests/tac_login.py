@@ -7,17 +7,18 @@ import logging
 import json
 from farm.models.factories import TacFactory
 from farm.helpers import ApiToken 
+from farm.models import CurrentRuntime
 
 class TacLoginViewSetTestCase(TestCase):
 
     def setUp(self):
+        CurrentRuntime.initialize()
         logging.debug("TacLoginViewSetTestCase setup")
         self.client = APIClient() 
         self.tac = TacFactory.create()
         self.customer = Customer.objects.create(code=uuid4(), first_name="Test first name", email="test@example.com", password="test_password")
         self.customer.tac = self.tac 
-        self.customer.save()
-        logging.debug(str(self.customer))
+        self.customer.save() 
         self.valid_request_data = {
             "email": "test@example.com",
             "password": "test_password"

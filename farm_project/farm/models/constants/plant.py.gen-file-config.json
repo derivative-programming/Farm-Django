@@ -17,6 +17,7 @@
         "prop.isEncrypted",
         "prop.calculatedIsDBColumnIndexed",
         "prop.calculatedIsCodeNotLookup",
-        "prop.calculatedIsCodeAndLookup"
+        "prop.calculatedIsCodeAndLookup",
+        "prop.calculatedisLexiconEligible"
     ]
 } 
