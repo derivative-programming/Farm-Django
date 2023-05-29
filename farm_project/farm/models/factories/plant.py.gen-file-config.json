@@ -1,6 +1,6 @@
 {
     "templateType":"object", 
-    "ForceFileNameFormat" : "LowerUnderscored",
+    "ForceFileNameFormat" : "Snake",
     "dimension" :{
         "name":"Plant"
     },

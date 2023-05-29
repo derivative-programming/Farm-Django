@@ -1,6 +1,6 @@
 {
     "templateType":"object",  
-    "ForceFileNameFormat" : "LowerUnderscored",
+    "ForceFileNameFormat" : "Snake",
     "IsEdgeCase": true,
     "dimension" :{
         "name":"DateGreaterThanFilter",
