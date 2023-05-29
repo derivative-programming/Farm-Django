@@ -21,7 +21,7 @@ class LandAddPlantViewSetTestCase(TestCase):
         self.invalid_request_data = {
             "xxxxxx": "yyyyy" 
         }
-        api_dict = {'LandCode': str(self.land.code)}
+        api_dict = {'LandCode': str(self.land.code), 'role_name_csv':'User'}
         self.test_api_key = ApiToken.create_token(api_dict,1)
         self.valid_header = {'HTTP_API_KEY' : self.test_api_key}
         
@@ -30,6 +30,7 @@ class LandAddPlantViewSetTestCase(TestCase):
     ## TODO add test - invalid api key 
     ## TODO add test - no api key on public endpoint
     ## TODO add test - no api key on private endpoint
+    ## TODO add test - correct role required in api key
         
     def test_post_not_implemented(self):
         # Assuming you have a FlowLandAddPlant.process method that handles valid data

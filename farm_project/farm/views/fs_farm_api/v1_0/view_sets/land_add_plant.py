@@ -21,7 +21,7 @@ class LandAddPlantViewSet(ViewSet):
     isPostWithIdAvailable:bool = True
     isPutAvailable:bool = False 
     isDeleteAvailable:bool = False  
-    isPublic: bool = False
+    isPublic: bool = False 
       
 
     def get_token(self, request):

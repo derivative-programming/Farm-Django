@@ -1,7 +1,7 @@
 from django.test import TestCase
 from dataclasses import asdict
 from rest_framework.test import APIClient 
-from farm.views.fs_farm_api.v1_0 import LandPlantListViewSet
+from farm.views.fs_farm_api.v1_0.view_sets import LandPlantListViewSet
 from uuid import uuid4
 import logging
 import json
@@ -27,7 +27,7 @@ class LandPlantListViewSetTestCase(TestCase):
 
         self.invalid_request_data3 = asdict(request)
         self.invalid_request_data3["pageNumber"] = "0"
-        api_dict = {'LandCode': str(self.land.code)}
+        api_dict = {'LandCode': str(self.land.code), 'role_name_csv':'User'}
         self.test_api_key = ApiToken.create_token(api_dict,1)
         self.valid_header = {'HTTP_API_KEY' : self.test_api_key}
 

@@ -1,7 +1,7 @@
 import json
 from django.test import TestCase
 from rest_framework.test import APIClient 
-from farm.views.fs_farm_api.v1_0 import TacRegisterViewSet
+from farm.views.fs_farm_api.v1_0.view_sets import TacRegisterViewSet
 from uuid import uuid4
 import logging
 from farm.models.factories import TacFactory
@@ -25,7 +25,7 @@ class TacRegisterViewSetTestCase(TestCase):
             "emailxxx": "invalid@example.com",
             "password": "wrong_password"
         }
-        api_dict = {'TacCode': str(self.tac.code)}
+        api_dict = {'TacCode': str(self.tac.code), 'role_name_csv':''}
         self.test_api_key = ApiToken.create_token(api_dict,1)
         self.valid_header = {'HTTP_API_KEY' : self.test_api_key}
 

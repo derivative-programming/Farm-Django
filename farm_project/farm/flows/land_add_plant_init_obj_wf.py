@@ -78,7 +78,7 @@ class FlowLandAddPlantInitObjWF(BaseFlowLandAddPlantInitObjWF):
         request_some_email_address_output:str = ""
         tac_code_output:uuid = uuid.UUID(int=0)
         land_name_output:str = ""
-        # TODO: add flow logic
+        # TODO: add flow logic 
   
         plant:farm_models.Plant = farm_models.Plant.build(land)
         request_flavor_code_output = plant.flavor.code
@@ -99,7 +99,7 @@ class FlowLandAddPlantInitObjWF(BaseFlowLandAddPlantInitObjWF):
         request_some_phone_number_output = plant.some_phone_number
         request_some_email_address_output = plant.some_email_address
         tac_code_output = farm_models.Tac.objects.from_enum(enum_val=farm_managers.TacEnum.Primary).code
-        land_name_output = land.name
+        land_name_output = land.name 
  
         super()._log_message_and_severity(LogSeverity.information_high_detail, "Building result")
         result = FlowLandAddPlantInitObjWFResult()

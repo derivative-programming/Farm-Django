@@ -43,6 +43,14 @@ class ReportManagerLandPlantList():
                 ) -> List[ReportItemLandPlantList]:
         logging.debug('ReportManagerLandPlantList.generate Start')
 
+        role_required = "User"
+
+        if len(role_required) > 0:
+            if role_required not in self._session_context.role_name_csv:
+                raise ReportRequestValidationError("","Unautorized access. " + role_required + " role not found.") 
+
+
+
         if item_count_per_page <= 0:
             raise ReportRequestValidationError("item_count_per_page","Minimum count per page is 1")
         

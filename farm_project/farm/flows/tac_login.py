@@ -70,6 +70,11 @@ class FlowTacLogin(BaseFlowTacLogin):
         api_key_output = ""
 
  
+        customer_roles = farm_models.CustomerRole.objects.filter(customer_id=customer.customer_id)
+       
+        roles = [customer_role.role.lookup_enum_name for customer_role in customer_roles]
+        roles_str = ', '.join(roles)
+        roles_str = roles_str.strip(', ')
  
    
         api_key_dict = dict()
@@ -77,17 +82,18 @@ class FlowTacLogin(BaseFlowTacLogin):
         api_key_dict["TacCode"] = str(customer.tac.code)
         api_key_dict["CustomerCode"] = str(customer.code)
         api_key_dict["UserName"] = customer.email
-        api_key_dict["role_name_csv"] = role_name_csv_list_output
+        api_key_dict["role_name_csv"] = roles_str
         api_key_output = ApiToken.create_token(api_key_dict, 1)
  
         customer.last_login_utc_date_time = timezone.now() 
         customer.save()
         
+        
         customer_code_output = customer.code
         email_output = customer.email
         user_code_value_output = customer.code
         utc_offset_in_minutes_output = customer.utc_offset_in_minutes 
-        role_name_csv_list_output = "" 
+        role_name_csv_list_output = roles_str 
  
         super()._log_message_and_severity(LogSeverity.information_high_detail, "Building result")
         result = FlowTacLoginResult()

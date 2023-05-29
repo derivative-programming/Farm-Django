@@ -1,6 +1,6 @@
 from django.test import TestCase
 from rest_framework.test import APIClient 
-from farm.views.fs_farm_api.v1_0 import TacFarmDashboardViewSet
+from farm.views.fs_farm_api.v1_0.view_sets import TacFarmDashboardViewSet
 from uuid import uuid4
 import logging
 import json
@@ -38,7 +38,7 @@ class TacFarmDashboardViewSetTestCase(TestCase):
             "orderByColumnName": "",
             "orderByDescending": "false" 
         }
-        api_dict = {'TacCode': str(self.tac.code)}
+        api_dict = {'TacCode': str(self.tac.code), 'role_name_csv':'User'}
         self.test_api_key = ApiToken.create_token(api_dict,1)
         self.valid_header = {'HTTP_API_KEY' : self.test_api_key}
     def test_submit_success(self):

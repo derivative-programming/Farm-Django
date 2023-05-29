@@ -7,6 +7,7 @@ from decimal import Decimal
 from datetime import date, datetime
 from farm.helpers import TypeConversion
 import farm.flows.constants.land_add_plant as FlowConstants
+import farm.models as farm_models
 
 class BaseFlowLandAddPlant(BaseFlow):
     def __init__(self, session_context:SessionContext): 
@@ -105,3 +106,60 @@ class BaseFlowLandAddPlant(BaseFlow):
         land: Land,
         ):
         super()._log_message_and_severity(LogSeverity.information_high_detail, "Processing security rules...")
+
+        customerCodeMatchRequired = False
+
+        role_required = "User"
+
+        if len(role_required) > 0:
+            if role_required not in self._session_context.role_name_csv:
+                self._add_validation_error("Unautorized access. " + role_required + " role not found.") 
+
+
+        if FlowConstants.calculatedIsRowLevelCustomerSecurityUsed == True:
+            customerCodeMatchRequired = True
+        if FlowConstants.calculatedIsRowLevelOrganizationSecurityUsed == True:
+            customerCodeMatchRequired = True
+        if FlowConstants.calculatedIsRowLevelOrgCustomerSecurityUsed == True:
+            customerCodeMatchRequired = True
+
+        if customerCodeMatchRequired == True:
+            
+            val = True
+
+            item = land 
+
+            while val:
+                if item.get_object_name() == "pac":
+                    val = False 
+
+##GENTrainingBlock[caseFlowLogic_calculatedIsRowLevelOrgCustomerSecurityUsed]Start
+##GENLearn[calculatedIsRowLevelOrgCustomerSecurityUsed=true]Start   
+                if FlowConstants.calculatedIsRowLevelOrgCustomerSecurityUsed == True:
+                    if item.get_object_name() == "org_customer":
+                        item = item.customer
+##GENLearn[calculatedIsRowLevelOrgCustomerSecurityUsed=true]End
+##GENTrainingBlock[caseFlowLogic_calculatedIsRowLevelOrgCustomerSecurityUsed]End
+
+##GENTrainingBlock[caseFlowLogic_calculatedIsRowLevelCustomerSecurityUsed]Start
+##GENLearn[calculatedIsRowLevelCustomerSecurityUsed=true]Start    
+                if FlowConstants.calculatedIsRowLevelCustomerSecurityUsed == True:
+                    if item.get_object_name() == "customer":
+                        if item.code != self._session_context.customer_code:
+                            self._add_validation_error("Unautorized access.  Invalid User.") 
+##GENLearn[calculatedIsRowLevelCustomerSecurityUsed=true]End
+##GENTrainingBlock[caseFlowLogic_calculatedIsRowLevelCustomerSecurityUsed]End
+    
+##GENTrainingBlock[caseFlowLogic_calculatedIsRowLevelOrganizationSecurityUsed]Start
+##GENLearn[calculatedIsRowLevelOrganizationSecurityUsed=true]Start    
+                if FlowConstants.calculatedIsRowLevelOrganizationSecurityUsed == True:
+                    if item.get_object_name() == "organization":
+                        customer = farm_models.Customer.objects.from_code(self._session_context.customer_code)
+                        org_customers = farm_models.OrgCustomer.objects.filter(organization_id=item.organization_id, customer_id=customer.customer_id)
+                        if org_customers.count() == 0:
+                            self._add_validation_error("Unautorized access. Invalid user in organization.") 
+##GENLearn[calculatedIsRowLevelOrganizationSecurityUsed=true]End
+##GENTrainingBlock[caseFlowLogic_calculatedIsRowLevelOrganizationSecurityUsed]End
+
+                      
+                item = item.get_parent_object()

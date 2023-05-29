@@ -8,6 +8,7 @@ class SessionContext:
     pac_code:uuid = uuid.UUID(int=0) 
     api_key_dict:dict = dict()
     session_code:uuid = uuid.UUID(int=0) 
+    role_name_csv:str = ""
 
     def __init__(self, api_key_dict:dict) -> None:
         self.api_key_dict = api_key_dict
@@ -32,6 +33,9 @@ class SessionContext:
         
         if'UserName' in self.api_key_dict:
             self.user_name = self.api_key_dict['UserName'] 
+            
+        if'role_name_csv' in self.api_key_dict:
+            self.role_name_csv = self.api_key_dict['role_name_csv'] 
         
         return context_code_value
 

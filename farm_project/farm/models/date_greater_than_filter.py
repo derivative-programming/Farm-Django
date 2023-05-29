@@ -63,8 +63,9 @@ class DateGreaterThanFilter(models.Model):
 
 
 ##GENTrainingBlock[caselookup]Start
-##GENLearn[isLookup=true,calculatedIsParentObjectAvailable=true]Start   
-
+##GENLearn[isLookup=true,calculatedIsParentObjectAvailable=true]Start    
+    def get_parent_object(self):
+        return self.pac
     @staticmethod
     def build(pac:Pac
         ):

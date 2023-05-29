@@ -49,9 +49,14 @@ class Pac(models.Model):
         self.last_change_code = uuid.uuid4()
         return super(Pac, self).save(*args, **kwargs)
 
+    def get_object_name(self):
+        return "pac" 
 
 ##GENTrainingBlock[caselookup]Start
 ##GENLearn[isLookup=true,calculatedIsParentObjectAvailable=false]Start  
+    
+    def get_parent_object(self):
+        return None
     @staticmethod
     def build():
         item = Pac()

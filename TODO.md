@@ -9,28 +9,11 @@ todo...
 
 
 priority...   
-security
-v1_0 and Farm in template paths  
+security 
 
+------------------
 convert ui apps to use new /submit endpoint
-
-signalr
- 
-- expose build on parent object model.  def build_[child_object]   
-
-implement django-seed to generate seed data.  add to readme doc on how to use.
-- getting error on seeding. only 3 are being populated.
-   
-
-site templates have farm in file path
-
-version number folder name replacement not working...
-calculatedCodeSafeVersionNumber > calculatedCodeSafeVersionNumberText
-add a view sub folder?
-
-add roles to token. check roles in flow?
-
-implement security checks in base flows
+     
 
 If report is custom, create txt file 
 
@@ -47,6 +30,10 @@ async workflow processing....
 
 low priority....
 
+implement django-seed to generate seed data.  add to readme doc on how to use.
+- getting error on seeding. only 3 are being populated.
+   
+ 
 on parent object...build_[child object name]...
 - need a sub array on object... childObjects
 - childObject array exist, but not being populated?

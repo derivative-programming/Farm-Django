@@ -10,6 +10,7 @@ from django.utils import timezone
 from farm.helpers import ApiToken
 import farm.models as farm_models 
 import farm.models.managers as farm_managers
+import logging
 
 @dataclass_json
 @dataclass
@@ -78,7 +79,7 @@ class FlowTacRegister(BaseFlowTacRegister):
         customer_role:farm_models.CustomerRole = farm_models.CustomerRole.build(customer)
         customer_role.customer = customer
         customer_role.role = farm_models.Role.objects.from_enum(farm_managers.RoleEnum.User)
-        customer_role.save
+        customer_role.save()
 
         if email.lower() == "vince.roche@gmail.com".lower(): 
             customer_role:farm_models.CustomerRole = farm_models.CustomerRole.build(customer)
@@ -90,21 +91,26 @@ class FlowTacRegister(BaseFlowTacRegister):
             customer_role.customer = customer
             customer_role.role = farm_models.Role.objects.from_enum(farm_managers.RoleEnum.Config)
             customer_role.save()
+ 
+        customer_roles = farm_models.CustomerRole.objects.filter(customer_id=customer.customer_id)
+       
+        roles = [customer_role.role.lookup_enum_name for customer_role in customer_roles]
+        roles_str = ', '.join(roles)
+        roles_str = roles_str.strip(', ')
 
-        
         customer_code_output = customer.code
         email_output = customer.email
         user_code_value_output = customer.code
         utc_offset_in_minutes_output = customer.utc_offset_in_minutes
  
-        role_name_csv_list_output = "" 
+        role_name_csv_list_output = roles_str 
 
         api_key_dict = dict()
         api_key_dict["PacCode"] = str(customer.tac.pac.code)
         api_key_dict["TacCode"] = str(customer.tac.code)
         api_key_dict["CustomerCode"] = str(customer.code)
         api_key_dict["UserName"] = customer.email
-        api_key_dict["role_name_csv"] = role_name_csv_list_output
+        api_key_dict["role_name_csv"] = roles_str
         api_key_output = ApiToken.create_token(api_key_dict, 1)
  
 

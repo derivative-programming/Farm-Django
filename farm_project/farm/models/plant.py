@@ -134,9 +134,15 @@ class Plant(models.Model):
         self.last_update_utc_date_time = timezone.now()
         self.last_change_code = uuid.uuid4()
         return super(Plant, self).save(*args, **kwargs)
+    
+    def get_object_name(self):
+        return "plant"
+    
 
 ##GENTrainingBlock[caselookup]Start
 ##GENLearn[isLookup=false,calculatedIsParentObjectAvailable=true]Start   
+    def get_parent_object(self):
+        return self.land
     @staticmethod
     def build(land:Land
         ):

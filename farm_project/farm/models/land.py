@@ -65,6 +65,12 @@ class Land(models.Model):
         self.last_change_code = uuid.uuid4()
         return super(Land, self).save(*args, **kwargs) 
     
+    def get_object_name(self):
+        return "land"
+    
+    def get_parent_object(self):
+        return self.pac
+    
     @staticmethod
     def build(pac:Pac
         ):

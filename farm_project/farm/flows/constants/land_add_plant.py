@@ -18,3 +18,6 @@ param_request_some_text_val_isRequired = True
 param_request_some_phone_number_isRequired = True 
 param_request_some_email_address_isRequired = True 
 param_request_sample_image_upload_file_isRequired = False
+calculatedIsRowLevelCustomerSecurityUsed = False
+calculatedIsRowLevelOrgCustomerSecurityUsed = False
+calculatedIsRowLevelOrganizationSecurityUsed = False

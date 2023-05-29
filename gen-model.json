@@ -1218,6 +1218,7 @@
                 "defaultOrderByDescending": "false",
                 "titleText": "Plant List title text",
                 "introText": "A list of plants on the land",
+                "roleRequired": "User",
                 "isCustomSqlUsed": "true",
                 "targetChildObject": "Plant",
                 "isAutoRefresh": "true",
@@ -1925,7 +1926,7 @@
                 "name": "LandAddPlant",
                 "titleText": "Add Plant Title Text",
                 "introText": "Add plant intro text.",
-                "roleRequired": "",
+                "roleRequired": "User",
                 "objectWorkflowParam": [
                   {
                     "name": "RequestFlavorCode",
@@ -2367,7 +2368,8 @@
                 "isInitObjWFSubscribedToParams": "false",
                 "layoutName": "",
                 "formFooterText": "Add plant form footer text",
-                "isHeaderVisible": "true"
+                "isHeaderVisible": "true",
+                "targetChildObject": "Plant"
               },
               {
                 "name": "LandAddPlantInitObjWF",
