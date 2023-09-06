@@ -7,13 +7,9 @@ You will be submitting a PR to this repository.
 
 todo...
 
-
-priority...   
-security 
-
-------------------
+openapi.json template
+ 
 convert ui apps to use new /submit endpoint
-     
 
 If report is custom, create txt file 
 
