@@ -670,10 +670,10 @@ class Migration(migrations.Migration):
                     ),
                 ),
                 (
-                    "flvr_fk",
+                    "flvr_foreign_key",
                     models.ForeignKey(
                         blank=True,
-                        db_column="flvr_fk_id",
+                        db_column="flvr_foreign_key_id",
                         null=True,
                         on_delete=django.db.models.deletion.SET_NULL,
                         related_name="plant_list",

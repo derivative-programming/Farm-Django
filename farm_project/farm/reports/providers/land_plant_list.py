@@ -71,7 +71,7 @@ class ReportProviderLandPlantList():
                     plant.code as details_link_plant_code
                 from 
                     farm_plant plant
-                join farm_flavor flavor on plant.flvr_fk_id = flavor.flavor_id
+                join farm_flavor flavor on plant.flvr_foreign_key_id = flavor.flavor_id
                 join farm_land land on land.land_id = plant.land_id
                 WHERE land.code = %s
                 """, (

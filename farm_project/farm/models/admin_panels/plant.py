@@ -7,7 +7,7 @@ class PlantAdmin(admin.ModelAdmin):
     readonly_fields = ('plant_id','code','insert_utc_date_time','last_update_utc_date_time','insert_user_id','last_update_user_id','last_change_code')
     list_display = ( 
         'plant_id',
-        'flvr_fk',
+        'flvr_foreign_key', #flvr_foreign_key_id
         'is_delete_allowed',
         'is_edit_allowed',
         'land_id',

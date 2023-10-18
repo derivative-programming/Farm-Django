@@ -1966,7 +1966,7 @@
                     "isFileUpload": "false",
                     "isIgnored": "false",
                     "sourceObjectName": "Plant",
-                    "sourcePropertyName": "FlvrFKID"
+                    "sourcePropertyName": "FlvrForeignKeyID"
                   },
                   {
                     "name": "RequestOtherFlavor",
@@ -4207,7 +4207,7 @@
             "parentObjectName": "Land",
             "prop": [
               {
-                "name": "FlvrFKID",
+                "name": "FlvrForeignKeyID",
                 "codeDescription": "Plant Flavor ID",
                 "sqlServerDBDataType": "int",
                 "isFK": "true",
@@ -4483,11 +4483,11 @@
             "propSubscription": [],
             "fetch": [
               {
-                "name": "FetchByFlvrFKID",
+                "name": "FetchByFlvrForeignKeyID",
                 "byObjectName": "Flavor",
                 "byObjectNamespaceName": "Farm",
                 "includeInByObjectNameXMLFunction": "false",
-                "byPropName": "FlvrFKID"
+                "byPropName": "FlvrForeignKeyID"
               },
               {
                 "name": "FetchByLandID",

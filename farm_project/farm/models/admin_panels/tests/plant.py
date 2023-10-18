@@ -26,7 +26,7 @@ class PlantAdminTest(TestCase):
         self.assertEqual(
             self.admin.list_display,
             ( 'plant_id',
-            'flvr_fk',
+            'flvr_foreign_key', #flvr_foreign_key_id
             'is_delete_allowed',
             'is_edit_allowed',
             'land_id',

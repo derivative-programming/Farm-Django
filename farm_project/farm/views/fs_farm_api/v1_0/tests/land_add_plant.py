@@ -6,7 +6,7 @@ import logging
 from farm.models.factories import LandFactory 
 from farm.views.factories import LandAddPlantPostModelRequestFactory
 from farm.helpers import ApiToken 
-from farm.models import CurrentRuntime,Flavor
+from farm.models import CurrentRuntime
 import logging
 
 class LandAddPlantViewSetTestCase(TestCase):

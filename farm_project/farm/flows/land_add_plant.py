@@ -125,47 +125,47 @@ class FlowLandAddPlant(BaseFlowLandAddPlant):
 ##GENTrainingBlock[caseFlowLogic]Start
 ##GENLearn[calculatedIsTrueParentChild=true,calculatedIsTargetChildObjectAvailable=true,calculatedIsInitObjWF=false,isLoginPage=false]Start   
  
-        plant:farm_models.Plant = farm_models.Plant.build(land)
-        plant.land = land
-        plant.flvr_fk = farm_models.Flavor.objects.from_code(request_flavor_code)
-        plant.other_flavor = request_other_flavor    
-        plant.some_int_val = request_some_int_val   
-        plant.some_big_int_val = request_some_big_int_val   
-        plant.some_bit_val = request_some_bit_val    
-        plant.is_edit_allowed = request_is_edit_allowed    
-        plant.is_delete_allowed = request_is_delete_allowed    
-        plant.some_float_val = request_some_float_val 
-        plant.some_decimal_val = request_some_decimal_val  
-        plant.some_utc_date_time_val = request_some_utc_date_time_val    
-        plant.some_date_val = request_some_date_val    
-        plant.some_money_val = request_some_money_val  
-        plant.some_n_var_char_val = request_some_n_var_char_val    
-        plant.some_var_char_val = request_some_var_char_val    
-        plant.some_text_val = request_some_text_val    
-        plant.some_phone_number = request_some_phone_number    
-        plant.some_email_address = request_some_email_address    
+        # plant:farm_models.Plant = farm_models.Plant.build(land)
+        # plant.land = land
+        # plant.flvr_foreign_key = farm_models.Flavor.objects.from_code(request_flavor_code)
+        # plant.other_flavor = request_other_flavor    
+        # plant.some_int_val = request_some_int_val   
+        # plant.some_big_int_val = request_some_big_int_val   
+        # plant.some_bit_val = request_some_bit_val    
+        # plant.is_edit_allowed = request_is_edit_allowed    
+        # plant.is_delete_allowed = request_is_delete_allowed    
+        # plant.some_float_val = request_some_float_val 
+        # plant.some_decimal_val = request_some_decimal_val  
+        # plant.some_utc_date_time_val = request_some_utc_date_time_val    
+        # plant.some_date_val = request_some_date_val    
+        # plant.some_money_val = request_some_money_val  
+        # plant.some_n_var_char_val = request_some_n_var_char_val    
+        # plant.some_var_char_val = request_some_var_char_val    
+        # plant.some_text_val = request_some_text_val    
+        # plant.some_phone_number = request_some_phone_number    
+        # plant.some_email_address = request_some_email_address    
         # plant.some_int_val = request_sample_image_upload_file
-        plant.save()
+        # plant.save()
 
-        land_code_output:uuid = land.code
-        plant_code_output:uuid = plant.code    
-        output_flavor_code_output = plant.flvr_fk.code 
-        output_other_flavor_output = plant.other_flavor
-        output_some_int_val_output = plant.some_int_val
-        output_some_big_int_val_output = plant.some_big_int_val
-        output_some_bit_val_output = plant.some_bit_val
-        output_is_edit_allowed_output = plant.is_edit_allowed
-        output_is_delete_allowed_output = plant.is_delete_allowed
-        output_some_float_val_output = plant.some_float_val
-        output_some_decimal_val_output = plant.some_decimal_val
-        output_some_utc_date_time_val_output = plant.some_utc_date_time_val
-        output_some_date_val_output = plant.some_date_val
-        output_some_money_val_output = plant.some_money_val
-        output_some_n_var_char_val_output = plant.some_n_var_char_val
-        output_some_var_char_val_output = plant.some_var_char_val
-        output_some_text_val_output = plant.some_text_val
-        output_some_phone_number_output = plant.some_phone_number
-        output_some_email_address_output = plant.some_email_address 
+        # land_code_output:uuid = land.code
+        # plant_code_output:uuid = plant.code    
+        # output_flavor_code_output = plant.flvr_foreign_key.code 
+        # output_other_flavor_output = plant.other_flavor
+        # output_some_int_val_output = plant.some_int_val
+        # output_some_big_int_val_output = plant.some_big_int_val
+        # output_some_bit_val_output = plant.some_bit_val
+        # output_is_edit_allowed_output = plant.is_edit_allowed
+        # output_is_delete_allowed_output = plant.is_delete_allowed
+        # output_some_float_val_output = plant.some_float_val
+        # output_some_decimal_val_output = plant.some_decimal_val
+        # output_some_utc_date_time_val_output = plant.some_utc_date_time_val
+        # output_some_date_val_output = plant.some_date_val
+        # output_some_money_val_output = plant.some_money_val
+        # output_some_n_var_char_val_output = plant.some_n_var_char_val
+        # output_some_var_char_val_output = plant.some_var_char_val
+        # output_some_text_val_output = plant.some_text_val
+        # output_some_phone_number_output = plant.some_phone_number
+        # output_some_email_address_output = plant.some_email_address 
 
 ##GENLearn[calculatedIsTrueParentChild=true,calculatedIsTargetChildObjectAvailable=true,calculatedIsInitObjWF=false,isLoginPage=false]End
 ##GENTrainingBlock[caseFlowLogic]End

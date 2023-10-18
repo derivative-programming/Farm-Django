@@ -1,5 +1,5 @@
 
-flvr_fk_id_calculatedIsDBColumnIndexed:bool = True
+flvr_foreign_key_id_calculatedIsDBColumnIndexed:bool = True
 is_delete_allowed_calculatedIsDBColumnIndexed:bool = False
 is_edit_allowed_calculatedIsDBColumnIndexed:bool = False
 land_id_calculatedIsDBColumnIndexed:bool = True
@@ -18,7 +18,7 @@ some_text_val_calculatedIsDBColumnIndexed:bool = False
 some_uniqueidentifier_val_calculatedIsDBColumnIndexed:bool = False
 some_utc_date_time_val_calculatedIsDBColumnIndexed:bool = False
 some_var_char_val_calculatedIsDBColumnIndexed:bool = False
-flvr_fk_id_isEncrypted:bool = False
+flvr_foreign_key_id_isEncrypted:bool = False
 is_delete_allowed_isEncrypted:bool = False
 is_edit_allowed_isEncrypted:bool = False
 land_id_isEncrypted:bool = False

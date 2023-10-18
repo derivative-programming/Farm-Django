@@ -1,7 +1,6 @@
 # farm/models/tests/test_plant.py
 from django.test import TestCase
-from farm.models import Plant
-from farm.models import Flavor
+from farm.models import Plant 
 from farm.models.factories import PlantFactory
 from farm.models import CurrentRuntime
 import logging
@@ -21,7 +20,7 @@ class PlantTestCase(TestCase):
         self.assertIsNotNone(self.plant.insert_user_id)
         self.assertIsNotNone(self.plant.last_update_user_id)
         self.assertIsNotNone(self.plant.last_change_code)
-        self.assertIsNotNone(self.plant.flvr_fk) #flvr_fk_id
+        self.assertIsNotNone(self.plant.flvr_foreign_key) #flvr_foreign_key_id
         self.assertIsNotNone(self.plant.is_delete_allowed)
         self.assertIsNotNone(self.plant.is_edit_allowed)
         self.assertIsNotNone(self.plant.land) #land_id

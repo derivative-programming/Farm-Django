@@ -7,7 +7,7 @@ from factory import Faker, SubFactory
 from django.utils import timezone
 from farm.models import Plant
 from farm.models.managers import PlantEnum
-from .flavor import FlavorFactory #flvr_fk_id
+from .flavor import FlavorFactory #flvr_foreign_key_id
 from .land import LandFactory #land_id
 class PlantFactory(DjangoModelFactory):
     class Meta:
@@ -18,7 +18,7 @@ class PlantFactory(DjangoModelFactory):
     insert_user_id = factory.LazyFunction(uuid.uuid4)
     last_update_user_id = factory.LazyFunction(uuid.uuid4)
     last_change_code = factory.LazyFunction(uuid.uuid4)
-    flvr_fk = SubFactory(FlavorFactory) #flvr_fk_id
+    flvr_foreign_key = SubFactory(FlavorFactory) #flvr_foreign_key_id
     is_delete_allowed = Faker('boolean')
     is_edit_allowed = Faker('boolean')
     land = SubFactory(LandFactory) #land_id

@@ -4,7 +4,7 @@ class PlantSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Plant
         fields = (
-            'flvr_fk_id',
+            'flvr_foreign_key_id',
             'is_delete_allowed',
             'is_edit_allowed',
             'land_id',
