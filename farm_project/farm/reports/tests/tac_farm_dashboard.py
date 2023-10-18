@@ -22,7 +22,9 @@ class ReportTestTacFarmDashboard(TestCase):
     # def test_generate(self, MockProvider):
     #     mock_provider = MockProvider.return_value
     #     mock_provider.generate_list.return_value = [
-    #         {"field_one_plant_list_link_land_code": str(self.tac_code)}
+    #         {"field_one_plant_list_link_land_code": str(self.tac_code)},
+    #         {"conditional_btn_example_link_land_code": str(self.tac_code)},
+    #         {"is_conditional_btn_available": False}
     #     ]
 
     #     result = self.report.generate(
@@ -37,6 +39,8 @@ class ReportTestTacFarmDashboard(TestCase):
     #     for item in result:
     #         self.assertIsInstance(item, ReportItemTacFarmDashboard)
     #         self.assertEqual(item.field_one_plant_list_link_land_code, self.tac_code)
+    #         self.assertEqual(item.conditional_btn_example_link_land_code, self.tac_code)
+    #         self.assertEqual(item.is_conditional_btn_available, True)
 
     def test_generate_invalid_item_count_per_page(self):
         with self.assertRaises(ReportRequestValidationError):

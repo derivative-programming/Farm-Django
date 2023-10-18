@@ -29,9 +29,13 @@ class TacFarmDashboardGetModelRequest():
 @dataclass
 class TacFarmDashboardGetModelResponseItem():
     field_one_plant_list_link_land_code:uuid = uuid.UUID(int=0)
+    conditional_btn_example_link_land_code:uuid = uuid.UUID(int=0)
+    is_conditional_btn_available:bool = False
 #endset
     def load_report_item(self,data:ReportItemTacFarmDashboard):
         self.field_one_plant_list_link_land_code = data.field_one_plant_list_link_land_code
+        self.conditional_btn_example_link_land_code = data.conditional_btn_example_link_land_code
+        self.is_conditional_btn_available = data.is_conditional_btn_available
 #endset
 @dataclass_json(letter_case=LetterCase.CAMEL)
 @dataclass

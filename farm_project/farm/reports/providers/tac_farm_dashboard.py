@@ -29,7 +29,9 @@ class ReportProviderTacFarmDashboard():
             
             cursor.execute(""" 
                 SELECT
-                    land.code as field_one_plant_list_link_land_code
+                    land.code as field_one_plant_list_link_land_code,
+                    land.code as conditional_btn_example_link_land_code,
+                    cast(1 as bit) as is_conditional_btn_available
                 from farm_tac tac
                 join farm_pac pac on tac.pac_id = pac.pac_id
                 join farm_land land on pac.pac_id = land.pac_id

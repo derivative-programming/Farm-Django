@@ -83,6 +83,8 @@ class ReportTestLandPlantList(TestCase):
     #     for item in result:
     #         self.assertIsInstance(item, ReportItemLandPlantList)
     #         self.assertEqual(item.field_one_plant_list_link_land_code, self.land_code)
+    #         self.assertEqual(item.conditional_btn_example_link_land_code, self.land_code)
+    #         self.assertEqual(item.is_conditional_btn_available, self.land_code)
 
     def test_generate_invalid_item_count_per_page(self):
         with self.assertRaises(ReportRequestValidationError):
