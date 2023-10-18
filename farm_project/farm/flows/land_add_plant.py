@@ -127,7 +127,7 @@ class FlowLandAddPlant(BaseFlowLandAddPlant):
  
         plant:farm_models.Plant = farm_models.Plant.build(land)
         plant.land = land
-        plant.flavor = farm_models.Flavor.objects.from_code(request_flavor_code)
+        plant.flvr_fk = farm_models.Flavor.objects.from_code(request_flavor_code)
         plant.other_flavor = request_other_flavor    
         plant.some_int_val = request_some_int_val   
         plant.some_big_int_val = request_some_big_int_val   
@@ -149,7 +149,7 @@ class FlowLandAddPlant(BaseFlowLandAddPlant):
 
         land_code_output:uuid = land.code
         plant_code_output:uuid = plant.code    
-        output_flavor_code_output = plant.flavor.code 
+        output_flavor_code_output = plant.flvr_fk.code 
         output_other_flavor_output = plant.other_flavor
         output_some_int_val_output = plant.some_int_val
         output_some_big_int_val_output = plant.some_big_int_val

@@ -3,11 +3,11 @@ from django.utils import timezone
 from django.core.exceptions import ValidationError
 import datetime
 import uuid
-from .flavor import Flavor #flavor_id
+from .flavor import Flavor #flvr_fk_id
 from .land import Land #land_id
 import farm.models.constants.plant as PlantConstants
 import logging 
-from farm.models.managers import FlavorManager,FlavorEnum #flavor_id
+from farm.models.managers import FlavorManager,FlavorEnum #flvr_fk_id
 from farm.models.managers import LandManager,LandEnum #land_id
 from farm.models.managers import PlantManager,PlantEnum
 from decimal import Decimal
@@ -22,13 +22,13 @@ class Plant(models.Model):
     insert_user_id = models.UUIDField(null=True,db_column='insert_user_id')
     last_update_user_id = models.UUIDField(null=True,db_column='last_update_user_id')
     last_change_code = models.UUIDField(default=uuid.uuid4,db_column='last_change_code')	
-    #flavor_id = models.IntegerField(null=True)
-    flavor = models.ForeignKey(Flavor,
+    #flvr_fk_id = models.IntegerField(null=True)
+    flvr_fk = models.ForeignKey(Flavor,
                                related_name='plant_list',
                                on_delete=models.SET_NULL,
                                blank=True,
                                null=True,
-                               db_column='flavor_id',
+                               db_column='flvr_fk_id',
                                db_index=True)
     is_delete_allowed = models.BooleanField(
                                 null=True,
@@ -169,7 +169,7 @@ class Plant(models.Model):
         item.some_phone_number = ""
         item.some_email_address = ""
         item.some_uniqueidentifier_val = uuid.UUID(int=0)
-        item.flavor = Flavor.objects.from_enum(enum_val=FlavorEnum.Unknown) #flavor_id
+        item.flvr_fk = Flavor.objects.from_enum(enum_val=FlavorEnum.Unknown) #flvr_fk_id
         item.land = land #land_id
         item.other_flavor = ""
         return item

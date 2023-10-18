@@ -42,17 +42,19 @@ Update pip...
 Install Django...
 >pip install django
 
+>cd farm_project
+
 Install requirements...
 >pip install -r requirements.txt
 
 make migration after model updates...
-python manage.py makemigrations api
+python manage.py makemigrations [namespace]
 
 Create\update DB with migrations...
 >python manage.py migrate
 
 view sql applied by a migration...replace 0001 with migration name
->python manage.py sqlmigrate api 0001
+>python manage.py sqlmigrate [namespace] 0001
 
 
 create django admin user...
@@ -65,7 +67,7 @@ initialize db with core objects...
 >python manage.py loaddata initialize-db.json
 
 generate seed data...
-python manage.py seed api --number=10
+python manage.py seed [namespace] --number=10
 
 run server....
 >cd farm_project

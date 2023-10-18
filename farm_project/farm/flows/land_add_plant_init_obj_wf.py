@@ -81,7 +81,7 @@ class FlowLandAddPlantInitObjWF(BaseFlowLandAddPlantInitObjWF):
         # TODO: add flow logic 
   
         plant:farm_models.Plant = farm_models.Plant.build(land)
-        request_flavor_code_output = plant.flavor.code
+        request_flavor_code_output = plant.flvr_fk.code
         request_other_flavor_output = plant.other_flavor
         request_some_int_val_output = plant.some_int_val
         request_some_big_int_val_output = plant.some_big_int_val
