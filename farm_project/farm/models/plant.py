@@ -47,7 +47,7 @@ class Plant(models.Model):
                                db_column='land_id',
                                db_index=True)
     other_flavor = models.TextField(
-                                null=True,
+                                blank=True,
                                 db_column='other_flavor',
                                 db_index=PlantConstants.other_flavor_calculatedIsDBColumnIndexed)
     some_big_int_val = models.BigIntegerField(
@@ -70,7 +70,7 @@ class Plant(models.Model):
                                 db_index=PlantConstants.some_decimal_val_calculatedIsDBColumnIndexed)
     some_email_address = models.TextField(
                                 max_length=50,
-                                null=True,
+                                blank=True,
                                 db_column='some_email_address',
                                 db_index=PlantConstants.some_email_address_calculatedIsDBColumnIndexed)
     some_float_val = models.FloatField(
@@ -88,17 +88,17 @@ class Plant(models.Model):
                                 null=True,
                                 db_index=PlantConstants.some_money_val_calculatedIsDBColumnIndexed)
     some_n_var_char_val = models.TextField(
-                                null=True,
+                                blank=True,
                                 db_column='some_n_var_char_val',
                                 db_index=PlantConstants.some_n_var_char_val_calculatedIsDBColumnIndexed)
     some_phone_number = models.TextField(
                                 max_length=50,
-                                null=True,
+                                blank=True,
                                 db_column='some_phone_number',
                                 db_index=PlantConstants.some_phone_number_calculatedIsDBColumnIndexed)
     some_text_val = models.TextField(
                                 max_length=max,
-                                null=True,
+                                blank=True,
                                 db_column='some_text_val',
                                 db_index=False)
     some_uniqueidentifier_val = models.UUIDField(
@@ -111,7 +111,7 @@ class Plant(models.Model):
                                 db_index=PlantConstants.some_utc_date_time_val_calculatedIsDBColumnIndexed)
     some_var_char_val = models.TextField(
                                 max_length=50,
-                                null=True,
+                                blank=True,
                                 db_column='some_var_char_val',
                                 db_index=PlantConstants.some_var_char_val_calculatedIsDBColumnIndexed)
         
