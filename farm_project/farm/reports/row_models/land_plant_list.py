@@ -36,6 +36,11 @@ class ReportItemLandPlantList():
     update_link_plant_code:uuid = uuid.UUID(int=0)
     delete_async_button_link_plant_code:uuid = uuid.UUID(int=0)
     details_link_plant_code:uuid = uuid.UUID(int=0)
+    test_file_download_link_pac_code:uuid = uuid.UUID(int=0)
+    test_conditional_file_download_link_pac_code:uuid = uuid.UUID(int=0)
+    test_async_flow_req_link_pac_code:uuid = uuid.UUID(int=0)
+    test_conditional_async_flow_req_link_pac_code:uuid = uuid.UUID(int=0)
+    conditional_btn_example_link_plant_code:uuid = uuid.UUID(int=0)
 #endset
     def __init__(self): 
         pass
@@ -63,4 +68,9 @@ class ReportItemLandPlantList():
             self.update_link_plant_code = uuid.UUID(data["update_link_plant_code"])
             self.delete_async_button_link_plant_code = uuid.UUID(data["delete_async_button_link_plant_code"])
             self.details_link_plant_code = uuid.UUID(data["details_link_plant_code"])
+            self.test_file_download_link_pac_code = uuid.UUID(data["test_file_download_link_pac_code"])
+            self.test_conditional_file_download_link_pac_code = uuid.UUID(data["test_conditional_file_download_link_pac_code"])
+            self.test_async_flow_req_link_pac_code = uuid.UUID(data["test_async_flow_req_link_pac_code"])
+            self.test_conditional_async_flow_req_link_pac_code = uuid.UUID(data["test_conditional_async_flow_req_link_pac_code"])
+            self.conditional_btn_example_link_plant_code = uuid.UUID(data["conditional_btn_example_link_plant_code"])
 

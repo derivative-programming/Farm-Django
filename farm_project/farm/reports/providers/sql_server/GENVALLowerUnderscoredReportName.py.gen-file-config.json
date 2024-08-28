@@ -5,7 +5,18 @@
         "calculatedIsPage":"true"
     },
     "ignoreDimensionPropertyList": [ 
+        "reportParam.isFKListInactiveIncluded",
+        "reportParam.isUnknownLookupAllowed",
+        "reportParam.isFKListSearchable",
+        "reportParam.isFK",
+        "reportParam.isRequired",
+        "reportParam.isVisible",
+        "reportParam.isFKLookup",
+        "reportParam.isFKList", 
+        "reportParam.calculatedIsTargetColumnNameAvailable",
+        "reportParam.calculatedIsTargetObjectAvailable",
         "reportColumn.calculatedIsConditionalSqlLogicAvailable", 
+        "reportColumn.calculatedIsSourceObjectAvailable",
         "reportColumn.isAsyncObjWFResultFileStreamedOut",
         "reportColumn.calculatedIsConditionalVisible",
         "reportColumn.calculatedIsMaxWidthAvailable",

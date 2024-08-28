@@ -68,11 +68,17 @@ class ReportProviderLandPlantList():
                     plant.some_int_val as some_int_conditional_on_deletable,
                     plant.code as update_link_plant_code,
                     plant.code as delete_async_button_link_plant_code,
-                    plant.code as details_link_plant_code
+                    plant.code as details_link_plant_code,
+                    pac.code as test_file_download_link_pac_code,
+                    pac.code as test_conditional_file_download_link_pac_code,
+                    pac.code as test_async_flow_req_link_pac_code,
+                    pac.code as test_conditional_async_flow_req_link_pac_code,
+                    plant.code as conditional_btn_example_link_plant_code
                 from 
                     farm_plant plant
                 join farm_flavor flavor on plant.flvr_foreign_key_id = flavor.flavor_id
                 join farm_land land on land.land_id = plant.land_id
+                join farm_pac pac on land.pac_id = pac.pac_id
                 WHERE land.code = %s
                 """, (
                     str(land_code).replace('-', ''),  

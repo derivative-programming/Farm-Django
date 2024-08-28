@@ -67,7 +67,12 @@ class ReportTestLandPlantList(TestCase):
     #             "n_var_char_as_url": str(self.n_var_char_as_url),
     #             "update_link_plant_code": uuid.UUID(self.update_link_plant_code),
     #             "delete_async_button_link_plant_code": uuid.UUID(self.delete_async_button_link_plant_code),
-    #             "details_link_plant_code": uuid.UUID(self.details_link_plant_code)
+    #             "details_link_plant_code": uuid.UUID(self.details_link_plant_code),
+    #             "test_file_download_link_pac_code": uuid.UUID(self.test_file_download_link_pac_code),
+    #             "test_conditional_file_download_link_pac_code": uuid.UUID(self.test_conditional_file_download_link_pac_code),
+    #             "test_async_flow_req_link_pac_code": uuid.UUID(self.test_async_flow_req_link_pac_code),
+    #             "test_conditional_async_flow_req_link_pac_code": uuid.UUID(self.test_conditional_async_flow_req_link_pac_code),
+    #             "conditional_btn_example_link_plant_code": uuid.UUID(self.conditional_btn_example_link_plant_code)
     #         }
     #     ]
 

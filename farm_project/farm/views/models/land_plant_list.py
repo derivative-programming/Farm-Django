@@ -80,6 +80,11 @@ class LandPlantListGetModelResponseItem():
     update_link_plant_code:uuid = uuid.UUID(int=0)
     delete_async_button_link_plant_code:uuid = uuid.UUID(int=0)
     details_link_plant_code:uuid = uuid.UUID(int=0)
+    test_file_download_link_pac_code:uuid = uuid.UUID(int=0)
+    test_conditional_file_download_link_pac_code:uuid = uuid.UUID(int=0)
+    test_async_flow_req_link_pac_code:uuid = uuid.UUID(int=0)
+    test_conditional_async_flow_req_link_pac_code:uuid = uuid.UUID(int=0)
+    conditional_btn_example_link_plant_code:uuid = uuid.UUID(int=0)
 #endset
     def load_report_item(self,data:ReportItemLandPlantList):
         self.plant_code = data.plant_code
@@ -105,6 +110,11 @@ class LandPlantListGetModelResponseItem():
         self.update_link_plant_code = data.update_link_plant_code
         self.delete_async_button_link_plant_code = data.delete_async_button_link_plant_code
         self.details_link_plant_code = data.details_link_plant_code
+        self.test_file_download_link_pac_code = data.test_file_download_link_pac_code
+        self.test_conditional_file_download_link_pac_code = data.test_conditional_file_download_link_pac_code
+        self.test_async_flow_req_link_pac_code = data.test_async_flow_req_link_pac_code
+        self.test_conditional_async_flow_req_link_pac_code = data.test_conditional_async_flow_req_link_pac_code
+        self.conditional_btn_example_link_plant_code = data.conditional_btn_example_link_plant_code
 #endset
 @dataclass_json(letter_case=LetterCase.CAMEL)
 @dataclass

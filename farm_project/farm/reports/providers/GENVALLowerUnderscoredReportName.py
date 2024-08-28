@@ -271,12 +271,12 @@ class ReportProviderLandPlantList():
 			--GENLOOPtargetChildObjectIntersectionObjEnd
 			
 			--GENIF[calculatedIsRowLevelOrgCustomerSecurityUsed=true]Start 
-			join farm_Customer Customer_Security on orgCustomer.CustomerID = Customer_Security.CustomerID
+			join farm_customer Customer_Security on farm_org_customer.CustomerID = Customer_Security.CustomerID
 			--GENIF[calculatedIsRowLevelOrgCustomerSecurityUsed=true]End
 			
 			--GENIF[calculatedIsRowLevelOrganizationSecurityUsed=true]Start
-			join farm_OrgCustomer orgCustomer_Security on orgCustomer_Security.OrganizationID = Organization.OrganizationID
-			join farm_Customer Customer_Security on orgCustomer_Security.CustomerID = Customer_Security.CustomerID
+			join farm_org_customer orgCustomer_Security on orgCustomer_Security.OrganizationID = farm_organization.OrganizationID
+			join farm_customer Customer_Security on farm_org_customer_Security.CustomerID = Customer_Security.CustomerID
 			--GENIF[calculatedIsRowLevelOrganizationSecurityUsed=true]End
 
 		where
