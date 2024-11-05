@@ -1,3 +1,7 @@
+# reports/providers/sql_server/GENVALLowerUnderscoredReportName.py
+"""
+This module provides the report provider for the GENVALLowerUnderscoredReportName report.
+"""
 import json
 from datetime import date, datetime
 import uuid

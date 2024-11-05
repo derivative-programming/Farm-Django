@@ -1,3 +1,7 @@
+# models/date_greater_than_filter.py
+"""
+This module initializes the DateGreaterThanFilter model used in the project.
+"""
 import uuid
 from datetime import datetime, timezone
 
@@ -11,6 +15,9 @@ from .pac import Pac #pac_id
 
 
 class DateGreaterThanFilter(models.Model):
+    """
+    This class initializes the DateGreaterThanFilter model used in the project.
+    """
     date_greater_than_filter_id = models.AutoField(primary_key=True)
     code = models.UUIDField(default=uuid.uuid4,db_index=True, unique=True)
     insert_utc_date_time =models.DateTimeField(default=datetime.now(timezone.utc))
@@ -47,10 +54,19 @@ class DateGreaterThanFilter(models.Model):
     objects = DateGreaterThanFilterManager()
 
     class Meta:
+        """
+        This class sets the db table name for the DateGreaterThanFilter model.
+        """
         db_table = 'farm_date_greater_than_filter'
     def __str__(self):
+        """
+        This method returns the code of the DateGreaterThanFilter model.
+        """
         return str(self.code)
     def save(self, *args, **kwargs):
+        """
+        This method saves the DateGreaterThanFilter model instance.
+        """
        # On save, update timestamps
         if self.date_greater_than_filter_id is not None:
             # If the instance already exists in the database, make sure it hasn't already changed since last read
@@ -68,10 +84,16 @@ class DateGreaterThanFilter(models.Model):
 ##GENTrainingBlock[caselookup]Start
 ##GENLearn[isLookup=true,calculatedIsParentObjectAvailable=true]Start
     def get_parent_object(self):
+        """
+        This method returns the parent object of the DateGreaterThanFilter model.
+        """
         return self.pac
     @staticmethod
     def build(pac:Pac
         ):
+        """
+        This method builds a new instance of the DateGreaterThanFilter model.
+        """
         item = DateGreaterThanFilter()
         item.day_count = 0
         item.code = uuid.uuid4()
@@ -92,6 +114,9 @@ class DateGreaterThanFilter(models.Model):
 
     @staticmethod
     def initialize():
+        """
+        This method initializes the DateGreaterThanFilter model.
+        """
         pac = Pac.objects.all().first()
         if DateGreaterThanFilter.objects.filter(lookup_enum_name=DateGreaterThanFilterEnum.Unknown.value).exists() == False:
             item = DateGreaterThanFilter.build(pac)

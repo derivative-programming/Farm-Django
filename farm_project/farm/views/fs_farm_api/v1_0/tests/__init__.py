@@ -1,3 +1,7 @@
+# views/fs_farm_api/v1_0/tests/__init__.py
+"""
+This module imports all of the test view sets used in the project.
+"""
 ##GENLOOPapiEndPointStart
 ##GENTrainingBlock[b]Start
 ##GENLearn[modelType=apiEndPoint,name=LandAddPlant]Start

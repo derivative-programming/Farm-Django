@@ -1,3 +1,7 @@
+# reports/__init__.py
+"""
+Import the reports of all objects
+"""
 from .report_request_validation_error import ReportRequestValidationError
 ##GENLOOPObjectStart
 ##GENTrainingBlock[a]Start

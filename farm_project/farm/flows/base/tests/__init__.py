@@ -1,3 +1,7 @@
+# flows/base/tests/__init__.py
+"""
+Test cases for base flows
+"""
 ##GENLOOPObjectStart
 ##GENTrainingBlock[a]Start
 ##GENLearn[modelType=object,name=Land]Start

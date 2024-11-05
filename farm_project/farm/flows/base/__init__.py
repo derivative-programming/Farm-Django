@@ -1,3 +1,7 @@
+# flows/base/__init__.py
+"""
+This module initializes the base business flows used in the project.
+"""
 from .base_flow import BaseFlow
 from .log_severity import LogSeverity
 from .flow_validation_error import FlowValidationError

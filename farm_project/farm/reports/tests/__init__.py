@@ -1,3 +1,7 @@
+# reports/tests/__init__.py
+"""
+Imports Test cases for all reports.
+"""
 ##GENLOOPObjectStart
 ##GENTrainingBlock[a]Start
 ##GENLearn[modelType=object,name=Land]Start

@@ -1,3 +1,7 @@
+# reports/providers/__init__.py
+"""
+Imports all report providers.
+"""
 ##GENLOOPObjectStart
 ##GENTrainingBlock[a]Start
 ##GENLearn[modelType=object,name=Land]Start

@@ -1,3 +1,7 @@
+# flows/base/tests/land_add_plant.py
+"""
+test cases for land_add_plant base flow
+"""
 import unittest
 import uuid
 from farm.flows.base import BaseFlowLandAddPlant
@@ -12,30 +16,39 @@ from farm.models import CurrentRuntime
 
 
 class BaseFlowLandAddPlantTestCase(unittest.TestCase):
+    """
+    test cases for land_add_plant base flow
+    """
     def setUp(self):
+        """
+        setup for test cases
+        """
         CurrentRuntime.initialize()
         session_context = SessionContext(dict())
         self.flow = BaseFlowLandAddPlant(session_context)
 
     def test_process_validation_rules(self):
+        """
+        test case for process_validation_rules
+        """
         land = LandFactory.create()
         request_flavor_code: uuid.UUID = FlavorFactory.create().code
         request_other_flavor:str = ""
-        request_some_int_val:int = Faker('random_int')
-        request_some_big_int_val:int = Faker('random_int')
-        request_some_bit_val:bool = Faker('boolean')
-        request_is_edit_allowed:bool = Faker('boolean')
-        request_is_delete_allowed:bool = Faker('boolean')
-        request_some_float_val:float = Faker('pyfloat', positive=True)
-        request_some_decimal_val:Decimal = Faker('pydecimal', left_digits=5, right_digits=2, positive=True)
-        request_some_utc_date_time_val:datetime = Faker('date_time', tzinfo=timezone.utc)
-        request_some_date_val:date = Faker('date_object')
-        request_some_money_val:Decimal = Faker('pydecimal', left_digits=5, right_digits=2, positive=True)
-        request_some_n_var_char_val:str = Faker('sentence', nb_words=4)
-        request_some_var_char_val:str = Faker('sentence', nb_words=4)
-        request_some_text_val:str = Faker('text')
-        request_some_phone_number:str = Faker('phone_number')
-        request_some_email_address:str = Faker('email')
+        request_some_int_val:int = Faker('random_int') # type: ignore
+        request_some_big_int_val:int = Faker('random_int') # type: ignore
+        request_some_bit_val:bool = Faker('boolean') # type: ignore
+        request_is_edit_allowed:bool = Faker('boolean') # type: ignore
+        request_is_delete_allowed:bool = Faker('boolean') # type: ignore
+        request_some_float_val:float = Faker('pyfloat', positive=True) # type: ignore
+        request_some_decimal_val:Decimal = Faker('pydecimal', left_digits=5, right_digits=2, positive=True) # type: ignore
+        request_some_utc_date_time_val:datetime = Faker('date_time', tzinfo=timezone.utc) # type: ignore
+        request_some_date_val:date = Faker('date_object') # type: ignore
+        request_some_money_val:Decimal = Faker('pydecimal', left_digits=5, right_digits=2, positive=True) # type: ignore
+        request_some_n_var_char_val:str = Faker('sentence', nb_words=4) # type: ignore
+        request_some_var_char_val:str = Faker('sentence', nb_words=4) # type: ignore
+        request_some_text_val:str = Faker('text') # type: ignore
+        request_some_phone_number:str = Faker('phone_number') # type: ignore
+        request_some_email_address:str = Faker('email') # type: ignore
         request_sample_image_upload_file:str = ""
 
         # Call the method being tested
@@ -69,6 +82,9 @@ class BaseFlowLandAddPlantTestCase(unittest.TestCase):
         #TODO add validation checks - calculatedIsRowLevelOrganizationSecurityUsed
 
     def test_process_security_rules(self):
+        """
+        test case for process_security_rules
+        """
         land = LandFactory.create()
 
         # Call the method being tested

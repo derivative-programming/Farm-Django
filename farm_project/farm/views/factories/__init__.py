@@ -1,4 +1,7 @@
-
+# views/factories/__init__.py
+"""
+This module imports the factories used in the project.
+"""
 ##GENLOOPObjectStart
 ##GENTrainingBlock[a]Start
 ##GENLearn[modelType=object,name=Land]Start

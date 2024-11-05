@@ -1,3 +1,7 @@
+# views/fs_farm_api/v1_0/view_sets/__init__.py
+"""
+This module initializes the view sets used in the project.
+"""
 ##GENLOOPApiEndPointStart
 ##GENTrainingBlock[b]Start
 ##GENLearn[modelType=apiEndPoint,name=LandAddPlant]Start

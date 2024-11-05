@@ -1,15 +1,25 @@
+# reports/providers/land_plant_list.py
+"""
+This module contains the land plant list report provider used in the project.
+"""
 import json
+import logging
 from datetime import date, datetime
 import uuid
 from decimal import Decimal
 from django.db import connection
 from farm.reports.row_models import ReportItemLandPlantList
-import logging
 from farm.helpers import SessionContext
 
 class ReportProviderLandPlantList():
+    """
+    The land plant list report provider.
+    """
     _session_context:SessionContext
     def __init__(self, session_context:SessionContext):
+        """
+        This method initializes the land plant list report provider.
+        """
         self._session_context = session_context
 
     def generate_list(self,
@@ -35,6 +45,9 @@ class ReportProviderLandPlantList():
                     order_by_column_name:str,
                     order_by_descending:bool,
                       ) -> list[dict[str,any]]:
+        """
+        This method generates the land plant list.
+        """
 
         logging.debug("ReportProviderLandPlantList.generate_list Start")
         logging.debug("ReportProviderLandPlantList.generate_list land_code:" + str(land_code))
@@ -90,7 +103,7 @@ class ReportProviderLandPlantList():
         logging.debug("ReportProviderLandPlantList.generate_list End")
         return results
 
-    def dictfetchall(self, cursor) -> list[dict[str,any]]:
+    def dictfetchall(self, cursor) -> list[dict[str, any]]:
         "Return all rows from a cursor as a dict"
         columns = [col[0] for col in cursor.description]
         return [

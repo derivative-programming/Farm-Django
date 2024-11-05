@@ -1,3 +1,7 @@
+# reports/providers/tests/__init__.py
+"""
+This module imports the tests for the report providers used in the project.
+"""
 ##GENLOOPObjectStart
 ##GENTrainingBlock[a]Start
 ##GENLearn[modelType=object,name=Land]Start

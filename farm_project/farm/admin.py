@@ -1,3 +1,7 @@
+# admin.py
+"""
+This module initializes the admin panel used in the project.
+"""
 from django.contrib import admin
 from farm import models
 from farm.models import admin_panels

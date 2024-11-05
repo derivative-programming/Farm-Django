@@ -1,3 +1,7 @@
+# reports/row_models/__init__.py
+"""
+Import the row models of all reports
+"""
 ##GENLOOPObjectStart
 ##GENTrainingBlock[a]Start
 ##GENLearn[modelType=object,name=Land]Start

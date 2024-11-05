@@ -1,12 +1,21 @@
-from django.apps import AppConfig
+# apps.py
+"""
+configures the app
+"""
 import logging
-
+from django.apps import AppConfig
 
 class FarmConfig(AppConfig):
+    """
+    configures the app
+    """
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'farm'
 
     def ready(self):
+        """
+        Initializes the app
+        """
         logging.debug('App initializing...')
 
         import farm.models as models
@@ -33,4 +42,3 @@ class FarmConfig(AppConfig):
         except Exception:
             pass
         logging.debug('App initialization complete')
-
