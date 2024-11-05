@@ -1,7 +1,6 @@
 from django.db import models
-from django.utils import timezone
-from django.core.exceptions import ValidationError
-import datetime
+from datetime import datetime, timezone
+from django.core.exceptions import ValidationError 
 import uuid  
 import farm.models.constants.pac as PacConstants
 from farm.models.managers import PacManager,PacEnum 
@@ -9,8 +8,8 @@ from farm.models.managers import PacManager,PacEnum
 class Pac(models.Model):  
     pac_id = models.AutoField(primary_key=True)
     code = models.UUIDField(default=uuid.uuid4,db_index=True, unique=True)
-    insert_utc_date_time =models.DateTimeField(default=timezone.now)
-    last_update_utc_date_time =models.DateTimeField(default=timezone.now)
+    insert_utc_date_time =models.DateTimeField(default=datetime.now(timezone.utc))
+    last_update_utc_date_time =models.DateTimeField(default=datetime.now(timezone.utc))
     insert_user_id = models.UUIDField(null=True)
     last_update_user_id = models.UUIDField(null=True)
     last_change_code = models.UUIDField(default=uuid.uuid4)	
@@ -44,8 +43,8 @@ class Pac(models.Model):
             if self.last_change_code != current_instance.last_change_code:
                 raise ValidationError('This object is invalid. It has already changed in the db.')
         if self.pac_id is None:
-            self.insert_utc_date_time = timezone.now()
-        self.last_update_utc_date_time = timezone.now()
+            self.insert_utc_date_time = datetime.now(timezone.utc)
+        self.last_update_utc_date_time = datetime.now(timezone.utc)
         self.last_change_code = uuid.uuid4()
         return super(Pac, self).save(*args, **kwargs)
 
@@ -63,8 +62,8 @@ class Pac(models.Model):
         item.description = ""
         item.display_order = 0
         item.code = uuid.uuid4()
-        item.insert_utc_date_time = timezone.now
-        item.last_update_utc_date_time = timezone.now
+        item.insert_utc_date_time = datetime.now(timezone.utc)
+        item.last_update_utc_date_time = datetime.now(timezone.utc)
         item.insert_user_id = uuid.UUID(int=0)
         item.last_update_user_id = uuid.UUID(int=0)
         item.last_change_code = uuid.uuid4()

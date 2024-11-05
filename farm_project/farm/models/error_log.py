@@ -1,7 +1,6 @@
 from django.db import models
-from django.utils import timezone
+from datetime import datetime, timezone
 from django.core.exceptions import ValidationError
-import datetime
 import uuid
 from .pac import Pac #pac_id
 import farm.models.constants.error_log as ErrorLogConstants
@@ -13,8 +12,8 @@ from farm.helpers import TypeConversion
 class ErrorLog(models.Model):  
     error_log_id = models.AutoField(primary_key=True,db_column='error_log_id')
     code = models.UUIDField(default=uuid.uuid4,db_index=True,db_column='code', unique=True)
-    insert_utc_date_time =models.DateTimeField(default=timezone.now,db_column='insert_utc_date_time')
-    last_update_utc_date_time =models.DateTimeField(default=timezone.now,db_column='last_update_utc_date_time')
+    insert_utc_date_time =models.DateTimeField(default=datetime.now(timezone.utc),db_column='insert_utc_date_time')
+    last_update_utc_date_time =models.DateTimeField(default=datetime.now(timezone.utc),db_column='last_update_utc_date_time')
     insert_user_id = models.UUIDField(null=True,db_column='insert_user_id')
     last_update_user_id = models.UUIDField(null=True,db_column='last_update_user_id')
     last_change_code = models.UUIDField(default=uuid.uuid4,db_column='last_change_code')	
@@ -68,8 +67,8 @@ class ErrorLog(models.Model):
                 logging.debug("in db: " + str(current_instance.last_change_code) + " yours: " + str(self.last_change_code))
                 raise ValidationError('This object is invalid. It has already changed in the db.')
         if self.error_log_id is None:
-            self.insert_utc_date_time = timezone.now()
-        self.last_update_utc_date_time = timezone.now()
+            self.insert_utc_date_time = datetime.now(timezone.utc)
+        self.last_update_utc_date_time = datetime.now(timezone.utc)
         self.last_change_code = uuid.uuid4()
         return super(ErrorLog, self).save(*args, **kwargs)
 
@@ -80,8 +79,8 @@ class ErrorLog(models.Model):
         ):
         item = ErrorLog()
         item.code = uuid.uuid4()
-        item.insert_utc_date_time = timezone.now
-        item.last_update_utc_date_time = timezone.now
+        item.insert_utc_date_time = datetime.now(timezone.utc)
+        item.last_update_utc_date_time = datetime.now(timezone.utc)
         item.insert_user_id = uuid.UUID(int=0)
         item.last_update_user_id = uuid.UUID(int=0)
         item.last_change_code = uuid.uuid4()

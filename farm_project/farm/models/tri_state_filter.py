@@ -1,7 +1,6 @@
 from django.db import models
-from django.utils import timezone
+from datetime import datetime, timezone
 from django.core.exceptions import ValidationError
-import datetime
 import uuid
 from .pac import Pac #pac_id
 import farm.models.constants.tri_state_filter as TriStateFilterConstants
@@ -13,8 +12,8 @@ from farm.helpers import TypeConversion
 class TriStateFilter(models.Model):  
     tri_state_filter_id = models.AutoField(primary_key=True,db_column='tri_state_filter_id')
     code = models.UUIDField(default=uuid.uuid4,db_index=True,db_column='code', unique=True)
-    insert_utc_date_time =models.DateTimeField(default=timezone.now,db_column='insert_utc_date_time')
-    last_update_utc_date_time =models.DateTimeField(default=timezone.now,db_column='last_update_utc_date_time')
+    insert_utc_date_time =models.DateTimeField(default=datetime.now(timezone.utc),db_column='insert_utc_date_time')
+    last_update_utc_date_time =models.DateTimeField(default=datetime.now(timezone.utc),db_column='last_update_utc_date_time')
     insert_user_id = models.UUIDField(null=True,db_column='insert_user_id')
     last_update_user_id = models.UUIDField(null=True,db_column='last_update_user_id')
     last_change_code = models.UUIDField(default=uuid.uuid4,db_column='last_change_code')	
@@ -64,8 +63,8 @@ class TriStateFilter(models.Model):
                 logging.debug("in db: " + str(current_instance.last_change_code) + " yours: " + str(self.last_change_code))
                 raise ValidationError('This object is invalid. It has already changed in the db.')
         if self.tri_state_filter_id is None:
-            self.insert_utc_date_time = timezone.now()
-        self.last_update_utc_date_time = timezone.now()
+            self.insert_utc_date_time = datetime.now(timezone.utc)
+        self.last_update_utc_date_time = datetime.now(timezone.utc)
         self.last_change_code = uuid.uuid4()
         return super(TriStateFilter, self).save(*args, **kwargs)
      
@@ -78,8 +77,8 @@ class TriStateFilter(models.Model):
         item.description = ""
         item.display_order = 0
         item.code = uuid.uuid4()
-        item.insert_utc_date_time = timezone.now
-        item.last_update_utc_date_time = timezone.now
+        item.insert_utc_date_time = datetime.now(timezone.utc)
+        item.last_update_utc_date_time = datetime.now(timezone.utc)
         item.insert_user_id = uuid.UUID(int=0)
         item.last_update_user_id = uuid.UUID(int=0)
         item.last_change_code = uuid.uuid4()
@@ -89,8 +88,8 @@ class TriStateFilter(models.Model):
         #pac_id = models.IntegerField(null=True)
         item.state_int_value = 0
         item.code = uuid.uuid4()
-        item.insert_utc_date_time = timezone.now
-        item.last_update_utc_date_time = timezone.now
+        item.insert_utc_date_time = datetime.now(timezone.utc)
+        item.last_update_utc_date_time = datetime.now(timezone.utc)
         item.insert_user_id = uuid.UUID(int=0)
         item.last_update_user_id = uuid.UUID(int=0)
         item.last_change_code = uuid.uuid4()

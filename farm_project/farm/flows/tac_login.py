@@ -10,7 +10,7 @@ from farm.helpers import SessionContext
 from django.core.exceptions import ObjectDoesNotExist
 from farm.flows.base import FlowValidationError
 from farm.helpers import ApiToken
-from django.utils import timezone
+from datetime import datetime, timezone
 import farm.models as farm_models 
 import farm.models.managers as farm_managers
 
@@ -85,7 +85,7 @@ class FlowTacLogin(BaseFlowTacLogin):
         api_key_dict["role_name_csv"] = roles_str
         api_key_output = ApiToken.create_token(api_key_dict, 1)
  
-        customer.last_login_utc_date_time = timezone.now() 
+        customer.last_login_utc_date_time = datetime.now(timezone.utc) 
         customer.save()
         
         

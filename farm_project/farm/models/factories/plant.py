@@ -4,7 +4,7 @@ import factory
 import random
 from factory.django import DjangoModelFactory
 from factory import Faker, SubFactory
-from django.utils import timezone
+from datetime import datetime, timezone
 from farm.models import Plant
 from farm.models.managers import PlantEnum
 from .flavor import FlavorFactory #flvr_foreign_key_id
@@ -13,8 +13,8 @@ class PlantFactory(DjangoModelFactory):
     class Meta:
         model = Plant
     code = factory.LazyFunction(uuid.uuid4)
-    insert_utc_date_time = factory.LazyFunction(timezone.now)
-    last_update_utc_date_time = factory.LazyFunction(timezone.now)
+    insert_utc_date_time = factory.LazyFunction(lambda: datetime.now(timezone.utc))
+    last_update_utc_date_time = factory.LazyFunction(lambda: datetime.now(timezone.utc))
     insert_user_id = factory.LazyFunction(uuid.uuid4)
     last_update_user_id = factory.LazyFunction(uuid.uuid4)
     last_change_code = factory.LazyFunction(uuid.uuid4)

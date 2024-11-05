@@ -7,7 +7,7 @@ from farm.models import Land
 from farm.flows.base import LogSeverity
 from farm.helpers import SessionContext
 from farm.models import Customer
-from django.utils import timezone
+from datetime import datetime, timezone
 from farm.helpers import ApiToken
 from decimal import Decimal
 from farm.helpers import TypeConversion

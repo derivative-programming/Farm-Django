@@ -1,5 +1,5 @@
 from django.db import models
-from django.utils import timezone
+from datetime import datetime, timezone
 import datetime
 import uuid 
 from django.contrib import admin

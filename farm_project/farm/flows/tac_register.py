@@ -6,7 +6,7 @@ from farm.models import Tac
 from farm.flows.base import LogSeverity
 from farm.helpers import SessionContext
 from farm.models import Customer
-from django.utils import timezone
+from datetime import datetime, timezone
 from farm.helpers import ApiToken
 import farm.models as farm_models 
 import farm.models.managers as farm_managers
@@ -71,7 +71,7 @@ class FlowTacRegister(BaseFlowTacRegister):
         customer.last_name = last_name
         customer.registration_utc_date_time=timezone.now() 
         customer.is_active = True
-        customer.last_login_utc_date_time = timezone.now() 
+        customer.last_login_utc_date_time = datetime.now(timezone.utc) 
         customer.save()
 
         

@@ -39,10 +39,17 @@ Install python
 Update pip...
 >python.exe -m pip install --upgrade pip
 
-Install Django...
->pip install django
+Install python 
 
 >cd farm_project
+
+create a virtual env...
+python -m venv env    
+
+start virtual env...
+env\scripts\activate
+ 
+pip install django
 
 Install requirements...
 >pip install -r requirements.txt
@@ -68,6 +75,9 @@ initialize db with core objects...
 
 generate seed data...
 python manage.py seed [namespace] --number=10
+
+tests...
+python manage.py test
 
 run server....
 >cd farm_project

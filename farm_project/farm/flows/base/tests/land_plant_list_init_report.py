@@ -5,7 +5,7 @@ from farm.helpers import SessionContext
 from farm.models.factories import LandFactory
 from decimal import Decimal
 from factory import Faker
-from django.utils import timezone
+from datetime import datetime, timezone
 from datetime import date, datetime
 from farm.models import CurrentRuntime
 

@@ -2,7 +2,7 @@
 import uuid
 import factory 
 from factory import Faker
-from django.utils import timezone
+from datetime import datetime, timezone
 from farm.models.factories import FlavorFactory #requestFlavorCode
 from farm.views.models import LandAddPlantPostModelRequest
 from datetime import date, datetime
