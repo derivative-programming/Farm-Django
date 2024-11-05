@@ -31,10 +31,10 @@ class RoleAdminTest(TestCase):
             'lookup_enum_name',
             'name',
             'pac_id',
-            'code', 
+            'code',
             )
         )
     def test_queryset(self):
         role = RoleFactory.create()
-        queryset = self.admin.get_queryset(request) 
-        self.assertIn(role.code, [obj.code for obj in queryset]) 
+        queryset = self.admin.get_queryset(request)
+        self.assertIn(role.code, [obj.code for obj in queryset])

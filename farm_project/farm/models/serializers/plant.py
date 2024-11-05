@@ -1,7 +1,17 @@
+# models/serializers/plant.py
+"""
+This module contains the Plant model serializer.
+"""
 from rest_framework import serializers
-from farm.models import Plant 
+from farm.models import Plant
 class PlantSerializer(serializers.HyperlinkedModelSerializer):
+    """
+    Plant model serializer.
+    """
     class Meta:
+        """
+        Meta class for PlantSerializer.
+        """
         model = Plant
         fields = (
             'flvr_foreign_key_id',

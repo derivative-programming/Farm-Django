@@ -1,3 +1,7 @@
+# models/__init__.py:
+"""
+This module initializes and imports all the models used in the project.
+"""
 from .customer import Customer
 from .customer_role import CustomerRole
 from .date_greater_than_filter import DateGreaterThanFilter

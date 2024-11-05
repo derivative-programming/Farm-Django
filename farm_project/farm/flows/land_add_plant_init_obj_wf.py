@@ -1,9 +1,9 @@
 from dataclasses import dataclass, field
-from dataclasses_json import dataclass_json, LetterCase, config 
+from dataclasses_json import dataclass_json, LetterCase, config
 from datetime import date, datetime
 import uuid
 from farm.flows.base import BaseFlowLandAddPlantInitObjWF
-from farm.models import Land 
+from farm.models import Land
 from farm.flows.base import LogSeverity
 from farm.helpers import SessionContext
 from farm.models import Customer
@@ -11,7 +11,7 @@ from datetime import datetime, timezone
 from farm.helpers import ApiToken
 from decimal import Decimal
 from farm.helpers import TypeConversion
-import farm.models as farm_models 
+import farm.models as farm_models
 import farm.models.managers as farm_managers
 
 @dataclass_json
@@ -26,13 +26,13 @@ class FlowLandAddPlantInitObjWFResult():
     request_is_edit_allowed:bool = False
     request_some_float_val:float = 0
     request_some_decimal_val:Decimal = Decimal(0)
-    request_some_utc_date_time_val:datetime = field(default_factory=TypeConversion.get_default_date_time, 
+    request_some_utc_date_time_val:datetime = field(default_factory=TypeConversion.get_default_date_time,
             metadata=config(
-            encoder=datetime.isoformat, 
+            encoder=datetime.isoformat,
             decoder=datetime.fromisoformat
-        )) 
+        ))
     request_some_date_val:date = field(default_factory=TypeConversion.get_default_date, metadata=config(
-            encoder=date.isoformat, 
+            encoder=date.isoformat,
             decoder=date.fromisoformat
         ))
     request_some_money_val:Decimal = Decimal(0)
@@ -41,13 +41,13 @@ class FlowLandAddPlantInitObjWFResult():
     request_some_text_val:str = ""
     request_some_phone_number:str = ""
     request_some_email_address:str = ""
-    tac_code:uuid = uuid.UUID(int=0)
+    tac_code: uuid.UUID = uuid.UUID(int=0)
     land_name:str = ""
-    def __init__(self): 
+    def __init__(self):
         pass
 class FlowLandAddPlantInitObjWF(BaseFlowLandAddPlantInitObjWF):
-    def __init__(self, session_context:SessionContext): 
-        super(FlowLandAddPlantInitObjWF, self).__init__(session_context) 
+    def __init__(self, session_context:SessionContext):
+        super(FlowLandAddPlantInitObjWF, self).__init__(session_context)
     def process(self,
         land: Land,
 
@@ -76,10 +76,10 @@ class FlowLandAddPlantInitObjWF(BaseFlowLandAddPlantInitObjWF):
         request_some_text_val_output:str = ""
         request_some_phone_number_output:str = ""
         request_some_email_address_output:str = ""
-        tac_code_output:uuid = uuid.UUID(int=0)
+        tac_code_output: uuid.UUID = uuid.UUID(int=0)
         land_name_output:str = ""
-        # TODO: add flow logic 
-  
+        # TODO: add flow logic
+
         plant:farm_models.Plant = farm_models.Plant.build(land)
         request_flavor_code_output = plant.flvr_foreign_key.code
         request_other_flavor_output = plant.other_flavor
@@ -99,8 +99,8 @@ class FlowLandAddPlantInitObjWF(BaseFlowLandAddPlantInitObjWF):
         request_some_phone_number_output = plant.some_phone_number
         request_some_email_address_output = plant.some_email_address
         tac_code_output = farm_models.Tac.objects.from_enum(enum_val=farm_managers.TacEnum.Primary).code
-        land_name_output = land.name 
- 
+        land_name_output = land.name
+
         super()._log_message_and_severity(LogSeverity.information_high_detail, "Building result")
         result = FlowLandAddPlantInitObjWFResult()
         result.request_flavor_code = request_flavor_code_output

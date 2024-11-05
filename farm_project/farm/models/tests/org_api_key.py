@@ -4,13 +4,13 @@ from farm.models import OrgApiKey
 from farm.models.factories import OrgApiKeyFactory
 from farm.models import CurrentRuntime
 class OrgApiKeyTestCase(TestCase):
-    def setUp(self): 
+    def setUp(self):
         CurrentRuntime.initialize()
         self.org_api_key = OrgApiKeyFactory.create()
     def test_org_api_key_creation(self):
         # Test that the instance was created
         self.assertIsNotNone(self.org_api_key)
-    def test_org_api_key_fields(self): 
+    def test_org_api_key_fields(self):
         self.assertIsInstance(self.org_api_key, OrgApiKey)
         self.assertIsNotNone(self.org_api_key.org_api_key_id)
         self.assertIsNotNone(self.org_api_key.code)

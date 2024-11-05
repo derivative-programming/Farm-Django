@@ -9,14 +9,14 @@ from farm.models.managers import PacManager,PacEnum #pac_id
 from farm.models.managers import TriStateFilterManager,TriStateFilterEnum
 from decimal import Decimal
 from farm.helpers import TypeConversion
-class TriStateFilter(models.Model):  
+class TriStateFilter(models.Model):
     tri_state_filter_id = models.AutoField(primary_key=True,db_column='tri_state_filter_id')
     code = models.UUIDField(default=uuid.uuid4,db_index=True,db_column='code', unique=True)
     insert_utc_date_time =models.DateTimeField(default=datetime.now(timezone.utc),db_column='insert_utc_date_time')
     last_update_utc_date_time =models.DateTimeField(default=datetime.now(timezone.utc),db_column='last_update_utc_date_time')
     insert_user_id = models.UUIDField(null=True,db_column='insert_user_id')
     last_update_user_id = models.UUIDField(null=True,db_column='last_update_user_id')
-    last_change_code = models.UUIDField(default=uuid.uuid4,db_column='last_change_code')	
+    last_change_code = models.UUIDField(default=uuid.uuid4,db_column='last_change_code')
     description = models.TextField(
                                 null=True,
                                 db_column='description',
@@ -24,7 +24,7 @@ class TriStateFilter(models.Model):
     display_order = models.IntegerField(
                                 null=True,
                                 db_column='display_order',
-                                db_index=TriStateFilterConstants.display_order_calculatedIsDBColumnIndexed)	
+                                db_index=TriStateFilterConstants.display_order_calculatedIsDBColumnIndexed)
     is_active = models.BooleanField(
                                 null=True,
                                 db_column='is_active',
@@ -48,7 +48,7 @@ class TriStateFilter(models.Model):
     state_int_value = models.IntegerField(
                                 null=True,
                                 db_column='state_int_value',
-                                db_index=TriStateFilterConstants.state_int_value_calculatedIsDBColumnIndexed)	
+                                db_index=TriStateFilterConstants.state_int_value_calculatedIsDBColumnIndexed)
     objects = TriStateFilterManager()
     class Meta:
         db_table = 'farm_tri_state_filter'
@@ -56,7 +56,7 @@ class TriStateFilter(models.Model):
         return str(self.code)
     def save(self, *args, **kwargs):
        # On save, update timestamps
-        if self.tri_state_filter_id is not None:  
+        if self.tri_state_filter_id is not None:
             # If the instance already exists in the database, make sure it hasn't already changed since last read
             current_instance:TriStateFilter = TriStateFilter.objects.get(tri_state_filter_id=self.tri_state_filter_id)
             if self.last_change_code != current_instance.last_change_code:
@@ -67,7 +67,7 @@ class TriStateFilter(models.Model):
         self.last_update_utc_date_time = datetime.now(timezone.utc)
         self.last_change_code = uuid.uuid4()
         return super(TriStateFilter, self).save(*args, **kwargs)
-     
+
     def get_parent_object(self):
         return self.pac
     @staticmethod

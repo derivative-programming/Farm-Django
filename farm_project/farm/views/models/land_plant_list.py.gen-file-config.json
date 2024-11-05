@@ -1,9 +1,9 @@
 {
-    "templateType":"report",  
+    "templateType":"report",
     "dimension" :{
         "name":"LandPlantList"
     },
-    "ignoreDimensionPropertyList": [   
+    "ignoreDimensionPropertyList": [
         "reportParam.calculatedIsTargetColumnNameAvailable",
         "reportParam.calculatedIsTargetObjectAvailable",
         "reportColumn.calculatedIsConditionalSqlLogicAvailable",
@@ -18,7 +18,7 @@
         "reportColumn.calculatedDestinationIsReport",
         "reportColumn.calculatedDestinationIsReportDetailView",
         "reportColumn.calculatedDestinationIsObjectWorkflow",
-        "reportColumn.calculatedDestinationIsJump", 
+        "reportColumn.calculatedDestinationIsJump",
         "reportColumn.isColumnSumMetricAvailable",
         "reportColumn.isButtonClickedOnRowClick",
         "reportColumn.isConditionallyDisplayed",
@@ -29,4 +29,4 @@
         "reportColumn.isForcedIntoExport",
         "reportColumn.isVisible"
     ]
-} 
+}

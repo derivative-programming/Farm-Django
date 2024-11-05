@@ -4,13 +4,13 @@ from farm.models import Organization
 from farm.models.factories import OrganizationFactory
 from farm.models import CurrentRuntime
 class OrganizationTestCase(TestCase):
-    def setUp(self): 
+    def setUp(self):
         CurrentRuntime.initialize()
         self.organization = OrganizationFactory.create()
     def test_organization_creation(self):
         # Test that the instance was created
         self.assertIsNotNone(self.organization)
-    def test_organization_fields(self): 
+    def test_organization_fields(self):
         self.assertIsInstance(self.organization, Organization)
         self.assertIsNotNone(self.organization.organization_id)
         self.assertIsNotNone(self.organization.code)

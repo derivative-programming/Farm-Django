@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from farm.models import ErrorLog 
+from farm.models import ErrorLog
 class ErrorLogSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = ErrorLog

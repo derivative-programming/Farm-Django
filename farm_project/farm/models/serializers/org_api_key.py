@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from farm.models import OrgApiKey 
+from farm.models import OrgApiKey
 class OrgApiKeySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = OrgApiKey

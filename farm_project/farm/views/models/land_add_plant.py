@@ -2,21 +2,21 @@ from dataclasses import dataclass, field
 from datetime import date, datetime
 from decimal import Decimal
 import uuid
-from dataclasses_json import dataclass_json, LetterCase, config  
+from dataclasses_json import dataclass_json, LetterCase, config
 from farm.helpers import TypeConversion
 from .post_reponse import PostResponse
 from farm.flows import FlowLandAddPlantResult
 from farm.flows import FlowLandAddPlant
-from farm.helpers import SessionContext 
-from farm.models import Land 
+from farm.helpers import SessionContext
+from farm.models import Land
 from farm.flows import FlowValidationError
 import farm.views.models as view_models
 import logging
-from farm.models import Land 
+from farm.models import Land
 @dataclass_json(letter_case=LetterCase.CAMEL)
-@dataclass        
+@dataclass
 class LandAddPlantPostModelResponse(PostResponse):
-    output_flavor_code:uuid = uuid.UUID(int=0)
+    output_flavor_code: uuid.UUID = uuid.UUID(int=0)
     output_other_flavor:str = ""
     output_some_int_val:int = 0
     output_some_big_int_val:int = 0
@@ -40,10 +40,10 @@ class LandAddPlantPostModelResponse(PostResponse):
     output_some_text_val:str = ""
     output_some_phone_number:str = ""
     output_some_email_address:str = ""
-    land_code:uuid = uuid.UUID(int=0)
-    plant_code:uuid = uuid.UUID(int=0)
+    land_code: uuid.UUID = uuid.UUID(int=0)
+    plant_code: uuid.UUID = uuid.UUID(int=0)
 #endset
-    def load_flow_response(self,data:FlowLandAddPlantResult): 
+    def load_flow_response(self,data:FlowLandAddPlantResult):
         placeholder = "" #to avoid pass line
         self.output_flavor_code = data.land_code
         self.output_other_flavor = data.output_other_flavor
@@ -94,10 +94,10 @@ class LandAddPlantPostModelRequest:
     requestSomePhoneNumber:str = ""
     requestSomeEmailAddress:str = ""
     requestSampleImageUploadFile:str = ""
-#endset 
+#endset
     def process_request(self,
                         session_context:SessionContext,
-                        land_code:uuid,
+                        land_code: uuid.UUID,
                         response:LandAddPlantPostModelResponse) -> LandAddPlantPostModelResponse:
         try:
             logging.debug("loading model...")
@@ -125,12 +125,12 @@ class LandAddPlantPostModelRequest:
                 self.requestSomeEmailAddress,
                 self.requestSampleImageUploadFile,
 #endset
-            ) 
-            response.load_flow_response(flowResponse); 
+            )
+            response.load_flow_response(flowResponse);
             response.success = True
             response.message = "Success."
         except FlowValidationError as ve:
-            response.success = False 
+            response.success = False
             response.validation_errors = list()
             for key in ve.error_dict:
                 response.validation_errors.append(view_models.ValidationError(key,ve.error_dict[key]))

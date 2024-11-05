@@ -1,13 +1,13 @@
 {
-    "templateType":"objWF",  
+    "templateType":"objWF",
     "dimension" :{
         "name":"LandAddPlantInitObjWF",
-        "calculatedIsInitObjWF":"true" 
+        "calculatedIsInitObjWF":"true"
     },
-    "ignoreDimensionPropertyList": [  
-        "objectWorkflowParam.calculatedIsSourceObjectAvailable", 
-        "objectWorkflowParam.calculatedIsDetailsTextAvailable", 
-        "objectWorkflowParam.calculatedIsRequiredCSSClassName", 
+    "ignoreDimensionPropertyList": [
+        "objectWorkflowParam.calculatedIsSourceObjectAvailable",
+        "objectWorkflowParam.calculatedIsDetailsTextAvailable",
+        "objectWorkflowParam.calculatedIsRequiredCSSClassName",
         "objectWorkflowParam.calculatedIsConditionalVisible",
         "objectWorkflowParam.calculatedIsRegExMatchRequired",
         "objectWorkflowParam.calculatedIsObjectID",
@@ -16,9 +16,9 @@
         "objectWorkflowParam.calculatedIsCodeAndLookup",
         "objectWorkflowParam.isFKListOptionRecommended",
         "objectWorkflowParam.isFKListInactiveIncluded",
-        "objectWorkflowParam.isTimeZoneDetermined", 
-        "objectWorkflowOutputVar.calculatedIsSourceObjectAvailable", 
-        "objectWorkflowOutputVar.calculatedIsConditionalVisible", 
-        "objectWorkflowOutputVar.isAutoRedirectURL" 
+        "objectWorkflowParam.isTimeZoneDetermined",
+        "objectWorkflowOutputVar.calculatedIsSourceObjectAvailable",
+        "objectWorkflowOutputVar.calculatedIsConditionalVisible",
+        "objectWorkflowOutputVar.isAutoRedirectURL"
     ]
-} 
+}

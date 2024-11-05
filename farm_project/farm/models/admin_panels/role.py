@@ -1,11 +1,10 @@
 from django.db import models
 from datetime import datetime, timezone
-import datetime
-import uuid 
+import uuid
 from django.contrib import admin
 class RoleAdmin(admin.ModelAdmin):
     readonly_fields = ('role_id','code','insert_utc_date_time','last_update_utc_date_time','insert_user_id','last_update_user_id','last_change_code')
-    list_display = ( 
+    list_display = (
         'role_id',
         'description',
         'display_order',
@@ -13,5 +12,5 @@ class RoleAdmin(admin.ModelAdmin):
         'lookup_enum_name',
         'name',
         'pac_id',
-        'code', 
+        'code',
         )

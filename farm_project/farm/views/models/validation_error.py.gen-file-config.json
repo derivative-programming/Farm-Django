@@ -1,8 +1,8 @@
 {
-    "templateType":"namespace",  
+    "templateType":"namespace",
     "dimension" :{
         "name":"Farm"
     },
-    "ignoreDimensionPropertyList": [ 
+    "ignoreDimensionPropertyList": [
     ]
-} 
+}

@@ -1,18 +1,18 @@
-from dataclasses import dataclass, field 
+from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json, LetterCase, config
 from typing import List
 from datetime import date, datetime
 import uuid
 from decimal import Decimal
 from farm.helpers import TypeConversion
-from farm.reports.row_models import ReportItemTacFarmDashboard 
-from farm.views.models import ListModel 
-from farm.helpers import SessionContext 
-from farm.models import Tac 
+from farm.reports.row_models import ReportItemTacFarmDashboard
+from farm.views.models import ListModel
+from farm.helpers import SessionContext
+from farm.models import Tac
 from farm.reports import ReportManagerTacFarmDashboard
-from farm.reports import ReportRequestValidationError 
+from farm.reports import ReportRequestValidationError
 import farm.views.models as view_models
-from farm.models import Tac 
+from farm.models import Tac
 import logging
 ### request. expect camel case. use marshmallow to validate.
 @dataclass_json(letter_case=LetterCase.SNAKE)
@@ -24,12 +24,12 @@ class TacFarmDashboardGetModelRequest():
     orderByDescending:bool = False
     forceErrorMessage:str = ""
 
-#endset 
+#endset
 @dataclass_json(letter_case=LetterCase.CAMEL)
 @dataclass
 class TacFarmDashboardGetModelResponseItem():
-    field_one_plant_list_link_land_code:uuid = uuid.UUID(int=0)
-    conditional_btn_example_link_land_code:uuid = uuid.UUID(int=0)
+    field_one_plant_list_link_land_code: uuid.UUID = uuid.UUID(int=0)
+    conditional_btn_example_link_land_code: uuid.UUID = uuid.UUID(int=0)
     is_conditional_btn_available:bool = False
 #endset
     def load_report_item(self,data:ReportItemTacFarmDashboard):
@@ -44,7 +44,7 @@ class TacFarmDashboardGetModelResponse(ListModel):
     items:List[TacFarmDashboardGetModelResponseItem] = field(default_factory=list)
     def process_request(self,
                         session_context:SessionContext,
-                        tac_code:uuid,
+                        tac_code: uuid.UUID,
                         request:TacFarmDashboardGetModelRequest):
         try:
             logging.debug("loading model...")
@@ -62,11 +62,11 @@ class TacFarmDashboardGetModelResponse(ListModel):
             for item in items:
                 report_item = TacFarmDashboardGetModelResponseItem()
                 report_item.load_report_item(item)
-                self.items.append(report_item) 
+                self.items.append(report_item)
             self.success = True
             self.message = "Success."
         except ReportRequestValidationError as ve:
-            self.success = False 
+            self.success = False
             self.message = "Validation Error..."
             self.validation_errors = list()
             for key in ve.error_dict:

@@ -7,15 +7,15 @@ from farm.reports.row_models import ReportItemTacFarmDashboard
 import logging
 from .report_request_validation_error import ReportRequestValidationError
 from farm.helpers import SessionContext
-from datetime import date, datetime 
-from decimal import Decimal 
+from datetime import date, datetime
+from decimal import Decimal
 from farm.helpers import SessionContext,TypeConversion
 class ReportManagerTacFarmDashboard():
     _session_context:SessionContext
-    def __init__(self, session_context:SessionContext): 
+    def __init__(self, session_context:SessionContext):
         self._session_context = session_context
-    def generate(self, 
-                tac_code:uuid,
+    def generate(self,
+                tac_code: uuid.UUID,
 
 #endset
                 page_number:int = 1,
@@ -42,7 +42,7 @@ class ReportManagerTacFarmDashboard():
         for dataItem in dataList:
             reportItem:ReportItemTacFarmDashboard = ReportItemTacFarmDashboard()
             reportItem.load_data_provider_dict(dataItem)
-            result.append(reportItem) 
+            result.append(reportItem)
         logging.debug("ReportManagerTacFarmDashboard.generate Results: " + json.dumps(dataList))
         logging.debug('ReportManagerTacFarmDashboard.generate End')
         return result

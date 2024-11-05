@@ -1,10 +1,10 @@
 {
-    "templateType":"report", 
+    "templateType":"report",
     "dimension" :{
         "name":"LandPlantList",
         "calculatedIsPage":"true"
     },
-    "ignoreDimensionPropertyList": [ 
+    "ignoreDimensionPropertyList": [
         "reportParam.isFKListInactiveIncluded",
         "reportParam.isUnknownLookupAllowed",
         "reportParam.isFKListSearchable",
@@ -12,10 +12,10 @@
         "reportParam.isRequired",
         "reportParam.isVisible",
         "reportParam.isFKLookup",
-        "reportParam.isFKList", 
+        "reportParam.isFKList",
         "reportParam.calculatedIsTargetColumnNameAvailable",
         "reportParam.calculatedIsTargetObjectAvailable",
-        "reportColumn.calculatedIsConditionalSqlLogicAvailable", 
+        "reportColumn.calculatedIsConditionalSqlLogicAvailable",
         "reportColumn.calculatedIsSourceObjectAvailable",
         "reportColumn.isAsyncObjWFResultFileStreamedOut",
         "reportColumn.calculatedIsConditionalVisible",

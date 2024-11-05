@@ -1,4 +1,7 @@
-
+# models/admin_panels/__init__.py
+"""
+This module initializes and imports the admin panels used in the project.
+"""
 from .customer import CustomerAdmin
 from .customer_role import CustomerRoleAdmin
 from .date_greater_than_filter import DateGreaterThanFilterAdmin

@@ -39,16 +39,16 @@ Install python
 Update pip...
 >python.exe -m pip install --upgrade pip
 
-Install python 
+Install python
 
 >cd farm_project
 
 create a virtual env...
-python -m venv env    
+python -m venv env
 
 start virtual env...
 env\scripts\activate
- 
+
 pip install django
 
 Install requirements...

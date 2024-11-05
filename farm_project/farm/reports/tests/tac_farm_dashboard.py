@@ -14,7 +14,7 @@ class ReportTestTacFarmDashboard(TestCase):
         self.tac_code = uuid.uuid4()
         self.page_number = 1
         self.item_count_per_page = 10
-        self.order_by_column_name = "code" 
+        self.order_by_column_name = "code"
         self.order_by_descending = False
         self.report = ReportManagerTacFarmDashboard(session_context)
 
@@ -28,7 +28,7 @@ class ReportTestTacFarmDashboard(TestCase):
     #     ]
 
     #     result = self.report.generate(
-    #         self.tac_code, 
+    #         self.tac_code,
     #         self.page_number,
     #         self.item_count_per_page,
     #         self.order_by_column_name,
@@ -45,7 +45,7 @@ class ReportTestTacFarmDashboard(TestCase):
     def test_generate_invalid_item_count_per_page(self):
         with self.assertRaises(ReportRequestValidationError):
             self.report.generate(
-                self.tac_code, 
+                self.tac_code,
                 self.page_number,
                 0,
                 self.order_by_column_name,
@@ -55,7 +55,7 @@ class ReportTestTacFarmDashboard(TestCase):
     def test_generate_invalid_page_number(self):
         with self.assertRaises(ReportRequestValidationError):
             self.report.generate(
-                self.tac_code, 
+                self.tac_code,
                 0,
                 self.item_count_per_page,
                 self.order_by_column_name,

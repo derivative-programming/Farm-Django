@@ -1,7 +1,7 @@
 from django.db import models
-from enum import Enum 
-import uuid  
- 
+from enum import Enum
+import uuid
+
 class TriStateFilterEnum(Enum):
     Unknown = 'Unknown'
     Yes = 'Yes'
@@ -9,7 +9,7 @@ class TriStateFilterEnum(Enum):
 
 
 class TriStateFilterManager(models.Manager):
-    def from_code(self, code:uuid):
+    def from_code(self, code: uuid.UUID):
         return self.get(code=code)
 
     def from_enum(self, enum_val:TriStateFilterEnum):

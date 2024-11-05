@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from farm.models import Land 
+from farm.models import Land
 class LandSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Land

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from farm.models import Pac 
+from farm.models import Pac
 class PacSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Pac

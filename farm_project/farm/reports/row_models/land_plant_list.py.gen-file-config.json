@@ -1,9 +1,9 @@
 {
-    "templateType":"report", 
+    "templateType":"report",
     "dimension" :{
         "name":"LandPlantList",
         "calculatedIsPage":"true"
-    }, 
+    },
     "ignoreDimensionPropertyList": [
         "reportParam.calculatedIsTargetColumnNameAvailable",
         "reportParam.calculatedIsTargetObjectAvailable",
@@ -19,7 +19,7 @@
         "reportColumn.calculatedDestinationIsReport",
         "reportColumn.calculatedDestinationIsReportDetailView",
         "reportColumn.calculatedDestinationIsObjectWorkflow",
-        "reportColumn.calculatedDestinationIsJump", 
+        "reportColumn.calculatedDestinationIsJump",
         "reportColumn.isColumnSumMetricAvailable",
         "reportColumn.isButtonClickedOnRowClick",
         "reportColumn.isConditionallyDisplayed",

@@ -4,16 +4,16 @@ from decimal import Decimal
 from farm.views.models import ValidationError
 from typing import List
 import uuid
-from dataclasses_json import dataclass_json, LetterCase, config    
-from farm.helpers import TypeConversion 
-from farm.flows import FlowLandAddPlantInitObjWFResult 
-from farm.helpers import SessionContext 
-from farm.models import Land 
-from farm.flows import FlowLandAddPlantInitObjWF 
+from dataclasses_json import dataclass_json, LetterCase, config
+from farm.helpers import TypeConversion
+from farm.flows import FlowLandAddPlantInitObjWFResult
+from farm.helpers import SessionContext
+from farm.models import Land
+from farm.flows import FlowLandAddPlantInitObjWF
 from farm.flows import FlowValidationError
 import farm.views.models as view_models
 import logging
-from farm.models import Land 
+from farm.models import Land
 @dataclass_json(letter_case=LetterCase.CAMEL)
 @dataclass
 class LandAddPlantInitObjWFGetInitModelResponse():
@@ -47,7 +47,7 @@ class LandAddPlantInitObjWFGetInitModelResponse():
     landName:str=""
     tacCode:uuid.UUID = field(default_factory=lambda: uuid.UUID('00000000-0000-0000-0000-000000000000'))
 #endset
-    def load_flow_response(self,data:FlowLandAddPlantInitObjWFResult): 
+    def load_flow_response(self,data:FlowLandAddPlantInitObjWFResult):
         self.validation_errors = list()
         self.success = False
         self.message = ""
@@ -75,21 +75,21 @@ class LandAddPlantInitObjWFGetInitModelResponse():
 class LandAddPlantInitObjWFGetInitModelRequest():
     def process_request(self,
                         session_context:SessionContext,
-                        land_code:uuid,
+                        land_code: uuid.UUID,
                         response:LandAddPlantInitObjWFGetInitModelResponse) -> LandAddPlantInitObjWFGetInitModelResponse:
         try:
             logging.debug("loading model...")
             land = Land.objects.get(code=land_code)
-            logging.debug("process request...") 
+            logging.debug("process request...")
             flow = FlowLandAddPlantInitObjWF(session_context)
             flowResponse = flow.process(
                 land
-            )  
-            response.load_flow_response(flowResponse); 
+            )
+            response.load_flow_response(flowResponse);
             response.success = True
             response.message = "Success."
         except FlowValidationError as ve:
-            response.success = False 
+            response.success = False
             response.validation_errors = list()
             for key in ve.error_dict:
                 response.validation_errors.append(view_models.ValidationError(key,ve.error_dict[key]))

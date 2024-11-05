@@ -1,4 +1,7 @@
-
+# models/serializers/__init__.py
+"""
+Imports all the serializers used in the project.
+"""
 from .customer import Customer
 from .customer_role import CustomerRole
 from .date_greater_than_filter import DateGreaterThanFilter

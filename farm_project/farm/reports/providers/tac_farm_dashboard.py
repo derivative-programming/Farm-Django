@@ -5,29 +5,29 @@ from farm.reports.row_models import ReportItemTacFarmDashboard
 import logging
 from farm.helpers import SessionContext
 
-class ReportProviderTacFarmDashboard(): 
+class ReportProviderTacFarmDashboard():
     _session_context:SessionContext
-    def __init__(self, session_context:SessionContext): 
+    def __init__(self, session_context:SessionContext):
         self._session_context = session_context
-    
-    def generate_list(self, 
-                    tacCode:uuid,
+
+    def generate_list(self,
+                    tacCode: uuid.UUID,
                     page_number:int,
                     item_count_per_page:int,
                     order_by_column_name:str,
                     order_by_descending:bool,
-                      ) -> list[dict[str,any]]: 
-        
+                      ) -> list[dict[str,any]]:
+
         logging.debug("ReportProviderTacFarmDashboard.generate_list Start")
         logging.debug("ReportProviderTacFarmDashboard.generate_list tacCode:" + str(tacCode))
-        
+
         offset = (page_number - 1) * item_count_per_page
-        
+
         results = list()
 
-        with connection.cursor() as cursor: 
-            
-            cursor.execute(""" 
+        with connection.cursor() as cursor:
+
+            cursor.execute("""
                 SELECT
                     land.code as field_one_plant_list_link_land_code,
                     land.code as conditional_btn_example_link_land_code,
@@ -37,10 +37,10 @@ class ReportProviderTacFarmDashboard():
                 join farm_land land on pac.pac_id = land.pac_id
                 WHERE tac.code = %s
                 """, (
-                    str(tacCode).replace('-', ''),  
+                    str(tacCode).replace('-', ''),
                     ))
             results = self.dictfetchall(cursor)
-             
+
         logging.debug("ReportProviderTacFarmDashboard.generate_list Results: " + json.dumps(results))
 
         logging.debug("ReportProviderTacFarmDashboard.generate_list End")

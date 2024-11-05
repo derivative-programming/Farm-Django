@@ -30,10 +30,10 @@ class PacAdminTest(TestCase):
             'is_active',
             'lookup_enum_name',
             'name',
-            'code', 
+            'code',
             )
         )
     def test_queryset(self):
         pac = PacFactory.create()
-        queryset = self.admin.get_queryset(request) 
-        self.assertIn(pac.code, [obj.code for obj in queryset]) 
+        queryset = self.admin.get_queryset(request)
+        self.assertIn(pac.code, [obj.code for obj in queryset])

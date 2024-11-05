@@ -1,18 +1,18 @@
-from dataclasses import dataclass, field 
+from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json, LetterCase, config
 from typing import List
 from datetime import date, datetime
 import uuid
 from decimal import Decimal
 from farm.helpers import TypeConversion
-from farm.reports.row_models import ReportItemLandPlantList 
-from farm.views.models import ListModel 
-from farm.helpers import SessionContext 
-from farm.models import Land 
+from farm.reports.row_models import ReportItemLandPlantList
+from farm.views.models import ListModel
+from farm.helpers import SessionContext
+from farm.models import Land
 from farm.reports import ReportManagerLandPlantList
-from farm.reports import ReportRequestValidationError 
+from farm.reports import ReportRequestValidationError
 import farm.views.models as view_models
-from farm.models import Land 
+from farm.models import Land
 import logging
 ### request. expect camel case. use marshmallow to validate.
 @dataclass_json(letter_case=LetterCase.SNAKE)
@@ -46,11 +46,11 @@ class LandPlantListGetModelRequest():
     someTextVal:str = ""
     somePhoneNumber:str = ""
     someEmailAddress:str = ""
-#endset 
+#endset
 @dataclass_json(letter_case=LetterCase.CAMEL)
 @dataclass
 class LandPlantListGetModelResponseItem():
-    plant_code:uuid = uuid.UUID(int=0)
+    plant_code: uuid.UUID = uuid.UUID(int=0)
     some_int_val:int = 0
     some_big_int_val:int = 0
     some_bit_val:bool = False
@@ -74,17 +74,17 @@ class LandPlantListGetModelResponseItem():
     some_phone_number:str = ""
     some_email_address:str = ""
     flavor_name:str = ""
-    flavor_code:uuid = uuid.UUID(int=0)
+    flavor_code: uuid.UUID = uuid.UUID(int=0)
     some_int_conditional_on_deletable:int = 0
     n_var_char_as_url:str = ""
-    update_link_plant_code:uuid = uuid.UUID(int=0)
-    delete_async_button_link_plant_code:uuid = uuid.UUID(int=0)
-    details_link_plant_code:uuid = uuid.UUID(int=0)
-    test_file_download_link_pac_code:uuid = uuid.UUID(int=0)
-    test_conditional_file_download_link_pac_code:uuid = uuid.UUID(int=0)
-    test_async_flow_req_link_pac_code:uuid = uuid.UUID(int=0)
-    test_conditional_async_flow_req_link_pac_code:uuid = uuid.UUID(int=0)
-    conditional_btn_example_link_plant_code:uuid = uuid.UUID(int=0)
+    update_link_plant_code: uuid.UUID = uuid.UUID(int=0)
+    delete_async_button_link_plant_code: uuid.UUID = uuid.UUID(int=0)
+    details_link_plant_code: uuid.UUID = uuid.UUID(int=0)
+    test_file_download_link_pac_code: uuid.UUID = uuid.UUID(int=0)
+    test_conditional_file_download_link_pac_code: uuid.UUID = uuid.UUID(int=0)
+    test_async_flow_req_link_pac_code: uuid.UUID = uuid.UUID(int=0)
+    test_conditional_async_flow_req_link_pac_code: uuid.UUID = uuid.UUID(int=0)
+    conditional_btn_example_link_plant_code: uuid.UUID = uuid.UUID(int=0)
 #endset
     def load_report_item(self,data:ReportItemLandPlantList):
         self.plant_code = data.plant_code
@@ -123,7 +123,7 @@ class LandPlantListGetModelResponse(ListModel):
     items:List[LandPlantListGetModelResponseItem] = field(default_factory=list)
     def process_request(self,
                         session_context:SessionContext,
-                        land_code:uuid,
+                        land_code: uuid.UUID,
                         request:LandPlantListGetModelRequest):
         try:
             logging.debug("loading model...")
@@ -156,11 +156,11 @@ class LandPlantListGetModelResponse(ListModel):
             for item in items:
                 report_item = LandPlantListGetModelResponseItem()
                 report_item.load_report_item(item)
-                self.items.append(report_item) 
+                self.items.append(report_item)
             self.success = True
             self.message = "Success."
         except ReportRequestValidationError as ve:
-            self.success = False 
+            self.success = False
             self.message = "Validation Error..."
             self.validation_errors = list()
             for key in ve.error_dict:

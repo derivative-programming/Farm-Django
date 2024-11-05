@@ -4,13 +4,13 @@ from farm.models import Land
 from farm.models.factories import LandFactory
 from farm.models import CurrentRuntime
 class LandTestCase(TestCase):
-    def setUp(self): 
+    def setUp(self):
         CurrentRuntime.initialize()
         self.land = LandFactory.create()
     def test_land_creation(self):
         # Test that the instance was created
         self.assertIsNotNone(self.land)
-    def test_land_fields(self): 
+    def test_land_fields(self):
         self.assertIsInstance(self.land, Land)
         self.assertIsNotNone(self.land.land_id)
         self.assertIsNotNone(self.land.code)

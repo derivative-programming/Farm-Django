@@ -31,10 +31,10 @@ class LandAdminTest(TestCase):
             'lookup_enum_name',
             'name',
             'pac_id',
-            'code', 
+            'code',
             )
         )
     def test_queryset(self):
         land = LandFactory.create()
-        queryset = self.admin.get_queryset(request) 
-        self.assertIn(land.code, [obj.code for obj in queryset]) 
+        queryset = self.admin.get_queryset(request)
+        self.assertIn(land.code, [obj.code for obj in queryset])

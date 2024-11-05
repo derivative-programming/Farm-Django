@@ -11,14 +11,14 @@ from farm.models.managers import RoleManager,RoleEnum #role_id
 from farm.models.managers import CustomerRoleManager,CustomerRoleEnum
 from decimal import Decimal
 from farm.helpers import TypeConversion
-class CustomerRole(models.Model):  
+class CustomerRole(models.Model):
     customer_role_id = models.AutoField(primary_key=True,db_column='customer_role_id')
     code = models.UUIDField(default=uuid.uuid4,db_index=True,db_column='code', unique=True)
     insert_utc_date_time =models.DateTimeField(default=datetime.now(timezone.utc),db_column='insert_utc_date_time')
     last_update_utc_date_time =models.DateTimeField(default=datetime.now(timezone.utc),db_column='last_update_utc_date_time')
     insert_user_id = models.UUIDField(null=True,db_column='insert_user_id')
     last_update_user_id = models.UUIDField(null=True,db_column='last_update_user_id')
-    last_change_code = models.UUIDField(default=uuid.uuid4,db_column='last_change_code')	
+    last_change_code = models.UUIDField(default=uuid.uuid4,db_column='last_change_code')
     #customer_id = models.IntegerField(null=True)
     customer = models.ForeignKey(Customer,
                                related_name='customer_role_list',
@@ -50,7 +50,7 @@ class CustomerRole(models.Model):
         return str(self.code)
     def save(self, *args, **kwargs):
        # On save, update timestamps
-        if self.customer_role_id is not None:  
+        if self.customer_role_id is not None:
             # If the instance already exists in the database, make sure it hasn't already changed since last read
             current_instance:CustomerRole = CustomerRole.objects.get(customer_role_id=self.customer_role_id)
             if self.last_change_code != current_instance.last_change_code:
@@ -63,7 +63,7 @@ class CustomerRole(models.Model):
         return super(CustomerRole, self).save(*args, **kwargs)
 
 
-   
+
     @staticmethod
     def build(customer:Customer
         ):

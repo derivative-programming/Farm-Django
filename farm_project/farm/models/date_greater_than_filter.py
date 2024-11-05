@@ -1,28 +1,32 @@
-from django.db import models
-from datetime import datetime, timezone
-from django.core.exceptions import ValidationError
 import uuid
-from .pac import Pac #pac_id
-import farm.models.constants.date_greater_than_filter as DateGreaterThanFilterConstants
-from farm.models.managers import DateGreaterThanFilterManager,DateGreaterThanFilterEnum 
+from datetime import datetime, timezone
 
-class DateGreaterThanFilter(models.Model):  
+import farm.models.constants.date_greater_than_filter as DateGreaterThanFilterConstants
+from farm.models.managers import DateGreaterThanFilterManager,DateGreaterThanFilterEnum
+
+from django.core.exceptions import ValidationError
+from django.db import models
+
+from .pac import Pac #pac_id
+
+
+class DateGreaterThanFilter(models.Model):
     date_greater_than_filter_id = models.AutoField(primary_key=True)
     code = models.UUIDField(default=uuid.uuid4,db_index=True, unique=True)
     insert_utc_date_time =models.DateTimeField(default=datetime.now(timezone.utc))
     last_update_utc_date_time =models.DateTimeField(default=datetime.now(timezone.utc))
     insert_user_id = models.UUIDField(null=True)
     last_update_user_id = models.UUIDField(null=True)
-    last_change_code = models.UUIDField(default=uuid.uuid4)	
+    last_change_code = models.UUIDField(default=uuid.uuid4)
     day_count = models.IntegerField(
                                 null=True,
-                                db_index=DateGreaterThanFilterConstants.day_count_calculatedIsDBColumnIndexed)	
+                                db_index=DateGreaterThanFilterConstants.day_count_calculatedIsDBColumnIndexed)
     description = models.TextField(
                                 null=True,
                                 db_index=DateGreaterThanFilterConstants.description_calculatedIsDBColumnIndexed)
     display_order = models.IntegerField(
                                 null=True,
-                                db_index=DateGreaterThanFilterConstants.display_order_calculatedIsDBColumnIndexed)	
+                                db_index=DateGreaterThanFilterConstants.display_order_calculatedIsDBColumnIndexed)
     is_active = models.BooleanField(
                                 null=True,
                                 db_index=DateGreaterThanFilterConstants.is_active_calculatedIsDBColumnIndexed)
@@ -39,16 +43,16 @@ class DateGreaterThanFilter(models.Model):
                                blank=True,
                                null=True,
                                db_index=True)
-        
+
     objects = DateGreaterThanFilterManager()
-    
+
     class Meta:
         db_table = 'farm_date_greater_than_filter'
     def __str__(self):
         return str(self.code)
     def save(self, *args, **kwargs):
        # On save, update timestamps
-        if self.date_greater_than_filter_id is not None:  
+        if self.date_greater_than_filter_id is not None:
             # If the instance already exists in the database, make sure it hasn't already changed since last read
             current_instance = DateGreaterThanFilter.objects.get(date_greater_than_filter_id=self.date_greater_than_filter_id)
             if self.last_change_code != current_instance.last_change_code:
@@ -62,7 +66,7 @@ class DateGreaterThanFilter(models.Model):
 
 
 ##GENTrainingBlock[caselookup]Start
-##GENLearn[isLookup=true,calculatedIsParentObjectAvailable=true]Start    
+##GENLearn[isLookup=true,calculatedIsParentObjectAvailable=true]Start
     def get_parent_object(self):
         return self.pac
     @staticmethod
@@ -90,7 +94,7 @@ class DateGreaterThanFilter(models.Model):
     def initialize():
         pac = Pac.objects.all().first()
         if DateGreaterThanFilter.objects.filter(lookup_enum_name=DateGreaterThanFilterEnum.Unknown.value).exists() == False:
-            item = DateGreaterThanFilter.build(pac) 
+            item = DateGreaterThanFilter.build(pac)
             item.name = "Unknown"
             item.lookup_enum_name = "Unknown"
             item.description = "Unknown"
@@ -99,7 +103,7 @@ class DateGreaterThanFilter(models.Model):
             # item.day_count = 1
             item.save()
         if DateGreaterThanFilter.objects.filter(lookup_enum_name=DateGreaterThanFilterEnum.Last_24_Hours.value).exists() == False:
-            item = DateGreaterThanFilter.build(pac)  
+            item = DateGreaterThanFilter.build(pac)
             item.name = "Last 24 Hours"
             item.lookup_enum_name = "Last_24_Hours"
             item.description = "Last 24 Hours"
@@ -108,7 +112,7 @@ class DateGreaterThanFilter(models.Model):
             # item.day_count = 1
             item.save()
         if DateGreaterThanFilter.objects.filter(lookup_enum_name=DateGreaterThanFilterEnum.Last_7_Days.value).exists() == False:
-            item = DateGreaterThanFilter.build(pac) 
+            item = DateGreaterThanFilter.build(pac)
             item.name = "Last 7 Days"
             item.lookup_enum_name = "Last_7_Days"
             item.description = "Last 7 Days"
@@ -117,7 +121,7 @@ class DateGreaterThanFilter(models.Model):
             # item.day_count = 7
             item.save()
         if DateGreaterThanFilter.objects.filter(lookup_enum_name=DateGreaterThanFilterEnum.Last_30_Days.value).exists() == False:
-            item = DateGreaterThanFilter.build(pac) 
+            item = DateGreaterThanFilter.build(pac)
             item.name = "Last 30 Days"
             item.lookup_enum_name = "Last_30_Days"
             item.description = "Last 30 Days"
@@ -126,7 +130,7 @@ class DateGreaterThanFilter(models.Model):
             # item.day_count = 30
             item.save()
         if DateGreaterThanFilter.objects.filter(lookup_enum_name=DateGreaterThanFilterEnum.Last_90_Days.value).exists() == False:
-            item = DateGreaterThanFilter.build(pac)  
+            item = DateGreaterThanFilter.build(pac)
             item.name = "Last 90 Days"
             item.lookup_enum_name = "Last_90_Days"
             item.description = "Last 90 Days"
@@ -135,13 +139,13 @@ class DateGreaterThanFilter(models.Model):
             # item.day_count = 90
             item.save()
         if DateGreaterThanFilter.objects.filter(lookup_enum_name=DateGreaterThanFilterEnum.Last_365_Days.value).exists() == False:
-            item = DateGreaterThanFilter.build(pac) 
+            item = DateGreaterThanFilter.build(pac)
             item.name = "Last 365 Days"
             item.lookup_enum_name = "Last_365_Days"
             item.description = "Last 365 Days"
             item.display_order = DateGreaterThanFilter.objects.count()
             item.is_active = True
             # item.day_count = 365
-            item.save() 
+            item.save()
 ##GENLearn[isLookup=true,calculatedIsParentObjectAvailable=true]End
 ##GENTrainingBlock[caselookup]End

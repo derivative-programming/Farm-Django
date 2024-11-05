@@ -23,5 +23,5 @@ class OrgCustomerFactory(DjangoModelFactory):
     organization = SubFactory(OrganizationFactory) #organization_id
 
 
- 
+
 

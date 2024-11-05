@@ -4,13 +4,13 @@ from farm.models import DateGreaterThanFilter
 from farm.models.factories import DateGreaterThanFilterFactory
 from farm.models import CurrentRuntime
 class DateGreaterThanFilterTestCase(TestCase):
-    def setUp(self): 
+    def setUp(self):
         CurrentRuntime.initialize()
         self.date_greater_than_filter = DateGreaterThanFilterFactory.create()
     def test_date_greater_than_filter_creation(self):
         # Test that the instance was created
         self.assertIsNotNone(self.date_greater_than_filter)
-    def test_date_greater_than_filter_fields(self): 
+    def test_date_greater_than_filter_fields(self):
         self.assertIsInstance(self.date_greater_than_filter, DateGreaterThanFilter)
         self.assertIsNotNone(self.date_greater_than_filter.date_greater_than_filter_id)
         self.assertIsNotNone(self.date_greater_than_filter.code)

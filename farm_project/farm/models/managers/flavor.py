@@ -1,7 +1,7 @@
+from enum import Enum
+import uuid
 from django.db import models
-from enum import Enum 
-import uuid  
- 
+
 class FlavorEnum(Enum):
     Unknown = 'Unknown'
     Sweet = 'Sweet'
@@ -9,7 +9,7 @@ class FlavorEnum(Enum):
 
 
 class FlavorManager(models.Manager):
-    def from_code(self, code:uuid):
+    def from_code(self, code: uuid.UUID):
         return self.get(code=code)
 
     def from_enum(self, enum_val:FlavorEnum):

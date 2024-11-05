@@ -1,11 +1,21 @@
-from django.db import models
-from datetime import datetime, timezone
-import datetime
-import uuid 
+# models/admin_panels/plant.py
+"""
+This module initializes the plant admin panel used in the project.
+"""
 from django.contrib import admin
 class PlantAdmin(admin.ModelAdmin):
-    readonly_fields = ('plant_id','code','insert_utc_date_time','last_update_utc_date_time','insert_user_id','last_update_user_id','last_change_code')
-    list_display = ( 
+    """
+    This class initializes the plant admin panel used in the project.
+    """
+    readonly_fields = (
+        'plant_id',
+        'code',
+        'insert_utc_date_time',
+        'last_update_utc_date_time',
+        'insert_user_id',
+        'last_update_user_id',
+        'last_change_code')
+    list_display = (
         'plant_id',
         'flvr_foreign_key', #flvr_foreign_key_id
         'is_delete_allowed',
@@ -26,5 +36,5 @@ class PlantAdmin(admin.ModelAdmin):
         'some_uniqueidentifier_val',
         'some_utc_date_time_val',
         'some_var_char_val',
-        'code', 
+        'code',
         )

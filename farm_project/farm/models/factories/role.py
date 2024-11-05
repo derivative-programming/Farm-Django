@@ -24,9 +24,9 @@ class RoleFactory(DjangoModelFactory):
     name = Faker('sentence', nb_words=4)
     pac = SubFactory(PacFactory) #pac_id
 
-  
+
     @classmethod
-    def _create(cls, model_class, *args, **kwargs): 
+    def _create(cls, model_class, *args, **kwargs):
         items = Role.objects.all()
         if len(items)>0:
             for item in items:

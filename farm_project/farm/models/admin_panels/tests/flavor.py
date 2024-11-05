@@ -31,10 +31,10 @@ class FlavorAdminTest(TestCase):
             'lookup_enum_name',
             'name',
             'pac_id',
-            'code', 
+            'code',
             )
         )
     def test_queryset(self):
         flavor = FlavorFactory.create()
-        queryset = self.admin.get_queryset(request) 
-        self.assertIn(flavor.code, [obj.code for obj in queryset]) 
+        queryset = self.admin.get_queryset(request)
+        self.assertIn(flavor.code, [obj.code for obj in queryset])

@@ -9,14 +9,14 @@ from farm.models.managers import PacManager,PacEnum #pac_id
 from farm.models.managers import ErrorLogManager,ErrorLogEnum
 from decimal import Decimal
 from farm.helpers import TypeConversion
-class ErrorLog(models.Model):  
+class ErrorLog(models.Model):
     error_log_id = models.AutoField(primary_key=True,db_column='error_log_id')
     code = models.UUIDField(default=uuid.uuid4,db_index=True,db_column='code', unique=True)
     insert_utc_date_time =models.DateTimeField(default=datetime.now(timezone.utc),db_column='insert_utc_date_time')
     last_update_utc_date_time =models.DateTimeField(default=datetime.now(timezone.utc),db_column='last_update_utc_date_time')
     insert_user_id = models.UUIDField(null=True,db_column='insert_user_id')
     last_update_user_id = models.UUIDField(null=True,db_column='last_update_user_id')
-    last_change_code = models.UUIDField(default=uuid.uuid4,db_column='last_change_code')	
+    last_change_code = models.UUIDField(default=uuid.uuid4,db_column='last_change_code')
     browser_code = models.UUIDField(
                                 null=True,
                                 db_column='browser_code',
@@ -60,7 +60,7 @@ class ErrorLog(models.Model):
         return str(self.code)
     def save(self, *args, **kwargs):
        # On save, update timestamps
-        if self.error_log_id is not None:  
+        if self.error_log_id is not None:
             # If the instance already exists in the database, make sure it hasn't already changed since last read
             current_instance:ErrorLog = ErrorLog.objects.get(error_log_id=self.error_log_id)
             if self.last_change_code != current_instance.last_change_code:
@@ -73,7 +73,7 @@ class ErrorLog(models.Model):
         return super(ErrorLog, self).save(*args, **kwargs)
 
 
-   
+
     @staticmethod
     def build(pac:Pac
         ):

@@ -32,10 +32,10 @@ class DateGreaterThanFilterAdminTest(TestCase):
             'lookup_enum_name',
             'name',
             'pac_id',
-            'code', 
+            'code',
             )
         )
     def test_queryset(self):
         date_greater_than_filter = DateGreaterThanFilterFactory.create()
-        queryset = self.admin.get_queryset(request) 
-        self.assertIn(date_greater_than_filter.code, [obj.code for obj in queryset]) 
+        queryset = self.admin.get_queryset(request)
+        self.assertIn(date_greater_than_filter.code, [obj.code for obj in queryset])

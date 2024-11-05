@@ -1,7 +1,7 @@
 {
     "ignore":[
         "dist",
-        ".git", 
+        ".git",
         ".pytest_cache",
         ".vscode",
         "build",

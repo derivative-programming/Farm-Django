@@ -27,5 +27,5 @@ class ErrorLogFactory(DjangoModelFactory):
     url = Faker('sentence', nb_words=4)
 
 
- 
+
 

@@ -9,14 +9,14 @@ from farm.models.managers import PacManager,PacEnum #pac_id
 from farm.models.managers import RoleManager,RoleEnum
 from decimal import Decimal
 from farm.helpers import TypeConversion
-class Role(models.Model):  
+class Role(models.Model):
     role_id = models.AutoField(primary_key=True,db_column='role_id')
     code = models.UUIDField(default=uuid.uuid4,db_index=True,db_column='code', unique=True)
     insert_utc_date_time =models.DateTimeField(default=datetime.now(timezone.utc),db_column='insert_utc_date_time')
     last_update_utc_date_time =models.DateTimeField(default=datetime.now(timezone.utc),db_column='last_update_utc_date_time')
     insert_user_id = models.UUIDField(null=True,db_column='insert_user_id')
     last_update_user_id = models.UUIDField(null=True,db_column='last_update_user_id')
-    last_change_code = models.UUIDField(default=uuid.uuid4,db_column='last_change_code')	
+    last_change_code = models.UUIDField(default=uuid.uuid4,db_column='last_change_code')
     description = models.TextField(
                                 null=True,
                                 db_column='description',
@@ -24,7 +24,7 @@ class Role(models.Model):
     display_order = models.IntegerField(
                                 null=True,
                                 db_column='display_order',
-                                db_index=RoleConstants.display_order_calculatedIsDBColumnIndexed)	
+                                db_index=RoleConstants.display_order_calculatedIsDBColumnIndexed)
     is_active = models.BooleanField(
                                 null=True,
                                 db_column='is_active',
@@ -52,7 +52,7 @@ class Role(models.Model):
         return str(self.code)
     def save(self, *args, **kwargs):
        # On save, update timestamps
-        if self.role_id is not None:  
+        if self.role_id is not None:
             # If the instance already exists in the database, make sure it hasn't already changed since last read
             current_instance:Role = Role.objects.get(role_id=self.role_id)
             if self.last_change_code != current_instance.last_change_code:
@@ -63,7 +63,7 @@ class Role(models.Model):
         self.last_update_utc_date_time = datetime.now(timezone.utc)
         self.last_change_code = uuid.uuid4()
         return super(Role, self).save(*args, **kwargs)
-     
+
     def get_parent_object(self):
         return self.pac
     @staticmethod

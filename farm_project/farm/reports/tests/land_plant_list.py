@@ -4,7 +4,7 @@ from farm.reports import ReportManagerLandPlantList, ReportRequestValidationErro
 from farm.reports.row_models import ReportItemLandPlantList
 from datetime import date, datetime
 import uuid
-from decimal import Decimal 
+from decimal import Decimal
 from farm.helpers import SessionContext,TypeConversion
 from farm.models.factories import LandFactory
 from farm.models import CurrentRuntime
@@ -16,7 +16,7 @@ class ReportTestLandPlantList(TestCase):
         session_context = SessionContext(dict())
         self.land = LandFactory.create()
         self.land_code = self.land.code
-        
+
         self.some_int_val: int = 0
         self.some_big_int_val: int = 0
         self.some_bit_val: bool = False
@@ -32,18 +32,18 @@ class ReportTestLandPlantList(TestCase):
         self.some_text_val: str = ""
         self.some_phone_number: str = ""
         self.some_email_address: str = ""
-        self.flavor_code: uuid = uuid.UUID(int=0) 
+        self.flavor_code: uuid.UUID = uuid.UUID(int=0)
 
         self.page_number = 1
         self.item_count_per_page = 10
-        self.order_by_column_name = "code" 
+        self.order_by_column_name = "code"
         self.order_by_descending = False
         self.report = ReportManagerLandPlantList(session_context)
 
     # @patch('farm.reports.providers.land_plant_list.ReportProviderLandPlantList')
     # def test_generate(self, MockProvider):
     #     mock_provider = MockProvider.return_value
-    #     mock_provider.generate_list.return_value = [ 
+    #     mock_provider.generate_list.return_value = [
     #         {
     #             "plant_code": uuid.UUID(self.plant_code),
     #             "some_int_val": int(self.some_int_val),
@@ -77,7 +77,7 @@ class ReportTestLandPlantList(TestCase):
     #     ]
 
     #     result = self.report.generate(
-    #         self.land_code, 
+    #         self.land_code,
     #         self.page_number,
     #         self.item_count_per_page,
     #         self.order_by_column_name,
@@ -94,23 +94,23 @@ class ReportTestLandPlantList(TestCase):
     def test_generate_invalid_item_count_per_page(self):
         with self.assertRaises(ReportRequestValidationError):
             self.report.generate(
-                self.land_code, 
-                self.some_int_val, 
+                self.land_code,
+                self.some_int_val,
                 self.some_big_int_val,
                 self.some_bit_val,
                 self.is_edit_allowed,
                 self.is_delete_allowed,
                 self.some_float_val,
-                self.some_decimal_val, 
+                self.some_decimal_val,
                 self.some_min_utc_date_time_val,
                 self.some_min_date_val,
-                self.some_money_val, 
+                self.some_money_val,
                 self.some_n_var_char_val,
                 self.some_var_char_val,
                 self.some_text_val,
                 self.some_phone_number,
                 self.some_email_address,
-                self.flavor_code, 
+                self.flavor_code,
                 self.page_number,
                 0,
                 self.order_by_column_name,
@@ -120,23 +120,23 @@ class ReportTestLandPlantList(TestCase):
     def test_generate_invalid_page_number(self):
         with self.assertRaises(ReportRequestValidationError):
             self.report.generate(
-                self.land_code, 
-                self.some_int_val, 
+                self.land_code,
+                self.some_int_val,
                 self.some_big_int_val,
                 self.some_bit_val,
                 self.is_edit_allowed,
                 self.is_delete_allowed,
                 self.some_float_val,
-                self.some_decimal_val, 
+                self.some_decimal_val,
                 self.some_min_utc_date_time_val,
                 self.some_min_date_val,
-                self.some_money_val, 
+                self.some_money_val,
                 self.some_n_var_char_val,
                 self.some_var_char_val,
                 self.some_text_val,
                 self.some_phone_number,
                 self.some_email_address,
-                self.flavor_code, 
+                self.flavor_code,
                 0,
                 self.item_count_per_page,
                 self.order_by_column_name,

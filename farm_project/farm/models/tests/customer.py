@@ -4,13 +4,13 @@ from farm.models import Customer
 from farm.models.factories import CustomerFactory
 from farm.models import CurrentRuntime
 class CustomerTestCase(TestCase):
-    def setUp(self): 
+    def setUp(self):
         CurrentRuntime.initialize()
         self.customer = CustomerFactory.create()
     def test_customer_creation(self):
         # Test that the instance was created
         self.assertIsNotNone(self.customer)
-    def test_customer_fields(self): 
+    def test_customer_fields(self):
         self.assertIsInstance(self.customer, Customer)
         self.assertIsNotNone(self.customer.customer_id)
         self.assertIsNotNone(self.customer.code)

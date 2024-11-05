@@ -1,8 +1,8 @@
 {
-    "templateType":"report",  
+    "templateType":"report",
     "dimension" :{
         "name":"LandPlantList"
     },
-    "ignoreDimensionPropertyList": [   
+    "ignoreDimensionPropertyList": [
     ]
-} 
+}

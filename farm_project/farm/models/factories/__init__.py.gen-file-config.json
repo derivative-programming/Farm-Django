@@ -1,13 +1,13 @@
 {
-    "templateType":"namespace",  
+    "templateType":"namespace",
     "dimension" :{
         "name":"Farm"
     },
-    "ignoreDimensionPropertyList": [ 
-        "object.isLookup", 
-        "object.isSoftDeleteUsed", 
-        "object.isFullResearchDatabaseViewAllowed", 
-        "object.calculatedIsParentObjectAvailable", 
-        "object.calculatedIsLookupCustomIntProp1NameAvailable"   
+    "ignoreDimensionPropertyList": [
+        "object.isLookup",
+        "object.isSoftDeleteUsed",
+        "object.isFullResearchDatabaseViewAllowed",
+        "object.calculatedIsParentObjectAvailable",
+        "object.calculatedIsLookupCustomIntProp1NameAvailable"
     ]
-} 
+}

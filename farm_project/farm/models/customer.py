@@ -9,18 +9,18 @@ from farm.models.managers import TacManager,TacEnum #tac_id
 from farm.models.managers import CustomerManager,CustomerEnum
 from decimal import Decimal
 from farm.helpers import TypeConversion
-class Customer(models.Model):  
+class Customer(models.Model):
     customer_id = models.AutoField(primary_key=True,db_column='customer_id')
     code = models.UUIDField(default=uuid.uuid4,db_index=True,db_column='code', unique=True)
     insert_utc_date_time =models.DateTimeField(default=datetime.now(timezone.utc),db_column='insert_utc_date_time')
     last_update_utc_date_time =models.DateTimeField(default=datetime.now(timezone.utc),db_column='last_update_utc_date_time')
     insert_user_id = models.UUIDField(null=True,db_column='insert_user_id')
     last_update_user_id = models.UUIDField(null=True,db_column='last_update_user_id')
-    last_change_code = models.UUIDField(default=uuid.uuid4,db_column='last_change_code')	
+    last_change_code = models.UUIDField(default=uuid.uuid4,db_column='last_change_code')
     active_organization_id = models.IntegerField(
                                 null=True,
                                 db_column='active_organization_id',
-                                db_index=CustomerConstants.active_organization_id_calculatedIsDBColumnIndexed)	
+                                db_index=CustomerConstants.active_organization_id_calculatedIsDBColumnIndexed)
     email = models.TextField(
                                 max_length=50,
                                 null=True,
@@ -110,7 +110,7 @@ class Customer(models.Model):
     utc_offset_in_minutes = models.IntegerField(
                                 null=True,
                                 db_column='utc_offset_in_minutes',
-                                db_index=CustomerConstants.utc_offset_in_minutes_calculatedIsDBColumnIndexed)	
+                                db_index=CustomerConstants.utc_offset_in_minutes_calculatedIsDBColumnIndexed)
     zip = models.TextField(
                                 null=True,
                                 db_column='zip',
@@ -122,7 +122,7 @@ class Customer(models.Model):
         return str(self.code)
     def save(self, *args, **kwargs):
        # On save, update timestamps
-        if self.customer_id is not None:  
+        if self.customer_id is not None:
             # If the instance already exists in the database, make sure it hasn't already changed since last read
             current_instance:Customer = Customer.objects.get(customer_id=self.customer_id)
             if self.last_change_code != current_instance.last_change_code:
@@ -135,7 +135,7 @@ class Customer(models.Model):
         return super(Customer, self).save(*args, **kwargs)
 
 
-   
+
     @staticmethod
     def build(tac:Tac
         ):

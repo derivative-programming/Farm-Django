@@ -4,13 +4,13 @@ from farm.models import Flavor
 from farm.models.factories import FlavorFactory
 from farm.models import CurrentRuntime
 class FlavorTestCase(TestCase):
-    def setUp(self): 
+    def setUp(self):
         CurrentRuntime.initialize()
         self.flavor = FlavorFactory.create()
     def test_flavor_creation(self):
         # Test that the instance was created
         self.assertIsNotNone(self.flavor)
-    def test_flavor_fields(self): 
+    def test_flavor_fields(self):
         self.assertIsInstance(self.flavor, Flavor)
         self.assertIsNotNone(self.flavor.flavor_id)
         self.assertIsNotNone(self.flavor.code)

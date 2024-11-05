@@ -1,4 +1,7 @@
-
+# models/admin_panels/tests/__init__.py
+"""
+This module initializes and imports the admin panel tests used in the project.
+"""
 from .customer import CustomerAdminTest
 from .customer_role import CustomerRoleAdminTest
 from .date_greater_than_filter import DateGreaterThanFilterAdminTest

@@ -1,17 +1,29 @@
 # farm/models/tests/test_plant.py
+"""
+Tests for the Plant model.
+"""
+import logging
 from django.test import TestCase
-from farm.models import Plant 
+from farm.models import Plant
 from farm.models.factories import PlantFactory
 from farm.models import CurrentRuntime
-import logging
 class PlantTestCase(TestCase):
-    def setUp(self): 
-        CurrentRuntime.initialize() 
-        self.plant = PlantFactory.create() 
+    """
+    Test case for the Plant model.
+    """
+    def setUp(self):
+        CurrentRuntime.initialize()
+        self.plant = PlantFactory.create()
     def test_plant_creation(self):
+        """
+        Test that a plant instance was created.
+        """
         # Test that the instance was created
         self.assertIsNotNone(self.plant)
-    def test_plant_fields(self): 
+    def test_plant_fields(self):
+        """
+        Test that the plant instance has all the fields.
+        """
         self.assertIsInstance(self.plant, Plant)
         self.assertIsNotNone(self.plant.plant_id)
         self.assertIsNotNone(self.plant.code)

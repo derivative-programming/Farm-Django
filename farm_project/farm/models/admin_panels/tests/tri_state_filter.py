@@ -32,10 +32,10 @@ class TriStateFilterAdminTest(TestCase):
             'name',
             'pac_id',
             'state_int_value',
-            'code', 
+            'code',
             )
         )
     def test_queryset(self):
         tri_state_filter = TriStateFilterFactory.create()
-        queryset = self.admin.get_queryset(request) 
-        self.assertIn(tri_state_filter.code, [obj.code for obj in queryset]) 
+        queryset = self.admin.get_queryset(request)
+        self.assertIn(tri_state_filter.code, [obj.code for obj in queryset])

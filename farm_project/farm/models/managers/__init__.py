@@ -1,3 +1,7 @@
+# models/mangers/__init__.py
+"""
+This module initializes and imports all the managers used in the project.
+"""
 from .customer import CustomerManager,CustomerEnum
 from .customer_role import CustomerRoleManager,CustomerRoleEnum
 from .date_greater_than_filter import DateGreaterThanFilterManager,DateGreaterThanFilterEnum

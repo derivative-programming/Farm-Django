@@ -1,35 +1,35 @@
 from dataclasses import dataclass
-from dataclasses_json import dataclass_json,LetterCase 
+from dataclasses_json import dataclass_json,LetterCase
 import uuid
 from farm.flows.base import BaseFlowTacRegister
-from farm.models import Tac 
+from farm.models import Tac
 from farm.flows.base import LogSeverity
 from farm.helpers import SessionContext
 from farm.models import Customer
 from datetime import datetime, timezone
 from farm.helpers import ApiToken
-import farm.models as farm_models 
+import farm.models as farm_models
 import farm.models.managers as farm_managers
 import logging
 
 @dataclass_json
 @dataclass
 class FlowTacRegisterResult():
-    context_object_code:uuid = uuid.UUID(int=0)
-    customer_code:uuid = uuid.UUID(int=0)
+    context_object_code: uuid.UUID = uuid.UUID(int=0)
+    customer_code: uuid.UUID = uuid.UUID(int=0)
     email:str = ""
-    user_code_value:uuid = uuid.UUID(int=0)
+    user_code_value: uuid.UUID = uuid.UUID(int=0)
     utc_offset_in_minutes:int = 0
     role_name_csv_list:str = ""
     api_key:str = ""
 
-    def __init__(self): 
+    def __init__(self):
         pass
 
 class FlowTacRegister(BaseFlowTacRegister):
-    def __init__(self, session_context:SessionContext): 
-        super(FlowTacRegister, self).__init__(session_context) 
-    
+    def __init__(self, session_context:SessionContext):
+        super(FlowTacRegister, self).__init__(session_context)
+
     def process(self,
         tac: Tac,
         email:str,
@@ -66,22 +66,22 @@ class FlowTacRegister(BaseFlowTacRegister):
         customer.tac = tac
         customer.email = email
         customer.password = password
-        customer.code = uuid.uuid4() 
+        customer.code = uuid.uuid4()
         customer.first_name = first_name
         customer.last_name = last_name
-        customer.registration_utc_date_time=timezone.now() 
+        customer.registration_utc_date_time=timezone.now()
         customer.is_active = True
-        customer.last_login_utc_date_time = datetime.now(timezone.utc) 
+        customer.last_login_utc_date_time = datetime.now(timezone.utc)
         customer.save()
 
-        
+
 
         customer_role:farm_models.CustomerRole = farm_models.CustomerRole.build(customer)
         customer_role.customer = customer
         customer_role.role = farm_models.Role.objects.from_enum(farm_managers.RoleEnum.User)
         customer_role.save()
 
-        if email.lower() == "vince.roche@gmail.com".lower(): 
+        if email.lower() == "vince.roche@gmail.com".lower():
             customer_role:farm_models.CustomerRole = farm_models.CustomerRole.build(customer)
             customer_role.customer = customer
             customer_role.role = farm_models.Role.objects.from_enum(farm_managers.RoleEnum.Admin)
@@ -91,9 +91,9 @@ class FlowTacRegister(BaseFlowTacRegister):
             customer_role.customer = customer
             customer_role.role = farm_models.Role.objects.from_enum(farm_managers.RoleEnum.Config)
             customer_role.save()
- 
+
         customer_roles = farm_models.CustomerRole.objects.filter(customer_id=customer.customer_id)
-       
+
         roles = [customer_role.role.lookup_enum_name for customer_role in customer_roles]
         roles_str = ', '.join(roles)
         roles_str = roles_str.strip(', ')
@@ -102,8 +102,8 @@ class FlowTacRegister(BaseFlowTacRegister):
         email_output = customer.email
         user_code_value_output = customer.code
         utc_offset_in_minutes_output = customer.utc_offset_in_minutes
- 
-        role_name_csv_list_output = roles_str 
+
+        role_name_csv_list_output = roles_str
 
         api_key_dict = dict()
         api_key_dict["PacCode"] = str(customer.tac.pac.code)
@@ -112,11 +112,11 @@ class FlowTacRegister(BaseFlowTacRegister):
         api_key_dict["UserName"] = customer.email
         api_key_dict["role_name_csv"] = roles_str
         api_key_output = ApiToken.create_token(api_key_dict, 1)
- 
+
 
 
         super()._log_message_and_severity(LogSeverity.information_high_detail, "Building result")
-        result = FlowTacRegisterResult() 
+        result = FlowTacRegisterResult()
         result.context_object_code = tac.code
         result.customer_code = customer_code_output
         result.email = email_output
@@ -132,4 +132,3 @@ class FlowTacRegister(BaseFlowTacRegister):
         return result
 
 
-    

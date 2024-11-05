@@ -42,5 +42,5 @@ class CustomerFactory(DjangoModelFactory):
     zip = Faker('sentence', nb_words=4)
 
 
- 
+
 

@@ -1,5 +1,5 @@
 import uuid
-from farm.models import Tac 
+from farm.models import Tac
 from .base_flow import BaseFlow
 from farm.flows.base import LogSeverity
 from farm.helpers import SessionContext
@@ -8,12 +8,12 @@ from datetime import date, datetime
 from farm.helpers import TypeConversion
 import farm.flows.constants.tac_register as FlowConstants
 class BaseFlowTacRegister(BaseFlow):
-    def __init__(self, session_context:SessionContext): 
+    def __init__(self, session_context:SessionContext):
         super(BaseFlowTacRegister, self).__init__(
-            "TacRegister", 
+            "TacRegister",
             session_context,
-            ) 
-    def _process_validation_rules(self, 
+            )
+    def _process_validation_rules(self,
             tac: Tac,
             email:str = "",
             password:str = "",
@@ -33,7 +33,7 @@ class BaseFlowTacRegister(BaseFlow):
         if last_name == "" and FlowConstants.param_last_name_isRequired == True:
             self._add_field_validation_error("lastName","Please enter a Last Name")
         self._process_security_rules(tac)
-    def _process_security_rules(self, 
+    def _process_security_rules(self,
         tac: Tac,
         ):
         super()._log_message_and_severity(LogSeverity.information_high_detail, "Processing security rules...")

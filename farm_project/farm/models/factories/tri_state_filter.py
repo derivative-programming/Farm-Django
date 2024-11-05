@@ -25,9 +25,9 @@ class TriStateFilterFactory(DjangoModelFactory):
     pac = SubFactory(PacFactory) #pac_id
     state_int_value = Faker('random_int')
 
-  
+
     @classmethod
-    def _create(cls, model_class, *args, **kwargs): 
+    def _create(cls, model_class, *args, **kwargs):
         items = TriStateFilter.objects.all()
         if len(items)>0:
             for item in items:

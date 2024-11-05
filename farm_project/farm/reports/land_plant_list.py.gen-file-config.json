@@ -1,5 +1,5 @@
 {
-    "templateType":"report", 
+    "templateType":"report",
     "dimension" :{
         "name":"LandPlantList",
         "calculatedIsPage":"true"
@@ -12,7 +12,7 @@
         "reportParam.isRequired",
         "reportParam.isVisible",
         "reportParam.isFKLookup",
-        "reportParam.isFKList", 
+        "reportParam.isFKList",
         "reportParam.calculatedIsTargetColumnNameAvailable",
         "reportParam.calculatedIsTargetObjectAvailable",
         "reportColumn.calculatedIsConditionalSqlLogicAvailable",
@@ -22,7 +22,7 @@
         "reportColumn.calculatedIsMaxWidthAvailable",
         "reportColumn.calculatedIsMinWidthAvailable",
         "reportColumn.calculatedIsSummarySumAllowed",
-        "reportColumn.calculatedIsSummaryDisplayed", 
+        "reportColumn.calculatedIsSummaryDisplayed",
         "reportColumn.calculatedIsAddedIntoExport",
         "reportColumn.isColumnSumMetricAvailable",
         "reportColumn.isButtonClickedOnRowClick",

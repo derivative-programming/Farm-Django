@@ -24,5 +24,5 @@ class CustomerRoleFactory(DjangoModelFactory):
     role = SubFactory(RoleFactory) #role_id
 
 
- 
+
 

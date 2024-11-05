@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from farm.models import DateGreaterThanFilter 
+from farm.models import DateGreaterThanFilter
 class DateGreaterThanFilterSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = DateGreaterThanFilter

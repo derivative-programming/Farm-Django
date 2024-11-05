@@ -34,10 +34,10 @@ class OrgApiKeyAdminTest(TestCase):
             'name',
             'organization_id',
             'org_customer_id',
-            'code', 
+            'code',
             )
         )
     def test_queryset(self):
         org_api_key = OrgApiKeyFactory.create()
-        queryset = self.admin.get_queryset(request) 
-        self.assertIn(org_api_key.code, [obj.code for obj in queryset]) 
+        queryset = self.admin.get_queryset(request)
+        self.assertIn(org_api_key.code, [obj.code for obj in queryset])

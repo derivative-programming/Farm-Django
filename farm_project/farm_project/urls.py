@@ -20,8 +20,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path("api/", include("farm.urls")), 
-    path('admin/', admin.site.urls), 
+    path("api/", include("farm.urls")),
+    path('admin/', admin.site.urls),
 ]  + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 # add debug toolbar in urlpatterns

@@ -5,7 +5,7 @@ import uuid
 from .flavor import Flavor #flvr_foreign_key_id
 from .land import Land #land_id
 import farm.models.constants.plant as PlantConstants
-import logging 
+import logging
 from farm.models.managers import FlavorManager,FlavorEnum #flvr_foreign_key_id
 from farm.models.managers import LandManager,LandEnum #land_id
 from farm.models.managers import PlantManager,PlantEnum
@@ -13,14 +13,14 @@ from decimal import Decimal
 from farm.helpers import TypeConversion
 
 
-class Plant(models.Model):  
+class Plant(models.Model):
     plant_id = models.AutoField(primary_key=True,db_column='plant_id')
     code = models.UUIDField(default=uuid.uuid4,db_index=True,db_column='code', unique=True)
     insert_utc_date_time =models.DateTimeField(default=datetime.now(timezone.utc),db_column='insert_utc_date_time')
     last_update_utc_date_time =models.DateTimeField(default=datetime.now(timezone.utc),db_column='last_update_utc_date_time')
     insert_user_id = models.UUIDField(null=True,db_column='insert_user_id')
     last_update_user_id = models.UUIDField(null=True,db_column='last_update_user_id')
-    last_change_code = models.UUIDField(default=uuid.uuid4,db_column='last_change_code')	
+    last_change_code = models.UUIDField(default=uuid.uuid4,db_column='last_change_code')
     #flvr_foreign_key_id = models.IntegerField(null=True)
     flvr_foreign_key = models.ForeignKey(Flavor,
                                related_name='plant_list',
@@ -75,11 +75,11 @@ class Plant(models.Model):
     some_float_val = models.FloatField(
                                 null=True,
                                 db_column='some_float_val',
-                                db_index=PlantConstants.some_float_val_calculatedIsDBColumnIndexed)	
+                                db_index=PlantConstants.some_float_val_calculatedIsDBColumnIndexed)
     some_int_val = models.IntegerField(
                                 null=True,
                                 db_column='some_int_val',
-                                db_index=PlantConstants.some_int_val_calculatedIsDBColumnIndexed)	
+                                db_index=PlantConstants.some_int_val_calculatedIsDBColumnIndexed)
     some_money_val = models.DecimalField(
                                 max_digits=19,
                                 decimal_places=4,
@@ -113,7 +113,7 @@ class Plant(models.Model):
                                 blank=True,
                                 db_column='some_var_char_val',
                                 db_index=PlantConstants.some_var_char_val_calculatedIsDBColumnIndexed)
-        
+
     objects = PlantManager()
 
     class Meta:
@@ -122,7 +122,7 @@ class Plant(models.Model):
         return str(self.code)
     def save(self, *args, **kwargs):
        # On save, update timestamps
-        if self.plant_id is not None:  
+        if self.plant_id is not None:
             # If the instance already exists in the database, make sure it hasn't already changed since last read
             current_instance:Plant = Plant.objects.get(plant_id=self.plant_id)
             if self.last_change_code != current_instance.last_change_code:
@@ -133,13 +133,13 @@ class Plant(models.Model):
         self.last_update_utc_date_time = datetime.now(timezone.utc)
         self.last_change_code = uuid.uuid4()
         return super(Plant, self).save(*args, **kwargs)
-    
+
     def get_object_name(self):
         return "plant"
-    
+
 
 ##GENTrainingBlock[caselookup]Start
-##GENLearn[isLookup=false,calculatedIsParentObjectAvailable=true]Start   
+##GENLearn[isLookup=false,calculatedIsParentObjectAvailable=true]Start
     def get_parent_object(self):
         return self.land
     @staticmethod

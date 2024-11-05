@@ -1,15 +1,30 @@
-import farm.models as models
+# models/current_runtime.py
+"""
+This module defines the CurrentRuntime class, which is responsible for initializing
+various models
+"""
 import logging
 
+import farm.models as models
+
 class CurrentRuntime:
+    """
+    This class is responsible for initializing various models
+    """
 
     @staticmethod
     def initialize_root_model():
+        """
+        Initializes the root model
+        """
         models.Pac.initialize()
 #endset
 
     @staticmethod
     def initialize():
+        """
+        Initializes all the models in the project
+        """
         logging.debug('Models.CurrentRuntime.initialize() Start')
         CurrentRuntime.initialize_root_model()
         CurrentRuntime.initialize_models()
@@ -17,8 +32,11 @@ class CurrentRuntime:
 
     @staticmethod
     def initialize_models():
+        """
+        Initializes all the models in the project
+        """
         logging.debug('Models.CurrentRuntime.initialize Models')
-        
+
         models.Customer.initialize()
         models.CustomerRole.initialize()
         models.DateGreaterThanFilter.initialize()
@@ -32,5 +50,5 @@ class CurrentRuntime:
         models.Plant.initialize()
         models.Role.initialize()
         models.Tac.initialize()
-        models.TriStateFilter.initialize() 
+        models.TriStateFilter.initialize()
 #endset

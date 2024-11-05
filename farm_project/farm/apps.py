@@ -5,13 +5,13 @@ import logging
 class FarmConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'farm'
-    
-    def ready(self):  
+
+    def ready(self):
         logging.debug('App initializing...')
 
         import farm.models as models
         try:
-                
+
             models.Pac.initialize()
     ##endset
             ### TODO create lookup records
@@ -28,7 +28,7 @@ class FarmConfig(AppConfig):
             models.Plant.initialize()
             models.Role.initialize()
             models.Tac.initialize()
-            models.TriStateFilter.initialize() 
+            models.TriStateFilter.initialize()
     ##endset
         except Exception:
             pass

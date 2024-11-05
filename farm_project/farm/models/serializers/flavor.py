@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from farm.models import Flavor 
+from farm.models import Flavor
 class FlavorSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Flavor

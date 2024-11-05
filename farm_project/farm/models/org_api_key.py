@@ -11,14 +11,14 @@ from farm.models.managers import OrgCustomerManager,OrgCustomerEnum #org_custome
 from farm.models.managers import OrgApiKeyManager,OrgApiKeyEnum
 from decimal import Decimal
 from farm.helpers import TypeConversion
-class OrgApiKey(models.Model):  
+class OrgApiKey(models.Model):
     org_api_key_id = models.AutoField(primary_key=True,db_column='org_api_key_id')
     code = models.UUIDField(default=uuid.uuid4,db_index=True,db_column='code', unique=True)
     insert_utc_date_time =models.DateTimeField(default=datetime.now(timezone.utc),db_column='insert_utc_date_time')
     last_update_utc_date_time =models.DateTimeField(default=datetime.now(timezone.utc),db_column='last_update_utc_date_time')
     insert_user_id = models.UUIDField(null=True,db_column='insert_user_id')
     last_update_user_id = models.UUIDField(null=True,db_column='last_update_user_id')
-    last_change_code = models.UUIDField(default=uuid.uuid4,db_column='last_change_code')	
+    last_change_code = models.UUIDField(default=uuid.uuid4,db_column='last_change_code')
     api_key_value = models.TextField(
                                 null=True,
                                 db_column='api_key_value',
@@ -70,7 +70,7 @@ class OrgApiKey(models.Model):
         return str(self.code)
     def save(self, *args, **kwargs):
        # On save, update timestamps
-        if self.org_api_key_id is not None:  
+        if self.org_api_key_id is not None:
             # If the instance already exists in the database, make sure it hasn't already changed since last read
             current_instance:OrgApiKey = OrgApiKey.objects.get(org_api_key_id=self.org_api_key_id)
             if self.last_change_code != current_instance.last_change_code:
@@ -83,7 +83,7 @@ class OrgApiKey(models.Model):
         return super(OrgApiKey, self).save(*args, **kwargs)
 
 
-   
+
     @staticmethod
     def build(organization:Organization
         ):

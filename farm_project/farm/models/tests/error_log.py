@@ -4,13 +4,13 @@ from farm.models import ErrorLog
 from farm.models.factories import ErrorLogFactory
 from farm.models import CurrentRuntime
 class ErrorLogTestCase(TestCase):
-    def setUp(self): 
+    def setUp(self):
         CurrentRuntime.initialize()
         self.error_log = ErrorLogFactory.create()
     def test_error_log_creation(self):
         # Test that the instance was created
         self.assertIsNotNone(self.error_log)
-    def test_error_log_fields(self): 
+    def test_error_log_fields(self):
         self.assertIsInstance(self.error_log, ErrorLog)
         self.assertIsNotNone(self.error_log.error_log_id)
         self.assertIsNotNone(self.error_log.code)

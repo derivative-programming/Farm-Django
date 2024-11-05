@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from farm.models import Tac 
+from farm.models import Tac
 class TacSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Tac

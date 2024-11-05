@@ -9,14 +9,14 @@ from farm.models.managers import PacManager,PacEnum #pac_id
 from farm.models.managers import LandManager,LandEnum
 from decimal import Decimal
 from farm.helpers import TypeConversion
-class Land(models.Model):  
+class Land(models.Model):
     land_id = models.AutoField(primary_key=True,db_column='land_id')
     code = models.UUIDField(default=uuid.uuid4,db_index=True,db_column='code', unique=True)
     insert_utc_date_time =models.DateTimeField(default=datetime.now(timezone.utc),db_column='insert_utc_date_time')
     last_update_utc_date_time =models.DateTimeField(default=datetime.now(timezone.utc),db_column='last_update_utc_date_time')
     insert_user_id = models.UUIDField(null=True,db_column='insert_user_id')
     last_update_user_id = models.UUIDField(null=True,db_column='last_update_user_id')
-    last_change_code = models.UUIDField(default=uuid.uuid4,db_column='last_change_code')	
+    last_change_code = models.UUIDField(default=uuid.uuid4,db_column='last_change_code')
     description = models.TextField(
                                 null=True,
                                 db_column='description',
@@ -24,7 +24,7 @@ class Land(models.Model):
     display_order = models.IntegerField(
                                 null=True,
                                 db_column='display_order',
-                                db_index=LandConstants.display_order_calculatedIsDBColumnIndexed)	
+                                db_index=LandConstants.display_order_calculatedIsDBColumnIndexed)
     is_active = models.BooleanField(
                                 null=True,
                                 db_column='is_active',
@@ -52,7 +52,7 @@ class Land(models.Model):
         return str(self.code)
     def save(self, *args, **kwargs):
        # On save, update timestamps
-        if self.land_id is not None:  
+        if self.land_id is not None:
             # If the instance already exists in the database, make sure it hasn't already changed since last read
             current_instance:Land = Land.objects.get(land_id=self.land_id)
             if self.last_change_code != current_instance.last_change_code:
@@ -62,14 +62,14 @@ class Land(models.Model):
             self.insert_utc_date_time = datetime.now(timezone.utc)
         self.last_update_utc_date_time = datetime.now(timezone.utc)
         self.last_change_code = uuid.uuid4()
-        return super(Land, self).save(*args, **kwargs) 
-    
+        return super(Land, self).save(*args, **kwargs)
+
     def get_object_name(self):
         return "land"
-    
+
     def get_parent_object(self):
         return self.pac
-    
+
     @staticmethod
     def build(pac:Pac
         ):

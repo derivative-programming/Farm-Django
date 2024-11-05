@@ -1,5 +1,5 @@
 {
-    "templateType":"report", 
+    "templateType":"report",
     "dimension" :{
         "name":"LandPlantList",
         "calculatedIsPage":"true"

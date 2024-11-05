@@ -3,7 +3,7 @@ from dataclasses_json import dataclass_json,LetterCase, config
 from datetime import date, datetime
 import uuid
 from farm.flows.base import BaseFlowLandPlantListInitReport
-from farm.models import Land 
+from farm.models import Land
 from farm.flows.base import LogSeverity
 from farm.helpers import SessionContext
 from farm.models import Customer
@@ -11,12 +11,12 @@ from datetime import datetime, timezone
 from farm.helpers import ApiToken
 from decimal import Decimal
 from farm.helpers import TypeConversion
-import farm.models as farm_models 
+import farm.models as farm_models
 import farm.models.managers as farm_managers
 @dataclass_json
 @dataclass
 class FlowLandPlantListInitReportResult():
-    context_object_code:uuid = uuid.UUID(int=0)
+    context_object_code: uuid.UUID = uuid.UUID(int=0)
     some_int_val:int = 0
     some_big_int_val:int = 0
     some_bit_val:bool = False
@@ -39,13 +39,13 @@ class FlowLandPlantListInitReportResult():
     some_text_val:str = ""
     some_phone_number:str = ""
     some_email_address:str = ""
-    flavor_code:uuid = uuid.UUID(int=0)
-    land_code:uuid = uuid.UUID(int=0)
-    tac_code:uuid = uuid.UUID(int=0)
+    flavor_code: uuid.UUID = uuid.UUID(int=0)
+    land_code: uuid.UUID = uuid.UUID(int=0)
+    tac_code: uuid.UUID = uuid.UUID(int=0)
     land_name:str = ""
 class FlowLandPlantListInitReport(BaseFlowLandPlantListInitReport):
-    def __init__(self, session_context:SessionContext): 
-        super(FlowLandPlantListInitReport, self).__init__(session_context) 
+    def __init__(self, session_context:SessionContext):
+        super(FlowLandPlantListInitReport, self).__init__(session_context)
     def process(self,
         land: Land,
 
@@ -72,9 +72,9 @@ class FlowLandPlantListInitReport(BaseFlowLandPlantListInitReport):
         some_text_val_output:str = ""
         some_phone_number_output:str = ""
         some_email_address_output:str = ""
-        flavor_code_output:uuid = uuid.UUID(int=0)
-        land_code_output:uuid = uuid.UUID(int=0)
-        tac_code_output:uuid = uuid.UUID(int=0)
+        flavor_code_output: uuid.UUID = uuid.UUID(int=0)
+        land_code_output: uuid.UUID = uuid.UUID(int=0)
+        tac_code_output: uuid.UUID = uuid.UUID(int=0)
         land_name_output:str = ""
         # TODO: add flow logic
 
@@ -84,7 +84,7 @@ class FlowLandPlantListInitReport(BaseFlowLandPlantListInitReport):
         land_name_output = land.name
 
         super()._log_message_and_severity(LogSeverity.information_high_detail, "Building result")
-        result = FlowLandPlantListInitReportResult() 
+        result = FlowLandPlantListInitReportResult()
         result.context_object_code = land.code
         result.some_int_val = some_int_val_output
         result.some_big_int_val = some_big_int_val_output

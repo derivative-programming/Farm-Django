@@ -1,13 +1,23 @@
+# helpers/api_token.py
+"""
+This module initializes the API token helper used in the project.
+"""
 import jwt
 import datetime
 import os
 from django.conf import settings
-import logging 
- 
+import logging
+
 class ApiToken:
+    """
+    This class initializes the API token helper used in the project.
+    """
 
     @staticmethod
-    def create_token(payload:dict, expires_in_day_count:int): 
+    def create_token(payload:dict, expires_in_day_count:int):
+        """
+        This method creates a new token.
+        """
         logging.debug("create_token Start")
 
         payload["exp"] = datetime.datetime.utcnow() + datetime.timedelta(days=expires_in_day_count)
@@ -20,6 +30,9 @@ class ApiToken:
 
     @staticmethod
     def validate_token(token) -> dict:
+        """
+        This method validates the token.
+        """
         try:
             # Decode the token and verify its validity
             payload = jwt.decode(token, settings.SECRET_KEY, algorithms=['HS256'])

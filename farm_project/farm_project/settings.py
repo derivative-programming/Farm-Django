@@ -42,8 +42,8 @@ INSTALLED_APPS = [
     'rest_framework',
     "crispy_forms",
     "crispy_bootstrap5",
-    'django_seed', 
-    'django_extensions', 
+    'django_seed',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -123,7 +123,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = '/static/' 
+STATIC_URL = '/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -147,8 +147,8 @@ LOGGING = {
         'level': 'DEBUG',
     },
 }
- 
-# debug_toolbar moved here. 
+
+# debug_toolbar moved here.
 if DEBUG:
     MIDDLEWARE += [
         'debug_toolbar.middleware.DebugToolbarMiddleware',
@@ -157,10 +157,10 @@ if DEBUG:
         'debug_toolbar',
     ]
     INTERNAL_IPS = ['127.0.0.1', ]
- 
+
     import mimetypes
     mimetypes.add_type("application/javascript", ".js", True)
 
     DEBUG_TOOLBAR_CONFIG = {
         'INTERCEPT_REDIRECTS': False,
-    } 
+    }

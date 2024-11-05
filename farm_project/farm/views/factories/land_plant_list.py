@@ -1,6 +1,6 @@
 # farm/models/factories.py
 import uuid
-import factory 
+import factory
 from factory import Faker
 from datetime import datetime, timezone
 from farm.models.factories import FlavorFactory #requestFlavorCode
@@ -10,7 +10,7 @@ from decimal import Decimal
 class LandPlantListGetModelRequestFactory(factory.base.Factory):
     class Meta:
         model = LandPlantListGetModelRequest
-    flavorCode:uuid = factory.LazyFunction(lambda: (FlavorFactory.create()).code)
+    flavorCode: uuid.UUID = factory.LazyFunction(lambda: (FlavorFactory.create()).code)
     someIntVal:int = Faker('random_int')
     someBigIntVal:int = Faker('random_int')
     someFloatVal:float = Faker('pyfloat', positive=True)

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from farm.models import Role 
+from farm.models import Role
 class RoleSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Role

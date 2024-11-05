@@ -1,4 +1,7 @@
-
+# models/tests/__init__.py
+"""
+Import all the test cases for the models.
+"""
 from .customer import CustomerTestCase
 from .customer_role import CustomerRoleTestCase
 from .date_greater_than_filter import DateGreaterThanFilterTestCase
@@ -12,4 +15,4 @@ from .pac import PacTestCase
 from .plant import PlantTestCase
 from .role import RoleTestCase
 from .tac import TacTestCase
-from .tri_state_filter import TriStateFilterTestCase 
+from .tri_state_filter import TriStateFilterTestCase

@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from dataclasses_json import dataclass_json,LetterCase 
+from dataclasses_json import dataclass_json,LetterCase
 from .validation_error import ValidationError
 from typing import List
 

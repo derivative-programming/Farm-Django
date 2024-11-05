@@ -1,29 +1,29 @@
 
 from dataclasses import dataclass
-from dataclasses_json import dataclass_json,LetterCase 
+from dataclasses_json import dataclass_json,LetterCase
 import uuid
 import farm.flows.base
-from farm.flows.base import BaseFlowTacFarmDashboardInitReport 
-from farm.models import Tac 
+from farm.flows.base import BaseFlowTacFarmDashboardInitReport
+from farm.models import Tac
 from farm.flows.base import LogSeverity
 from farm.helpers import SessionContext
-import farm.models as farm_models 
+import farm.models as farm_models
 import farm.models.managers as farm_managers
 
 @dataclass_json
 @dataclass
 class FlowTacFarmDashboardInitReportResult():
-    context_object_code:uuid = uuid.UUID(int=0)
-    customer_code:uuid = uuid.UUID(int=0)
+    context_object_code: uuid.UUID = uuid.UUID(int=0)
+    customer_code: uuid.UUID = uuid.UUID(int=0)
 
-    def __init__(self): 
+    def __init__(self):
         pass
 
-class FlowTacFarmDashboardInitReport(BaseFlowTacFarmDashboardInitReport):  
-    def __init__(self, session_context:SessionContext):  
-        super(FlowTacFarmDashboardInitReport, self).__init__(session_context) 
+class FlowTacFarmDashboardInitReport(BaseFlowTacFarmDashboardInitReport):
+    def __init__(self, session_context:SessionContext):
+        super(FlowTacFarmDashboardInitReport, self).__init__(session_context)
 
-    def process(self, 
+    def process(self,
         tac: Tac,
         ) -> FlowTacFarmDashboardInitReportResult:
         super()._log_message_and_severity(LogSeverity.information_high_detail, "Start")
@@ -34,20 +34,19 @@ class FlowTacFarmDashboardInitReport(BaseFlowTacFarmDashboardInitReport):
         )
 
         super()._throw_queued_validation_errors()
-        
+
         # customer_code_output = uuid.UUID(int=0)
 
         customer_code_output = self._session_context.customer_code
-    
+
         super()._log_message_and_severity(LogSeverity.information_high_detail, "Building result")
         result = FlowTacFarmDashboardInitReportResult()
         result.context_object_code = tac.code
         result.customer_code = customer_code_output
         result.context_object_code = tac.code
         super()._log_message_and_severity(LogSeverity.information_high_detail, "Result:" + result.to_json())
-        
+
         super()._log_message_and_severity(LogSeverity.information_high_detail, "End")
         return result
 
 
-    

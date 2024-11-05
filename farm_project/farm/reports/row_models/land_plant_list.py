@@ -6,7 +6,7 @@ from decimal import Decimal
 from farm.helpers import TypeConversion
 @dataclass
 class ReportItemLandPlantList():
-    plant_code:uuid = uuid.UUID(int=0)
+    plant_code: uuid.UUID = uuid.UUID(int=0)
     some_int_val:int = 0
     some_big_int_val:int = 0
     some_bit_val:bool = False
@@ -30,19 +30,19 @@ class ReportItemLandPlantList():
     some_phone_number:str = ""
     some_email_address:str = ""
     flavor_name:str = ""
-    flavor_code:uuid = uuid.UUID(int=0)
+    flavor_code: uuid.UUID = uuid.UUID(int=0)
     some_int_conditional_on_deletable:int = 0
     n_var_char_as_url:str = ""
-    update_link_plant_code:uuid = uuid.UUID(int=0)
-    delete_async_button_link_plant_code:uuid = uuid.UUID(int=0)
-    details_link_plant_code:uuid = uuid.UUID(int=0)
-    test_file_download_link_pac_code:uuid = uuid.UUID(int=0)
-    test_conditional_file_download_link_pac_code:uuid = uuid.UUID(int=0)
-    test_async_flow_req_link_pac_code:uuid = uuid.UUID(int=0)
-    test_conditional_async_flow_req_link_pac_code:uuid = uuid.UUID(int=0)
-    conditional_btn_example_link_plant_code:uuid = uuid.UUID(int=0)
+    update_link_plant_code: uuid.UUID = uuid.UUID(int=0)
+    delete_async_button_link_plant_code: uuid.UUID = uuid.UUID(int=0)
+    details_link_plant_code: uuid.UUID = uuid.UUID(int=0)
+    test_file_download_link_pac_code: uuid.UUID = uuid.UUID(int=0)
+    test_conditional_file_download_link_pac_code: uuid.UUID = uuid.UUID(int=0)
+    test_async_flow_req_link_pac_code: uuid.UUID = uuid.UUID(int=0)
+    test_conditional_async_flow_req_link_pac_code: uuid.UUID = uuid.UUID(int=0)
+    conditional_btn_example_link_plant_code: uuid.UUID = uuid.UUID(int=0)
 #endset
-    def __init__(self): 
+    def __init__(self):
         pass
     def load_data_provider_dict(self,data:dict):
             self.plant_code = uuid.UUID(data["plant_code"])

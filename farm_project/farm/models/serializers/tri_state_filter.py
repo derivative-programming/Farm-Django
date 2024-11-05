@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from farm.models import TriStateFilter 
+from farm.models import TriStateFilter
 class TriStateFilterSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = TriStateFilter

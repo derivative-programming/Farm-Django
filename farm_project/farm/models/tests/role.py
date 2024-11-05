@@ -4,13 +4,13 @@ from farm.models import Role
 from farm.models.factories import RoleFactory
 from farm.models import CurrentRuntime
 class RoleTestCase(TestCase):
-    def setUp(self): 
+    def setUp(self):
         CurrentRuntime.initialize()
         self.role = RoleFactory.create()
     def test_role_creation(self):
         # Test that the instance was created
         self.assertIsNotNone(self.role)
-    def test_role_fields(self): 
+    def test_role_fields(self):
         self.assertIsInstance(self.role, Role)
         self.assertIsNotNone(self.role.role_id)
         self.assertIsNotNone(self.role.code)

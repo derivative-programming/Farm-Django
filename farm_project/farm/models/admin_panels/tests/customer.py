@@ -48,10 +48,10 @@ class CustomerAdminTest(TestCase):
             'tac_id',
             'utc_offset_in_minutes',
             'zip',
-            'code', 
+            'code',
             )
         )
     def test_queryset(self):
         customer = CustomerFactory.create()
-        queryset = self.admin.get_queryset(request) 
-        self.assertIn(customer.code, [obj.code for obj in queryset]) 
+        queryset = self.admin.get_queryset(request)
+        self.assertIn(customer.code, [obj.code for obj in queryset])

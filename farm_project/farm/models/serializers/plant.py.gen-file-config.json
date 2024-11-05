@@ -1,5 +1,5 @@
 {
-    "templateType":"object", 
+    "templateType":"object",
     "ForceFileNameFormat" : "Snake",
     "dimension" :{
         "name":"Plant"
@@ -14,4 +14,4 @@
         "prop.calculatedIsCodeAndLookup",
         "prop.calculatedisLexiconEligible"
     ]
-} 
+}

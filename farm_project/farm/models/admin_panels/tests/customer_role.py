@@ -29,10 +29,10 @@ class CustomerRoleAdminTest(TestCase):
             'is_placeholder',
             'placeholder',
             'role_id',
-            'code', 
+            'code',
             )
         )
     def test_queryset(self):
         customer_role = CustomerRoleFactory.create()
-        queryset = self.admin.get_queryset(request) 
-        self.assertIn(customer_role.code, [obj.code for obj in queryset]) 
+        queryset = self.admin.get_queryset(request)
+        self.assertIn(customer_role.code, [obj.code for obj in queryset])
