@@ -1,4 +1,21 @@
 {
+    "python.linting.enabled": true,
+    "python.linting.mypyEnabled": true,
+    "python.linting.flake8Enabled": true,
+    "python.linting.mypyArgs": [
+      "--config-file",
+      "mypy.ini"
+    ],
+    "python.analysis.extraPaths": [
+        "${workspaceFolder}",
+      "${workspaceFolder}/farm"
+    ],
+    "python.autoComplete.extraPaths": [
+      "${workspaceFolder}",
+      "${workspaceFolder}/farm"
+    ],
+    "python.pythonPath": "env/Scripts/python.exe",
+    "python.envFile": "${workspaceFolder}/.env",
     "python.testing.unittestArgs": [
         "-v",
         "-s",

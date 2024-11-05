@@ -1,0 +1,6 @@
+[MASTER]
+init-hook='import sys; sys.path.append(".")'
+ignore=venv
+
+[MESSAGES CONTROL]
+# disable=R0801  # Similar lines in files. This is a false positive for the way we use the codebase. first line is always the file path and name.
